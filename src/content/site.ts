@@ -26,8 +26,7 @@ export const person = {
   handle: 'rodrigogs',
   email: 'rodrigo.smscom@gmail.com',
   github: 'https://github.com/rodrigogs',
-  /** Hidden while null. Set once the profile URL is confirmed by the owner. */
-  linkedin: null as string | null,
+  linkedin: 'https://www.linkedin.com/in/rodrigogomesdasilva/' as string | null,
   site: 'https://rodrigogs.github.io',
   /** First professional role (public LinkedIn). */
   since: 2010,
@@ -102,8 +101,8 @@ export const sections = {
   ai: {
     label: l('AI engineering', 'Engenharia de IA'),
     claim: l(
-      'I build and contribute to AI agent infrastructure: delegation, routing, interoperability and memory.',
-      'Construo e contribuo com infraestrutura de agentes de IA: delegação, roteamento, interoperabilidade e memória.',
+      'I build and contribute to AI agent infrastructure: delegation, routing, resilient tools and memory.',
+      'Construo e contribuo com infraestrutura de agentes de IA: delegação, roteamento, ferramentas resilientes e memória.',
     ),
   },
   work: {
@@ -178,7 +177,6 @@ export const field = {
   demo: l('Live demo', 'Demo'),
   package: l('Package', 'Pacote'),
   docs: l('Docs', 'Documentação'),
-  privateCode: l('Private codebase', 'Código privado'),
   permalink: l('Link to this entry', 'Link para esta entrada'),
   commitsLink: l('My commits', 'Meus commits'),
   registry: l('Registry', 'Registro'),
@@ -198,13 +196,11 @@ export const fieldOne: Partial<Record<keyof typeof field, L>> = {
   commits: l('commit upstream', 'commit upstream'),
 };
 
-/** Status vocabulary. Computed from pushedAt unless an entry is private. */
+/** Status vocabulary, computed from the repo's last push. */
 export const status = {
   latest: { role: 'added' as Role, label: l('Active', 'Ativo') },
   maintained: { role: 'merged' as Role, label: l('Maintained', 'Mantido') },
   dormant: { role: 'deprecated' as Role, label: l('Legacy', 'Legado') },
-  private: { role: 'changed' as Role, label: l('Private, live', 'Privado, no ar') },
-  wip: { role: 'changed' as Role, label: l('In progress', 'Em andamento') },
 } as const;
 export type StatusKey = keyof typeof status;
 
@@ -224,14 +220,10 @@ export interface WorkEntry {
   /** Anchor id, stable: used as the permalink (#<id>). */
   id: string;
   name: string | L;
-  /** Public repo name for the snapshot join; null for private products. */
-  repo: string | null;
+  /** Public repo name for the snapshot join. Private projects are never listed (owner's rule). */
+  repo: string;
   /** Package for the snapshot join. */
   package?: { registry: 'npm' | 'crates'; name: string };
-  /** Only for entries without a public repo. */
-  status?: StatusKey;
-  /** Year it started, only when there is no repo to read it from. */
-  born?: number;
   note: L;
   detail: L;
   stack: string[];
@@ -259,40 +251,6 @@ export const work: WorkEntry[] = [
       { kind: 'demo', href: 'https://rodrigogs.github.io/whats-reader/' },
       { kind: 'repo', href: 'https://github.com/rodrigogs/whats-reader' },
     ],
-  },
-  {
-    id: 'cardiac-ct-planning',
-    name: l('Cardiac CT planning workstation', 'Estação de planejamento cardíaco por tomografia'),
-    repo: null,
-    status: 'private',
-    born: 2026,
-    note: l(
-      'Plans transcatheter aortic valve procedures from a CT angiography, in the browser.',
-      'Planejamento de implante transcateter de válvula aórtica (TAVI) a partir de uma angiotomografia, no navegador.',
-    ),
-    detail: l(
-      'DICOM parsing, 3D volume rendering and the clinical measurements a heart team needs (annulus, aortic root, coronary heights, implant projection) in a zero-install web app built for hospital reading rooms.',
-      'Leitura de DICOM, renderização volumétrica 3D e as medidas clínicas de que a equipe cardíaca precisa (anel aórtico, raiz da aorta, altura dos óstios coronarianos, projeção do implante) num app web sem instalação, feito para as salas de laudo do hospital.',
-    ),
-    stack: ['TypeScript', 'React', 'Cornerstone.js', 'vtk.js', 'three.js', 'Rust', 'Supabase'],
-    links: [],
-  },
-  {
-    id: 'pitstop',
-    name: 'PitStop',
-    repo: null,
-    status: 'private',
-    born: 2025,
-    note: l(
-      'Runs an auto repair shop in one system, from the front desk to work orders and finance.',
-      'Gestão completa de oficinas num só sistema, do atendimento às ordens de serviço e ao financeiro.',
-    ),
-    detail: l(
-      'A multi-tenant B2B SaaS for repair shops and auto centers in Brazil: service intake, work orders, cash and receivables in one product.',
-      'Um SaaS B2B multi-tenant para oficinas e auto centers: atendimento, ordens de serviço, caixa e recebimentos num só produto.',
-    ),
-    stack: ['Next.js', 'TypeScript', 'Prisma', 'PostgreSQL', 'next-intl', 'Turborepo'],
-    links: [{ kind: 'site', href: 'https://pitstop.sh' }],
   },
   {
     id: 'mysql-events',
@@ -436,12 +394,6 @@ const hermesAgentNote = l(
   'Correções no watchdog do gateway contra falsos travamentos, no cache da janela de contexto do Bedrock e no reset do cooldown de autenticação.',
 );
 
-/** The two-way MCP bridge, named the same way everywhere. */
-const bridgeNote = l(
-  'A two-way MCP bridge that lets Claude Code and Hermes Agent call each other as tool providers across machines, with anti-recursion guards and a shared append-only mailbox.',
-  'Uma ponte MCP nos dois sentidos que deixa o Claude Code e o Hermes Agent chamarem um ao outro como provedores de ferramentas entre máquinas, com proteção contra recursão e uma caixa de mensagens compartilhada, só de acréscimo.',
-);
-
 export interface AiProject {
   id: string;
   name: string | L;
@@ -477,21 +429,24 @@ export const aiProjects: AiProject[] = [
     links: [{ kind: 'repo', href: 'https://github.com/rodrigogs/hermes-smart-router' }],
   },
   {
-    id: 'mcp-bridge',
-    name: l('Claude Code and Hermes bridge', 'Ponte Claude Code e Hermes'),
-    repo: null,
-    note: bridgeNote,
-    links: [],
+    id: 'hermes-web-resilient',
+    name: 'hermes-web-resilient',
+    repo: 'hermes-web-resilient',
+    note: l(
+      'A Hermes Agent plugin that chains web search providers and moves to the next one when a backend fails (expired key, outage, captcha), ending on a keyless free tier.',
+      'Um plugin do Hermes Agent que encadeia provedores de busca web e passa para o próximo quando um falha (chave expirada, queda, captcha), terminando num nível gratuito sem chave.',
+    ),
+    links: [{ kind: 'repo', href: 'https://github.com/rodrigogs/hermes-web-resilient' }],
   },
   {
-    id: 'trama',
-    name: 'Trama',
-    repo: null,
+    id: 'hermes-one-fact-explorer',
+    name: 'hermes-one-fact-explorer',
+    repo: 'hermes-one-fact-explorer',
     note: l(
-      'A plugin-first browser workspace for agent runs, drawn as a node graph: panels are nodes, wires are connections.',
-      'Um workspace de navegador para execuções de agentes, plugin-first, desenhado como grafo: painéis são nós, fios são conexões.',
+      "A read-only explorer for an agent's memory store: what it knows, why a fact is trusted, which retrieval path can reach it, and what keyword recall would return.",
+      'Um explorador somente leitura da memória de um agente: o que ele sabe, por que um fato é confiável, qual caminho de recuperação o alcança e o que a busca por palavra-chave retornaria.',
     ),
-    links: [],
+    links: [{ kind: 'repo', href: 'https://github.com/rodrigogs/hermes-one-fact-explorer' }],
   },
 ];
 
@@ -638,6 +593,7 @@ export const stack = {
 /** AI capabilities, shown under the AI engineering projects (and as one line in the README). */
 export const aiCapabilities = {
   label: l('What I can do', 'O que eu faço'),
+  /** Every capability links to public proof: a repo or this site's own source. */
   items: [
     {
       name: l('Multi-agent orchestration', 'Orquestração multi-agente'),
@@ -648,33 +604,36 @@ export const aiCapabilities = {
       href: 'https://github.com/rodrigogs/rodrigogs.github.io',
     },
     {
-      name: l('Agent interoperability', 'Interoperabilidade de agentes'),
-      text: l(
-        'A two-way MCP bridge between Claude Code and Hermes Agent across machines, with anti-recursion guards and a shared append-only mailbox.',
-        'Uma ponte MCP nos dois sentidos entre Claude Code e Hermes Agent, entre máquinas, com proteção contra recursão e uma caixa de mensagens compartilhada, só de acréscimo.',
-      ),
-    },
-    {
       name: l('Capability routing', 'Roteamento por capacidade'),
       text: l(
-        'Classifies how hard a delegated task is and routes it to the right profile and model in an isolated process.',
-        'Classifica a dificuldade de uma tarefa delegada e a envia para o perfil e o modelo certos num processo isolado.',
+        'Delegated tasks run under the right profile and model, picked by task difficulty, in an isolated process.',
+        'Tarefas delegadas rodam no perfil e no modelo certos, escolhidos pela dificuldade da tarefa, num processo isolado.',
       ),
       href: 'https://github.com/rodrigogs/hermes-smart-router',
     },
     {
-      name: l('Agent memory and retrieval', 'Memória e recuperação para agentes'),
+      name: l('Resilient agent tools', 'Ferramentas resilientes para agentes'),
       text: l(
-        'Hybrid dense and lexical recall with cross-encoder reranking, embedding models evaluated in Portuguese and English, gated by a frozen eval set in CI.',
-        'Recall híbrido denso e lexical com reranking por cross-encoder, modelos de embedding avaliados em português e inglês, com um conjunto de avaliação congelado no CI.',
+        "Provider chains that keep an agent's web search working when one backend dies, without patching the framework's core.",
+        'Cadeias de provedores que mantêm a busca web do agente funcionando quando um backend cai, sem alterar o núcleo do framework.',
       ),
+      href: 'https://github.com/rodrigogs/hermes-web-resilient',
     },
     {
-      name: l('Provider-agnostic LLM integration', 'Integração de LLMs independente de provedor'),
+      name: l('Auditable agent memory', 'Memória de agente auditável'),
       text: l(
-        'One interface over Anthropic, OpenAI, DeepSeek, Z.ai and Nous models and local runtimes, with automatic failover.',
-        'Uma interface sobre modelos Anthropic, OpenAI, DeepSeek, Z.ai e Nous e runtimes locais, com failover automático.',
+        'Trust, reach and recall made visible per fact: dense embeddings, holographic vectors and BM25 keyword retrieval, side by side.',
+        'Confiança, alcance e recuperação visíveis por fato: embeddings densos, vetores holográficos e busca BM25 por palavra-chave, lado a lado.',
       ),
+      href: 'https://github.com/rodrigogs/hermes-one-fact-explorer',
+    },
+    {
+      name: l('Agent observability', 'Observabilidade de agentes'),
+      text: l(
+        'A live 3D office of an agent fleet: one agent per profile, each with its current task, history, sessions and configuration.',
+        'Um escritório 3D ao vivo de uma frota de agentes: um agente por perfil, cada um com a tarefa atual, o histórico, as sessões e a configuração.',
+      ),
+      href: 'https://github.com/rodrigogs/hermes-office-web',
     },
     {
       name: l('Local-first AI', 'IA local-first'),
@@ -685,19 +644,20 @@ export const aiCapabilities = {
       href: 'https://github.com/rodrigogs/whats-reader',
     },
     {
-      name: l('Document RAG', 'RAG de documentos'),
+      name: l('Messaging bots', 'Bots de mensageria'),
       text: l(
-        'OCR ingestion, a vector store, hybrid BM25 and vector retrieval and reranking, behind a chat front end.',
-        'Ingestão com OCR, banco vetorial, recuperação híbrida BM25 e vetorial com reranking, por trás de uma interface de chat.',
-      ),
-    },
-    {
-      name: l('Messaging agents', 'Agentes em mensageria'),
-      text: l(
-        'WhatsApp bots with persistent sessions, and a self-hosted agent gateway I operate over Telegram.',
-        'Bots de WhatsApp com sessões persistentes e um gateway de agentes auto-hospedado que opero pelo Telegram.',
+        'WhatsApp bots whose auth sessions live in Redis, Postgres or any Keyv backend, so they survive restarts.',
+        'Bots de WhatsApp com sessões de autenticação em Redis, Postgres ou qualquer backend Keyv, para sobreviverem a reinícios.',
       ),
       href: 'https://github.com/rodrigogs/baileys-store',
+    },
+    {
+      name: l('Testing AI code', 'Testes para código de IA'),
+      text: l(
+        'AI code held to the same bar as any other: 1,959 tests and 100% branch coverage on the delegation router.',
+        'Código de IA com a mesma exigência de qualquer outro: 1.959 testes e 100% de cobertura de branches no roteador de delegação.',
+      ),
+      href: 'https://github.com/rodrigogs/hermes-smart-router',
     },
   ],
 } as const;

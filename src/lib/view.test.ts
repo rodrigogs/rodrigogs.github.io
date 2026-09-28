@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import snapshotJson from '../data/snapshot.json' with { type: 'json' };
 import type { Snapshot } from '../data/schema.ts';
+import { aiProjects, work } from '../content/site.ts';
 import { buildView, fill, repoStatus } from './view.ts';
 
 const snapshot = snapshotJson as unknown as Snapshot;
@@ -34,13 +35,22 @@ describe.each(['en', 'pt'] as const)('buildView(%s) on the committed snapshot', 
   });
 
   it('renders every curated work entry with its fixed furniture', () => {
-    expect(view.work.length).toBeGreaterThanOrEqual(10);
+    expect(view.work.length).toBeGreaterThanOrEqual(8);
     for (const entry of view.work) {
       expect(entry.name).toBeTruthy();
       expect(entry.note).toBeTruthy();
       expect(entry.statusLabel).toBeTruthy();
-      expect(entry.born).not.toBeNull();
-      if (!entry.isPrivate) expect(entry.proofs.length).toBeGreaterThan(0);
+      expect(entry.born).toBeGreaterThan(2000);
+      expect(entry.proofs.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('only shows public work: every entry resolves to a public repo or an upstream row', () => {
+    const publicRepos = new Set(snapshot.repos.map((r) => r.name));
+    const upstream = new Set(snapshot.upstream.map((u) => u.repo));
+    for (const entry of work) expect(publicRepos.has(entry.repo)).toBe(true);
+    for (const entry of aiProjects) {
+      expect(entry.repo ? publicRepos.has(entry.repo) : upstream.has(entry.upstream ?? '')).toBe(true);
     }
   });
 
