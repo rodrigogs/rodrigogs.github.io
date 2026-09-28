@@ -47,19 +47,25 @@ const line2 = words.slice(2).join(' ');
           {hero.cta.email}
         </a>
         <CopyEmail email={person.email} copy={hero.cta.copy} copied={hero.cta.copied} />
-        <a class="action action-quiet" href={person.github}>
-          GitHub
-          <Icon name="external" size={12} />
-        </a>
+      </div>
+      <ul class="profiles">
+        <li>
+          <a href={person.github}>
+            GitHub
+            <Icon name="external" size={12} />
+          </a>
+        </li>
         {
           person.linkedin && (
-            <a class="action action-quiet" href={person.linkedin}>
-              LinkedIn
-              <Icon name="external" size={12} />
-            </a>
+            <li>
+              <a href={person.linkedin}>
+                LinkedIn
+                <Icon name="external" size={12} />
+              </a>
+            </li>
           )
         }
-      </div>
+      </ul>
     </div>
 
     <div class="aside">
@@ -143,8 +149,20 @@ const line2 = words.slice(2).join(' ');
   .actions > :global(.action:not(.copy)) {
     padding-inline: var(--s-4);
   }
-  .action-quiet {
-    border-color: var(--c-rule);
+  /* Profiles sit one quiet tier below the email actions: links, not buttons. */
+  .profiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2) var(--s-5);
+    margin-block-start: var(--s-4);
+    font-size: var(--t-small);
+    font-weight: 600;
+  }
+  .profiles a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-1);
+    min-block-size: var(--s-5);
   }
 
   @media (max-width: 63.99rem) {
