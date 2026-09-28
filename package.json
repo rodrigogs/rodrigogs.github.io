@@ -1,0 +1,37 @@
+{
+  "name": "rodrigogs.github.io",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Personal site and GitHub profile cards of Rodrigo Gomes da Silva",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "data": "node scripts/fetch-data.ts",
+    "cards": "node scripts/render-cards.ts",
+    "dev": "astro dev",
+    "build": "astro check && astro build && node scripts/render-cards.ts",
+    "preview": "astro preview",
+    "test": "vitest run",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/archivo": "^5.3.0",
+    "@fontsource-variable/martian-mono": "^5.3.0",
+    "@resvg/resvg-js": "^2.6.2",
+    "astro": "^7.3.5",
+    "satori": "^0.33.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@types/node": "^26.6.3",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.2"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "fsevents@2.3.3": true
+  }
+}
