@@ -1,0 +1,3708 @@
+{
+  "schemaVersion": 1,
+  "fetchedAt": "2026-09-28T18:30:06.142Z",
+  "sources": {
+    "github": {
+      "ok": true,
+      "lastSuccessAt": "2026-09-28T18:30:06.142Z"
+    },
+    "npm": {
+      "ok": true,
+      "lastSuccessAt": "2026-09-28T18:30:06.142Z"
+    },
+    "crates": {
+      "ok": true,
+      "lastSuccessAt": "2026-09-28T18:30:06.142Z"
+    }
+  },
+  "user": {
+    "login": "rodrigogs",
+    "name": "Rodrigo Gomes da Silva",
+    "followers": 211,
+    "publicRepos": 136,
+    "createdAt": "2012-09-17T12:49:05Z",
+    "contributionsLastYear": 6489
+  },
+  "repos": [
+    {
+      "name": "easyvpn",
+      "fullName": "rodrigogs/easyvpn",
+      "url": "https://github.com/rodrigogs/easyvpn",
+      "description": "Easily connect to a VPN in a country of your choice.",
+      "homepage": null,
+      "stars": 519,
+      "forks": 46,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 6890
+      },
+      "topics": [
+        "autovpn",
+        "choice",
+        "countries",
+        "nodejs",
+        "openvpn",
+        "vpn",
+        "vpn-connections"
+      ],
+      "frameworks": [
+        "ESLint"
+      ],
+      "createdAt": "2017-01-24T12:39:53Z",
+      "pushedAt": "2023-03-01T12:18:29Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-2-Clause",
+      "latestRelease": {
+        "tag": "1.3.1",
+        "name": "Updated dependencies",
+        "publishedAt": "2017-12-19T19:56:50Z",
+        "url": "https://github.com/rodrigogs/easyvpn/releases/tag/1.3.1"
+      },
+      "releaseCount": 11,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "xvideos",
+      "fullName": "rodrigogs/xvideos",
+      "url": "https://github.com/rodrigogs/xvideos",
+      "description": "xvideos API library",
+      "homepage": null,
+      "stars": 302,
+      "forks": 85,
+      "language": "TypeScript",
+      "languages": {
+        "TypeScript": 102378,
+        "Shell": 1367
+      },
+      "topics": [
+        "api",
+        "crawler",
+        "library",
+        "nodejs",
+        "npm",
+        "porn",
+        "scrapper",
+        "xvideos"
+      ],
+      "frameworks": [
+        "Biome",
+        "TypeScript",
+        "Vitest"
+      ],
+      "createdAt": "2018-06-26T01:55:30Z",
+      "pushedAt": "2026-09-11T01:08:08Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": {
+        "tag": "v3.2.2",
+        "name": "v3.2.2",
+        "publishedAt": "2026-08-07T16:08:16Z",
+        "url": "https://github.com/rodrigogs/xvideos/releases/tag/v3.2.2"
+      },
+      "releaseCount": 13,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "whats-reader",
+      "fullName": "rodrigogs/whats-reader",
+      "url": "https://github.com/rodrigogs/whats-reader",
+      "description": "Browse WhatsApp chat exports offline with AI-powered voice transcription. Privacy-first desktop/web app with bookmarks, search, and statistics. Built with SvelteKit and Electron.",
+      "homepage": "https://rodrigogs.github.io/whats-reader/",
+      "stars": 272,
+      "forks": 28,
+      "language": "TypeScript",
+      "languages": {
+        "TypeScript": 598175,
+        "Svelte": 273194,
+        "JavaScript": 15062,
+        "CSS": 6201,
+        "HTML": 3524,
+        "Shell": 3390
+      },
+      "topics": [
+        "ai",
+        "backup",
+        "bookmarks",
+        "chat-viewer",
+        "desktop-app",
+        "electron",
+        "offline",
+        "privacy",
+        "search",
+        "svelte",
+        "sveltekit",
+        "transcription",
+        "whatsapp",
+        "whisper"
+      ],
+      "frameworks": [
+        "Biome",
+        "Electron",
+        "Playwright",
+        "Svelte",
+        "SvelteKit",
+        "Tailwind CSS",
+        "Transformers.js",
+        "TypeScript",
+        "Vitest",
+        "semantic-release"
+      ],
+      "createdAt": "2025-12-04T00:43:18Z",
+      "pushedAt": "2026-09-28T03:38:02Z",
+      "archived": false,
+      "fork": false,
+      "license": "AGPL-3.0",
+      "latestRelease": {
+        "tag": "v1.31.0",
+        "name": "v1.31.0",
+        "publishedAt": "2026-08-24T05:05:28Z",
+        "url": "https://github.com/rodrigogs/whats-reader/releases/tag/v1.31.0"
+      },
+      "releaseCount": 93,
+      "releaseDownloads": 7042
+    },
+    {
+      "name": "nodejs-web-jade-scaffold",
+      "fullName": "rodrigogs/nodejs-web-jade-scaffold",
+      "url": "https://github.com/rodrigogs/nodejs-web-jade-scaffold",
+      "description": "Web application featuring Node.js, Express, Jade, Passport, MongoDB and Bootstrap",
+      "homepage": "http://nodejs-web-jade-scaffold.herokuapp.com/",
+      "stars": 167,
+      "forks": 11,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 28498,
+        "HTML": 10025,
+        "CSS": 2777
+      },
+      "topics": [],
+      "frameworks": [
+        "Express",
+        "Jade",
+        "Mongoose"
+      ],
+      "createdAt": "2015-12-24T13:23:40Z",
+      "pushedAt": "2016-10-10T05:29:32Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-2-Clause",
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "mysql-events",
+      "fullName": "rodrigogs/mysql-events",
+      "url": "https://github.com/rodrigogs/mysql-events",
+      "description": "A node package that watches a MySQL database and runs callbacks on matched events.",
+      "homepage": null,
+      "stars": 139,
+      "forks": 53,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 33979,
+        "Shell": 931
+      },
+      "topics": [
+        "binlog",
+        "database",
+        "event-sourcing",
+        "events",
+        "mysql",
+        "nodejs",
+        "reactive"
+      ],
+      "frameworks": [
+        "ESLint",
+        "Jest",
+        "MySQL"
+      ],
+      "createdAt": "2018-07-05T00:29:05Z",
+      "pushedAt": "2024-05-27T06:41:23Z",
+      "archived": false,
+      "fork": true,
+      "license": "BSD-3-Clause",
+      "latestRelease": {
+        "tag": "0.6.0",
+        "name": "Allow connection pools",
+        "publishedAt": "2019-05-14T19:31:21Z",
+        "url": "https://github.com/rodrigogs/mysql-events/releases/tag/0.6.0"
+      },
+      "releaseCount": 9,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "kairos",
+      "fullName": "rodrigogs/kairos",
+      "url": "https://github.com/rodrigogs/kairos",
+      "description": "A non date-based time calculator",
+      "homepage": "http://rodrigogs.github.io/kairos/",
+      "stars": 96,
+      "forks": 5,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 162423,
+        "HTML": 1462
+      },
+      "topics": [
+        "bower",
+        "browser",
+        "calculate",
+        "calculator",
+        "expressions",
+        "kairos",
+        "math",
+        "nodejs",
+        "time"
+      ],
+      "frameworks": [
+        "Mocha"
+      ],
+      "createdAt": "2015-09-25T20:45:08Z",
+      "pushedAt": "2018-11-24T16:58:04Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-2-Clause",
+      "latestRelease": {
+        "tag": "v2.1.3",
+        "name": "Decreased install size from 4.29MB to 115kB",
+        "publishedAt": "2018-11-24T16:58:04Z",
+        "url": "https://github.com/rodrigogs/kairos/releases/tag/v2.1.3"
+      },
+      "releaseCount": 9,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "payowl",
+      "fullName": "rodrigogs/payowl",
+      "url": "https://github.com/rodrigogs/payowl",
+      "description": "Detect websites protected by paywall applications",
+      "homepage": null,
+      "stars": 17,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 8265
+      },
+      "topics": [
+        "detect",
+        "detection",
+        "detector",
+        "news",
+        "payment",
+        "paywall"
+      ],
+      "frameworks": [
+        "ESLint",
+        "Jest"
+      ],
+      "createdAt": "2019-01-15T16:48:54Z",
+      "pushedAt": "2019-01-15T16:51:39Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": {
+        "tag": "0.0.1-ALPHA",
+        "name": "0.0.1-ALPHA",
+        "publishedAt": "2019-01-15T16:51:39Z",
+        "url": "https://github.com/rodrigogs/payowl/releases/tag/0.0.1-ALPHA"
+      },
+      "releaseCount": 1,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "fastify-scaffold",
+      "fullName": "rodrigogs/fastify-scaffold",
+      "url": "https://github.com/rodrigogs/fastify-scaffold",
+      "description": "A structured fastify app example.",
+      "homepage": null,
+      "stars": 16,
+      "forks": 4,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 10637
+      },
+      "topics": [
+        "api",
+        "example",
+        "fastify",
+        "javascript",
+        "nodejs",
+        "web"
+      ],
+      "frameworks": [
+        "ESLint",
+        "Fastify",
+        "Mocha"
+      ],
+      "createdAt": "2017-09-13T21:51:42Z",
+      "pushedAt": "2017-10-08T04:53:06Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": {
+        "tag": "1.0.0",
+        "name": "The first one",
+        "publishedAt": "2017-09-13T22:03:49Z",
+        "url": "https://github.com/rodrigogs/fastify-scaffold/releases/tag/1.0.0"
+      },
+      "releaseCount": 1,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "mongoose-timezone",
+      "fullName": "rodrigogs/mongoose-timezone",
+      "url": "https://github.com/rodrigogs/mongoose-timezone",
+      "description": "Mongoose plugin to normalize stored dates timezone.",
+      "homepage": null,
+      "stars": 16,
+      "forks": 5,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 4068
+      },
+      "topics": [
+        "date",
+        "mongodb",
+        "mongoose",
+        "nodejs",
+        "offset",
+        "timezone",
+        "utc"
+      ],
+      "frameworks": [
+        "ESLint",
+        "Jest",
+        "Mongoose"
+      ],
+      "createdAt": "2017-02-18T07:30:50Z",
+      "pushedAt": "2023-01-04T04:30:21Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": {
+        "tag": "v1.3.0",
+        "name": "Updated mongoose support to v5.x",
+        "publishedAt": "2019-09-05T19:33:03Z",
+        "url": "https://github.com/rodrigogs/mongoose-timezone/releases/tag/v1.3.0"
+      },
+      "releaseCount": 3,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "promise-pool",
+      "fullName": "rodrigogs/promise-pool",
+      "url": "https://github.com/rodrigogs/promise-pool",
+      "description": "This promise pool keeps looping `Promise.all`'s promises until the last generator item is submitted to the processor.",
+      "homepage": null,
+      "stars": 14,
+      "forks": 1,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 8700
+      },
+      "topics": [
+        "async",
+        "generator",
+        "javascript",
+        "nodejs",
+        "poller",
+        "pool",
+        "promise",
+        "promises"
+      ],
+      "frameworks": [
+        "ESLint",
+        "Jest"
+      ],
+      "createdAt": "2020-01-31T23:39:36Z",
+      "pushedAt": "2023-01-07T14:20:44Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": {
+        "tag": "2.0.0",
+        "name": "",
+        "publishedAt": "2021-03-24T05:01:06Z",
+        "url": "https://github.com/rodrigogs/promise-pool/releases/tag/2.0.0"
+      },
+      "releaseCount": 2,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "occupy-sarahah",
+      "fullName": "rodrigogs/occupy-sarahah",
+      "url": "https://github.com/rodrigogs/occupy-sarahah",
+      "description": "Flood sarahah with random messages",
+      "homepage": null,
+      "stars": 11,
+      "forks": 2,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 3413
+      },
+      "topics": [
+        "cli",
+        "flood",
+        "nodejs",
+        "occupy",
+        "sarahah"
+      ],
+      "frameworks": [
+        "ESLint",
+        "Puppeteer"
+      ],
+      "createdAt": "2017-08-04T03:59:42Z",
+      "pushedAt": "2018-02-20T12:39:31Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": {
+        "tag": "2.0.0",
+        "name": "2.0.0",
+        "publishedAt": "2017-08-20T20:16:28Z",
+        "url": "https://github.com/rodrigogs/occupy-sarahah/releases/tag/2.0.0"
+      },
+      "releaseCount": 1,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "barracao-digital",
+      "fullName": "rodrigogs/barracao-digital",
+      "url": "https://github.com/rodrigogs/barracao-digital",
+      "description": "Sistema de gerenciamento de fila virtual para os barracões de atendimento do COVID-19",
+      "homepage": "https://barracaodigital.com",
+      "stars": 10,
+      "forks": 1,
+      "language": "Vue",
+      "languages": {
+        "Vue": 249161,
+        "JavaScript": 182838,
+        "Shell": 6905,
+        "Pug": 2451,
+        "CSS": 434,
+        "SCSS": 138
+      },
+      "topics": [
+        "backend",
+        "coronavirus",
+        "covid",
+        "covid-19",
+        "frontend",
+        "healthcare",
+        "medical",
+        "nodejs",
+        "pandemic",
+        "serverless",
+        "serverless-framework",
+        "vue"
+      ],
+      "frameworks": [
+        "AWS SDK",
+        "ESLint",
+        "Jest",
+        "Serverless Framework"
+      ],
+      "createdAt": "2020-03-23T03:29:30Z",
+      "pushedAt": "2023-01-27T02:15:18Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "debuggler",
+      "fullName": "rodrigogs/debuggler",
+      "url": "https://github.com/rodrigogs/debuggler",
+      "description": "Resolves debug namespace like magic.",
+      "homepage": null,
+      "stars": 8,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 7761
+      },
+      "topics": [
+        "automatic",
+        "debug",
+        "debugger",
+        "helper",
+        "log",
+        "logging",
+        "nodejs",
+        "wrapper"
+      ],
+      "frameworks": [
+        "ESLint",
+        "Mocha"
+      ],
+      "createdAt": "2018-04-17T22:22:18Z",
+      "pushedAt": "2018-04-24T05:18:55Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": {
+        "tag": "1.0.0",
+        "name": "Release 1.0.0",
+        "publishedAt": "2018-04-18T22:12:54Z",
+        "url": "https://github.com/rodrigogs/debuggler/releases/tag/1.0.0"
+      },
+      "releaseCount": 1,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "express-seed",
+      "fullName": "rodrigogs/express-seed",
+      "url": "https://github.com/rodrigogs/express-seed",
+      "description": "Minimal Node.js express based application for project kickstarting.",
+      "homepage": null,
+      "stars": 8,
+      "forks": 6,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 7206
+      },
+      "topics": [
+        "express",
+        "minimal",
+        "node",
+        "seed"
+      ],
+      "frameworks": [
+        "ESLint",
+        "Express",
+        "Mocha"
+      ],
+      "createdAt": "2017-05-29T18:57:06Z",
+      "pushedAt": "2019-03-09T16:24:40Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "pornhub",
+      "fullName": "rodrigogs/pornhub",
+      "url": "https://github.com/rodrigogs/pornhub",
+      "description": "pornhub API library",
+      "homepage": null,
+      "stars": 8,
+      "forks": 1,
+      "language": "TypeScript",
+      "languages": {
+        "TypeScript": 148268,
+        "Shell": 1205
+      },
+      "topics": [
+        "api",
+        "crawler",
+        "library",
+        "nodejs",
+        "npm",
+        "porn",
+        "pornhub",
+        "scraper"
+      ],
+      "frameworks": [
+        "Biome",
+        "TypeScript",
+        "Vitest"
+      ],
+      "createdAt": "2026-04-28T10:40:46Z",
+      "pushedAt": "2026-09-28T12:10:34Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": {
+        "tag": "v0.6.0",
+        "name": "v0.6.0",
+        "publishedAt": "2026-08-07T05:45:29Z",
+        "url": "https://github.com/rodrigogs/pornhub/releases/tag/v0.6.0"
+      },
+      "releaseCount": 8,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "baileys-store",
+      "fullName": "rodrigogs/baileys-store",
+      "url": "https://github.com/rodrigogs/baileys-store",
+      "description": "Baileys Store",
+      "homepage": null,
+      "stars": 7,
+      "forks": 10,
+      "language": "TypeScript",
+      "languages": {
+        "TypeScript": 95938,
+        "Svelte": 28253,
+        "JavaScript": 1071,
+        "HTML": 382,
+        "CSS": 23
+      },
+      "topics": [],
+      "frameworks": [
+        "Baileys",
+        "Keyv",
+        "TypeScript",
+        "Vitest"
+      ],
+      "createdAt": "2025-05-17T20:04:39Z",
+      "pushedAt": "2026-01-12T05:30:41Z",
+      "archived": false,
+      "fork": false,
+      "license": "MIT",
+      "latestRelease": {
+        "tag": "v2.0.0",
+        "name": "v2.0.0",
+        "publishedAt": "2026-01-12T05:36:51Z",
+        "url": "https://github.com/rodrigogs/baileys-store/releases/tag/v2.0.0"
+      },
+      "releaseCount": 4,
+      "releaseDownloads": 11
+    },
+    {
+      "name": "conditional-race",
+      "fullName": "rodrigogs/conditional-race",
+      "url": "https://github.com/rodrigogs/conditional-race",
+      "description": "Promise conditional race",
+      "homepage": null,
+      "stars": 7,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 3217
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "Jest"
+      ],
+      "createdAt": "2018-10-17T05:37:09Z",
+      "pushedAt": "2018-10-18T05:21:13Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": {
+        "tag": "1.0.0",
+        "name": "v1.0.0",
+        "publishedAt": "2018-10-18T02:29:19Z",
+        "url": "https://github.com/rodrigogs/conditional-race/releases/tag/1.0.0"
+      },
+      "releaseCount": 1,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "cenv",
+      "fullName": "rodrigogs/cenv",
+      "url": "https://github.com/rodrigogs/cenv",
+      "description": "Get your environment variables directly from the cloud :cloud:",
+      "homepage": null,
+      "stars": 6,
+      "forks": 1,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 20134
+      },
+      "topics": [
+        "cloud",
+        "env",
+        "environment",
+        "variables"
+      ],
+      "frameworks": [
+        "ESLint",
+        "Mocha"
+      ],
+      "createdAt": "2017-07-19T23:06:29Z",
+      "pushedAt": "2017-08-11T23:22:38Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": null,
+      "releaseCount": 1,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "nuxt3-vuetify-pug-template",
+      "fullName": "rodrigogs/nuxt3-vuetify-pug-template",
+      "url": "https://github.com/rodrigogs/nuxt3-vuetify-pug-template",
+      "description": null,
+      "homepage": null,
+      "stars": 6,
+      "forks": 1,
+      "language": "Vue",
+      "languages": {
+        "Vue": 1681,
+        "JavaScript": 1135,
+        "Shell": 724,
+        "TypeScript": 217,
+        "CSS": 52
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "Pug",
+        "TypeScript"
+      ],
+      "createdAt": "2021-11-18T15:17:53Z",
+      "pushedAt": "2021-11-18T15:22:04Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "cenv-registry",
+      "fullName": "rodrigogs/cenv-registry",
+      "url": "https://github.com/rodrigogs/cenv-registry",
+      "description": "Cloud environment registry",
+      "homepage": null,
+      "stars": 5,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 47324
+      },
+      "topics": [
+        "api",
+        "cenv",
+        "cloud",
+        "environment",
+        "rest"
+      ],
+      "frameworks": [
+        "ESLint",
+        "Express",
+        "Mocha",
+        "Mongoose"
+      ],
+      "createdAt": "2017-07-19T23:07:04Z",
+      "pushedAt": "2017-08-17T13:55:50Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": null,
+      "releaseCount": 1,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "github-metrics",
+      "fullName": "rodrigogs/github-metrics",
+      "url": "https://github.com/rodrigogs/github-metrics",
+      "description": "Github metrics based on board events.",
+      "homepage": null,
+      "stars": 5,
+      "forks": 1,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 106391,
+        "HTML": 10863,
+        "CSS": 144
+      },
+      "topics": [
+        "board",
+        "github",
+        "github-metrics",
+        "javascript",
+        "management",
+        "metrics",
+        "nodejs",
+        "project"
+      ],
+      "frameworks": [
+        "ESLint",
+        "Express",
+        "GraphQL",
+        "Mocha",
+        "Mongoose",
+        "Pug",
+        "Redis"
+      ],
+      "createdAt": "2017-09-27T17:51:37Z",
+      "pushedAt": "2018-04-11T17:55:41Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "fastify-router",
+      "fullName": "rodrigogs/fastify-router",
+      "url": "https://github.com/rodrigogs/fastify-router",
+      "description": "Simple fastify router",
+      "homepage": null,
+      "stars": 4,
+      "forks": 1,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 1990
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "Fastify",
+        "Mocha"
+      ],
+      "createdAt": "2017-09-13T18:28:45Z",
+      "pushedAt": "2017-10-08T21:18:42Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": {
+        "tag": "1.1.0",
+        "name": "1.1.0",
+        "publishedAt": "2017-10-03T17:27:58Z",
+        "url": "https://github.com/rodrigogs/fastify-router/releases/tag/1.1.0"
+      },
+      "releaseCount": 2,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "hidemyass-scrapper",
+      "fullName": "rodrigogs/hidemyass-scrapper",
+      "url": "https://github.com/rodrigogs/hidemyass-scrapper",
+      "description": "Page scrapper that retrieves proxy server information from HideMyAss website",
+      "homepage": null,
+      "stars": 4,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 6408
+      },
+      "topics": [],
+      "frameworks": [],
+      "createdAt": "2016-01-06T16:00:38Z",
+      "pushedAt": "2016-08-30T19:55:10Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-2-Clause",
+      "latestRelease": {
+        "tag": "0.3.7",
+        "name": "Release 0.3.7",
+        "publishedAt": "2016-01-20T18:15:19Z",
+        "url": "https://github.com/rodrigogs/hidemyass-scrapper/releases/tag/0.3.7"
+      },
+      "releaseCount": 10,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "overture",
+      "fullName": "rodrigogs/overture",
+      "url": "https://github.com/rodrigogs/overture",
+      "description": "A proxy crawler",
+      "homepage": null,
+      "stars": 4,
+      "forks": 1,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 12862
+      },
+      "topics": [],
+      "frameworks": [
+        "Express"
+      ],
+      "createdAt": "2015-11-12T17:07:55Z",
+      "pushedAt": "2016-01-22T15:28:45Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-2-Clause",
+      "latestRelease": {
+        "tag": "2.0.0",
+        "name": "",
+        "publishedAt": "2016-01-22T12:50:03Z",
+        "url": "https://github.com/rodrigogs/overture/releases/tag/2.0.0"
+      },
+      "releaseCount": 2,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "cannoneer",
+      "fullName": "rodrigogs/cannoneer",
+      "url": "https://github.com/rodrigogs/cannoneer",
+      "description": "Absurdly scalable Node.js message broker.",
+      "homepage": null,
+      "stars": 3,
+      "forks": 1,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 45553
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "GraphQL",
+        "Koa",
+        "Mocha",
+        "Mongoose",
+        "Redis"
+      ],
+      "createdAt": "2018-04-17T23:13:01Z",
+      "pushedAt": "2018-05-28T17:24:47Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "discord-server-manager",
+      "fullName": "rodrigogs/discord-server-manager",
+      "url": "https://github.com/rodrigogs/discord-server-manager",
+      "description": null,
+      "homepage": null,
+      "stars": 3,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 6350
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint"
+      ],
+      "createdAt": "2022-01-31T05:00:31Z",
+      "pushedAt": "2022-03-07T03:48:33Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "freeproxylists-scrapper",
+      "fullName": "rodrigogs/freeproxylists-scrapper",
+      "url": "https://github.com/rodrigogs/freeproxylists-scrapper",
+      "description": "Page scrapper that retrieves proxy server information from FreeProxyLists website",
+      "homepage": null,
+      "stars": 3,
+      "forks": 2,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 7909
+      },
+      "topics": [],
+      "frameworks": [],
+      "createdAt": "2016-01-06T18:13:03Z",
+      "pushedAt": "2016-08-30T19:13:17Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-2-Clause",
+      "latestRelease": {
+        "tag": "0.3.2",
+        "name": "Release 0.3.2",
+        "publishedAt": "2016-01-20T18:17:31Z",
+        "url": "https://github.com/rodrigogs/freeproxylists-scrapper/releases/tag/0.3.2"
+      },
+      "releaseCount": 8,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "ionic-jade-scaffold",
+      "fullName": "rodrigogs/ionic-jade-scaffold",
+      "url": "https://github.com/rodrigogs/ionic-jade-scaffold",
+      "description": " Create Ionic Apps Using Jade as Template Engine",
+      "homepage": null,
+      "stars": 3,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 3197219,
+        "CSS": 563507,
+        "HTML": 2126
+      },
+      "topics": [],
+      "frameworks": [
+        "Jade"
+      ],
+      "createdAt": "2016-01-13T23:20:44Z",
+      "pushedAt": "2016-01-18T10:47:05Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "ispi",
+      "fullName": "rodrigogs/ispi",
+      "url": "https://github.com/rodrigogs/ispi",
+      "description": "Check if the program is running on a Raspberry Pi",
+      "homepage": null,
+      "stars": 3,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 754
+      },
+      "topics": [
+        "checker",
+        "raspberry",
+        "raspberry-pi",
+        "raspberrypi"
+      ],
+      "frameworks": [
+        "ESLint"
+      ],
+      "createdAt": "2018-04-02T05:56:33Z",
+      "pushedAt": "2023-01-07T22:02:19Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": {
+        "tag": "1.1.1",
+        "name": "Updated and fixed dependencies",
+        "publishedAt": "2020-11-01T16:49:25Z",
+        "url": "https://github.com/rodrigogs/ispi/releases/tag/1.1.1"
+      },
+      "releaseCount": 3,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "not-only-fans",
+      "fullName": "rodrigogs/not-only-fans",
+      "url": "https://github.com/rodrigogs/not-only-fans",
+      "description": null,
+      "homepage": null,
+      "stars": 3,
+      "forks": 1,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 10708
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "Playwright"
+      ],
+      "createdAt": "2021-08-28T16:23:38Z",
+      "pushedAt": "2021-08-28T16:25:55Z",
+      "archived": false,
+      "fork": false,
+      "license": "WTFPL",
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "rodrigogs",
+      "fullName": "rodrigogs/rodrigogs",
+      "url": "https://github.com/rodrigogs/rodrigogs",
+      "description": null,
+      "homepage": null,
+      "stars": 3,
+      "forks": 3,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 23725,
+        "HTML": 20814,
+        "CSS": 20755
+      },
+      "topics": [],
+      "frameworks": [],
+      "createdAt": "2020-12-07T04:12:28Z",
+      "pushedAt": "2026-03-23T23:43:55Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "addressbook",
+      "fullName": "rodrigogs/addressbook",
+      "url": "https://github.com/rodrigogs/addressbook",
+      "description": null,
+      "homepage": "https://addressbook-.herokuapp.com",
+      "stars": 2,
+      "forks": 1,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 48801,
+        "Dockerfile": 149
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "Koa",
+        "Mocha",
+        "Mongoose",
+        "Redis"
+      ],
+      "createdAt": "2018-08-02T03:23:46Z",
+      "pushedAt": "2018-08-08T02:40:40Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "BE-Template",
+      "fullName": "rodrigogs/BE-Template",
+      "url": "https://github.com/rodrigogs/BE-Template",
+      "description": null,
+      "homepage": null,
+      "stars": 2,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 26505
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "Express",
+        "Jest"
+      ],
+      "createdAt": "2022-06-13T01:45:33Z",
+      "pushedAt": "2022-06-13T01:57:21Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "cenv-admin",
+      "fullName": "rodrigogs/cenv-admin",
+      "url": "https://github.com/rodrigogs/cenv-admin",
+      "description": "Administration interface for cenv-registry",
+      "homepage": null,
+      "stars": 2,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 23829,
+        "Vue": 1706,
+        "HTML": 198
+      },
+      "topics": [
+        "admin",
+        "cenv",
+        "cloud",
+        "environment",
+        "ui"
+      ],
+      "frameworks": [
+        "ESLint",
+        "Express",
+        "Mocha",
+        "Vue"
+      ],
+      "createdAt": "2017-07-28T19:00:19Z",
+      "pushedAt": "2017-07-31T17:37:24Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "codespace",
+      "fullName": "rodrigogs/codespace",
+      "url": "https://github.com/rodrigogs/codespace",
+      "description": null,
+      "homepage": null,
+      "stars": 2,
+      "forks": 0,
+      "language": "EJS",
+      "languages": {
+        "EJS": 815,
+        "CSS": 689,
+        "JavaScript": 508
+      },
+      "topics": [],
+      "frameworks": [
+        "Express"
+      ],
+      "createdAt": "2021-10-02T23:34:55Z",
+      "pushedAt": "2021-10-02T23:34:56Z",
+      "archived": false,
+      "fork": false,
+      "license": "MIT",
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "fs",
+      "fullName": "rodrigogs/fs",
+      "url": "https://github.com/rodrigogs/fs",
+      "description": "Fluid and promisified file system helpers",
+      "homepage": null,
+      "stars": 2,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 17003
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "Jest"
+      ],
+      "createdAt": "2018-11-20T02:04:06Z",
+      "pushedAt": "2023-03-04T03:41:14Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": {
+        "tag": "v0.3.0",
+        "name": "v0.3.0",
+        "publishedAt": "2021-08-15T19:02:56Z",
+        "url": "https://github.com/rodrigogs/fs/releases/tag/v0.3.0"
+      },
+      "releaseCount": 1,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "juquinha",
+      "fullName": "rodrigogs/juquinha",
+      "url": "https://github.com/rodrigogs/juquinha",
+      "description": null,
+      "homepage": null,
+      "stars": 2,
+      "forks": 1,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 228604,
+        "Vue": 65632,
+        "TypeScript": 6663,
+        "SCSS": 138
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "Jest",
+        "Serverless Framework"
+      ],
+      "createdAt": "2021-11-26T01:40:28Z",
+      "pushedAt": "2022-09-07T23:26:26Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "kinky-quotes",
+      "fullName": "rodrigogs/kinky-quotes",
+      "url": "https://github.com/rodrigogs/kinky-quotes",
+      "description": "Just another joke project. It is used by a Discord bot.",
+      "homepage": null,
+      "stars": 2,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 2181
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "Jest"
+      ],
+      "createdAt": "2022-02-13T00:29:05Z",
+      "pushedAt": "2024-02-05T04:02:23Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "node-scalable-example",
+      "fullName": "rodrigogs/node-scalable-example",
+      "url": "https://github.com/rodrigogs/node-scalable-example",
+      "description": "Node.js Scalable Example",
+      "homepage": null,
+      "stars": 2,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 13781,
+        "HTML": 1606,
+        "CSS": 90
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "Koa",
+        "Mocha",
+        "Redis"
+      ],
+      "createdAt": "2018-02-07T21:03:26Z",
+      "pushedAt": "2018-02-14T21:37:56Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "sadistic",
+      "fullName": "rodrigogs/sadistic",
+      "url": "https://github.com/rodrigogs/sadistic",
+      "description": null,
+      "homepage": null,
+      "stars": 2,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 2824,
+        "Shell": 483
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint"
+      ],
+      "createdAt": "2018-11-26T13:55:54Z",
+      "pushedAt": "2018-11-26T13:56:17Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "serveo",
+      "fullName": "rodrigogs/serveo",
+      "url": "https://github.com/rodrigogs/serveo",
+      "description": null,
+      "homepage": null,
+      "stars": 2,
+      "forks": 0,
+      "language": "TypeScript",
+      "languages": {
+        "TypeScript": 117,
+        "JavaScript": 115
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "Jest"
+      ],
+      "createdAt": "2019-03-26T20:19:27Z",
+      "pushedAt": "2019-03-26T20:24:13Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "spiderman",
+      "fullName": "rodrigogs/spiderman",
+      "url": "https://github.com/rodrigogs/spiderman",
+      "description": null,
+      "homepage": null,
+      "stars": 2,
+      "forks": 0,
+      "language": null,
+      "languages": {},
+      "topics": [],
+      "frameworks": [],
+      "createdAt": "2022-03-20T18:54:18Z",
+      "pushedAt": "2022-03-20T18:54:25Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "sro-premium-farmer",
+      "fullName": "rodrigogs/sro-premium-farmer",
+      "url": "https://github.com/rodrigogs/sro-premium-farmer",
+      "description": null,
+      "homepage": null,
+      "stars": 2,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 2570
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint"
+      ],
+      "createdAt": "2018-12-14T00:13:50Z",
+      "pushedAt": "2018-12-14T00:19:06Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "twitter-bot",
+      "fullName": "rodrigogs/twitter-bot",
+      "url": "https://github.com/rodrigogs/twitter-bot",
+      "description": "Simple twitter bot to get followers",
+      "homepage": null,
+      "stars": 2,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 17014
+      },
+      "topics": [],
+      "frameworks": [
+        "Puppeteer"
+      ],
+      "createdAt": "2020-10-31T17:37:49Z",
+      "pushedAt": "2021-01-25T02:58:58Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "vibecode-playground",
+      "fullName": "rodrigogs/vibecode-playground",
+      "url": "https://github.com/rodrigogs/vibecode-playground",
+      "description": null,
+      "homepage": "https://brain-rot-factory.vercel.app",
+      "stars": 2,
+      "forks": 0,
+      "language": "TypeScript",
+      "languages": {
+        "TypeScript": 745818,
+        "JavaScript": 20988,
+        "CSS": 9536,
+        "Dockerfile": 709
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "LangChain",
+        "LangGraph",
+        "Next.js",
+        "OpenAI SDK",
+        "React",
+        "Tailwind CSS",
+        "TypeScript"
+      ],
+      "createdAt": "2025-06-16T18:33:22Z",
+      "pushedAt": "2025-08-14T17:51:53Z",
+      "archived": false,
+      "fork": false,
+      "license": "MIT",
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "alpine-node-git",
+      "fullName": "rodrigogs/alpine-node-git",
+      "url": "https://github.com/rodrigogs/alpine-node-git",
+      "description": "https://cloud.docker.com/repository/docker/rodrigogs/alpine-node-git/general",
+      "homepage": null,
+      "stars": 1,
+      "forks": 0,
+      "language": "Dockerfile",
+      "languages": {
+        "Dockerfile": 146
+      },
+      "topics": [
+        "alpine",
+        "docker",
+        "git",
+        "image",
+        "node",
+        "vcs"
+      ],
+      "frameworks": [],
+      "createdAt": "2018-12-20T20:57:07Z",
+      "pushedAt": "2018-12-21T15:24:10Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": {
+        "tag": "8.14.1",
+        "name": "8.14.1",
+        "publishedAt": "2018-12-21T15:24:10Z",
+        "url": "https://github.com/rodrigogs/alpine-node-git/releases/tag/8.14.1"
+      },
+      "releaseCount": 1,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "coin-magnet",
+      "fullName": "rodrigogs/coin-magnet",
+      "url": "https://github.com/rodrigogs/coin-magnet",
+      "description": null,
+      "homepage": null,
+      "stars": 1,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 3510
+      },
+      "topics": [],
+      "frameworks": [
+        "Jest"
+      ],
+      "createdAt": "2021-06-09T00:48:35Z",
+      "pushedAt": "2021-06-09T00:52:22Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "disx",
+      "fullName": "rodrigogs/disx",
+      "url": "https://github.com/rodrigogs/disx",
+      "description": null,
+      "homepage": null,
+      "stars": 1,
+      "forks": 0,
+      "language": null,
+      "languages": {},
+      "topics": [],
+      "frameworks": [],
+      "createdAt": "2018-09-28T17:33:59Z",
+      "pushedAt": "2018-09-28T17:34:00Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "ditcher",
+      "fullName": "rodrigogs/ditcher",
+      "url": "https://github.com/rodrigogs/ditcher",
+      "description": null,
+      "homepage": null,
+      "stars": 1,
+      "forks": 0,
+      "language": null,
+      "languages": {},
+      "topics": [],
+      "frameworks": [],
+      "createdAt": "2020-02-03T04:40:06Z",
+      "pushedAt": "2020-02-03T04:40:07Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-2-Clause",
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "filefish",
+      "fullName": "rodrigogs/filefish",
+      "url": "https://github.com/rodrigogs/filefish",
+      "description": null,
+      "homepage": null,
+      "stars": 1,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 1504
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint"
+      ],
+      "createdAt": "2018-09-26T20:19:18Z",
+      "pushedAt": "2018-09-26T20:21:15Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "findmypet",
+      "fullName": "rodrigogs/findmypet",
+      "url": "https://github.com/rodrigogs/findmypet",
+      "description": null,
+      "homepage": null,
+      "stars": 1,
+      "forks": 0,
+      "language": "Java",
+      "languages": {
+        "Java": 134396
+      },
+      "topics": [],
+      "frameworks": [],
+      "createdAt": "2015-02-24T18:07:01Z",
+      "pushedAt": "2015-03-04T20:33:20Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "gogs-utils",
+      "fullName": "rodrigogs/gogs-utils",
+      "url": "https://github.com/rodrigogs/gogs-utils",
+      "description": "just to have it",
+      "homepage": null,
+      "stars": 1,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 20064,
+        "CSS": 8420,
+        "HTML": 4261
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "Koa",
+        "MySQL"
+      ],
+      "createdAt": "2018-06-05T20:22:30Z",
+      "pushedAt": "2018-06-05T20:23:35Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "hermes-smart-router",
+      "fullName": "rodrigogs/hermes-smart-router",
+      "url": "https://github.com/rodrigogs/hermes-smart-router",
+      "description": "Hermes Agent plugin: delegate_task with profile selection",
+      "homepage": null,
+      "stars": 1,
+      "forks": 0,
+      "language": "Python",
+      "languages": {
+        "Python": 2554295,
+        "JavaScript": 794643,
+        "HTML": 743273,
+        "Shell": 6042,
+        "CSS": 4544
+      },
+      "topics": [],
+      "frameworks": [],
+      "createdAt": "2026-07-21T21:41:59Z",
+      "pushedAt": "2026-09-28T14:40:35Z",
+      "archived": false,
+      "fork": false,
+      "license": "MIT",
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "http-tester",
+      "fullName": "rodrigogs/http-tester",
+      "url": "https://github.com/rodrigogs/http-tester",
+      "description": "Simple Node.js library created in a hurry to test and log HTTP requests.",
+      "homepage": null,
+      "stars": 1,
+      "forks": 1,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 2892
+      },
+      "topics": [],
+      "frameworks": [],
+      "createdAt": "2016-10-13T20:45:46Z",
+      "pushedAt": "2016-11-10T16:56:43Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-2-Clause",
+      "latestRelease": {
+        "tag": "0.1.1",
+        "name": "Whatever",
+        "publishedAt": "2016-10-13T22:58:41Z",
+        "url": "https://github.com/rodrigogs/http-tester/releases/tag/0.1.1"
+      },
+      "releaseCount": 3,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "ionic2-jade-scaffold",
+      "fullName": "rodrigogs/ionic2-jade-scaffold",
+      "url": "https://github.com/rodrigogs/ionic2-jade-scaffold",
+      "description": null,
+      "homepage": null,
+      "stars": 1,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 3347187,
+        "CSS": 568381,
+        "HTML": 3980
+      },
+      "topics": [],
+      "frameworks": [
+        "Jade"
+      ],
+      "createdAt": "2016-10-04T17:03:15Z",
+      "pushedAt": "2016-10-04T17:23:51Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "juca-framework",
+      "fullName": "rodrigogs/juca-framework",
+      "url": "https://github.com/rodrigogs/juca-framework",
+      "description": "Tudo na mãozinha",
+      "homepage": null,
+      "stars": 1,
+      "forks": 0,
+      "language": null,
+      "languages": {},
+      "topics": [],
+      "frameworks": [],
+      "createdAt": "2021-05-05T02:27:49Z",
+      "pushedAt": "2021-05-05T02:27:49Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "keyword-crawler",
+      "fullName": "rodrigogs/keyword-crawler",
+      "url": "https://github.com/rodrigogs/keyword-crawler",
+      "description": null,
+      "homepage": null,
+      "stars": 1,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 2963
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "Mocha",
+        "Mongoose"
+      ],
+      "createdAt": "2017-10-16T01:56:01Z",
+      "pushedAt": "2017-10-16T01:58:33Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "ml-world",
+      "fullName": "rodrigogs/ml-world",
+      "url": "https://github.com/rodrigogs/ml-world",
+      "description": "Machine learning on Unity",
+      "homepage": null,
+      "stars": 1,
+      "forks": 1,
+      "language": "C#",
+      "languages": {
+        "C#": 217257,
+        "ShaderLab": 96874,
+        "HLSL": 19973,
+        "PowerShell": 700,
+        "Shell": 700
+      },
+      "topics": [],
+      "frameworks": [],
+      "createdAt": "2021-07-13T03:44:23Z",
+      "pushedAt": "2025-11-12T01:02:27Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "mouseless",
+      "fullName": "rodrigogs/mouseless",
+      "url": "https://github.com/rodrigogs/mouseless",
+      "description": null,
+      "homepage": null,
+      "stars": 1,
+      "forks": 0,
+      "language": "Java",
+      "languages": {
+        "Java": 38086
+      },
+      "topics": [],
+      "frameworks": [],
+      "createdAt": "2014-10-29T17:47:51Z",
+      "pushedAt": "2015-05-26T04:41:11Z",
+      "archived": false,
+      "fork": false,
+      "license": "Apache-2.0",
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "mouseless-server",
+      "fullName": "rodrigogs/mouseless-server",
+      "url": "https://github.com/rodrigogs/mouseless-server",
+      "description": null,
+      "homepage": null,
+      "stars": 1,
+      "forks": 1,
+      "language": "Java",
+      "languages": {
+        "Java": 38057
+      },
+      "topics": [],
+      "frameworks": [],
+      "createdAt": "2014-10-07T14:29:47Z",
+      "pushedAt": "2015-01-28T12:32:08Z",
+      "archived": false,
+      "fork": false,
+      "license": "Apache-2.0",
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "nuxt3-tailwind-pug-template",
+      "fullName": "rodrigogs/nuxt3-tailwind-pug-template",
+      "url": "https://github.com/rodrigogs/nuxt3-tailwind-pug-template",
+      "description": null,
+      "homepage": null,
+      "stars": 1,
+      "forks": 0,
+      "language": "Vue",
+      "languages": {
+        "Vue": 8267,
+        "JavaScript": 1169,
+        "TypeScript": 300,
+        "CSS": 182
+      },
+      "topics": [],
+      "frameworks": [
+        "Pug",
+        "Tailwind CSS"
+      ],
+      "createdAt": "2021-11-17T22:32:35Z",
+      "pushedAt": "2021-11-17T22:32:41Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "pg-turbo",
+      "fullName": "rodrigogs/pg-turbo",
+      "url": "https://github.com/rodrigogs/pg-turbo",
+      "description": "Resilient PostgreSQL dump & restore CLI with direct COPY protocol, chunked streaming, and automatic connection recovery",
+      "homepage": null,
+      "stars": 1,
+      "forks": 0,
+      "language": "TypeScript",
+      "languages": {
+        "TypeScript": 248850,
+        "JavaScript": 543
+      },
+      "topics": [],
+      "frameworks": [
+        "Biome",
+        "PostgreSQL",
+        "TypeScript",
+        "Vitest"
+      ],
+      "createdAt": "2026-04-02T22:43:32Z",
+      "pushedAt": "2026-04-14T01:39:26Z",
+      "archived": false,
+      "fork": false,
+      "license": "AGPL-3.0",
+      "latestRelease": {
+        "tag": "v0.1.4",
+        "name": "v0.1.4",
+        "publishedAt": "2026-04-14T01:39:27Z",
+        "url": "https://github.com/rodrigogs/pg-turbo/releases/tag/v0.1.4"
+      },
+      "releaseCount": 3,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "raspberry-pi-ap-client-script",
+      "fullName": "rodrigogs/raspberry-pi-ap-client-script",
+      "url": "https://github.com/rodrigogs/raspberry-pi-ap-client-script",
+      "description": null,
+      "homepage": null,
+      "stars": 1,
+      "forks": 0,
+      "language": "Shell",
+      "languages": {
+        "Shell": 7359
+      },
+      "topics": [],
+      "frameworks": [],
+      "createdAt": "2018-03-01T04:39:21Z",
+      "pushedAt": "2018-03-01T17:03:41Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "senna-sample",
+      "fullName": "rodrigogs/senna-sample",
+      "url": "https://github.com/rodrigogs/senna-sample",
+      "description": "Ugly Grails application featuring Sennajs in a simple way to understand and see it working.",
+      "homepage": null,
+      "stars": 1,
+      "forks": 1,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 147003,
+        "CSS": 16388,
+        "Groovy": 11615,
+        "Shell": 5968
+      },
+      "topics": [],
+      "frameworks": [],
+      "createdAt": "2014-08-29T17:31:48Z",
+      "pushedAt": "2014-09-03T18:30:10Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "slots-inheritance-renaming-problem",
+      "fullName": "rodrigogs/slots-inheritance-renaming-problem",
+      "url": "https://github.com/rodrigogs/slots-inheritance-renaming-problem",
+      "description": "Code example for oppening a Vue.js issue",
+      "homepage": null,
+      "stars": 1,
+      "forks": 0,
+      "language": "Vue",
+      "languages": {
+        "Vue": 2094,
+        "HTML": 613,
+        "JavaScript": 209
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "Vue"
+      ],
+      "createdAt": "2020-11-02T17:44:08Z",
+      "pushedAt": "2020-11-02T18:09:54Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "stomatopod",
+      "fullName": "rodrigogs/stomatopod",
+      "url": "https://github.com/rodrigogs/stomatopod",
+      "description": null,
+      "homepage": null,
+      "stars": 1,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 12893,
+        "Vue": 4618,
+        "HTML": 254
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "Koa",
+        "Mocha",
+        "MySQL"
+      ],
+      "createdAt": "2018-06-13T20:55:48Z",
+      "pushedAt": "2018-06-19T18:33:47Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "asaas-sdk",
+      "fullName": "rodrigogs/asaas-sdk",
+      "url": "https://github.com/rodrigogs/asaas-sdk",
+      "description": null,
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "TypeScript",
+      "languages": {
+        "TypeScript": 328579
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "TypeScript",
+        "Vitest"
+      ],
+      "createdAt": "2026-03-14T00:16:08Z",
+      "pushedAt": "2026-03-18T22:33:14Z",
+      "archived": false,
+      "fork": false,
+      "license": "Apache-2.0",
+      "latestRelease": {
+        "tag": "v0.1.2",
+        "name": "v0.1.2",
+        "publishedAt": "2026-03-18T22:33:45Z",
+        "url": "https://github.com/rodrigogs/asaas-sdk/releases/tag/v0.1.2"
+      },
+      "releaseCount": 2,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "avell-sucks",
+      "fullName": "rodrigogs/avell-sucks",
+      "url": "https://github.com/rodrigogs/avell-sucks",
+      "description": "Unofficial open-source control center for the Avell G1555 gaming laptop: fan, power, RGB and device controls, talking straight to the hardware.",
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "C#",
+      "languages": {
+        "C#": 593690,
+        "PowerShell": 14476,
+        "Shell": 5513,
+        "Inno Setup": 4684,
+        "Makefile": 2051
+      },
+      "topics": [
+        "avell",
+        "dotnet",
+        "ec",
+        "embedded-controller",
+        "fan-control",
+        "gaming-laptop",
+        "power-management",
+        "reverse-engineering",
+        "windows",
+        "wpf"
+      ],
+      "frameworks": [],
+      "createdAt": "2026-07-05T08:25:31Z",
+      "pushedAt": "2026-08-24T01:06:17Z",
+      "archived": false,
+      "fork": false,
+      "license": "Apache-2.0",
+      "latestRelease": {
+        "tag": "v1.3.1",
+        "name": "v1.3.1",
+        "publishedAt": "2026-08-24T00:42:52Z",
+        "url": "https://github.com/rodrigogs/avell-sucks/releases/tag/v1.3.1"
+      },
+      "releaseCount": 4,
+      "releaseDownloads": 9
+    },
+    {
+      "name": "campobom.online",
+      "fullName": "rodrigogs/campobom.online",
+      "url": "https://github.com/rodrigogs/campobom.online",
+      "description": "Campo Bom Online",
+      "homepage": "https://campobom.online",
+      "stars": 0,
+      "forks": 0,
+      "language": "TypeScript",
+      "languages": {
+        "TypeScript": 49853,
+        "Shell": 2229,
+        "JavaScript": 92
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "Next.js",
+        "React",
+        "TypeScript"
+      ],
+      "createdAt": "2024-07-30T00:07:07Z",
+      "pushedAt": "2024-09-16T04:51:24Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "controle-viagens",
+      "fullName": "rodrigogs/controle-viagens",
+      "url": "https://github.com/rodrigogs/controle-viagens",
+      "description": "Sistema de controle de viagens",
+      "homepage": null,
+      "stars": 0,
+      "forks": 1,
+      "language": "HTML",
+      "languages": {
+        "HTML": 20938,
+        "JavaScript": 19271,
+        "CSS": 550
+      },
+      "topics": [],
+      "frameworks": [
+        "Express",
+        "Jade",
+        "Mongoose"
+      ],
+      "createdAt": "2015-12-09T22:38:08Z",
+      "pushedAt": "2015-12-18T17:12:00Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "focusnfe-sdk",
+      "fullName": "rodrigogs/focusnfe-sdk",
+      "url": "https://github.com/rodrigogs/focusnfe-sdk",
+      "description": "TypeScript SDK for the FocusNFe Brazilian fiscal document API",
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "TypeScript",
+      "languages": {
+        "TypeScript": 224812
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "TypeScript",
+        "Vitest"
+      ],
+      "createdAt": "2026-03-18T22:18:18Z",
+      "pushedAt": "2026-03-18T22:53:34Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": {
+        "tag": "v0.1.2",
+        "name": "v0.1.2",
+        "publishedAt": "2026-03-18T22:54:05Z",
+        "url": "https://github.com/rodrigogs/focusnfe-sdk/releases/tag/v0.1.2"
+      },
+      "releaseCount": 2,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "fotosldl",
+      "fullName": "rodrigogs/fotosldl",
+      "url": "https://github.com/rodrigogs/fotosldl",
+      "description": null,
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "Java",
+      "languages": {
+        "Java": 27435
+      },
+      "topics": [],
+      "frameworks": [],
+      "createdAt": "2015-03-12T17:15:22Z",
+      "pushedAt": "2015-03-25T01:13:04Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "garrulous",
+      "fullName": "rodrigogs/garrulous",
+      "url": "https://github.com/rodrigogs/garrulous",
+      "description": "Convert any encoding to any encoding",
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 2258
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint"
+      ],
+      "createdAt": "2017-08-18T16:58:06Z",
+      "pushedAt": "2017-08-21T16:26:49Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": {
+        "tag": "1.1.0",
+        "name": "1.1.0",
+        "publishedAt": "2017-08-18T22:05:17Z",
+        "url": "https://github.com/rodrigogs/garrulous/releases/tag/1.1.0"
+      },
+      "releaseCount": 2,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "github-angular-auth-test",
+      "fullName": "rodrigogs/github-angular-auth-test",
+      "url": "https://github.com/rodrigogs/github-angular-auth-test",
+      "description": null,
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 11697,
+        "HTML": 1601
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "Express",
+        "Redis"
+      ],
+      "createdAt": "2017-04-28T12:22:50Z",
+      "pushedAt": "2017-04-28T12:30:57Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "gpt-query",
+      "fullName": "rodrigogs/gpt-query",
+      "url": "https://github.com/rodrigogs/gpt-query",
+      "description": null,
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "TypeScript",
+      "languages": {
+        "TypeScript": 9640,
+        "JavaScript": 156
+      },
+      "topics": [],
+      "frameworks": [
+        "Biome",
+        "Jest",
+        "OpenAI SDK",
+        "TypeScript"
+      ],
+      "createdAt": "2024-11-24T02:29:04Z",
+      "pushedAt": "2024-11-24T03:25:24Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "hermes-office-web",
+      "fullName": "rodrigogs/hermes-office-web",
+      "url": "https://github.com/rodrigogs/hermes-office-web",
+      "description": "Hermes One Office 3D — web port. Renders your agent fleet as a live 3D office.",
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "TypeScript",
+      "languages": {
+        "TypeScript": 428632,
+        "JavaScript": 89873,
+        "CSS": 62772,
+        "HTML": 1215
+      },
+      "topics": [],
+      "frameworks": [
+        "React",
+        "React Three Fiber",
+        "TypeScript",
+        "Vitest",
+        "three.js"
+      ],
+      "createdAt": "2026-07-31T03:17:18Z",
+      "pushedAt": "2026-09-08T18:44:22Z",
+      "archived": false,
+      "fork": false,
+      "license": "MIT",
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "hermes-one-extensions",
+      "fullName": "rodrigogs/hermes-one-extensions",
+      "url": "https://github.com/rodrigogs/hermes-one-extensions",
+      "description": "Integrated extension bundle for Hermes One.",
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "HTML",
+      "languages": {
+        "HTML": 743273,
+        "JavaScript": 219238,
+        "CSS": 38775
+      },
+      "topics": [],
+      "frameworks": [],
+      "createdAt": "2026-07-27T21:01:01Z",
+      "pushedAt": "2026-09-08T19:53:13Z",
+      "archived": false,
+      "fork": false,
+      "license": "MIT",
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "hermes-one-fact-explorer",
+      "fullName": "rodrigogs/hermes-one-fact-explorer",
+      "url": "https://github.com/rodrigogs/hermes-one-fact-explorer",
+      "description": "Read-only Holographic Memory fact explorer for Hermes One.",
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "HTML",
+      "languages": {
+        "HTML": 126838,
+        "JavaScript": 78633,
+        "Python": 63845,
+        "CSS": 3250
+      },
+      "topics": [],
+      "frameworks": [],
+      "createdAt": "2026-07-27T21:01:05Z",
+      "pushedAt": "2026-09-08T20:33:42Z",
+      "archived": false,
+      "fork": false,
+      "license": "MIT",
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "hermes-web-resilient",
+      "fullName": "rodrigogs/hermes-web-resilient",
+      "url": "https://github.com/rodrigogs/hermes-web-resilient",
+      "description": "Resilient meta web-search provider plugin for hermes-agent: SearXNG first, keyed providers next, keyless free-tier ring last",
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "Python",
+      "languages": {
+        "Python": 66437
+      },
+      "topics": [],
+      "frameworks": [],
+      "createdAt": "2026-09-06T09:38:27Z",
+      "pushedAt": "2026-09-06T09:38:35Z",
+      "archived": false,
+      "fork": false,
+      "license": "MIT",
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "nipe",
+      "fullName": "rodrigogs/nipe",
+      "url": "https://github.com/rodrigogs/nipe",
+      "description": "Nipe is a script to make Tor Network your default gateway.",
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 6655
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint"
+      ],
+      "createdAt": "2018-02-27T04:37:25Z",
+      "pushedAt": "2018-02-27T16:43:21Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "node-texas-holdem",
+      "fullName": "rodrigogs/node-texas-holdem",
+      "url": "https://github.com/rodrigogs/node-texas-holdem",
+      "description": null,
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 29349
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "Mocha"
+      ],
+      "createdAt": "2018-04-26T05:37:00Z",
+      "pushedAt": "2018-04-26T15:21:54Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "orbit-dns",
+      "fullName": "rodrigogs/orbit-dns",
+      "url": "https://github.com/rodrigogs/orbit-dns",
+      "description": "IPFS pubsub DNS resolver.",
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": null,
+      "languages": {},
+      "topics": [],
+      "frameworks": [],
+      "createdAt": "2018-04-03T06:25:58Z",
+      "pushedAt": "2018-04-03T06:26:29Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "passat-b5-site",
+      "fullName": "rodrigogs/passat-b5-site",
+      "url": "https://github.com/rodrigogs/passat-b5-site",
+      "description": null,
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "HTML",
+      "languages": {
+        "HTML": 2376474,
+        "TypeScript": 27905,
+        "JavaScript": 15042,
+        "CSS": 9629,
+        "Astro": 8498,
+        "MDX": 1971
+      },
+      "topics": [],
+      "frameworks": [
+        "TypeScript",
+        "Vitest"
+      ],
+      "createdAt": "2026-04-12T21:34:40Z",
+      "pushedAt": "2026-04-13T01:06:03Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "projects-webhook-test",
+      "fullName": "rodrigogs/projects-webhook-test",
+      "url": "https://github.com/rodrigogs/projects-webhook-test",
+      "description": null,
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": null,
+      "languages": {},
+      "topics": [],
+      "frameworks": [],
+      "createdAt": "2017-10-02T16:43:57Z",
+      "pushedAt": "2017-10-02T16:43:58Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "pulchra",
+      "fullName": "rodrigogs/pulchra",
+      "url": "https://github.com/rodrigogs/pulchra",
+      "description": null,
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 17395
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "Mocha"
+      ],
+      "createdAt": "2017-11-20T01:51:46Z",
+      "pushedAt": "2017-11-30T21:05:59Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": null,
+      "releaseCount": 1,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "punto",
+      "fullName": "rodrigogs/punto",
+      "url": "https://github.com/rodrigogs/punto",
+      "description": "Bidirectional dot notation conversion.",
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "JavaScript",
+      "languages": {
+        "JavaScript": 22309,
+        "HTML": 1284
+      },
+      "topics": [],
+      "frameworks": [
+        "Mocha"
+      ],
+      "createdAt": "2017-01-28T15:52:09Z",
+      "pushedAt": "2017-01-31T02:21:16Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-2-Clause",
+      "latestRelease": {
+        "tag": "v1.1.2",
+        "name": "Bug fix",
+        "publishedAt": "2017-01-31T02:21:16Z",
+        "url": "https://github.com/rodrigogs/punto/releases/tag/v1.1.2"
+      },
+      "releaseCount": 4,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "selecaoinvolves",
+      "fullName": "rodrigogs/selecaoinvolves",
+      "url": "https://github.com/rodrigogs/selecaoinvolves",
+      "description": "https://github.com/involvestecnologia/selecaoinvolves/blob/master/teste-java-2017-01.md",
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "Java",
+      "languages": {
+        "Java": 17941
+      },
+      "topics": [],
+      "frameworks": [],
+      "createdAt": "2017-02-02T01:52:30Z",
+      "pushedAt": "2017-02-02T02:32:50Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "sxyprn",
+      "fullName": "rodrigogs/sxyprn",
+      "url": "https://github.com/rodrigogs/sxyprn",
+      "description": "sxyprn.com api implementation",
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "TypeScript",
+      "languages": {
+        "TypeScript": 91767,
+        "Shell": 2234
+      },
+      "topics": [],
+      "frameworks": [
+        "Biome",
+        "TypeScript",
+        "Vitest"
+      ],
+      "createdAt": "2026-09-22T19:14:39Z",
+      "pushedAt": "2026-09-23T05:30:55Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": {
+        "tag": "v0.1.0",
+        "name": "v0.1.0",
+        "publishedAt": "2026-09-23T05:31:15Z",
+        "url": "https://github.com/rodrigogs/sxyprn/releases/tag/v0.1.0"
+      },
+      "releaseCount": 1,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "ts-monorepo-template",
+      "fullName": "rodrigogs/ts-monorepo-template",
+      "url": "https://github.com/rodrigogs/ts-monorepo-template",
+      "description": null,
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "TypeScript",
+      "languages": {
+        "TypeScript": 235143,
+        "JavaScript": 6045,
+        "Dockerfile": 1691
+      },
+      "topics": [],
+      "frameworks": [
+        "ESLint",
+        "LangChain",
+        "LangGraph",
+        "OpenAI SDK"
+      ],
+      "createdAt": "2025-06-09T18:13:10Z",
+      "pushedAt": "2025-06-09T22:52:21Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    },
+    {
+      "name": "vibewatch",
+      "fullName": "rodrigogs/vibewatch",
+      "url": "https://github.com/rodrigogs/vibewatch",
+      "description": "A file watcher utility with glob pattern support and event-specific commands",
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "Rust",
+      "languages": {
+        "Rust": 135300,
+        "Just": 3450,
+        "Shell": 1839
+      },
+      "topics": [],
+      "frameworks": [
+        "Tokio",
+        "clap"
+      ],
+      "createdAt": "2025-10-05T03:25:37Z",
+      "pushedAt": "2025-10-17T17:27:33Z",
+      "archived": false,
+      "fork": false,
+      "license": "BSD-3-Clause",
+      "latestRelease": {
+        "tag": "v0.5.0",
+        "name": "v0.5.0",
+        "publishedAt": "2025-10-17T04:34:53Z",
+        "url": "https://github.com/rodrigogs/vibewatch/releases/tag/v0.5.0"
+      },
+      "releaseCount": 6,
+      "releaseDownloads": 22
+    },
+    {
+      "name": "videocrawler",
+      "fullName": "rodrigogs/videocrawler",
+      "url": "https://github.com/rodrigogs/videocrawler",
+      "description": null,
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "ApacheConf",
+      "languages": {
+        "ApacheConf": 24139,
+        "JavaScript": 18692,
+        "HTML": 8796,
+        "CSS": 3045
+      },
+      "topics": [],
+      "frameworks": [
+        "Express",
+        "Jade"
+      ],
+      "createdAt": "2014-09-15T16:35:42Z",
+      "pushedAt": "2016-07-09T23:03:45Z",
+      "archived": false,
+      "fork": false,
+      "license": null,
+      "latestRelease": null,
+      "releaseCount": 0,
+      "releaseDownloads": 0
+    }
+  ],
+  "packages": [
+    {
+      "registry": "npm",
+      "name": "debuggler",
+      "url": "https://www.npmjs.com/package/debuggler",
+      "repo": null,
+      "description": "Resolves debug namespace like magic.",
+      "version": "1.0.0",
+      "monthlyDownloads": 5362,
+      "yearlyDownloads": 79982,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/mysql-events",
+      "url": "https://www.npmjs.com/package/@rodrigogs/mysql-events",
+      "repo": "mysql-events",
+      "description": "A node.js package that watches a MySQL database and runs callbacks on matched events like updates on tables and/or specific columns.",
+      "version": "0.6.0",
+      "monthlyDownloads": 5263,
+      "yearlyDownloads": 77405,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/zongji",
+      "url": "https://www.npmjs.com/package/@rodrigogs/zongji",
+      "repo": "zongji",
+      "description": "A mysql binlog listener running on Node.js",
+      "version": "0.4.14",
+      "monthlyDownloads": 5100,
+      "yearlyDownloads": 76109,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "pornhub",
+      "url": "https://www.npmjs.com/package/pornhub",
+      "repo": "pornhub",
+      "description": "pornhub.com api implementation.",
+      "version": "0.6.0",
+      "monthlyDownloads": 1964,
+      "yearlyDownloads": 5710,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "mongoose-timezone",
+      "url": "https://www.npmjs.com/package/mongoose-timezone",
+      "repo": "mongoose-timezone",
+      "description": "[![Build Status](https://travis-ci.org/rodrigogs/mongoose-timezone.svg?branch=master)](https://travis-ci.org/rodrigogs/mongoose-timezone) [![Code Climate](https://codeclimate.com/github/rodrigogs/mongoose-timezone/badges/gpa.svg)](https://codeclimate.com/",
+      "version": "1.3.0",
+      "monthlyDownloads": 661,
+      "yearlyDownloads": 24228,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "kairos",
+      "url": "https://www.npmjs.com/package/kairos",
+      "repo": null,
+      "description": "A non date-based time calculator",
+      "version": "2.1.3",
+      "monthlyDownloads": 623,
+      "yearlyDownloads": 7606,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "sxyprn",
+      "url": "https://www.npmjs.com/package/sxyprn",
+      "repo": "sxyprn",
+      "description": "sxyprn.com api implementation.",
+      "version": "0.1.0",
+      "monthlyDownloads": 459,
+      "yearlyDownloads": 459,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/baileys-store",
+      "url": "https://www.npmjs.com/package/@rodrigogs/baileys-store",
+      "repo": "baileys-store",
+      "description": "Baileys Store",
+      "version": "2.0.0",
+      "monthlyDownloads": 457,
+      "yearlyDownloads": 19848,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/xvideos",
+      "url": "https://www.npmjs.com/package/@rodrigogs/xvideos",
+      "repo": "xvideos",
+      "description": "xvideos.com api implementation.",
+      "version": "3.2.2",
+      "monthlyDownloads": 240,
+      "yearlyDownloads": 2705,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "mongoose-unique-validation",
+      "url": "https://www.npmjs.com/package/mongoose-unique-validation",
+      "repo": null,
+      "description": "Plugin for Mongoose that turns duplicate errors into regular Mongoose validation errors",
+      "version": "0.1.0",
+      "monthlyDownloads": 133,
+      "yearlyDownloads": 933,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "easyvpn",
+      "url": "https://www.npmjs.com/package/easyvpn",
+      "repo": "easyvpn",
+      "description": "Easy way to get a VPN connection.",
+      "version": "1.3.1",
+      "monthlyDownloads": 112,
+      "yearlyDownloads": 821,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "involves-changelog",
+      "url": "https://www.npmjs.com/package/involves-changelog",
+      "repo": null,
+      "description": "# Install ```bash $ npm install involves-changelog --save ```",
+      "version": "0.4.0",
+      "monthlyDownloads": 107,
+      "yearlyDownloads": 701,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "punto",
+      "url": "https://www.npmjs.com/package/punto",
+      "repo": "punto",
+      "description": "Bidirectional dot notation conversion.",
+      "version": "1.1.2",
+      "monthlyDownloads": 92,
+      "yearlyDownloads": 573,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/focusnfe-sdk",
+      "url": "https://www.npmjs.com/package/@rodrigogs/focusnfe-sdk",
+      "repo": "focusnfe-sdk",
+      "description": "TypeScript SDK for the FocusNFe Brazilian fiscal document API",
+      "version": "0.1.0",
+      "monthlyDownloads": 66,
+      "yearlyDownloads": 1663,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "hidemyass-scrapper",
+      "url": "https://www.npmjs.com/package/hidemyass-scrapper",
+      "repo": null,
+      "description": "Page scrapper that retrieves proxy server information from HideMyAss website",
+      "version": "0.4.0",
+      "monthlyDownloads": 56,
+      "yearlyDownloads": 599,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "serveo",
+      "url": "https://www.npmjs.com/package/serveo",
+      "repo": null,
+      "description": null,
+      "version": "0.0.0",
+      "monthlyDownloads": 45,
+      "yearlyDownloads": 1000,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/promise-pool",
+      "url": "https://www.npmjs.com/package/@rodrigogs/promise-pool",
+      "repo": "promise-pool",
+      "description": "This promise pool keeps looping `Promise.all`'s promises until the last generator item is submitted to the processor.",
+      "version": "2.0.0",
+      "monthlyDownloads": 44,
+      "yearlyDownloads": 1863,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "autogram",
+      "url": "https://www.npmjs.com/package/autogram",
+      "repo": null,
+      "description": "",
+      "version": "0.0.7",
+      "monthlyDownloads": 39,
+      "yearlyDownloads": 280,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "overturejs",
+      "url": "https://www.npmjs.com/package/overturejs",
+      "repo": null,
+      "description": "A proxy crawler.",
+      "version": "2.0.0",
+      "monthlyDownloads": 38,
+      "yearlyDownloads": 302,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "sarahah",
+      "url": "https://www.npmjs.com/package/sarahah",
+      "repo": "occupy-sarahah",
+      "description": "Sarahah flodder",
+      "version": "2.0.0",
+      "monthlyDownloads": 38,
+      "yearlyDownloads": 265,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "cenv",
+      "url": "https://www.npmjs.com/package/cenv",
+      "repo": null,
+      "description": "Load environment variables from the cloud. cenv may be loaded from the code or used as a cli.",
+      "version": "1.0.0-alpha",
+      "monthlyDownloads": 37,
+      "yearlyDownloads": 307,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "fastify-router",
+      "url": "https://www.npmjs.com/package/fastify-router",
+      "repo": "fastify-router",
+      "description": "[![Build Status](https://travis-ci.org/rodrigogs/fastify-router.svg?branch=master)](https://travis-ci.org/rodrigogs/fastify-router) [![Code Climate](https://codeclimate.com/github/rodrigogs/fastify-router/badges/gpa.svg)](https://codeclimate.com/github/ro",
+      "version": "1.1.0",
+      "monthlyDownloads": 37,
+      "yearlyDownloads": 275,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "involves-changelog-store",
+      "url": "https://www.npmjs.com/package/involves-changelog-store",
+      "repo": null,
+      "description": "### Install ```bash $ npm install involves-changelog-store -g ```",
+      "version": "0.3.0",
+      "monthlyDownloads": 36,
+      "yearlyDownloads": 568,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "athens",
+      "url": "https://www.npmjs.com/package/athens",
+      "repo": null,
+      "description": "",
+      "version": "1.0.0",
+      "monthlyDownloads": 31,
+      "yearlyDownloads": 210,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "nipe",
+      "url": "https://www.npmjs.com/package/nipe",
+      "repo": null,
+      "description": null,
+      "version": "0.0.0",
+      "monthlyDownloads": 31,
+      "yearlyDownloads": 126,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "pulchra",
+      "url": "https://www.npmjs.com/package/pulchra",
+      "repo": "pulchra",
+      "description": "[![Build Status](https://travis-ci.org/rodrigogs/pulchra.svg?branch=master)](https://travis-ci.org/rodrigogs/pulchra) [![Maintainability](https://api.codeclimate.com/v1/badges/a9e8a6a7fde22f6582b3/maintainability)](https://codeclimate.com/github/rodrigogs",
+      "version": "1.0.7-aplha",
+      "monthlyDownloads": 28,
+      "yearlyDownloads": 336,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "freeproxylists-scrapper",
+      "url": "https://www.npmjs.com/package/freeproxylists-scrapper",
+      "repo": null,
+      "description": "Page scrapper that retrieves proxy server information from FreeProxyLists website",
+      "version": "0.4.1",
+      "monthlyDownloads": 27,
+      "yearlyDownloads": 525,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "gpt-query",
+      "url": "https://www.npmjs.com/package/gpt-query",
+      "repo": null,
+      "description": "A TypeScript library designed to streamline queries and integrate with APIs like OpenAI GPT and others. The project is modular, making it simple to maintain and extend functionality.",
+      "version": "1.0.0",
+      "monthlyDownloads": 24,
+      "yearlyDownloads": 181,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "noipjs",
+      "url": "https://www.npmjs.com/package/noipjs",
+      "repo": null,
+      "description": null,
+      "version": "0.0.0",
+      "monthlyDownloads": 24,
+      "yearlyDownloads": 107,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "pg-turbo",
+      "url": "https://www.npmjs.com/package/pg-turbo",
+      "repo": "pg-turbo",
+      "description": "Resilient PostgreSQL dump & restore with direct COPY protocol",
+      "version": "0.1.4",
+      "monthlyDownloads": 24,
+      "yearlyDownloads": 690,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/ispi",
+      "url": "https://www.npmjs.com/package/@rodrigogs/ispi",
+      "repo": null,
+      "description": "Check if the program is running on a Raspberry Pi",
+      "version": "1.1.1",
+      "monthlyDownloads": 21,
+      "yearlyDownloads": 331,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "not-only-fans",
+      "url": "https://www.npmjs.com/package/not-only-fans",
+      "repo": null,
+      "description": "Easily download OnlyFans content",
+      "version": "1.0.0",
+      "monthlyDownloads": 21,
+      "yearlyDownloads": 88,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "conditional-race",
+      "url": "https://www.npmjs.com/package/conditional-race",
+      "repo": "conditional-race",
+      "description": "[![Build Status](https://travis-ci.org/rodrigogs/conditional-race.svg?branch=master)](https://travis-ci.org/rodrigogs/conditional-race) [![Maintainability](https://api.codeclimate.com/v1/badges/daa916d68e2291a6352a/maintainability)](https://codeclimate.co",
+      "version": "1.0.0",
+      "monthlyDownloads": 20,
+      "yearlyDownloads": 233,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "involves-changelog-server",
+      "url": "https://www.npmjs.com/package/involves-changelog-server",
+      "repo": null,
+      "description": "### Install ```bash $ npm install involves-changelog-server -g ```",
+      "version": "0.3.0",
+      "monthlyDownloads": 20,
+      "yearlyDownloads": 197,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "coin-magnet",
+      "url": "https://www.npmjs.com/package/coin-magnet",
+      "repo": null,
+      "description": "Detects coinmarketcap fresh added coins",
+      "version": "1.0.0",
+      "monthlyDownloads": 19,
+      "yearlyDownloads": 135,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "structo",
+      "url": "https://www.npmjs.com/package/structo",
+      "repo": null,
+      "description": null,
+      "version": "0.0.0",
+      "monthlyDownloads": 19,
+      "yearlyDownloads": 85,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "apogeu",
+      "url": "https://www.npmjs.com/package/apogeu",
+      "repo": null,
+      "description": "[![Build Status](https://travis-ci.org/apogeu/apogeu.svg?branch=master)](https://travis-ci.org/apogeu/apogeu) [![Code Climate](https://codeclimate.com/github/apogeu/apogeu/badges/gpa.svg)](https://codeclimate.com/github/apogeu/apogeu) [![Dependency Status",
+      "version": "0.1.1",
+      "monthlyDownloads": 17,
+      "yearlyDownloads": 240,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "garrulous",
+      "url": "https://www.npmjs.com/package/garrulous",
+      "repo": "garrulous",
+      "description": "Convert any encoding to any encoding",
+      "version": "1.1.0",
+      "monthlyDownloads": 17,
+      "yearlyDownloads": 163,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "kinky-quote",
+      "url": "https://www.npmjs.com/package/kinky-quote",
+      "repo": null,
+      "description": "Crawls random quotes from kinkyquotes.com.",
+      "version": "1.0.1",
+      "monthlyDownloads": 17,
+      "yearlyDownloads": 130,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "http-tester",
+      "url": "https://www.npmjs.com/package/http-tester",
+      "repo": null,
+      "description": "Simple library created in a hurry to test and log HTTP requests.",
+      "version": "0.1.1",
+      "monthlyDownloads": 16,
+      "yearlyDownloads": 169,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/adapter-nextjs",
+      "url": "https://www.npmjs.com/package/@rodrigogs/adapter-nextjs",
+      "repo": null,
+      "description": "The adapter for the supporting of using Amplify APIs in Next.js.",
+      "version": "1.3.0-next15.0",
+      "monthlyDownloads": 15,
+      "yearlyDownloads": 169,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "cusparada",
+      "url": "https://www.npmjs.com/package/cusparada",
+      "repo": null,
+      "description": "",
+      "version": "0.0.0",
+      "monthlyDownloads": 15,
+      "yearlyDownloads": 94,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "payowl",
+      "url": "https://www.npmjs.com/package/payowl",
+      "repo": null,
+      "description": "Detect websites protected by paywall applications",
+      "version": "0.0.1-ALPHA",
+      "monthlyDownloads": 15,
+      "yearlyDownloads": 107,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "succubus",
+      "url": "https://www.npmjs.com/package/succubus",
+      "repo": null,
+      "description": null,
+      "version": "0.0.0",
+      "monthlyDownloads": 15,
+      "yearlyDownloads": 86,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/vuejs-noty",
+      "url": "https://www.npmjs.com/package/@rodrigogs/vuejs-noty",
+      "repo": "vuejs-noty",
+      "description": "Noty plugin for Vue.js 2 and 3",
+      "version": "0.1.5-beta-2",
+      "monthlyDownloads": 14,
+      "yearlyDownloads": 117,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "broad",
+      "url": "https://www.npmjs.com/package/broad",
+      "repo": null,
+      "description": "",
+      "version": "1.0.0",
+      "monthlyDownloads": 14,
+      "yearlyDownloads": 92,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "gh-trending",
+      "url": "https://www.npmjs.com/package/gh-trending",
+      "repo": null,
+      "description": "[![Code Climate](https://codeclimate.com/github/rodrigogs/ilsap/badges/gpa.svg)](https://codeclimate.com/github/rodrigogs/ilsap) [![dependencies Status](https://david-dm.org/rodrigogs/ilsap/status.svg)](https://david-dm.org/rodrigogs/ilsap) [![devDependen",
+      "version": "0.0.0",
+      "monthlyDownloads": 14,
+      "yearlyDownloads": 156,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "nerdy",
+      "url": "https://www.npmjs.com/package/nerdy",
+      "repo": null,
+      "description": "",
+      "version": "0.0.0",
+      "monthlyDownloads": 14,
+      "yearlyDownloads": 80,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "sadistic",
+      "url": "https://www.npmjs.com/package/sadistic",
+      "repo": null,
+      "description": "",
+      "version": "0.0.0",
+      "monthlyDownloads": 14,
+      "yearlyDownloads": 83,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "twinned",
+      "url": "https://www.npmjs.com/package/twinned",
+      "repo": null,
+      "description": "Stupidly small and fast object deep cloner",
+      "version": "1.0.0",
+      "monthlyDownloads": 14,
+      "yearlyDownloads": 79,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/serverless",
+      "url": "https://www.npmjs.com/package/@rodrigogs/serverless",
+      "repo": null,
+      "description": "Serverless Framework - Build web, mobile and IoT applications with serverless architectures using AWS Lambda, Azure Functions, Google CloudFunctions & more",
+      "version": "3.22.0-patched",
+      "monthlyDownloads": 13,
+      "yearlyDownloads": 142,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/serverless-router",
+      "url": "https://www.npmjs.com/package/@rodrigogs/serverless-router",
+      "repo": "serverless-router",
+      "description": "Serverless, minimalist, pluggable, universal router.",
+      "version": "0.0.1",
+      "monthlyDownloads": 13,
+      "yearlyDownloads": 103,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "pilgrim",
+      "url": "https://www.npmjs.com/package/pilgrim",
+      "repo": null,
+      "description": null,
+      "version": "0.0.0",
+      "monthlyDownloads": 13,
+      "yearlyDownloads": 82,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "rodrigo",
+      "url": "https://www.npmjs.com/package/rodrigo",
+      "repo": null,
+      "description": "",
+      "version": "0.0.0",
+      "monthlyDownloads": 13,
+      "yearlyDownloads": 80,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/asaas-sdk",
+      "url": "https://www.npmjs.com/package/@rodrigogs/asaas-sdk",
+      "repo": "asaas-sdk",
+      "description": "[![CI](https://github.com/rodrigogs/asaas-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/rodrigogs/asaas-sdk/actions/workflows/ci.yml) [![npm version](https://img.shields.io/npm/v/%40rodrigogs%2Fasaas-sdk)](https://www.npmjs.com/package/@rodr",
+      "version": "0.1.1",
+      "monthlyDownloads": 12,
+      "yearlyDownloads": 1437,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/fs",
+      "url": "https://www.npmjs.com/package/@rodrigogs/fs",
+      "repo": "fs",
+      "description": "Fluid and promisified file system helpers",
+      "version": "0.3.0",
+      "monthlyDownloads": 12,
+      "yearlyDownloads": 274,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "cannoneer",
+      "url": "https://www.npmjs.com/package/cannoneer",
+      "repo": null,
+      "description": null,
+      "version": "0.0.0-SCRAP",
+      "monthlyDownloads": 12,
+      "yearlyDownloads": 138,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "ditcher",
+      "url": "https://www.npmjs.com/package/ditcher",
+      "repo": null,
+      "description": "",
+      "version": "0.0.0",
+      "monthlyDownloads": 12,
+      "yearlyDownloads": 76,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "habilis",
+      "url": "https://www.npmjs.com/package/habilis",
+      "repo": null,
+      "description": null,
+      "version": "0.0.0",
+      "monthlyDownloads": 11,
+      "yearlyDownloads": 97,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "megazord",
+      "url": "https://www.npmjs.com/package/megazord",
+      "repo": null,
+      "description": "",
+      "version": "0.0.0",
+      "monthlyDownloads": 11,
+      "yearlyDownloads": 68,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/serverless-bundle",
+      "url": "https://www.npmjs.com/package/@rodrigogs/serverless-bundle",
+      "repo": "serverless-bundle",
+      "description": "An extension of the serverless-webpack plugin that bundles your ES6 + TypeScript Node.js Lambda functions. Without node-sass.",
+      "version": "5.0.1",
+      "monthlyDownloads": 10,
+      "yearlyDownloads": 278,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/dynamoose-plugin-optimistic-locking",
+      "url": "https://www.npmjs.com/package/@rodrigogs/dynamoose-plugin-optimistic-locking",
+      "repo": "dynamoose-plugin-optimistic-locking",
+      "description": "A Dynamoose plugin that implements optimistic locking for db writes",
+      "version": "0.0.1",
+      "monthlyDownloads": 9,
+      "yearlyDownloads": 79,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/spiderman",
+      "url": "https://www.npmjs.com/package/@rodrigogs/spiderman",
+      "repo": "spiderman",
+      "description": "Yet to describe",
+      "version": "0.0.0",
+      "monthlyDownloads": 9,
+      "yearlyDownloads": 104,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/serverless-finch",
+      "url": "https://www.npmjs.com/package/@rodrigogs/serverless-finch",
+      "repo": "serverless-finch",
+      "description": "Deploy your serverless static website to AWS S3.",
+      "version": "3.0.0",
+      "monthlyDownloads": 8,
+      "yearlyDownloads": 86,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "rationalist",
+      "url": "https://www.npmjs.com/package/rationalist",
+      "repo": null,
+      "description": null,
+      "version": "0.0.0",
+      "monthlyDownloads": 8,
+      "yearlyDownloads": 183,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "crates",
+      "name": "vibewatch",
+      "url": "https://crates.io/crates/vibewatch",
+      "repo": null,
+      "description": "A file watcher utility with glob pattern support",
+      "version": "0.5.0",
+      "monthlyDownloads": 6,
+      "yearlyDownloads": null,
+      "totalDownloads": 1375,
+      "excluded": false
+    }
+  ],
+  "upstream": [
+    {
+      "repo": "NousResearch/hermes-agent",
+      "url": "https://github.com/NousResearch/hermes-agent",
+      "stars": 249747,
+      "mergedPrs": 0,
+      "prsOpened": 40,
+      "commits": 5,
+      "firstAt": "2026-07-01T03:49:34Z",
+      "lastAt": "2026-09-09T02:07:41Z",
+      "proofUrl": "https://github.com/NousResearch/hermes-agent/commits?author=rodrigogs",
+      "highlights": []
+    },
+    {
+      "repo": "RocketChat/Rocket.Chat",
+      "url": "https://github.com/RocketChat/Rocket.Chat",
+      "stars": 46183,
+      "mergedPrs": 1,
+      "prsOpened": 1,
+      "commits": 2,
+      "firstAt": "2015-09-03T00:13:29.000-03:00",
+      "lastAt": "2015-09-03T10:24:08.000-03:00",
+      "proofUrl": "https://github.com/RocketChat/Rocket.Chat/pulls?q=is%3Apr+author%3Arodrigogs",
+      "highlights": [
+        {
+          "title": "Issue #616 - Fixed multiline code block overflow",
+          "url": "https://github.com/RocketChat/Rocket.Chat/pull/674",
+          "mergedAt": "2015-09-03T13:30:30Z"
+        }
+      ]
+    },
+    {
+      "repo": "nesquena/hermes-webui",
+      "url": "https://github.com/nesquena/hermes-webui",
+      "stars": 18651,
+      "mergedPrs": 5,
+      "prsOpened": 8,
+      "commits": 52,
+      "firstAt": "2026-07-31T18:12:49.000-03:00",
+      "lastAt": "2026-09-24T11:24:18.000-03:00",
+      "proofUrl": "https://github.com/nesquena/hermes-webui/pulls?q=is%3Apr+author%3Arodrigogs",
+      "highlights": [
+        {
+          "title": "fix(sessions): stop save() from reading and parsing the whole sidecar to count it",
+          "url": "https://github.com/nesquena/hermes-webui/pull/7578",
+          "mergedAt": "2026-09-23T21:23:31Z"
+        },
+        {
+          "title": "fix(sessions): stop one oversized metadata field from re-parsing the whole sidecar",
+          "url": "https://github.com/nesquena/hermes-webui/pull/7573",
+          "mergedAt": "2026-09-16T04:25:27Z"
+        },
+        {
+          "title": "fix(sessions): warn once per state.db when 'source' column is missing",
+          "url": "https://github.com/nesquena/hermes-webui/pull/7476",
+          "mergedAt": "2026-09-09T02:33:51Z"
+        },
+        {
+          "title": "fix(sessions): keep project-assigned CLI sessions past the recent-session cap",
+          "url": "https://github.com/nesquena/hermes-webui/pull/6659",
+          "mergedAt": "2026-09-24T19:00:35Z"
+        },
+        {
+          "title": "fix(a11y): clear stale aria-expanded when switching panels",
+          "url": "https://github.com/nesquena/hermes-webui/pull/6656",
+          "mergedAt": "2026-08-09T21:44:58Z"
+        }
+      ]
+    },
+    {
+      "repo": "moleculerjs/moleculer",
+      "url": "https://github.com/moleculerjs/moleculer",
+      "stars": 6378,
+      "mergedPrs": 1,
+      "prsOpened": 1,
+      "commits": 4,
+      "firstAt": "2017-06-09T13:12:57.000-03:00",
+      "lastAt": "2017-06-09T16:17:30Z",
+      "proofUrl": "https://github.com/moleculerjs/moleculer/pulls?q=is%3Apr+author%3Arodrigogs",
+      "highlights": [
+        {
+          "title": "Refactored health status provider",
+          "url": "https://github.com/moleculerjs/moleculer/pull/38",
+          "mergedAt": "2017-06-09T16:39:50Z"
+        }
+      ]
+    },
+    {
+      "repo": "ACloudGuru/serverless-plugin-aws-alerts",
+      "url": "https://github.com/ACloudGuru/serverless-plugin-aws-alerts",
+      "stars": 522,
+      "mergedPrs": 1,
+      "prsOpened": 1,
+      "commits": 1,
+      "firstAt": "2021-04-12T16:50:18Z",
+      "lastAt": "2021-04-26T01:18:13.000-03:00",
+      "proofUrl": "https://github.com/ACloudGuru/serverless-plugin-aws-alerts/pulls?q=is%3Apr+author%3Arodrigogs",
+      "highlights": [
+        {
+          "title": "chore: using lodash modules instead of the whole lib",
+          "url": "https://github.com/ACloudGuru/serverless-plugin-aws-alerts/pull/172",
+          "mergedAt": "2021-04-26T04:18:14Z"
+        }
+      ]
+    },
+    {
+      "repo": "friedrith/node-wifi",
+      "url": "https://github.com/friedrith/node-wifi",
+      "stars": 415,
+      "mergedPrs": 1,
+      "prsOpened": 1,
+      "commits": 1,
+      "firstAt": "2018-04-04T01:47:41.000-03:00",
+      "lastAt": "2018-04-04T04:49:24Z",
+      "proofUrl": "https://github.com/friedrith/node-wifi/pulls?q=is%3Apr+author%3Arodrigogs",
+      "highlights": [
+        {
+          "title": "Fixed Windows netsh missing argument problem",
+          "url": "https://github.com/friedrith/node-wifi/pull/44",
+          "mergedAt": "2018-12-18T20:17:44Z"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "stars": 1721,
+    "repos": 91,
+    "monthlyDownloads": 21317,
+    "packages": 43,
+    "releaseDownloads": 7084
+  }
+}
