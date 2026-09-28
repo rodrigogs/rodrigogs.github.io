@@ -1,7 +1,7 @@
 /**
  * og/{en,pt}.png — 1200x630 social preview, light theme (the scene is a
  * link unfurl card, always rendered on a light chrome by the platforms that
- * show it). Name, role, the release title, the CalVer plate and a diff
+ * show it). Name, role, the release title, the site plate and a diff
  * strip (+added / -removed) as the world's signature mark, compact enough
  * to read at social-card thumbnail size.
  */
@@ -9,7 +9,7 @@
 import type { Theme } from '../../../src/design/tokens.ts';
 import type { SiteView } from '../../../src/lib/view.ts';
 import { MONO, SANS, SANS_EXPANDED } from './fonts.ts';
-import { calverPlate, flex, nameLines, plateBox, text } from './pieces.ts';
+import { flex, nameLines, plateBox, sitePlate, text } from './pieces.ts';
 
 export const OG_WIDTH = 1200;
 export const OG_HEIGHT = 630;
@@ -60,7 +60,7 @@ export function ogCard(view: SiteView, theme: Theme) {
 
   const bottom = flex(
     { flexDirection: 'row', alignItems: 'center', gap: 20, marginTop: 40 },
-    calverPlate(theme, view.hero.calver, view.hero.latestLabel, { fontSize: 22, padX: 16, padY: 10 }),
+    sitePlate(theme, view.person.site, { fontSize: 22, padX: 16, padY: 10 }),
     diffPlate(theme, 'added', '+', added.length, addedLabel),
     diffPlate(theme, 'deprecated', '−', removed.length, removedLabel),
   );

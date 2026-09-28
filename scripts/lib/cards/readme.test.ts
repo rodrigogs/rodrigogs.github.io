@@ -27,7 +27,7 @@ describe('renderReadme', () => {
   });
 
   it('puts each pair of release cards on one source line, one pair per row', () => {
-    const releases = readme.split('## Releases')[1]!.split('Also live:')[0]!.trim();
+    const releases = readme.split('## Selected work')[1]!.split('Also live:')[0]!.trim();
     const lines = releases.split('\n').filter(Boolean);
     expect(lines).toHaveLength(WORK_IDS.length / 2);
     for (const line of lines) {

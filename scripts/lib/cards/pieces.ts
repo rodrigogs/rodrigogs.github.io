@@ -90,14 +90,13 @@ export function nameLines(name: string): [string, string] {
   return [words.slice(0, -2).join(' '), words.slice(-2).join(' ')];
 }
 
-/** The green CalVer "Latest" plate: mono date, sans label, shared by the header and the OG images. */
-export function calverPlate(theme: Theme, calver: string, latestLabel: string, opts: PlateOpts = {}): VNode {
+/** The green site plate ("rodrigogs.github.io"), shared by the README header and the OG images. */
+export function sitePlate(theme: Theme, siteUrl: string, opts: PlateOpts = {}): VNode {
   const { padX = 14, padY = 8 } = opts;
   return plateBox(
     theme,
     'added',
     { padX, padY },
-    text({ fontFamily: MONO, fontWeight: 600, fontSize: opts.fontSize ?? 18, lineHeight: 1 }, calver),
-    text({ fontFamily: SANS, fontWeight: 700, fontSize: (opts.fontSize ?? 18) - 3, lineHeight: 1, marginLeft: 8 }, `· ${latestLabel}`),
+    text({ fontFamily: MONO, fontWeight: 600, fontSize: opts.fontSize ?? 18, lineHeight: 1 }, siteUrl.replace(/^https?:\/\//, '')),
   );
 }

@@ -26,6 +26,7 @@ import { renderReadme, WORK_IDS } from './lib/cards/readme.ts';
 import { roundNumbers, withAccessibleTitle } from './lib/cards/svg.ts';
 import { upstreamCard, upstreamTitle, UPSTREAM_WIDTH } from './lib/cards/upstream.ts';
 import { workCard, WORK_HEIGHT, WORK_WIDTH } from './lib/cards/work.ts';
+import { OG_PROVENANCE, PROVENANCE_KEY, withPngText } from './lib/cards/png.ts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
@@ -102,7 +103,11 @@ export async function renderAll(snapshot: Snapshot, build: { now: Date; sha: str
 
   for (const [locale, view] of [['en', viewEn], ['pt', viewPt]] as const) {
     const ogSvg = await renderSvg(ogCard(view, themes.light), { width: OG_WIDTH, height: OG_HEIGHT }, `${view.person.name}. ${view.hero.title}`);
-    const png = new Resvg(ogSvg, { fitTo: { mode: 'width', value: OG_WIDTH } }).render().asPng();
+    const png = withPngText(
+      new Resvg(ogSvg, { fitTo: { mode: 'width', value: OG_WIDTH } }).render().asPng(),
+      PROVENANCE_KEY,
+      OG_PROVENANCE,
+    );
     await writeFile(path.join(OG_DIR, `${locale}.png`), png);
     results.push({ name: `og/${locale}.png`, width: OG_WIDTH, height: OG_HEIGHT, bytes: png.length });
   }

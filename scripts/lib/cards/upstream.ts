@@ -1,7 +1,7 @@
 /**
  * upstream-{light,dark}.svg — 1280 wide, as tall as the rows need (rendered
  * with only a width, so satori sizes the height from content), capped at 7
- * rows. One cobalt "Upstream" plate and the section claim head the card; per row: repo,
+ * rows. One cobalt "Open source" plate and the section claim head the card; per row: repo,
  * stars, the count (already worded correctly as commits vs merged PRs by
  * the view layer), and the note.
  */
@@ -69,7 +69,7 @@ export function upstreamTitle(rows: UpstreamView[]): string {
       : omitted
         ? shown.join(', ')
         : `${shown.slice(0, -1).join(', ')} and ${shown[shown.length - 1]}`;
-  return `Upstream contributions: ${list}${omitted ? ' and more.' : '.'}`;
+  return `Open source contributions: ${list}${omitted ? ' and more.' : '.'}`;
 }
 
 export function upstreamCard(view: SiteView, theme: Theme) {
@@ -77,7 +77,7 @@ export function upstreamCard(view: SiteView, theme: Theme) {
 
   const header = flex(
     { flexDirection: 'row', alignItems: 'center', gap: 16, paddingBottom: 24, borderBottom: `1px solid ${theme.rule}`, marginBottom: 8 },
-    plate(theme, 'merged', view.roleLabel.merged),
+    plate(theme, 'merged', view.sections.upstream.label),
     text({ fontFamily: SANS, fontWeight: 600, fontSize: 26, color: theme.ink }, view.sections.upstream.claim),
   );
 

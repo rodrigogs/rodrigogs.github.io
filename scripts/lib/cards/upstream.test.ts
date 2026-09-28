@@ -21,17 +21,17 @@ describe('upstreamTitle', () => {
     const title = upstreamTitle(
       ['NousResearch/hermes-agent', 'RocketChat/Rocket.Chat', 'nesquena/hermes-webui', 'moleculerjs/moleculer', 'friedrith/node-wifi'].map(row),
     );
-    expect(title).toBe('Upstream contributions: hermes-agent, Rocket.Chat, hermes-webui, moleculer and more.');
+    expect(title).toBe('Open source contributions: hermes-agent, Rocket.Chat, hermes-webui, moleculer and more.');
     expect(title.match(/ and /g)).toHaveLength(1);
   });
 
   it('lists every repo, Oxford-free, when none are omitted', () => {
     const title = upstreamTitle(['NousResearch/hermes-agent', 'RocketChat/Rocket.Chat', 'nesquena/hermes-webui'].map(row));
-    expect(title).toBe('Upstream contributions: hermes-agent, Rocket.Chat and hermes-webui.');
+    expect(title).toBe('Open source contributions: hermes-agent, Rocket.Chat and hermes-webui.');
   });
 
   it('names the single repo with no conjunction', () => {
     const title = upstreamTitle(['NousResearch/hermes-agent'].map(row));
-    expect(title).toBe('Upstream contributions: hermes-agent.');
+    expect(title).toBe('Open source contributions: hermes-agent.');
   });
 });

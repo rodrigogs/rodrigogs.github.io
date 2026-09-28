@@ -2,7 +2,7 @@
  * Static TTF instances for satori (it cannot use the site's variable
  * WOFF2 fonts). Each static file is registered under its own family name
  * because satori has no `font-stretch` support: the expanded width axis
- * that carries names and CalVer numerals on the site becomes a distinct
+ * that carries names and display numerals on the site becomes a distinct
  * family here, "Archivo Expanded", loaded only in black and bold.
  *
  * See assets/fonts/README.md for what each file is.
@@ -20,7 +20,7 @@ const load = (file: string): Buffer => readFileSync(resolve(fontsDir, file));
 
 /** Sans family, normal width: body text, notes, labels. */
 export const SANS = 'Archivo';
-/** Sans family, expanded width: names, CalVer numerals, headline weight. */
+/** Sans family, expanded width: names, display numerals, headline weight. */
 export const SANS_EXPANDED = 'Archivo Expanded';
 /** Monospace family: versions, dates, counts, hashes. */
 export const MONO = 'Martian Mono';

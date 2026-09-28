@@ -1,8 +1,8 @@
 /**
  * header-{light,dark}.svg — 1280x400. The masthead of the profile README:
- * the name and role on the left with the CalVer "Latest" plate beside it
- * (never above it, as an eyebrow would sit), the three hero notes on the
- * right, each in its release-role plate. Same grammar as the site's first
+ * the name, role and site plate on the left (never an eyebrow above the
+ * name), the three hero notes on the right, each with its plain label
+ * (Role, Product, Open source) on a role plate. Same grammar as the site's first
  * viewport, cropped to what a README needs.
  */
 
@@ -10,7 +10,7 @@ import type { Theme } from '../../../src/design/tokens.ts';
 import type { SiteView } from '../../../src/lib/view.ts';
 import { SANS, SANS_EXPANDED } from './fonts.ts';
 import { measureWidth } from './measure.ts';
-import { calverPlate, flex, hairline, nameLines, plateBox, text } from './pieces.ts';
+import { flex, hairline, nameLines, plateBox, sitePlate, text } from './pieces.ts';
 
 export const HEADER_WIDTH = 1280;
 export const HEADER_HEIGHT = 400;
@@ -42,7 +42,7 @@ export async function headerCard(view: SiteView, theme: Theme) {
     { flexDirection: 'column', flexBasis: '660px', flexShrink: 0, justifyContent: 'center' },
     name,
     roleLine,
-    flex({ marginTop: 24 }, calverPlate(theme, view.hero.calver, view.hero.latestLabel)),
+    flex({ marginTop: 24 }, sitePlate(theme, view.person.site)),
   );
 
   // Every note's plate shares one column width (the widest label plus its

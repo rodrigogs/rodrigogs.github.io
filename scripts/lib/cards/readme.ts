@@ -5,7 +5,7 @@
  * has no locale switch.
  */
 
-import type { EntryView, NowView, SiteView } from '../../../src/lib/view.ts';
+import type { AiProjectView, EntryView, SiteView } from '../../../src/lib/view.ts';
 import { upstreamTitle } from './upstream.ts';
 
 /** Work entries embedded in the README, in the order it lists them. */
@@ -50,13 +50,13 @@ function chunk<T>(items: readonly T[], size: number): T[][] {
  * by the one structural difference the view already carries: a fact proof
  * has no `href`, since it names a number rather than linking to its source.
  */
-function factsText(entry: NowView): string {
+function factsText(entry: AiProjectView): string {
   const facts = entry.proofs.filter((p) => !p.href);
   if (facts.length === 0) return '';
   return ` ${facts.map((f) => `${f.value} ${f.label}`).join(', ')}.`;
 }
 
-function nowBullet(entry: NowView): string {
+function aiBullet(entry: AiProjectView): string {
   const link = entry.links[0];
   const name = link ? `[${entry.name}](${link.href})` : entry.name;
   const priv = entry.isPrivate ? ' Private.' : '';
@@ -86,7 +86,8 @@ export function renderReadme(view: SiteView): string {
     `Remote from ${view.person.location} (${view.person.timezone}). English and Portuguese.`;
   const links = `[Site](${SITE_URL}/) · [Em português](${SITE_URL}/pt/) · [Email](mailto:${view.person.email})`;
 
-  const unreleased = view.now.map(nowBullet).join('\n');
+  const ai = view.ai.map(aiBullet).join('\n');
+  const capabilities = `**${view.toolchain.skillsLabel}**: ${view.toolchain.skills.map((k) => k.name).join(' · ')}`;
 
   const workCards = WORK_IDS.map((id) => {
     const entry = view.work.find((w) => w.id === id);
@@ -110,13 +111,13 @@ export function renderReadme(view: SiteView): string {
 
   const ships = `**Ships with**: ${joinList(view.toolchain.ships.items)}.`;
   // One line per group (Agents, Models, MCP servers...), so the list reads as a manifest, not a badge wall.
-  const aiEngineering = view.toolchain.groups
+  const tools = view.toolchain.groups
     .filter((g) => g.label !== 'Quality')
     .map((g) => `**${g.label}**: ${g.items.join(' · ')}`)
     .join('<br>\n');
 
   const closing =
-    '<sub>Cards refresh daily from GitHub, npm and crates.io. The full release history, including a stack diff ' +
+    '<sub>Cards refresh daily from GitHub, npm and crates.io. The full history of the work, including a stack diff ' +
     `between any two years, is at <a href="${SITE_URL}/">rodrigogs.github.io</a>.</sub>`;
 
   return [
@@ -126,25 +127,27 @@ export function renderReadme(view: SiteView): string {
     '',
     links,
     '',
-    '## Unreleased',
+    '## AI engineering',
     '',
-    unreleased,
+    ai,
     '',
-    '## Releases',
+    capabilities,
+    '',
+    '## Selected work',
     '',
     releases,
     '',
     alsoLive,
     '',
-    '## Upstream',
+    '## Open source',
     '',
     upstream,
     '',
-    '## Toolchain',
+    '## Stack',
     '',
     ships,
     '',
-    aiEngineering,
+    tools,
     '',
     closing,
     '',
