@@ -39,6 +39,7 @@ An engineer shipping since 2010 and senior since 2018 *(public LinkedIn)* who bu
 - Numbers shown must be real and fetched, never hardcoded placeholders. If a fetch fails, the build keeps the last committed snapshot and says when it was taken.
 - Languages: English primary, Brazilian Portuguese available *(inferred decision; the owner is Brazilian and targets international roles)*.
 - Private repos with public products (tavia, pitstop, trama) are shown through their public product sites or as private work, never with repo links.
+- The cardiac CT planning workstation is deliberately shown unnamed and unlinked (no taviacardio.com link): it may be a client engagement in a regulated medical domain, and the owner has not confirmed it can be credited publicly. Add `links: [{ kind: 'site', href: 'https://www.taviacardio.com' }]` to its entry in `src/content/site.ts` only after that confirmation.
 - Adult-site scraper libraries (xvideos, pornhub, sxyprn) are shown neutrally as scraping/API client libraries, not hidden and not featured as flagships. (Confirmed: "Mostrar de forma neutra".)
 - Tooling and AI stack are listed from verified usage. Employer-internal projects, client names beyond what LinkedIn already shows, hostnames, IPs and secrets are never published.
 
