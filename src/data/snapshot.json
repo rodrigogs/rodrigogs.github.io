@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-09-28T21:00:51.482Z",
+  "fetchedAt": "2026-09-28T21:12:57.603Z",
   "sources": {
     "github": {
       "ok": true,
-      "lastSuccessAt": "2026-09-28T21:00:51.482Z"
+      "lastSuccessAt": "2026-09-28T21:12:57.603Z"
     },
     "npm": {
       "ok": true,
-      "lastSuccessAt": "2026-09-28T21:00:51.482Z"
+      "lastSuccessAt": "2026-09-28T21:12:57.603Z"
     },
     "crates": {
       "ok": true,
-      "lastSuccessAt": "2026-09-28T21:00:51.482Z"
+      "lastSuccessAt": "2026-09-28T21:12:57.603Z"
     }
   },
   "user": {
@@ -21,7 +21,7 @@
     "followers": 211,
     "publicRepos": 137,
     "createdAt": "2012-09-17T12:49:05Z",
-    "contributionsLastYear": 6511
+    "contributionsLastYear": 6516
   },
   "repos": [
     {
@@ -2639,8 +2639,8 @@
       "forks": 0,
       "language": "TypeScript",
       "languages": {
-        "TypeScript": 182569,
-        "Astro": 74849,
+        "TypeScript": 184943,
+        "Astro": 74180,
         "CSS": 8888,
         "JavaScript": 1526
       },
@@ -2654,7 +2654,7 @@
         "Vitest"
       ],
       "createdAt": "2026-09-28T20:50:59Z",
-      "pushedAt": "2026-09-28T21:00:36Z",
+      "pushedAt": "2026-09-28T21:12:41Z",
       "archived": false,
       "fork": false,
       "license": null,
@@ -3609,7 +3609,7 @@
     {
       "repo": "NousResearch/hermes-agent",
       "url": "https://github.com/NousResearch/hermes-agent",
-      "stars": 249770,
+      "stars": 249771,
       "mergedPrs": 0,
       "prsOpened": 40,
       "commits": 5,
