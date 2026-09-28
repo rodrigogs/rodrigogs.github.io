@@ -3,7 +3,7 @@
  * The site's only icon set: drawn on a 16px grid, one 1.5px square-capped
  * stroke, so every glyph matches the square plates.
  */
-export type IconName = 'plus' | 'minus' | 'mail' | 'copy' | 'check' | 'hash' | 'lock' | 'external' | 'up' | 'unfold' | 'fold';
+export type IconName = 'plus' | 'minus' | 'mail' | 'copy' | 'check' | 'hash' | 'external' | 'up' | 'unfold' | 'fold';
 
 interface Props {
   name: IconName;
@@ -20,7 +20,6 @@ const paths: Record<IconName, string> = {
   copy: 'M5.75 5.75h7.5v7.5h-7.5zM10.25 3.25v-0.5h-7.5v7.5h0.5',
   check: 'M3 8.5l3 3 7-7',
   hash: 'M6.25 2.75l-1 10.5M10.75 2.75l-1 10.5M2.75 6h10.5M2.25 10.25h10.5',
-  lock: 'M3.25 7.25h9.5v6h-9.5zM5.25 7.25v-2a2.75 2.75 0 0 1 5.5 0v2',
   external: 'M5 11l6-6M6.25 4.75h4.75v4.75',
   up: 'M8 13V3.5M4 7.25l4-4 4 4',
   unfold: 'M4.75 5.75L8 2.5l3.25 3.25M4.75 10.25L8 13.5l3.25-3.25',

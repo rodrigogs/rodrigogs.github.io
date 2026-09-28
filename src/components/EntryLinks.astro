@@ -1,22 +1,19 @@
 ---
 /**
- * Where to check an entry. Private products say so instead of showing a
- * repository link; a live site, when there is one, still links.
+ * Where to check an entry: its repository, live site, package or docs.
  */
 import type { LinkView } from '../lib/view.ts';
 import Icon from './Icon.astro';
 
 interface Props {
   links: LinkView[];
-  isPrivate: boolean;
-  privateLabel: string;
 }
 
-const { links, isPrivate, privateLabel } = Astro.props;
+const { links } = Astro.props;
 ---
 
 {
-  (links.length > 0 || isPrivate) && (
+  links.length > 0 && (
     <ul class="links">
       {links.map((link) => (
         <li>
@@ -26,12 +23,6 @@ const { links, isPrivate, privateLabel } = Astro.props;
           </a>
         </li>
       ))}
-      {isPrivate && (
-        <li class="private">
-          <Icon name="lock" size={14} />
-          {privateLabel}
-        </li>
-      )}
     </ul>
   )
 }
@@ -46,17 +37,10 @@ const { links, isPrivate, privateLabel } = Astro.props;
     font-weight: 600;
     line-height: 1.25rem;
   }
-  a,
-  .private {
+  a {
     display: inline-flex;
     align-items: center;
     gap: var(--s-1);
-  }
-  a {
     min-block-size: var(--s-5);
-  }
-  .private {
-    color: var(--fg-2);
-    font-weight: 500;
   }
 </style>

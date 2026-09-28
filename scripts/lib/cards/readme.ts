@@ -59,8 +59,7 @@ function factsText(entry: AiProjectView): string {
 function aiBullet(entry: AiProjectView): string {
   const link = entry.links[0];
   const name = link ? `[${entry.name}](${link.href})` : entry.name;
-  const priv = entry.isPrivate ? ' Private.' : '';
-  return `- **${name}**: ${entry.note}${factsText(entry)}${priv}`;
+  return `- **${name}**: ${entry.note}${factsText(entry)}`;
 }
 
 function workCardHtml(id: string, entry: EntryView): string {
@@ -84,7 +83,8 @@ export function renderReadme(view: SiteView): string {
   const intro =
     `**Senior Software Engineer** at Globant on the Disney Entertainment account, shipping software since ${view.person.since}. ` +
     `Remote from ${view.person.location} (${view.person.timezone}). English and Portuguese.`;
-  const links = `[Site](${SITE_URL}/) · [Em português](${SITE_URL}/pt/) · [Email](mailto:${view.person.email})`;
+  const linkedin = view.person.linkedin ? ` · [LinkedIn](${view.person.linkedin})` : '';
+  const links = `[Site](${SITE_URL}/) · [Em português](${SITE_URL}/pt/)${linkedin} · [Email](mailto:${view.person.email})`;
 
   const ai = view.ai.map(aiBullet).join('\n');
   const capabilities = `**${view.aiCapabilities.label}**: ${view.aiCapabilities.items.map((k) => k.name).join(' · ')}`;
@@ -98,9 +98,6 @@ export function renderReadme(view: SiteView): string {
     .map((pair) => pair.join(''))
     .join('\n');
 
-  const alsoLive =
-    'Also live: a **cardiac CT planning workstation** for transcatheter valve procedures (private, live) and ' +
-    '**[PitStop](https://pitstop.sh)**, a management SaaS for auto repair shops.';
 
   const upstream = picture({
     href: `${SITE_URL}/#open-source`,
@@ -136,8 +133,6 @@ export function renderReadme(view: SiteView): string {
     '## Selected work',
     '',
     releases,
-    '',
-    alsoLive,
     '',
     '## Open source',
     '',

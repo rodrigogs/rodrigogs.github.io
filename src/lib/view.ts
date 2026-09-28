@@ -65,14 +65,13 @@ export interface EntryView {
   status: StatusKey;
   statusLabel: string;
   statusRole: Role;
-  born: number | null;
+  born: number;
   latest: { tag: string; date: string | null; href: string | null } | null;
   note: string;
   detail: string;
   stack: string[];
   proofs: ProofView[];
   links: LinkView[];
-  isPrivate: boolean;
 }
 
 export interface AiProjectView {
@@ -81,7 +80,6 @@ export interface AiProjectView {
   note: string;
   proofs: ProofView[];
   links: LinkView[];
-  isPrivate: boolean;
 }
 
 export interface UpstreamView {
@@ -339,10 +337,12 @@ function entryProofs(repo: RepoStat | undefined, pkg: PackageStat | undefined, f
 }
 
 function workView(entry: WorkEntry, snapshot: Snapshot, locale: Locale, now: Date): EntryView {
-  const repo = entry.repo ? snapshot.repos.find((r) => r.name === entry.repo) : undefined;
+  const repo = snapshot.repos.find((r) => r.name === entry.repo);
+  // Fail the build loudly rather than render an entry without its proof.
+  if (!repo) throw new Error(`work entry "${entry.id}": repo "${entry.repo}" is not in the snapshot`);
   const pkg = findPackage(snapshot, entry.package);
-  const st: StatusKey = entry.status ?? (repo ? repoStatus(repo, now) : 'private');
-  const latest = repo?.latestRelease
+  const st: StatusKey = repoStatus(repo, now);
+  const latest = repo.latestRelease
     ? { tag: repo.latestRelease.tag, date: isoDate(repo.latestRelease.publishedAt, locale), href: repo.latestRelease.url }
     : pkg?.version
       ? { tag: `v${pkg.version.replace(/^v/, '')}`, date: null, href: pkg.url }
@@ -353,14 +353,13 @@ function workView(entry: WorkEntry, snapshot: Snapshot, locale: Locale, now: Dat
     status: st,
     statusLabel: statusVocab[st].label[locale],
     statusRole: statusVocab[st].role,
-    born: repo ? new Date(repo.createdAt).getUTCFullYear() : (entry.born ?? null),
+    born: new Date(repo.createdAt).getUTCFullYear(),
     latest,
     note: entry.note[locale],
     detail: entry.detail[locale],
     stack: entry.stack,
     proofs: entryProofs(repo, pkg, entry.facts, locale),
     links: linkViews(entry.links, locale),
-    isPrivate: !entry.repo,
   };
 }
 
@@ -531,7 +530,6 @@ export function buildView(snapshot: Snapshot, locale: Locale, build: BuildInfo):
         note: entry.note[locale],
         proofs,
         links: linkViews(entry.links, locale),
-        isPrivate: !entry.repo && !entry.upstream,
       };
     }),
     work: work.map((entry) => workView(entry, snapshot, locale, now)),

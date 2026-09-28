@@ -35,7 +35,7 @@ const caps = view.aiCapabilities;
             </div>
             <p class="note">{item.note}</p>
             <Proofs proofs={item.proofs} />
-            <EntryLinks links={item.links} isPrivate={item.isPrivate} privateLabel={view.field.privateCode} />
+            <EntryLinks links={item.links} />
           </li>
         ))
       }

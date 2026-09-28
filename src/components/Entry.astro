@@ -26,16 +26,12 @@ const { entry, field } = Astro.props;
         <dt class="sr-only">{field.status}</dt>
         <dd><Plate role={entry.statusRole}>{entry.statusLabel}</Plate></dd>
       </div>
-      {
-        entry.born !== null && (
-          <div>
-            <dt>{field.born}</dt>
-            <dd class="mono">
-              <time datetime={String(entry.born)}>{entry.born}</time>
-            </dd>
-          </div>
-        )
-      }
+      <div>
+        <dt>{field.born}</dt>
+        <dd class="mono">
+          <time datetime={String(entry.born)}>{entry.born}</time>
+        </dd>
+      </div>
       {
         entry.latest && (
           <div>
@@ -67,7 +63,7 @@ const { entry, field } = Astro.props;
       {entry.stack.map((s) => <li>{s}</li>)}
     </ul>
     <Proofs proofs={entry.proofs} />
-    <EntryLinks links={entry.links} isPrivate={entry.isPrivate} privateLabel={field.privateCode} />
+    <EntryLinks links={entry.links} />
   </div>
 </article>
 
