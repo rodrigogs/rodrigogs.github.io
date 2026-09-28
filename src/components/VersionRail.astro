@@ -1,0 +1,230 @@
+---
+/**
+ * Career version rail: one row per year, newest on top, from the first role
+ * to now. Each role is a segment on a branch lane (overlapping roles take
+ * the next lane, like a git graph); the current role is lit. Each year
+ * with stack data carries the two Compare controls: a From radio and a To
+ * radio, so the rail itself is the picker.
+ */
+import type { CareerView } from '../lib/view.ts';
+
+interface Props {
+  career: CareerView[];
+  from: number;
+  to: number;
+  pickable: number[];
+  base: number;
+  head: number;
+  baseLabel: string;
+  headLabel: string;
+}
+
+const { career, from, to, pickable, base, head, baseLabel, headLabel } = Astro.props;
+
+const years: number[] = [];
+for (let y = to; y >= from; y--) years.push(y);
+const rowOf = (year: number) => to - year + 2; // row 1 is the column header
+
+// Greedy lane assignment: a role takes the first lane that is free before it starts.
+const laneEnds: number[] = [];
+const segments = [...career]
+  .sort((a, b) => a.startYear - b.startYear || a.endYear - b.endYear)
+  .map((role) => {
+    let lane = laneEnds.findIndex((end) => end < role.startYear);
+    if (lane === -1) {
+      lane = laneEnds.length;
+      laneEnds.push(role.endYear);
+    } else {
+      laneEnds[lane] = role.endYear;
+    }
+    return { role, lane };
+  });
+const lanes = Math.max(laneEnds.length, 1);
+
+const labelsByYear = new Map<number, CareerView[]>();
+for (const { role } of segments) {
+  const list = labelsByYear.get(role.endYear) ?? [];
+  list.push(role);
+  labelsByYear.set(role.endYear, list);
+}
+
+const lo = Math.min(base, head);
+const hi = Math.max(base, head);
+const firstLane = 4;
+---
+
+<div class="rail" style={`--lanes:${lanes}; --rows:${years.length}`} data-rail data-to={to}>
+  <span class="col-label" style="grid-row:1; grid-column:2" aria-hidden="true">{baseLabel}</span>
+  <span class="col-label" style="grid-row:1; grid-column:3" aria-hidden="true">{headLabel}</span>
+
+  <span class="range" data-range style={`grid-row:${rowOf(hi)} / ${rowOf(lo) + 1}`} aria-hidden="true"></span>
+
+  {
+    years.map((y) => {
+      const can = pickable.includes(y);
+      const edge = y === base ? 'base' : y === head ? 'head' : undefined;
+      return (
+        <>
+          <span class="year mono" style={`grid-row:${rowOf(y)}`} data-year={y} data-edge={edge}>
+            {y}
+          </span>
+          {can && (
+            <>
+              <input
+                class="knob"
+                type="radio"
+                name="base"
+                value={y}
+                checked={y === base}
+                aria-label={`${baseLabel} ${y}`}
+                data-role="deprecated"
+                style={`grid-row:${rowOf(y)}; grid-column:2`}
+              />
+              <input
+                class="knob"
+                type="radio"
+                name="head"
+                value={y}
+                checked={y === head}
+                aria-label={`${headLabel} ${y}`}
+                data-role="added"
+                style={`grid-row:${rowOf(y)}; grid-column:3`}
+              />
+            </>
+          )}
+        </>
+      );
+    })
+  }
+
+  {
+    segments.map(({ role, lane }) => (
+      <span
+        class="seg"
+        data-current={role.current ? '' : undefined}
+        style={`grid-row:${rowOf(role.endYear)} / ${rowOf(role.startYear) + 1}; grid-column:${firstLane + lane}`}
+        aria-hidden="true"
+      />
+    ))
+  }
+
+  {
+    [...labelsByYear].map(([year, roles]) => (
+      <span class="org" style={`grid-row:${rowOf(year)}`} aria-hidden="true">
+        {roles.map((r) =>
+          r.current ? (
+            <span class="plate" data-role="changed">
+              {r.org}
+            </span>
+          ) : (
+            <span class="org-name">{r.org}</span>
+          ),
+        )}
+      </span>
+    ))
+  }
+</div>
+
+<style>
+  .rail {
+    --row: calc(var(--s-5) + var(--s-1));
+    position: relative;
+    display: grid;
+    grid-template-columns: max-content var(--s-6) var(--s-6) repeat(var(--lanes), var(--s-3)) max-content;
+    grid-template-rows: var(--s-6) repeat(var(--rows), var(--row));
+    align-items: center;
+  }
+  .col-label {
+    justify-self: center;
+    color: var(--c-ink3);
+    font-size: var(--t-micro);
+    font-weight: 600;
+    line-height: 1rem;
+  }
+  .range {
+    grid-column: 1 / -1;
+    align-self: stretch;
+    background: color-mix(in srgb, var(--c-ink) 5%, transparent);
+    border-block: 1px solid var(--c-rule);
+    transition: grid-row var(--d-base) var(--ease);
+  }
+  .year {
+    grid-column: 1;
+    padding-inline-end: var(--s-2);
+    color: var(--c-ink3);
+    font-size: var(--t-micro);
+    line-height: 1rem;
+  }
+  .year[data-edge] {
+    color: var(--c-ink);
+    font-weight: 700;
+  }
+  .knob {
+    appearance: none;
+    justify-self: center;
+    inline-size: var(--s-5);
+    block-size: var(--s-5);
+    margin: 0;
+    border-radius: 0;
+    background: var(--c-paper);
+    box-shadow:
+      inset 0 0 0 7px var(--c-paper),
+      inset 0 0 0 8px var(--c-ink3);
+    cursor: pointer;
+    transition:
+      background-color var(--d-fast) var(--ease),
+      box-shadow var(--d-fast) var(--ease);
+  }
+  .knob:hover {
+    box-shadow:
+      inset 0 0 0 6px var(--c-paper),
+      inset 0 0 0 8px var(--c-ink);
+  }
+  .knob[data-role='deprecated']:checked {
+    background: var(--c-deprecated);
+    box-shadow: inset 0 0 0 6px var(--c-paper);
+  }
+  .knob[data-role='added']:checked {
+    background: var(--c-added);
+    box-shadow: inset 0 0 0 6px var(--c-paper);
+  }
+  .seg {
+    position: relative;
+    justify-self: center;
+    align-self: stretch;
+    inline-size: var(--s-1);
+    margin-block: calc(var(--row) / 2);
+    background: var(--c-ink3);
+  }
+  .seg::before {
+    content: '';
+    position: absolute;
+    inset-block-start: calc(var(--s-2) / -2);
+    inset-inline-start: calc(var(--s-1) / -1);
+    inline-size: var(--s-3);
+    block-size: var(--s-2);
+    background: inherit;
+  }
+  .seg[data-current] {
+    background: var(--c-changed);
+    inline-size: var(--s-2);
+  }
+  .seg[data-current]::before {
+    inset-inline-start: calc(var(--s-1) / -2);
+  }
+  .org {
+    grid-column: -2;
+    display: flex;
+    gap: var(--s-2);
+    min-inline-size: 0;
+    padding-inline-start: var(--s-2);
+    font-size: var(--t-micro);
+    line-height: 1rem;
+    color: var(--c-ink2);
+    white-space: nowrap;
+  }
+  .org-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</style>

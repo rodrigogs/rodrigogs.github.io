@@ -1,0 +1,28 @@
+---
+/**
+ * Role tag plate: square cornered, solid role fill, on-role text. Used for
+ * Latest / Unreleased, entry status, hero notes and diff roles.
+ * `inverse` swaps fill and text, for a plate that sits on its own role field.
+ */
+import type { Role } from '../design/tokens.ts';
+
+interface Props {
+  role: Role;
+  inverse?: boolean;
+  size?: 's' | 'm';
+  href?: string;
+  class?: string;
+  id?: string;
+}
+
+const { role, inverse = false, size = 's', href, class: cls, id } = Astro.props;
+const Tag = href ? 'a' : 'span';
+---
+
+<Tag
+  class:list={['plate', size === 'm' && 'plate-m', cls]}
+  data-role={role}
+  data-inverse={inverse ? '' : undefined}
+  href={href}
+  id={id}><slot /></Tag
+>

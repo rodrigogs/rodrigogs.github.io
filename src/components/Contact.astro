@@ -1,0 +1,124 @@
+---
+/**
+ * Contact, the close: a full-bleed ink field (the sheet with a strong rule
+ * in the dark theme) with the claim, the body and the big email action.
+ */
+import type { SiteView } from '../lib/view.ts';
+import CopyEmail from './CopyEmail.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  view: SiteView;
+}
+
+const { view } = Astro.props;
+const s = view.sections.contact;
+const { person, hero } = view;
+---
+
+<section class="band field-ink contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap grid">
+    <div class="copy">
+      <h2 class="section-title" id="contact-title">{s.label}</h2>
+      <p class="claim display">{s.claim}</p>
+      {s.body && <p class="body">{s.body}</p>}
+    </div>
+    <div class="reach">
+      <a class="email" href={`mailto:${person.email}`}>
+        <Icon name="mail" size={32} />
+        <span>{person.email}</span>
+      </a>
+      <div class="actions">
+        <a class="action action-primary" href={`mailto:${person.email}`}>{hero.cta.email}</a>
+        <CopyEmail email={person.email} copy={hero.cta.copy} copied={hero.cta.copied} showAddress={false} />
+        <a class="action" href={person.github}>
+          GitHub
+          <Icon name="external" size={12} />
+        </a>
+        {
+          person.linkedin && (
+            <a class="action" href={person.linkedin}>
+              LinkedIn
+              <Icon name="external" size={12} />
+            </a>
+          )
+        }
+      </div>
+      <p class="where">
+        {person.location}
+        <span class="mono">{person.timezone}</span>
+        {person.spoken}
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    padding-block: var(--s-10) var(--s-9);
+  }
+  .grid {
+    row-gap: var(--s-7);
+  }
+  .copy {
+    grid-column: 1 / span 8;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+  }
+  .claim {
+    max-inline-size: 16ch;
+    font-size: clamp(2rem, 1rem + 3.6vw, 4rem);
+    line-height: 1;
+    font-weight: 900;
+  }
+  .body {
+    max-inline-size: 58ch;
+    font-size: var(--t-lead);
+    line-height: 1.75rem;
+  }
+  .reach {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+    padding-block-start: var(--s-6);
+    border-block-start: 1px solid var(--line);
+  }
+  .email {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-4);
+    inline-size: fit-content;
+    max-inline-size: 100%;
+    font-size: clamp(var(--t-lead), 0.6rem + 3vw, 3rem);
+    font-stretch: 112%;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.18em;
+    overflow-wrap: anywhere;
+  }
+  .email :global(.icon) {
+    flex: none;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+  }
+  .actions :global(.action) {
+    border-color: var(--line);
+  }
+  .actions :global(.action-primary) {
+    border-color: var(--fg);
+  }
+  .where {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-1) var(--s-4);
+    font-size: var(--t-small);
+    line-height: 1.25rem;
+  }
+</style>

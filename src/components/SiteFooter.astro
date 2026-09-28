@@ -1,0 +1,92 @@
+---
+/**
+ * Footer: build provenance (date, commit, data age, stale warning when a
+ * source failed), source, the previous version, language, back to top.
+ */
+import type { SiteView } from '../lib/view.ts';
+import Icon from './Icon.astro';
+import Plate from './Plate.astro';
+
+interface Props {
+  view: SiteView;
+}
+
+const { view } = Astro.props;
+const f = view.footer;
+---
+
+<footer class="site-footer">
+  <div class="wrap grid">
+    <div class="build">
+      <p>{f.built}</p>
+      <p>{f.data}</p>
+      {
+        f.stale && (
+          <p class="stale">
+            <Plate role="deprecated">{view.roleLabel.deprecated}</Plate>
+            {f.stale}
+          </p>
+        )
+      }
+    </div>
+    <ul class="links">
+      <li><a href={f.sourceHref}>{f.source}</a></li>
+      <li><a href={f.previousHref}>{f.previous}</a></li>
+      <li>
+        <a href={view.alternate.href} hreflang={view.alternate.lang} lang={view.alternate.lang}>{f.switchTo}</a>
+      </li>
+      <li>
+        <a class="top" href="#top">
+          <Icon name="up" size={14} />
+          {f.top}
+        </a>
+      </li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: var(--s-6) var(--s-7);
+    border-block-start: 1px solid var(--c-rule);
+    color: var(--c-ink3);
+    font-size: var(--t-small);
+    line-height: 1.25rem;
+  }
+  .grid {
+    row-gap: var(--s-5);
+  }
+  .build {
+    grid-column: 1 / span 6;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-1);
+  }
+  .stale {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    color: var(--c-ink);
+  }
+  .links {
+    grid-column: 7 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-content: flex-start;
+    gap: var(--s-2) var(--s-5);
+  }
+  .links a {
+    color: var(--c-ink2);
+  }
+  .top {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-1);
+  }
+  @media (max-width: 47.99rem) {
+    .links {
+      justify-content: flex-start;
+    }
+  }
+</style>

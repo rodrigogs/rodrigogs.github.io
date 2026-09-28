@@ -1,0 +1,38 @@
+---
+/** The release-tag anchor every entry carries: #<id>, drawn hash glyph. */
+import Icon from './Icon.astro';
+
+interface Props {
+  id: string;
+  name: string;
+  label: string;
+}
+
+const { id, name, label } = Astro.props;
+---
+
+<a class="permalink" href={`#${id}`} aria-label={`${label}: ${name}`}><Icon name="hash" /></a>
+
+<style>
+  .permalink {
+    display: inline-grid;
+    place-items: center;
+    inline-size: var(--s-5);
+    block-size: var(--s-5);
+    color: var(--fg-3);
+    opacity: 0;
+    transition: opacity var(--d-fast) var(--ease);
+  }
+  .permalink:hover {
+    color: var(--fg);
+  }
+  :global([data-entry]:is(:hover, :focus-within, :target)) .permalink,
+  .permalink:focus-visible {
+    opacity: 1;
+  }
+  @media (hover: none) {
+    .permalink {
+      opacity: 1;
+    }
+  }
+</style>

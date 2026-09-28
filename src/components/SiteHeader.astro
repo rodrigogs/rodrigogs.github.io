@@ -1,0 +1,158 @@
+---
+/**
+ * Sticky thin bar: wordmark, the literal nouns of the page, language switch.
+ * The section in view gets aria-current through the scroll spy.
+ */
+import type { SiteView } from '../lib/view.ts';
+
+interface Props {
+  view: SiteView;
+}
+
+const { view } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="wordmark" href={view.href}>
+      <svg class="glyph" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" focusable="false">
+        <rect width="16" height="16" rx="1.5" fill="currentColor"></rect>
+        <path d="M8 3.5v9M3.5 8h9" stroke="var(--c-on-added)" stroke-width="2"></path>
+      </svg>
+      <span>{view.person.handle}</span>
+    </a>
+    <nav class="nav">
+      <ul>
+        {
+          view.nav.map((item) => (
+            <li>
+              <a href={item.href} data-spy={item.key}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <a class="lang" href={view.alternate.href} hreflang={view.alternate.lang} lang={view.alternate.lang}>
+      {view.footer.switchTo}
+    </a>
+  </div>
+</header>
+
+<script>
+  import '../scripts/scrollspy.ts';
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 20;
+    background: var(--c-paper);
+    border-block-end: 1px solid var(--c-rule);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: var(--s-6);
+    block-size: var(--header-h);
+  }
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    color: var(--c-ink);
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: var(--t-body);
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+  .glyph {
+    color: var(--c-added);
+  }
+  .nav {
+    flex: 1;
+    min-inline-size: 0;
+  }
+  .nav ul {
+    display: flex;
+    gap: var(--s-1);
+  }
+  .nav a,
+  .lang {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    block-size: var(--header-h);
+    padding-inline: var(--s-3);
+    color: var(--c-ink2);
+    font-size: var(--t-small);
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .nav a::after {
+    content: '';
+    position: absolute;
+    inset-inline: var(--s-3);
+    inset-block-end: -1px;
+    block-size: 2px;
+    background: var(--c-ink);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--d-base) var(--ease);
+  }
+  .nav a:hover,
+  .nav a[aria-current='true'] {
+    color: var(--c-ink);
+  }
+  .nav a[aria-current='true']::after {
+    transform: none;
+  }
+  .nav a:focus-visible,
+  .lang:focus-visible {
+    outline-offset: -2px;
+  }
+  .lang {
+    margin-inline-start: auto;
+    padding-inline-end: 0;
+    color: var(--c-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--c-rule);
+  }
+  .lang:hover {
+    text-decoration-color: currentColor;
+  }
+
+  @media (max-width: 63.99rem) {
+    .bar {
+      flex-wrap: wrap;
+      block-size: auto;
+      column-gap: var(--s-4);
+      row-gap: 0;
+    }
+    .wordmark,
+    .lang {
+      block-size: var(--s-7);
+    }
+    .lang {
+      order: 2;
+    }
+    .nav {
+      order: 3;
+      flex-basis: 100%;
+      margin-inline: calc(var(--pad) * -1);
+      overflow-x: auto;
+      scrollbar-width: none;
+      border-block-start: 1px solid var(--c-rule);
+    }
+    .nav ul {
+      padding-inline: calc(var(--pad) - var(--s-3));
+    }
+    .nav a {
+      block-size: var(--s-7);
+    }
+  }
+</style>

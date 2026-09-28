@@ -1,0 +1,418 @@
+/*
+ * Global layer: reset, browser surfaces, type roles, the 12-column grid and
+ * the shared primitives (plates, fields, proofs). Every color, size and
+ * step comes from the token stylesheet emitted by cssVariables()
+ * (src/design/tokens.ts); nothing here hardcodes a color or a font.
+ */
+
+:root {
+  --sans: var(--font-archivo);
+  --mono: var(--font-martian);
+  --pad: clamp(var(--s-4), 4vw, var(--s-7));
+  --header-h: calc(var(--s-7) + var(--s-1));
+
+  /* Role colors used as text or as small marks (glyphs, counts). The easter
+     egg palette swaps them for ink so text contrast never drops. */
+  --mark-added: var(--c-added);
+  --mark-deprecated: var(--c-deprecated);
+
+  /* Surface-local roles; fields override them. */
+  --ground: var(--c-paper);
+  --fg: var(--c-ink);
+  --fg-2: var(--c-ink2);
+  --fg-3: var(--c-ink3);
+  --line: var(--c-rule);
+  --focus: var(--c-merged);
+  --link: var(--c-ink);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + var(--s-4));
+  scrollbar-color: var(--c-ink3) var(--c-paper);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--c-paper);
+  color: var(--c-ink);
+  font-family: var(--sans);
+  font-size: var(--t-body);
+  line-height: 1.5;
+  font-stretch: 100%;
+  caret-color: var(--c-added);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+dl,
+dd,
+figure {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+  font-weight: var(--w-bold, 700);
+}
+
+p,
+li,
+dd {
+  text-wrap: pretty;
+}
+
+img,
+svg {
+  display: block;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: var(--c-selection);
+  color: var(--c-on-changed);
+}
+
+a {
+  color: var(--link);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  transition: text-decoration-color var(--d-fast) var(--ease);
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Data voice: versions, dates, counts, hashes, commands. */
+.mono {
+  font-family: var(--mono);
+  font-stretch: 100%;
+  font-size: 0.8125em;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums slashed-zero;
+}
+
+/* Layout ---------------------------------------------------------------- */
+
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--pad);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+}
+
+@media (max-width: 47.99rem) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .grid > * {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+/* A section is a band. Fields paint the whole band edge to edge. */
+.band {
+  position: relative;
+  background: var(--ground);
+  color: var(--fg);
+}
+
+.field-changed {
+  --ground: var(--c-changed);
+  --fg: var(--c-on-changed);
+  --fg-2: var(--c-on-changed);
+  --fg-3: var(--c-on-changed);
+  --line: color-mix(in srgb, var(--c-on-changed) 28%, transparent);
+  --focus: var(--c-on-changed);
+  --link: var(--c-on-changed);
+}
+
+.field-merged {
+  --ground: var(--c-merged);
+  --fg: var(--c-on-merged);
+  --fg-2: var(--c-on-merged);
+  --fg-3: var(--c-on-merged);
+  --line: color-mix(in srgb, var(--c-on-merged) 30%, transparent);
+  --focus: var(--c-on-merged);
+  --link: var(--c-on-merged);
+}
+
+.field-sheet {
+  --ground: var(--c-sheet);
+  border-block: 1px solid var(--c-rule);
+}
+
+.field-ink {
+  --ground: var(--c-ink);
+  --fg: var(--c-paper);
+  --fg-2: var(--c-paper);
+  --fg-3: var(--c-paper);
+  --line: color-mix(in srgb, var(--c-paper) 22%, transparent);
+  --focus: var(--c-changed);
+  --link: var(--c-paper);
+}
+
+@media (prefers-color-scheme: dark) {
+  .field-ink {
+    --ground: var(--c-sheet);
+    --fg: var(--c-ink);
+    --fg-2: var(--c-ink2);
+    --fg-3: var(--c-ink3);
+    --line: var(--c-rule);
+    --link: var(--c-ink);
+    border-top: 2px solid var(--c-ink);
+  }
+}
+
+.field-changed ::selection,
+.field-merged ::selection,
+.field-ink ::selection {
+  background: var(--fg);
+  color: var(--ground);
+}
+
+/* Type roles ------------------------------------------------------------ */
+
+.display {
+  font-family: var(--sans);
+  font-stretch: 125%;
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  line-height: 0.92;
+}
+
+.section-title {
+  font-stretch: 125%;
+  font-weight: 900;
+  font-size: clamp(var(--t-h3), 3.2vw, var(--t-h2));
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.claim {
+  font-size: clamp(var(--t-lead), 2.2vw, var(--t-h3));
+  line-height: 1.34;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  max-width: 34ch;
+}
+
+/* Plates: the role tag. Square cornered, solid role fill, on-role text. -- */
+
+.plate {
+  --plate-bg: var(--c-ink);
+  --plate-fg: var(--c-paper);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  block-size: var(--s-5);
+  padding-inline: var(--s-2);
+  border-radius: var(--radius);
+  background: var(--plate-bg);
+  color: var(--plate-fg);
+  font-family: var(--sans);
+  font-stretch: 100%;
+  font-size: var(--t-micro);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  text-decoration: none;
+  vertical-align: baseline;
+}
+
+.plate[data-role='added'] {
+  --plate-bg: var(--c-added);
+  --plate-fg: var(--c-on-added);
+}
+.plate[data-role='changed'] {
+  --plate-bg: var(--c-changed);
+  --plate-fg: var(--c-on-changed);
+}
+.plate[data-role='merged'] {
+  --plate-bg: var(--c-merged);
+  --plate-fg: var(--c-on-merged);
+}
+.plate[data-role='deprecated'] {
+  --plate-bg: var(--c-deprecated);
+  --plate-fg: var(--c-on-deprecated);
+}
+.plate[data-inverse] {
+  background: var(--plate-fg);
+  color: var(--plate-bg);
+}
+
+.plate-m {
+  block-size: var(--s-6);
+  padding-inline: var(--s-3);
+  font-size: var(--t-small);
+}
+
+a.plate:hover {
+  text-decoration: none;
+}
+
+/* Action plates: buttons and mailto links that look like printed tags. */
+.action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-block-size: var(--s-7);
+  padding-inline: var(--s-5);
+  border: 1px solid var(--fg);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--fg);
+  font-family: var(--sans);
+  font-stretch: 100%;
+  font-size: var(--t-body);
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--d-fast) var(--ease),
+    color var(--d-fast) var(--ease);
+}
+
+.action:hover {
+  text-decoration: none;
+  background: color-mix(in srgb, var(--fg) 8%, transparent);
+}
+
+.action-primary {
+  background: var(--fg);
+  color: var(--ground);
+}
+
+.action-primary:hover {
+  background: color-mix(in srgb, var(--fg) 86%, var(--ground));
+}
+
+.action .icon {
+  flex: none;
+}
+
+/* Section scaffold ------------------------------------------------------- */
+
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+
+.section-head .heading-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-3) var(--s-4);
+}
+
+/* Entry targeting: a permalink briefly marks what it points at. */
+:target {
+  animation: target-mark 1.8s var(--ease) 1;
+}
+
+@keyframes target-mark {
+  0%,
+  35% {
+    box-shadow: 0 0 0 var(--s-2) color-mix(in srgb, var(--c-selection) 55%, transparent);
+    background-color: color-mix(in srgb, var(--c-selection) 22%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 var(--s-2) transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :target {
+    animation: none;
+    box-shadow: 0 0 0 var(--s-2) color-mix(in srgb, var(--c-selection) 45%, transparent);
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* The retired 2026 palette, behind the Konami code. The four role colors
+   and their on-role text come from retiredVariables() in tokens.ts; the
+   tints and small marks are derived here so text contrast never drops. */
+:root[data-theme='vaporwave'] {
+  --c-selection: var(--c-deprecated);
+  --c-added-tint: color-mix(in srgb, var(--c-added) 16%, var(--c-paper));
+  --c-deprecated-tint: color-mix(in srgb, var(--c-deprecated) 18%, var(--c-paper));
+  --c-changed-tint: color-mix(in srgb, var(--c-changed) 18%, var(--c-paper));
+  --mark-added: var(--c-ink);
+  --mark-deprecated: var(--c-ink);
+}

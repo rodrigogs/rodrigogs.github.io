@@ -1,0 +1,234 @@
+---
+/**
+ * Packages: the registry listing. Each row's bar is its share of the most
+ * downloaded package (linear, last 30 days): data, not decoration. The top
+ * rows are open; the long tail sits behind a native disclosure.
+ */
+import { fill, type PackageView, type SiteView } from '../lib/view.ts';
+import SectionHead from './SectionHead.astro';
+
+interface Props {
+  view: SiteView;
+}
+
+const { view } = Astro.props;
+const s = view.sections.packages;
+const f = view.field;
+const OPEN = 12;
+const rows = [...view.packages].sort((a, b) => b.monthlyRaw - a.monthlyRaw);
+const max = Math.max(1, ...rows.map((p) => p.monthlyRaw));
+const head = rows.slice(0, OPEN);
+const tail = rows.slice(OPEN);
+const share = (p: PackageView) => (p.monthlyRaw / max).toFixed(4);
+const registryName = { npm: 'npm', crates: 'crates.io' } as const;
+---
+
+<section class="band packages" id="packages" aria-labelledby="packages-title">
+  <div class="wrap grid">
+    <div class="lead">
+      <SectionHead id="packages" label={s.label} claim={s.claim} />
+    </div>
+    <div class="listing">
+      {
+        [head, tail].map((group, gi) => {
+          const table = (
+            <table class:list={['pkgs', gi > 0 && 'pkgs-tail']}>
+              <colgroup>
+                <col class="c-name" />
+                <col class="c-reg" />
+                <col class="c-ver" />
+                <col class="c-bar" />
+                <col class="c-num" />
+              </colgroup>
+              <thead class:list={[gi > 0 && 'sr-only']}>
+                <tr>
+                  <th scope="col">{f.name}</th>
+                  <th scope="col">{f.registry}</th>
+                  <th scope="col">{f.version}</th>
+                  <th scope="col" colspan="2" class="num">
+                    {f.downloadsMonth}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {group.map((p) => (
+                  <tr>
+                    <th scope="row" class="pkg">
+                      <a href={p.url}>{p.name}</a>
+                    </th>
+                    <td class="reg">{registryName[p.registry]}</td>
+                    <td class="mono ver">{p.version ?? ''}</td>
+                    <td class="bar-cell" aria-hidden="true">
+                      <span class="bar" style={`--v:${share(p)}`} />
+                    </td>
+                    <td class="mono num">{p.monthly}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          );
+          if (gi === 0) return table;
+          if (group.length === 0) return null;
+          return (
+            <details class="more">
+              <summary>
+                {fill(f.allPackages, { count: view.totals.packages })}
+              </summary>
+              {table}
+            </details>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .packages {
+    padding-block: var(--s-9);
+  }
+  .grid {
+    row-gap: var(--s-7);
+  }
+  .lead {
+    grid-column: 1 / span 4;
+  }
+  .lead :global(.section-head) {
+    position: sticky;
+    inset-block-start: calc(var(--header-h) + var(--s-6));
+  }
+  .listing {
+    grid-column: 5 / -1;
+    min-inline-size: 0;
+  }
+  .pkgs {
+    inline-size: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: var(--t-small);
+    line-height: 1.25rem;
+  }
+  .c-name {
+    inline-size: 34%;
+  }
+  .c-reg {
+    inline-size: 13%;
+  }
+  .c-ver {
+    inline-size: 15%;
+  }
+  .c-bar {
+    inline-size: 26%;
+  }
+  .c-num {
+    inline-size: 12%;
+  }
+  th,
+  td {
+    padding-block: var(--s-2);
+    padding-inline: 0 var(--s-3);
+    text-align: start;
+    vertical-align: middle;
+    border-block-end: 1px solid var(--c-rule);
+  }
+  thead th {
+    padding-block: 0 var(--s-2);
+    color: var(--c-ink3);
+    font-size: var(--t-micro);
+    font-weight: 600;
+    line-height: 1rem;
+    border-block-end: 1px solid var(--c-ink);
+  }
+  .pkg {
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .reg {
+    color: var(--c-ink2);
+  }
+  .ver {
+    color: var(--c-ink2);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .num {
+    padding-inline-end: 0;
+    text-align: end;
+  }
+  td.num {
+    font-weight: 600;
+  }
+  .bar-cell {
+    padding-inline-end: var(--s-3);
+  }
+  .bar {
+    display: block;
+    inline-size: calc(var(--v) * 100%);
+    min-inline-size: 1px;
+    block-size: var(--s-2);
+    background: var(--c-ink);
+  }
+  .more {
+    margin-block-start: var(--s-5);
+  }
+  .more summary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    min-block-size: var(--s-7);
+    padding-inline: var(--s-4);
+    border: 1px solid var(--c-rule);
+    border-radius: var(--radius);
+    font-size: var(--t-small);
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+  }
+  .more summary::-webkit-details-marker {
+    display: none;
+  }
+  .more summary::before {
+    content: '';
+    inline-size: var(--s-2);
+    block-size: var(--s-2);
+    border-inline-end: 1.5px solid currentColor;
+    border-block-end: 1.5px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform var(--d-base) var(--ease);
+  }
+  .more[open] summary::before {
+    transform: translateY(2px) rotate(-135deg);
+  }
+  .more[open] summary {
+    margin-block-end: var(--s-4);
+  }
+  @media (max-width: 63.99rem) {
+    .lead,
+    .listing {
+      grid-column: 1 / -1;
+    }
+    .lead :global(.section-head) {
+      position: static;
+    }
+  }
+  @media (max-width: 47.99rem) {
+    .c-name {
+      inline-size: 38%;
+    }
+    .c-reg {
+      inline-size: 15%;
+    }
+    .c-ver {
+      inline-size: 17%;
+    }
+    .c-bar {
+      inline-size: 12%;
+    }
+    .c-num {
+      inline-size: 18%;
+    }
+  }
+</style>

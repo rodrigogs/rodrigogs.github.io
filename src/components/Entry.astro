@@ -1,0 +1,212 @@
+---
+/**
+ * A release entry with fixed furniture: every entry carries the same fields
+ * in the same places (status, born, latest version, name, note, detail,
+ * stack, proofs, links, permalink). Dormant entries print in a retired state.
+ */
+import type { EntryView, SiteView } from '../lib/view.ts';
+import EntryLinks from './EntryLinks.astro';
+import Permalink from './Permalink.astro';
+import Plate from './Plate.astro';
+import Proofs from './Proofs.astro';
+
+interface Props {
+  entry: EntryView;
+  field: SiteView['field'];
+}
+
+const { entry, field } = Astro.props;
+---
+
+<article class="entry" id={entry.id} data-entry data-status={entry.status} aria-labelledby={`${entry.id}-name`}>
+  <div class="rail">
+    <span class="node" aria-hidden="true"></span>
+    <dl class="meta">
+      <div class="status">
+        <dt class="sr-only">{field.status}</dt>
+        <dd><Plate role={entry.statusRole}>{entry.statusLabel}</Plate></dd>
+      </div>
+      {
+        entry.born !== null && (
+          <div>
+            <dt>{field.born}</dt>
+            <dd class="mono">
+              <time datetime={String(entry.born)}>{entry.born}</time>
+            </dd>
+          </div>
+        )
+      }
+      {
+        entry.latest && (
+          <div>
+            <dt>{field.latest}</dt>
+            <dd class="latest">
+              {entry.latest.href ? (
+                <a class="mono tag" href={entry.latest.href}>
+                  {entry.latest.tag}
+                </a>
+              ) : (
+                <span class="mono tag">{entry.latest.tag}</span>
+              )}
+              {entry.latest.date && <span class="mono date">{entry.latest.date}</span>}
+            </dd>
+          </div>
+        )
+      }
+    </dl>
+  </div>
+
+  <div class="body">
+    <div class="title-row">
+      <h3 class="name" id={`${entry.id}-name`}>{entry.name}</h3>
+      <Permalink id={entry.id} name={entry.name} label={field.permalink} />
+    </div>
+    <p class="note">{entry.note}</p>
+    <p class="detail">{entry.detail}</p>
+    <ul class="stack">
+      {entry.stack.map((s) => <li>{s}</li>)}
+    </ul>
+    <Proofs proofs={entry.proofs} />
+    <EntryLinks links={entry.links} isPrivate={entry.isPrivate} privateLabel={field.privateCode} />
+  </div>
+</article>
+
+<style>
+  .entry {
+    position: relative;
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
+    padding-block: var(--s-6);
+    border-block-start: 1px solid var(--c-rule);
+  }
+  .rail {
+    position: relative;
+    grid-column: 1 / span 3;
+    padding-inline-start: var(--s-6);
+  }
+  .node {
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-start: var(--s-2);
+    inline-size: var(--s-2);
+    block-size: var(--s-2);
+    background: var(--c-ink);
+  }
+  .meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .meta > div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--s-1) var(--s-3);
+  }
+  dt {
+    min-inline-size: 3.5rem;
+    color: var(--c-ink3);
+    font-size: var(--t-micro);
+    font-weight: 600;
+    line-height: 1rem;
+  }
+  dd {
+    font-size: var(--t-small);
+    line-height: 1.25rem;
+  }
+  .latest {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--s-2);
+  }
+  .tag {
+    font-weight: 600;
+    color: var(--c-ink);
+  }
+  .date {
+    color: var(--c-ink3);
+  }
+
+  .body {
+    grid-column: 4 / -1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    min-inline-size: 0;
+    max-inline-size: 46rem;
+  }
+  .title-row {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+  }
+  .name {
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: var(--t-h3);
+    line-height: 2rem;
+    letter-spacing: -0.015em;
+  }
+  .note {
+    font-size: var(--t-lead);
+    line-height: 1.75rem;
+    font-weight: 500;
+    max-inline-size: 50ch;
+  }
+  .detail {
+    color: var(--c-ink2);
+    max-inline-size: 68ch;
+  }
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--s-3);
+    color: var(--c-ink2);
+    font-size: var(--t-small);
+    line-height: 1.25rem;
+  }
+  .stack li + li::before {
+    content: '/';
+    margin-inline-end: var(--s-3);
+    color: var(--c-rule);
+  }
+  .body > :global(.proofs) {
+    margin-block-start: var(--s-2);
+  }
+
+  /* Retired: dormant work stays readable (ink3 passes AA on the sheet) but
+     steps back from the active entries. */
+  .entry[data-status='dormant'] .name,
+  .entry[data-status='dormant'] .note,
+  .entry[data-status='dormant'] .tag {
+    color: var(--c-ink3);
+  }
+  .entry[data-status='dormant'] .node {
+    background: var(--c-sheet);
+    box-shadow: inset 0 0 0 1px var(--c-ink3);
+  }
+  .entry[data-status='dormant'] .note {
+    font-weight: 400;
+  }
+
+  @media (max-width: 47.99rem) {
+    .entry {
+      display: flex;
+      flex-direction: column;
+      gap: var(--s-4);
+      padding-block: var(--s-6);
+    }
+    .meta {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: var(--s-2) var(--s-5);
+    }
+    dt {
+      min-inline-size: 0;
+    }
+    .body {
+      padding-inline-start: var(--s-6);
+    }
+  }
+</style>

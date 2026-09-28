@@ -1,0 +1,102 @@
+---
+/**
+ * 404, in the same world and in both languages: a removed line, then the
+ * way back to the latest release of each locale.
+ */
+import Icon from '../components/Icon.astro';
+import Plate from '../components/Plate.astro';
+import { localeTag, locales, notFound } from '../content/site.ts';
+import type { Snapshot } from '../data/schema.ts';
+import snapshotJson from '../data/snapshot.json';
+import Base from '../layouts/Base.astro';
+import { buildView } from '../lib/view.ts';
+
+const view = buildView(snapshotJson as unknown as Snapshot, 'en', { now: new Date(), sha: process.env.GIT_SHA ?? '' });
+const home = { en: '/', pt: '/pt/' } as const;
+---
+
+<Base view={view} title={`404 · ${notFound.title.en} · ${notFound.title.pt}`} noindex>
+  <main id="main" class="nf wrap" tabindex="-1">
+    {
+      locales.map((locale, i) => (
+        <section class="side" lang={localeTag[locale]} aria-labelledby={`nf-${locale}`}>
+          <div class="head">
+            {i === 0 ? (
+              <h1 class="display title" id={`nf-${locale}`}>
+                {notFound.title[locale]}
+              </h1>
+            ) : (
+              <h2 class="display title" id={`nf-${locale}`}>
+                {notFound.title[locale]}
+              </h2>
+            )}
+            <Plate role="deprecated" size="m">
+              <span class="mono">404</span>
+            </Plate>
+          </div>
+          <p class="line">
+            <Icon name="minus" size={12} />
+            <span>{notFound.text[locale]}</span>
+          </p>
+          <a class="action action-primary" href={home[locale]}>
+            {notFound.home[locale]}
+          </a>
+        </section>
+      ))
+    }
+  </main>
+</Base>
+
+<style>
+  .nf {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-8) var(--gutter);
+    align-content: center;
+    min-block-size: 100dvh;
+    padding-block: var(--s-9);
+  }
+  .side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--s-5);
+  }
+  .side + .side {
+    padding-inline-start: var(--gutter);
+    border-inline-start: 1px solid var(--c-rule);
+  }
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--s-3) var(--s-4);
+  }
+  .title {
+    font-size: clamp(2.25rem, 1rem + 3.5vw, 4rem);
+  }
+  .line {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    padding: var(--s-2) var(--s-3);
+    background: var(--c-deprecated-tint);
+    font-size: var(--t-small);
+    line-height: 1.25rem;
+  }
+  .line :global(.icon) {
+    flex: none;
+    color: var(--mark-deprecated);
+  }
+  @media (max-width: 47.99rem) {
+    .nf {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .side + .side {
+      padding-inline-start: 0;
+      padding-block-start: var(--s-8);
+      border-inline-start: 0;
+      border-block-start: 1px solid var(--c-rule);
+    }
+  }
+</style>

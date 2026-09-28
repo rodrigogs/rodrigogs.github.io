@@ -1,0 +1,198 @@
+---
+/**
+ * The first viewport, read as the latest release: the name as the release
+ * heading with its CalVer "Latest" plate on the baseline, the release title,
+ * three tagged notes and the primary action. The right five columns carry
+ * the version rail and the live Compare readout.
+ */
+import type { SiteView } from '../lib/view.ts';
+import Compare from './Compare.astro';
+import CopyEmail from './CopyEmail.astro';
+import Icon from './Icon.astro';
+import Plate from './Plate.astro';
+
+interface Props {
+  view: SiteView;
+}
+
+const { view } = Astro.props;
+const { hero, person } = view;
+const words = person.name.split(' ');
+const line1 = words.slice(0, 2).join(' ');
+const line2 = words.slice(2).join(' ');
+---
+
+<section class="hero" aria-labelledby="release-name">
+  <div class="wrap grid">
+    <div class="release">
+      <div class="release-head">
+        <h1 class="display name" id="release-name">{line1}{line2 && <br />}{line2}</h1>
+        <Plate role="added" class="latest">
+          <time class="mono" datetime={hero.calverDatetime}>{hero.calver}</time>
+          <span class="sep" aria-hidden="true">·</span>
+          <span>{hero.latestLabel}</span>
+        </Plate>
+      </div>
+
+      <p class="release-title">{hero.title}</p>
+
+      <ul class="notes">
+        {
+          hero.notes.map((note) => (
+            <li>
+              <Plate role={note.role}>{note.label}</Plate>
+              <span class="note-text">{note.text}</span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="actions">
+        <a class="action action-primary" href={`mailto:${person.email}`}>
+          <Icon name="mail" />
+          {hero.cta.email}
+        </a>
+        <CopyEmail email={person.email} copy={hero.cta.copy} copied={hero.cta.copied} />
+        <a class="action action-quiet" href={person.github}>
+          GitHub
+          <Icon name="external" size={12} />
+        </a>
+        {
+          person.linkedin && (
+            <a class="action action-quiet" href={person.linkedin}>
+              LinkedIn
+              <Icon name="external" size={12} />
+            </a>
+          )
+        }
+      </div>
+    </div>
+
+    <div class="aside">
+      <Compare view={view} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: var(--s-8) var(--s-9);
+  }
+  .grid {
+    row-gap: var(--s-8);
+    align-items: start;
+  }
+  .release {
+    grid-column: 1 / span 7;
+    display: flex;
+    flex-direction: column;
+    min-inline-size: 0;
+  }
+  .aside {
+    grid-column: 8 / -1;
+    min-inline-size: 0;
+    padding-block-start: var(--s-2);
+    padding-inline-start: var(--s-5);
+  }
+
+  /* Sized so "Rodrigo Gomes" holds one line inside seven columns. */
+  .release-head {
+    font-size: clamp(2rem, 6vw - 0.375rem, 4.25rem);
+    line-height: 0.94;
+  }
+  .name {
+    display: inline;
+    font-size: 1em;
+    line-height: inherit;
+  }
+  .release-head :global(.latest) {
+    position: relative;
+    inset-block-start: -0.06em;
+    margin-inline-start: var(--s-3);
+    block-size: var(--s-6);
+    padding-inline: var(--s-3);
+    font-size: var(--t-small);
+    vertical-align: baseline;
+  }
+  .release-head :global(.latest .mono) {
+    font-size: var(--t-micro);
+    font-weight: 600;
+  }
+  .sep {
+    opacity: 0.8;
+  }
+
+  .release-title {
+    margin-block-start: var(--s-6);
+    max-inline-size: 36ch;
+    font-size: clamp(var(--t-lead), 1rem + 0.8vw, var(--t-h3));
+    line-height: 1.34;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+  }
+
+  .notes {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    row-gap: var(--s-3);
+    column-gap: var(--s-4);
+    margin-block-start: var(--s-6);
+    padding-block-start: var(--s-5);
+    border-block-start: 1px solid var(--c-rule);
+    max-inline-size: 42rem;
+  }
+  .notes li {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+    align-items: baseline;
+  }
+  .notes li :global(.plate) {
+    justify-self: start;
+  }
+  .note-text {
+    color: var(--c-ink2);
+    line-height: 1.5rem;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-2);
+    margin-block-start: var(--s-7);
+  }
+  .actions > :global(.action:not(.copy)) {
+    padding-inline: var(--s-4);
+  }
+  .action-quiet {
+    border-color: var(--c-rule);
+  }
+
+  @media (max-width: 63.99rem) {
+    .release-head {
+      font-size: clamp(2rem, 9vw, 4.25rem);
+    }
+    .release,
+    .aside {
+      grid-column: 1 / -1;
+    }
+    .aside {
+      max-inline-size: 36rem;
+      padding-inline-start: 0;
+    }
+  }
+  @media (max-width: 47.99rem) {
+    .hero {
+      padding-block: var(--s-7) var(--s-8);
+    }
+    .notes {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: var(--s-4);
+    }
+    .notes li {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: var(--s-2);
+    }
+  }
+</style>

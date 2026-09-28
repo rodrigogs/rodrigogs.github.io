@@ -1,0 +1,56 @@
+---
+/** Work: the release entries on a left time rail, on the white sheet. */
+import type { SiteView } from '../lib/view.ts';
+import Entry from './Entry.astro';
+import SectionHead from './SectionHead.astro';
+
+interface Props {
+  view: SiteView;
+}
+
+const { view } = Astro.props;
+const s = view.sections.work;
+---
+
+<section class="band field-sheet work" id="work" aria-labelledby="work-title">
+  <div class="wrap">
+    <div class="grid head">
+      <SectionHead id="work" label={s.label} claim={s.claim} class="head-inner" />
+    </div>
+    <div class="grid entries">
+      {view.work.map((entry) => <Entry entry={entry} field={view.field} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .work {
+    padding-block: var(--s-9) var(--s-8);
+  }
+  .head {
+    margin-block-end: var(--s-7);
+  }
+  .head :global(.head-inner) {
+    grid-column: 1 / -1;
+  }
+  .head :global(.claim) {
+    max-inline-size: 30ch;
+  }
+  .entries {
+    position: relative;
+  }
+  /* The time rail: one hairline through every entry's node. */
+  .entries::before {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: calc(var(--s-1) - 0.5px);
+    inline-size: 1px;
+    background: var(--c-rule);
+  }
+  @media (min-width: 48rem) {
+    .head :global(.head-inner) {
+      grid-column: 4 / -1;
+    }
+  }
+</style>

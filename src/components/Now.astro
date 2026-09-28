@@ -1,0 +1,113 @@
+---
+/**
+ * Now: the unreleased work, on a full-bleed Changed (amber) field. Quiet
+ * density: few entries, large type, generous space.
+ */
+import type { SiteView } from '../lib/view.ts';
+import EntryLinks from './EntryLinks.astro';
+import Permalink from './Permalink.astro';
+import Proofs from './Proofs.astro';
+import SectionHead from './SectionHead.astro';
+
+interface Props {
+  view: SiteView;
+}
+
+const { view } = Astro.props;
+const s = view.sections.now;
+---
+
+<section class="band field-changed now" id="now" aria-labelledby="now-title">
+  <div class="wrap grid">
+    <div class="lead">
+      <SectionHead
+        id="now"
+        label={s.label}
+        claim={s.claim}
+        tag={s.tag ? { role: 'changed', text: s.tag, inverse: true } : undefined}
+      />
+    </div>
+    <ol class="items">
+      {
+        view.now.map((item) => (
+          <li class="item" id={item.id} data-entry>
+            <div class="title-row">
+              <h3 class="name">{item.name}</h3>
+              <Permalink id={item.id} name={item.name} label={view.field.permalink} />
+            </div>
+            <p class="note">{item.note}</p>
+            <Proofs proofs={item.proofs} />
+            <EntryLinks links={item.links} isPrivate={item.isPrivate} privateLabel={view.field.privateCode} />
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .now {
+    padding-block: var(--s-10);
+  }
+  .grid {
+    row-gap: var(--s-7);
+  }
+  .lead {
+    grid-column: 1 / span 5;
+  }
+  @media (min-width: 64rem) {
+    .lead :global(.section-head) {
+      position: sticky;
+      inset-block-start: calc(var(--header-h) + var(--s-7));
+    }
+  }
+  .lead :global(.claim) {
+    max-inline-size: 18ch;
+    font-size: clamp(var(--t-h3), 1rem + 1.6vw, 2.25rem);
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .items {
+    grid-column: 7 / -1;
+    display: flex;
+    flex-direction: column;
+  }
+  .item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    padding-block: var(--s-6);
+    border-block-start: 1px solid var(--line);
+  }
+  .item:first-child {
+    padding-block-start: 0;
+    border-block-start: 0;
+  }
+  .title-row {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+  }
+  .name {
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: var(--t-h3);
+    line-height: 2rem;
+    letter-spacing: -0.015em;
+  }
+  .note {
+    max-inline-size: 60ch;
+    font-size: var(--t-lead);
+    line-height: 1.75rem;
+  }
+  .item :global(.proofs .n) {
+    font-weight: 700;
+  }
+  @media (max-width: 63.99rem) {
+    .lead,
+    .items {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

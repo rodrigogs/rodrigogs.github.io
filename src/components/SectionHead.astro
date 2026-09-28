@@ -1,0 +1,33 @@
+---
+/**
+ * Every section opens the same way: its literal noun as the heading, an
+ * optional plate inline after it, then its one claim sentence.
+ */
+import type { Role } from '../design/tokens.ts';
+import Plate from './Plate.astro';
+
+interface Props {
+  id: string;
+  label: string;
+  claim: string;
+  tag?: { role: Role; text: string; inverse?: boolean };
+  class?: string;
+}
+
+const { id, label, claim, tag, class: cls } = Astro.props;
+---
+
+<header class:list={['section-head', cls]}>
+  <div class="heading-row">
+    <h2 class="section-title" id={`${id}-title`}>{label}</h2>
+    {
+      tag && (
+        <Plate role={tag.role} inverse={tag.inverse} size="m">
+          {tag.text}
+        </Plate>
+      )
+    }
+  </div>
+  <p class="claim">{claim}</p>
+  <slot />
+</header>

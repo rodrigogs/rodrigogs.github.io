@@ -1,0 +1,135 @@
+---
+/**
+ * Career: the version history, newest first. Each role is a line with its
+ * dates as <time>; the current role is the one lit in the Changed color.
+ */
+import type { SiteView } from '../lib/view.ts';
+import Plate from './Plate.astro';
+import SectionHead from './SectionHead.astro';
+
+interface Props {
+  view: SiteView;
+}
+
+const { view } = Astro.props;
+const s = view.sections.career;
+---
+
+<section class="band career" id="career" aria-labelledby="career-title">
+  <div class="wrap grid">
+    <div class="lead">
+      <SectionHead id="career" label={s.label} claim={s.claim} />
+    </div>
+    <ol class="roles">
+      {
+        view.career.map((role) => (
+          <li class="role" data-current={role.current ? '' : undefined}>
+            <p class="when mono">
+              <time datetime={role.fromDatetime}>{role.from}</time>
+              <span class="dash" aria-hidden="true">–</span>
+              {role.current ? (
+                <Plate role="changed">{role.to}</Plate>
+              ) : (
+                <time datetime={role.toDatetime ?? undefined}>{role.to}</time>
+              )}
+            </p>
+            <h3 class="org">
+              {role.org}
+              {role.via && <span class="via">via {role.via}</span>}
+            </h3>
+            <div class="what">
+              <p class="title">{role.title}</p>
+              {role.note && <p class="note">{role.note}</p>}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .career {
+    padding-block: var(--s-9);
+  }
+  .grid {
+    row-gap: var(--s-7);
+  }
+  .lead {
+    grid-column: 1 / span 4;
+  }
+  .roles {
+    grid-column: 5 / -1;
+    display: grid;
+    grid-template-columns: 11rem minmax(0, 1fr) minmax(0, 1.1fr);
+    column-gap: var(--s-5);
+    border-block-start: 1px solid var(--c-ink);
+  }
+  .role {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+    align-items: baseline;
+    padding-block: var(--s-4);
+    border-block-end: 1px solid var(--c-rule);
+  }
+  .role[data-current] {
+    background: var(--c-changed-tint);
+    padding-inline: var(--s-3);
+    margin-inline: calc(var(--s-3) * -1);
+  }
+  .when {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-2);
+    color: var(--c-ink2);
+    font-size: var(--t-micro);
+    line-height: 1.5rem;
+    white-space: nowrap;
+  }
+  .when :global(.plate) {
+    align-self: center;
+  }
+  .dash {
+    color: var(--c-ink3);
+  }
+  .org {
+    font-size: var(--t-lead);
+    font-stretch: 112%;
+    font-weight: 800;
+    line-height: 1.75rem;
+    letter-spacing: -0.01em;
+  }
+  .via {
+    display: block;
+    color: var(--c-ink3);
+    font-size: var(--t-small);
+    font-stretch: 100%;
+    font-weight: 500;
+    line-height: 1.25rem;
+    letter-spacing: 0;
+  }
+  .title {
+    font-weight: 600;
+  }
+  .note {
+    color: var(--c-ink2);
+    font-size: var(--t-small);
+    line-height: 1.25rem;
+    margin-block-start: var(--s-1);
+  }
+  @media (max-width: 63.99rem) {
+    .lead,
+    .roles {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 47.99rem) {
+    .roles {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .role {
+      row-gap: var(--s-1);
+    }
+  }
+</style>

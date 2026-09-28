@@ -1,0 +1,170 @@
+---
+/**
+ * Upstream: work merged into other people's projects, on a full-bleed
+ * Merged (cobalt) field. One row per repository, with the count that links
+ * to its proof and the merged pull requests by title.
+ */
+import type { SiteView } from '../lib/view.ts';
+import Permalink from './Permalink.astro';
+import SectionHead from './SectionHead.astro';
+
+interface Props {
+  view: SiteView;
+}
+
+const { view } = Astro.props;
+const s = view.sections.upstream;
+const slug = (repo: string) => repo.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+---
+
+<section class="band field-merged upstream" id="upstream" aria-labelledby="upstream-title">
+  <div class="wrap">
+    <div class="grid head">
+      <SectionHead id="upstream" label={s.label} claim={s.claim} class="head-inner" />
+    </div>
+    <ol class="rows">
+      {
+        view.upstream.map((row) => {
+          const id = slug(row.repo);
+          const [owner, name] = row.repo.split('/');
+          return (
+            <li class="row grid" id={id} data-entry>
+              <div class="repo">
+                <div class="title-row">
+                  <h3 class="name">
+                    <a href={row.url}>
+                      <span class="owner">{owner}/</span>
+                      {name}
+                    </a>
+                  </h3>
+                  <Permalink id={id} name={row.repo} label={view.field.permalink} />
+                </div>
+                <p class="stars">
+                  <span class="mono">{row.stars}</span> {view.field.stars}
+                </p>
+              </div>
+              <div class="count">
+                <a href={row.proofUrl}>
+                  <span class="mono n">{row.countValue}</span> {row.countLabel}
+                </a>
+                {row.years && <span class="mono years">{row.years}</span>}
+              </div>
+              <div class="what">
+                <p class="note">{row.note}</p>
+                {row.highlights.length > 0 && (
+                  <ul class="prs">
+                    {row.highlights.map((h) => (
+                      <li>
+                        <a href={h.url}>{h.title}</a>
+                        <span class="mono date">{h.date}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </li>
+          );
+        })
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .upstream {
+    padding-block: var(--s-9);
+  }
+  .head {
+    margin-block-end: var(--s-7);
+  }
+  .head :global(.head-inner) {
+    grid-column: 1 / -1;
+  }
+  .rows {
+    border-block-end: 1px solid var(--line);
+  }
+  .row {
+    padding-block: var(--s-5);
+    border-block-start: 1px solid var(--line);
+    row-gap: var(--s-3);
+  }
+  .repo {
+    grid-column: 1 / span 4;
+    min-inline-size: 0;
+  }
+  .count {
+    grid-column: 5 / span 2;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-1);
+    font-size: var(--t-small);
+    line-height: 1.25rem;
+  }
+  .what {
+    grid-column: 7 / -1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .title-row {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+  }
+  .name {
+    font-size: var(--t-lead);
+    line-height: 1.75rem;
+    font-weight: 800;
+    font-stretch: 112%;
+    overflow-wrap: anywhere;
+  }
+  .name a {
+    text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  }
+  .owner {
+    font-weight: 500;
+  }
+  .stars {
+    font-size: var(--t-small);
+    line-height: 1.25rem;
+  }
+  .n {
+    font-size: var(--t-body);
+    font-weight: 700;
+  }
+  .years {
+    font-size: var(--t-micro);
+  }
+  .note {
+    font-size: var(--t-body);
+    max-inline-size: 60ch;
+  }
+  .prs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+    font-size: var(--t-small);
+    line-height: 1.25rem;
+  }
+  .prs li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 0 var(--s-5);
+  }
+  .date {
+    font-size: var(--t-micro);
+    white-space: nowrap;
+  }
+  @media (max-width: 63.99rem) {
+    .repo {
+      grid-column: 1 / span 6;
+    }
+    .count {
+      grid-column: 7 / -1;
+    }
+    .what {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

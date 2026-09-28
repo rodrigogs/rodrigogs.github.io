@@ -1,0 +1,49 @@
+---
+/**
+ * The whole page for one locale. Loads the committed snapshot and builds
+ * the view model once at build time; every component only renders it.
+ */
+import type { Locale } from '../content/site.ts';
+import type { Snapshot } from '../data/schema.ts';
+import snapshotJson from '../data/snapshot.json';
+import Base from '../layouts/Base.astro';
+import { buildView } from '../lib/view.ts';
+import Career from './Career.astro';
+import Contact from './Contact.astro';
+import Hero from './Hero.astro';
+import Konami from './Konami.astro';
+import Now from './Now.astro';
+import Packages from './Packages.astro';
+import SiteFooter from './SiteFooter.astro';
+import SiteHeader from './SiteHeader.astro';
+import Toolchain from './Toolchain.astro';
+import Upstream from './Upstream.astro';
+import Work from './Work.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const view = buildView(snapshotJson as unknown as Snapshot, locale, {
+  now: new Date(),
+  sha: process.env.GIT_SHA ?? '',
+});
+---
+
+<Base view={view}>
+  <div id="top"></div>
+  <SiteHeader view={view} />
+  <main id="main" tabindex="-1">
+    <Hero view={view} />
+    <Now view={view} />
+    <Work view={view} />
+    <Upstream view={view} />
+    <Packages view={view} />
+    <Career view={view} />
+    <Toolchain view={view} />
+    <Contact view={view} />
+  </main>
+  <SiteFooter view={view} />
+  <Konami />
+</Base>

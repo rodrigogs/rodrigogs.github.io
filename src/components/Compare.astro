@@ -1,0 +1,294 @@
+---
+/**
+ * Compare, the signature interaction: pick any two years on the version
+ * rail and read the diff of the stack between them. The default range is
+ * server-rendered, so it reads the same with JS off; the module in
+ * src/scripts/compare.ts takes over from there (URL state, live region,
+ * the one authored motion).
+ */
+import { fill, type SiteView } from '../lib/view.ts';
+import { formatInt } from '../lib/derive.ts';
+import Icon from './Icon.astro';
+import VersionRail from './VersionRail.astro';
+
+interface Props {
+  view: SiteView;
+}
+
+const { view } = Astro.props;
+const c = view.compare;
+const d = c.data;
+const { added, removed, kept } = d.initial;
+const lo = Math.min(d.base, d.head);
+const hi = Math.max(d.base, d.head);
+const repos = d.repoYears.filter((y) => y >= lo && y <= hi).length;
+const num = (n: number) => formatInt(n, view.locale);
+
+/** GitHub-style five-block diffstat: blocks split by the added:removed ratio. */
+function blocks(a: number, r: number): ('add' | 'rem' | 'none')[] {
+  const total = a + r;
+  if (total === 0) return ['none', 'none', 'none', 'none', 'none'];
+  let adds = Math.round((5 * a) / total);
+  if (a > 0 && adds === 0) adds = 1;
+  if (r > 0 && adds === 5) adds = 4;
+  return Array.from({ length: 5 }, (_, i) => (i < adds ? 'add' : 'rem'));
+}
+
+const payload = JSON.stringify({
+  years: d.years,
+  stackByYear: d.stackByYear,
+  repoYears: d.repoYears,
+  base: d.base,
+  head: d.head,
+}).replace(/</g, '\\u003c');
+
+---
+
+<form
+  class="compare"
+  data-compare
+  data-lang={view.lang}
+  data-added={c.added}
+  data-removed={c.removed}
+  data-kept={c.kept}
+  data-work={c.work}
+>
+  <div class="compare-head">
+    <h2 class="compare-title" id="compare-title">{c.label}</h2>
+    <p class="hint" id="compare-hint">{c.hint}</p>
+  </div>
+
+  <div class="compare-body" role="group" aria-labelledby="compare-title" aria-describedby="compare-hint">
+    <VersionRail
+      career={view.career}
+      from={view.person.since}
+      to={d.years[d.years.length - 1] ?? d.head}
+      pickable={d.years}
+      base={d.base}
+      head={d.head}
+      baseLabel={c.base}
+      headLabel={c.head}
+    />
+
+    <div class="readout">
+      <p class="range mono">
+        <span data-out="base">{d.base}</span><span class="dots">...</span><span data-out="head">{d.head}</span>
+      </p>
+
+      <div class="stat">
+        <span class="count"><span class="n mono add" data-out="added">+{num(added.length)}</span> {c.added}</span>
+        <span class="count"><span class="n mono rem" data-out="removed">−{num(removed.length)}</span> {c.removed}</span>
+        <span class="blocks" aria-hidden="true" data-out="blocks">
+          {blocks(added.length, removed.length).map((k) => <i data-kind={k} />)}
+        </span>
+      </div>
+
+      <p class="meta">
+        <span><span class="mono" data-out="kept">{num(kept.length)}</span> {c.kept}</span>
+        <span data-out="work">{fill(c.work, { repos: num(repos) })}</span>
+      </p>
+
+      <ul class="lines" data-out="lines" aria-label={c.label}>
+        {
+          added.map((name) => (
+            <li class="line" data-kind="add" data-key={`add:${name}`}>
+              <Icon name="plus" size={12} />
+              <span>{name}</span>
+            </li>
+          ))
+        }
+        {
+          removed.map((name) => (
+            <li class="line" data-kind="rem" data-key={`rem:${name}`}>
+              <Icon name="minus" size={12} />
+              <span>{name}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="sr-only" aria-live="polite" data-out="announce"></p>
+    </div>
+  </div>
+
+  <script type="application/json" data-compare-data set:html={payload} />
+</form>
+
+<template data-line-template>
+  <li class="line">
+    <Icon name="plus" size={12} class="g-add" />
+    <Icon name="minus" size={12} class="g-rem" />
+    <span></span>
+  </li>
+</template>
+
+<script>
+  import '../scripts/compare.ts';
+</script>
+
+<style>
+  .compare {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+  .compare-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--s-1) var(--s-3);
+    padding-block-end: var(--s-3);
+    border-block-end: 1px solid var(--c-rule);
+  }
+  .compare-title {
+    font-size: var(--t-body);
+    font-stretch: 125%;
+    font-weight: 800;
+    line-height: 1.5rem;
+  }
+  .hint {
+    color: var(--c-ink3);
+    font-size: var(--t-small);
+    line-height: 1.25rem;
+  }
+  .compare-body {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: var(--s-4);
+    align-items: start;
+  }
+  .readout {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    min-inline-size: 0;
+    padding-block-start: var(--s-6);
+  }
+  .range {
+    font-size: var(--t-small);
+    font-weight: 700;
+    line-height: 1.25rem;
+    color: var(--c-ink);
+  }
+  .dots {
+    color: var(--c-ink3);
+    font-weight: 400;
+  }
+  .stat {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-1) var(--s-3);
+    font-size: var(--t-small);
+    line-height: 1.25rem;
+    color: var(--c-ink2);
+  }
+  .n {
+    font-weight: 700;
+  }
+  .add {
+    color: var(--mark-added);
+  }
+  .rem {
+    color: var(--mark-deprecated);
+  }
+  .blocks {
+    display: inline-flex;
+    gap: 2px;
+  }
+  .blocks :global(i) {
+    inline-size: var(--s-2);
+    block-size: var(--s-2);
+    background: var(--c-rule);
+    transition: background-color var(--d-base) var(--ease);
+  }
+  .blocks :global(i[data-kind='add']) {
+    background: var(--c-added);
+  }
+  .blocks :global(i[data-kind='rem']) {
+    background: var(--c-deprecated);
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-1) var(--s-3);
+    color: var(--c-ink3);
+    font-size: var(--t-micro);
+    line-height: 1rem;
+  }
+  .meta .mono {
+    color: var(--c-ink);
+    font-size: var(--t-micro);
+    font-weight: 600;
+  }
+  .lines {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    margin-block-start: var(--s-1);
+    font-size: var(--t-small);
+    font-weight: 500;
+    line-height: 1.25rem;
+  }
+  .lines :global(.line) {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    min-block-size: var(--s-5);
+    padding-inline: var(--s-2);
+    color: var(--c-ink);
+    overflow: hidden;
+  }
+  .lines :global(.line[data-kind='add']) {
+    background: var(--c-added-tint);
+  }
+  .lines :global(.line[data-kind='rem']) {
+    background: var(--c-deprecated-tint);
+  }
+  .lines :global(.line[data-kind='add'] .icon) {
+    color: var(--mark-added);
+  }
+  .lines :global(.line[data-kind='rem'] .icon) {
+    color: var(--mark-deprecated);
+  }
+  .lines :global(.line[data-kind='add'] .g-rem),
+  .lines :global(.line[data-kind='rem'] .g-add) {
+    display: none;
+  }
+  .lines :global(.line span) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  /* The strike that crosses a line on its way out, before it fades. */
+  .lines :global(.line span) {
+    position: relative;
+  }
+  .lines :global(.line span::after) {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    inset-block-start: 50%;
+    block-size: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform var(--d-fast) var(--ease);
+  }
+  .lines :global(.line.leaving span::after) {
+    transform: scaleX(1);
+  }
+
+  @media (max-width: 29.99rem) {
+    .compare-body {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .readout {
+      padding-block-start: 0;
+    }
+    .lines {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+    }
+  }
+</style>

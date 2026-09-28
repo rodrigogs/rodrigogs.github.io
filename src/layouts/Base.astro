@@ -1,0 +1,96 @@
+---
+/**
+ * Document shell: language, meta, social cards, hreflang, JSON-LD, fonts
+ * (Astro Fonts API) and the token stylesheet. Pages pass a SiteView.
+ */
+import { Font } from 'astro:assets';
+import { cssVariables, retiredVariables, themes } from '../design/tokens.ts';
+import type { SiteView } from '../lib/view.ts';
+import '../styles/global.css';
+
+interface Props {
+  view: SiteView;
+  /** Overrides for pages other than home (404). */
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const { view, title = view.meta.title, description = view.meta.description, noindex = false } = Astro.props;
+
+const origin = 'https://rodrigogs.github.io';
+const canonical = `${origin}${view.href}`;
+const ogImage = `${origin}/og/${view.locale}.png`;
+const ogLocale = { en: 'en_US', pt: 'pt_BR' } as const;
+const jsonLd = JSON.stringify(view.jsonLd).replace(/</g, '\\u003c');
+---
+
+<!doctype html>
+<html lang={view.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    {
+      !noindex && (
+        <>
+          <link rel="canonical" href={canonical} />
+          <link rel="alternate" hreflang="en" href={`${origin}/`} />
+          <link rel="alternate" hreflang="pt-BR" href={`${origin}/pt/`} />
+          <link rel="alternate" hreflang="x-default" href={`${origin}/`} />
+        </>
+      )
+    }
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content={view.person.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={ogLocale[view.locale]} />
+    <meta property="og:locale:alternate" content={ogLocale[view.alternate.locale]} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${view.person.name}: ${view.hero.title}`} />
+    <meta property="profile:username" content={view.person.handle} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content={themes.light.paper} />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content={themes.dark.paper} />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <Font cssVariable="--font-archivo" preload />
+    <Font cssVariable="--font-martian" />
+    <style is:inline set:html={`${cssVariables()}\n${retiredVariables()}`}></style>
+    <noscript><style is:inline>[data-js-only] { display: none !important; }</style></noscript>
+    <script type="application/ld+json" is:inline set:html={jsonLd} />
+  </head>
+  <body>
+    <a class="skip" href="#main">{view.footer.skip}</a>
+    <slot />
+  </body>
+</html>
+
+<style>
+  .skip {
+    position: fixed;
+    inset-block-start: var(--s-2);
+    inset-inline-start: var(--s-2);
+    z-index: 100;
+    padding: var(--s-2) var(--s-4);
+    background: var(--c-ink);
+    color: var(--c-paper);
+    font-weight: 700;
+    text-decoration: none;
+    transform: translateY(-200%);
+  }
+  .skip:focus-visible {
+    transform: none;
+  }
+</style>

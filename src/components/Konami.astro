@@ -1,0 +1,32 @@
+---
+/**
+ * Easter egg: the Konami code brings back the retired 2026 vaporwave role
+ * colors for a moment, with a plate saying so. Esc or a second code restores.
+ * The plate is a status message; nothing else changes on the page.
+ */
+import Plate from './Plate.astro';
+---
+
+<div class="konami" data-konami hidden>
+  <Plate role="merged" size="m"><span class="mono">v0</span> <span aria-hidden="true">·</span> vaporwave (retired)</Plate>
+</div>
+<p class="sr-only" role="status" aria-live="polite" data-konami-status></p>
+
+<script>
+  import '../scripts/konami.ts';
+</script>
+
+<style>
+  .konami {
+    position: fixed;
+    inset-block-end: var(--s-4);
+    inset-inline-start: var(--s-4);
+    z-index: 30;
+  }
+  .konami[hidden] {
+    display: none;
+  }
+  .konami :global(.mono) {
+    font-size: var(--t-micro);
+  }
+</style>

@@ -1,0 +1,53 @@
+---
+/**
+ * Inline proof numbers. The figure is data (Martian Mono, tabular); the
+ * label is prose. Every figure with a source links to it.
+ */
+import type { ProofView } from '../lib/view.ts';
+
+interface Props {
+  proofs: ProofView[];
+  class?: string;
+}
+
+const { proofs, class: cls } = Astro.props;
+---
+
+{
+  proofs.length > 0 && (
+    <ul class:list={['proofs', cls]}>
+      {proofs.map((p) => (
+        <li>
+          {p.href ? (
+            <a href={p.href}>
+              <span class="n mono">{p.value}</span> <span class="l">{p.label}</span>
+            </a>
+          ) : (
+            <span>
+              <span class="n mono">{p.value}</span> <span class="l">{p.label}</span>
+            </span>
+          )}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+<style>
+  .proofs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-1) var(--s-5);
+    font-size: var(--t-small);
+    line-height: 1.25rem;
+    color: var(--fg-2);
+  }
+  .proofs a {
+    color: inherit;
+  }
+  .n {
+    font-size: var(--t-small);
+    font-weight: 600;
+    color: var(--fg);
+  }
+</style>
