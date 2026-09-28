@@ -24,7 +24,7 @@ The personal site and GitHub profile of Rodrigo Gomes da Silva (GitHub `rodrigog
 
 ## Positioning
 
-An engineer shipping since 2010 and senior since 2018 *(public LinkedIn)* who builds whole products end to end and whose claims are checkable: software people actually install and download (about 21k npm downloads a month, 1.5k+ GitHub stars, a desktop app with 90+ releases), live products in regulated or demanding domains (cardiac CT planning in the browser, a repair-shop SaaS), and current work on AI agent infrastructure upstream in Hermes Agent. The mechanism a neighbor cannot copy: the range runs from MySQL binlog change data capture and resumable Postgres COPY streaming to on-device Whisper over WebGPU and multi-agent orchestration, and every piece has a public artifact behind it.
+An engineer shipping since 2010 and senior since 2018 *(public LinkedIn)* who builds whole products end to end and whose claims are checkable: software people actually install and download (about 21k npm downloads a month, 1.5k+ GitHub stars, a desktop app with 90+ releases), and open work on AI agent infrastructure (Hermes Agent upstream, delegation routing, resilient search and auditable memory plugins). The mechanism a neighbor cannot copy: the range runs from MySQL binlog change data capture and resumable Postgres COPY streaming to on-device Whisper over WebGPU and multi-agent orchestration, and every piece has a public artifact behind it.
 
 ## Operating Context
 
@@ -38,8 +38,7 @@ An engineer shipping since 2010 and senior since 2018 *(public LinkedIn)* who bu
 - Static site, no backend. Contact is email (`rodrigo.smscom@gmail.com`, already public) plus GitHub and LinkedIn.
 - Numbers shown must be real and fetched, never hardcoded placeholders. If a fetch fails, the build keeps the last committed snapshot and says when it was taken.
 - Languages: English primary, Brazilian Portuguese available *(inferred decision; the owner is Brazilian and targets international roles)*.
-- Private repos with public products (tavia, pitstop, trama) are shown through their public product sites or as private work, never with repo links.
-- The cardiac CT planning workstation is deliberately shown unnamed and unlinked (no taviacardio.com link): it may be a client engagement in a regulated medical domain, and the owner has not confirmed it can be credited publicly. Add `links: [{ kind: 'site', href: 'https://www.taviacardio.com' }]` to its entry in `src/content/site.ts` only after that confirmation.
+- Private projects are never mentioned, in any form: no names, no descriptions, no links, no "private codebase" entries, and no capability whose only proof is private code. Every entry and capability resolves to a public repo, a public upstream contribution or this site's own source. (Owner's rule, 2026-09-28; enforced by a test in `src/lib/view.test.ts`.)
 - Adult-site scraper libraries (xvideos, pornhub, sxyprn) are shown neutrally as scraping/API client libraries, not hidden and not featured as flagships. (Confirmed: "Mostrar de forma neutra".)
 - Tooling and AI stack are listed from verified usage. Employer-internal projects, client names beyond what LinkedIn already shows, hostnames, IPs and secrets are never published.
 
@@ -54,9 +53,8 @@ An engineer shipping since 2010 and senior since 2018 *(public LinkedIn)* who bu
 
 All fetched on 2026-09-28; raw data in `/tmp/rg-profile/` during the build, then committed as the build snapshot.
 
-- Career timeline (public LinkedIn): Secullum (2010–2012), Safetech (2011–2015, Java/Grails, NF-e), Stefanini (2015–2016), ntxdev (2016–2017), Involves (2017–2018), Meltwater (2018–2020), Stilingue (2021–2022), Globant (2022–present) on Warner Bros. Discovery (2022–2025) and Disney Entertainment (2025–present) accounts. Based in Rio Grande do Sul, Brazil. Portuguese native, English fluent.
+- Career timeline (public LinkedIn, https://www.linkedin.com/in/rodrigogomesdasilva/, confirmed by the owner): Secullum (2010–2012), Safetech (2011–2015, Java/Grails, NF-e), Stefanini (2015–2016), ntxdev (2016–2017), Involves (2017–2018), Meltwater (2018–2020), Stilingue (2021–2022), Globant (2022–present) on Warner Bros. Discovery (2022–2025) and Disney Entertainment (2025–present) accounts. Based in Rio Grande do Sul, Brazil. Portuguese native, English fluent.
 - Flagships: whats-reader (272★, 93 releases, 7k release downloads, local Whisper over WebGPU after a one-time model download, 10 README languages), @rodrigogs/mysql-events (139★, 77k downloads a year), easyvpn (519★), pg-turbo, vibewatch (Rust, crates.io, 187 tests, 91% coverage), baileys-store (151 tests), hermes-smart-router (1,959 tests, 100% branch coverage), kairos, mongoose-timezone (24k downloads a year).
-- Live products: taviacardio.com (TAVI planning from CT angiography), pitstop.sh (repair-shop management SaaS).
 - Upstream: contributor to NousResearch/hermes-agent (5 commits landed upstream, 40 PRs opened), 5 merged PRs to nesquena/hermes-webui, earlier merged PRs to Rocket.Chat and moleculer.
 - Impact story: barracao-digital, a virtual queue for COVID-19 screening centers (site offline; tell it as a story, link the repo).
 - Excluded everywhere: `ilsap` (a DMCA-disabled repo; its stars are not counted) and trivial list-entry PRs (InternetSemLimites).

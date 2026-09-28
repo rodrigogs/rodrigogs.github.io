@@ -28,6 +28,26 @@ typography:
     fontVariation: "font-stretch: 125% (expanded)"
     lineHeight: 0.92
     letterSpacing: "-0.025em"
+  display-name:
+    fontFamily: "Archivo, system-ui, sans-serif"
+    fontSize: "clamp(2rem, 6vw - 0.375rem, 4.25rem)"
+    fontWeight: 900
+    fontVariation: "font-stretch: 125% (expanded)"
+    lineHeight: 0.94
+    letterSpacing: "-0.025em"
+  display-close:
+    fontFamily: "Archivo, system-ui, sans-serif"
+    fontSize: "clamp(2rem, 1rem + 3.6vw, 4rem)"
+    fontWeight: 900
+    fontVariation: "font-stretch: 125% (expanded)"
+    lineHeight: 1
+    letterSpacing: "-0.025em"
+  display-email:
+    fontFamily: "Archivo, system-ui, sans-serif"
+    fontSize: "clamp(1.25rem, 0.6rem + 3vw, 3rem)"
+    fontWeight: 800
+    lineHeight: 1.1
+    letterSpacing: "-0.02em"
   headline:
     fontFamily: "Archivo, system-ui, sans-serif"
     fontSize: "clamp(1.5rem, 3.2vw, 2.25rem)"
@@ -157,7 +177,10 @@ All values above are the light theme, the frontmatter-normative source. A dark t
 **Character:** One typeface family carries the whole system across its width axis instead of pairing a display serif with a body sans; Martian Mono is the sole second voice, and it only ever speaks numbers.
 
 ### Hierarchy
-- **Display** (900, `clamp(2rem, 6vw, 6rem)`, line-height 0.92, `-0.025em`, expanded 125%): the owner's name, H1 in the hero.
+- **Display** (900, `clamp(2rem, 6vw, 6rem)`, line-height 0.92, `-0.025em`, expanded 125%): the base display class.
+- **Display name** (900, `clamp(2rem, 6vw - 0.375rem, 4.25rem)`, line-height 0.94, expanded 125%): the owner's name, H1 in the hero, sized so "Rodrigo Gomes" holds one line in seven columns (up to `clamp(2rem, 9vw, 4.25rem)` once the hero stacks).
+- **Display close** (900, `clamp(2rem, 1rem + 3.6vw, 4rem)`, expanded 125%): the Contact headline and the 404 title (`clamp(2.25rem, 1rem + 3.5vw, 4rem)`).
+- **Display email** (800, `clamp(1.25rem, 0.6rem + 3vw, 3rem)`): the email address set large in the Contact close.
 - **Headline / Section title** (900, `clamp(1.5rem, 3.2vw, 2.25rem)`, line-height 1.1, `-0.02em`, expanded 125%): the literal-noun section heading (AI engineering, Work, Career, Stack, etc.).
 - **Title** (800, 1.5rem/2rem, `-0.015em`, expanded 125%): entry names inside a release or project list.
 - **Claim** (600, `clamp(1.25rem, 2.2vw, 1.5rem)`, line-height 1.34, max 34–42ch): the one claim sentence that opens each section and the hero release title.

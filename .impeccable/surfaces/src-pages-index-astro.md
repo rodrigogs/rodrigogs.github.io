@@ -19,7 +19,7 @@ OWN-WORLD: Keep a Changelog and release-page grammar on a bright white sheet wit
 
 STORY: The visitor learns that he is a senior engineer who ships whole products and works on agent infrastructure now. The linked numbers make that believable. Then they copy the email or open LinkedIn.
 
-FIRST VIEWPORT: Left seven columns: the name in expanded black (about 5.5rem), a one-sentence title and three notes with proof numbers, each on a role plate with a plain label (Role, Product, Open source). No CalVer or "Latest" plate: owner feedback (2026-09-28) was that changelog jargon applied to a person ("Now", "Unreleased", "Changed/Added") read badly, so the world lives in structure and visuals, never in the copy. The primary "Email me" plate sits below them, with GitHub beside it, and LinkedIn too once the owner confirms its URL. Right five columns: the career version rail from 2010 to now, with the current role lit and a live compare readout.
+FIRST VIEWPORT: Left seven columns: the name in expanded black (about 5.5rem), a one-sentence title and three notes with proof numbers, each on a role plate with a plain label (Role, Product, Open source). No CalVer or "Latest" plate: owner feedback (2026-09-28) was that changelog jargon applied to a person ("Now", "Unreleased", "Changed/Added") read badly, so the world lives in structure and visuals, never in the copy. The primary "Email me" plate sits below them, with GitHub and LinkedIn beside it. Right five columns: the career version rail from 2010 to now, with the current role lit and a live compare readout.
 
 FORM: Release notes / changelog, #4 of 7 on my list, seed eee612c4. The signature interaction is Compare: pick any two years and the page renders a +/− diff of stack and work computed from real repo data. The compare state lives in the URL.
 
@@ -37,5 +37,4 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
 ## Unresolved
 
-- LinkedIn profile URL still needs verification before it is linked.
 - There is no CV/PDF, so the site does not offer one.
