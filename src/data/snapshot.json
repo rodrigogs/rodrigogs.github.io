@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-09-28T20:51:36.592Z",
+  "fetchedAt": "2026-09-28T20:57:07.151Z",
   "sources": {
     "github": {
       "ok": true,
-      "lastSuccessAt": "2026-09-28T20:51:36.592Z"
+      "lastSuccessAt": "2026-09-28T20:57:07.151Z"
     },
     "npm": {
       "ok": true,
-      "lastSuccessAt": "2026-09-28T20:51:36.592Z"
+      "lastSuccessAt": "2026-09-28T20:57:07.151Z"
     },
     "crates": {
       "ok": true,
-      "lastSuccessAt": "2026-09-28T20:51:36.592Z"
+      "lastSuccessAt": "2026-09-28T20:57:07.151Z"
     }
   },
   "user": {
@@ -21,7 +21,7 @@
     "followers": 211,
     "publicRepos": 137,
     "createdAt": "2012-09-17T12:49:05Z",
-    "contributionsLastYear": 6508
+    "contributionsLastYear": 6511
   },
   "repos": [
     {
@@ -1099,20 +1099,18 @@
       "name": "rodrigogs",
       "fullName": "rodrigogs/rodrigogs",
       "url": "https://github.com/rodrigogs/rodrigogs",
-      "description": null,
-      "homepage": null,
+      "description": "Profile README. The site lives at rodrigogs.github.io.",
+      "homepage": "https://rodrigogs.github.io",
       "stars": 3,
       "forks": 3,
-      "language": "JavaScript",
+      "language": "HTML",
       "languages": {
-        "JavaScript": 23725,
-        "HTML": 20814,
-        "CSS": 20755
+        "HTML": 966
       },
       "topics": [],
       "frameworks": [],
       "createdAt": "2020-12-07T04:12:28Z",
-      "pushedAt": "2026-03-23T23:43:55Z",
+      "pushedAt": "2026-09-28T20:56:54Z",
       "archived": false,
       "fork": false,
       "license": null,
@@ -2656,7 +2654,7 @@
         "Vitest"
       ],
       "createdAt": "2026-09-28T20:50:59Z",
-      "pushedAt": "2026-09-28T20:51:15Z",
+      "pushedAt": "2026-09-28T20:56:51Z",
       "archived": false,
       "fork": false,
       "license": null,
@@ -3623,7 +3621,7 @@
     {
       "repo": "RocketChat/Rocket.Chat",
       "url": "https://github.com/RocketChat/Rocket.Chat",
-      "stars": 46186,
+      "stars": 46185,
       "mergedPrs": 1,
       "prsOpened": 1,
       "commits": 2,
