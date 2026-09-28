@@ -17,6 +17,7 @@ import {
   fieldOne,
   footer,
   hero,
+  konami,
   localeTag,
   meta,
   now as nowEntries,
@@ -30,6 +31,7 @@ import {
   upstreamNotes,
   work,
   type EntryLink,
+  type Fact,
   type L,
   type Locale,
   type SectionKey,
@@ -180,9 +182,13 @@ export interface SiteView {
     base: string;
     head: string;
     added: string;
+    addedOne: string;
     removed: string;
+    removedOne: string;
     kept: string;
+    keptOne: string;
     work: string;
+    workOne: string;
     data: CompareData;
   };
   toolchain: {
@@ -199,6 +205,7 @@ export interface SiteView {
     contributions: string | null;
     followers: string;
   };
+  konami: { label: string };
   footer: {
     built: string;
     data: string;
@@ -274,15 +281,38 @@ function countLabel(key: keyof typeof field, n: number, locale: Locale): string 
   return ((n === 1 ? fieldOne[key] : undefined) ?? field[key])[locale];
 }
 
+const linkLabel: Record<EntryLink['kind'], keyof typeof field> = {
+  repo: 'repo',
+  site: 'site',
+  demo: 'demo',
+  package: 'package',
+  docs: 'docs',
+  commits: 'commitsLink',
+};
+
 function linkViews(links: EntryLink[], locale: Locale): LinkView[] {
-  return links.map((link) => ({ kind: link.kind, label: field[link.kind === 'repo' ? 'repo' : link.kind][locale], href: link.href }));
+  return links.map((link) => ({ kind: link.kind, label: field[linkLabel[link.kind]][locale], href: link.href }));
+}
+
+/**
+ * Star counts under this are not shown as proof: a zero or a single star
+ * says nothing to a visitor, so the entry leads with its other numbers.
+ */
+export const MIN_STARS_SHOWN = 5;
+
+function starsProof(repo: RepoStat, locale: Locale): ProofView | null {
+  if (repo.stars < MIN_STARS_SHOWN) return null;
+  return { value: formatInt(repo.stars, locale), label: countLabel('stars', repo.stars, locale), href: repo.url };
+}
+
+function factProof(fact: Fact, locale: Locale): ProofView {
+  return { value: `${formatInt(fact.value, locale)}${fact.unit ?? ''}`, label: fact.label[locale] };
 }
 
 function entryProofs(repo: RepoStat | undefined, pkg: PackageStat | undefined, facts: WorkEntry['facts'], locale: Locale): ProofView[] {
   const proofs: ProofView[] = [];
-  if (repo) {
-    proofs.push({ value: formatInt(repo.stars, locale), label: countLabel('stars', repo.stars, locale), href: `${repo.url}/stargazers` });
-  }
+  const stars = repo ? starsProof(repo, locale) : null;
+  if (stars) proofs.push(stars);
   if (pkg) {
     if (pkg.registry === 'crates' && pkg.totalDownloads !== null) {
       proofs.push({ value: compact(pkg.totalDownloads, locale), label: field.downloadsTotal[locale], href: pkg.url });
@@ -302,9 +332,7 @@ function entryProofs(repo: RepoStat | undefined, pkg: PackageStat | undefined, f
       href: `${repo.url}/releases`,
     });
   }
-  for (const fact of facts ?? []) {
-    proofs.push({ value: fact.value, label: fact.label[locale] });
-  }
+  for (const fact of facts ?? []) proofs.push(factProof(fact, locale));
   return proofs;
 }
 
@@ -352,7 +380,9 @@ function upstreamRow(row: UpstreamStat, locale: Locale): UpstreamView | null {
     countLabel: countLabel(countCommits ? 'commits' : 'mergedPrs', n, locale),
     proofUrl: row.proofUrl,
     years: first && last ? (first === last ? String(first) : `${first}–${last}`) : '',
-    highlights: row.highlights.map((h) => ({ title: h.title, url: h.url, date: isoDate(h.mergedAt, locale) })),
+    highlights: [...row.highlights]
+      .sort((a, b) => b.mergedAt.localeCompare(a.mergedAt))
+      .map((h) => ({ title: h.title, url: h.url, date: isoDate(h.mergedAt, locale) })),
   };
 }
 
@@ -447,7 +477,7 @@ export function buildView(snapshot: Snapshot, locale: Locale, build: BuildInfo):
   }
 
   const fieldView = Object.fromEntries(Object.entries(field).map(([k, v]) => [k, v[locale]])) as SiteView['field'];
-  const shortSha = sha ? sha.slice(0, 7) : 'local';
+  const shortSha = sha ? sha.slice(0, 7) : '';
 
   return {
     locale,
@@ -494,8 +524,9 @@ export function buildView(snapshot: Snapshot, locale: Locale, build: BuildInfo):
           href: `${up.url}/pulls?q=is%3Apr+author%3Arodrigogs`,
         });
       }
-      if (repo) proofs.push({ value: formatInt(repo.stars, locale), label: countLabel('stars', repo.stars, locale), href: `${repo.url}/stargazers` });
-      for (const fact of entry.facts ?? []) proofs.push({ value: fact.value, label: fact.label[locale] });
+      const stars = repo ? starsProof(repo, locale) : null;
+      if (stars) proofs.push(stars);
+      for (const fact of entry.facts ?? []) proofs.push(factProof(fact, locale));
       return {
         id: entry.id,
         name: t(entry.name, locale),
@@ -522,14 +553,18 @@ export function buildView(snapshot: Snapshot, locale: Locale, build: BuildInfo):
       base: compare.base[locale],
       head: compare.head[locale],
       added: compare.added[locale],
+      addedOne: compare.addedOne[locale],
       removed: compare.removed[locale],
+      removedOne: compare.removedOne[locale],
       kept: compare.kept[locale],
+      keptOne: compare.keptOne[locale],
       work: compare.work[locale],
+      workOne: compare.workOne[locale],
       data: compareData(snapshot, now),
     },
     toolchain: {
       ships: { label: toolchain.ships.label[locale], items: toolchain.ships.items },
-      groups: toolchain.groups.map((g) => ({ label: g.label[locale], items: g.items })),
+      groups: toolchain.groups.map((g) => ({ label: g.label[locale], items: g.items.map((item) => t(item, locale)) })),
       skillsLabel: toolchain.skillsLabel[locale],
       skills: toolchain.skills.map((s) => ({ name: s.name[locale], text: s.text[locale], href: 'href' in s ? s.href : null })),
     },
@@ -541,8 +576,10 @@ export function buildView(snapshot: Snapshot, locale: Locale, build: BuildInfo):
       contributions: snapshot.user.contributionsLastYear === null ? null : formatInt(snapshot.user.contributionsLastYear, locale),
       followers: formatInt(snapshot.user.followers, locale),
     },
+    konami: { label: konami.label[locale] },
     footer: {
-      built: fill(footer.built[locale], { date: isoDate(now.toISOString(), locale), sha: shortSha }) ?? '',
+      built:
+        fill(shortSha ? footer.built[locale] : footer.builtNoSha[locale], { date: isoDate(now.toISOString(), locale), sha: shortSha }) ?? '',
       data: fill(footer.data[locale], { age: relativeDays(age.days, locale) }) ?? '',
       stale: failing && oldest ? fill(footer.stale[locale], { date: isoDate(oldest, locale) }) : null,
       source: footer.source[locale],
