@@ -68,11 +68,19 @@ export function hairline(theme: Theme, style: Record<string, unknown> = {}): VNo
 }
 
 /** `"519 stars · 112 downloads / 30 days"`: the proof row, capped so a card never overflows. */
-export function joinProofs(proofs: { value: string; label: string }[], max = 3): string {
-  return proofs
-    .slice(0, max)
-    .map((p) => `${p.value} ${p.label}`)
-    .join(' · ');
+/**
+ * Proof line for a card: at most `max` proofs, and never more characters
+ * than fit one line of the card (proofs are dropped whole, never cut).
+ */
+export function joinProofs(proofs: { value: string; label: string }[], max = 3, maxChars = 52): string {
+  const parts: string[] = [];
+  for (const p of proofs.slice(0, max)) {
+    const part = `${p.value} ${p.label}`;
+    const next = parts.length ? `${parts.join(' · ')} · ${part}` : part;
+    if (parts.length && next.length > maxChars) break;
+    parts.push(part);
+  }
+  return parts.join(' · ');
 }
 
 /** Splits a "First Last" or "First Middle Last" name into two display lines. */

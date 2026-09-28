@@ -1,7 +1,7 @@
 /**
  * upstream-{light,dark}.svg — 1280 wide, as tall as the rows need (rendered
  * with only a width, so satori sizes the height from content), capped at 7
- * rows. One cobalt "Merged" plate marks the whole section, per row: repo,
+ * rows. One cobalt "Upstream" plate and the section claim head the card; per row: repo,
  * stars, the count (already worded correctly as commits vs merged PRs by
  * the view layer), and the note.
  */
@@ -16,8 +16,8 @@ export const UPSTREAM_MAX_ROWS = 7;
 
 function upstreamRowNode(row: UpstreamView, field: SiteView['field'], theme: Theme, isLast: boolean) {
   const left = flex(
-    { flexDirection: 'column', flexBasis: '380px', flexShrink: 0 },
-    text({ fontFamily: SANS_EXPANDED, fontWeight: 700, fontSize: 24, color: theme.ink }, row.repo),
+    { flexDirection: 'column', flexBasis: '500px', flexShrink: 0 },
+    text({ fontFamily: SANS_EXPANDED, fontWeight: 700, fontSize: 22, color: theme.ink }, row.repo),
     text({ fontFamily: MONO, fontWeight: 400, fontSize: 18, color: theme.ink3, marginTop: 6 }, `${row.stars} ${field.stars} · ${row.count}`),
   );
 
@@ -78,7 +78,7 @@ export function upstreamCard(view: SiteView, theme: Theme) {
   const header = flex(
     { flexDirection: 'row', alignItems: 'center', gap: 16, paddingBottom: 24, borderBottom: `1px solid ${theme.rule}`, marginBottom: 8 },
     plate(theme, 'merged', view.roleLabel.merged),
-    text({ fontFamily: SANS_EXPANDED, fontWeight: 700, fontSize: 28, color: theme.ink }, view.sections.upstream.label),
+    text({ fontFamily: SANS, fontWeight: 600, fontSize: 26, color: theme.ink }, view.sections.upstream.claim),
   );
 
   return flex(
