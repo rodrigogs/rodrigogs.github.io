@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-09-28T21:31:20.526Z",
+  "fetchedAt": "2026-09-28T22:26:04.625Z",
   "sources": {
     "github": {
       "ok": true,
-      "lastSuccessAt": "2026-09-28T21:31:20.526Z"
+      "lastSuccessAt": "2026-09-28T22:26:04.625Z"
     },
     "npm": {
       "ok": true,
-      "lastSuccessAt": "2026-09-28T21:31:20.526Z"
+      "lastSuccessAt": "2026-09-28T22:26:04.625Z"
     },
     "crates": {
       "ok": true,
-      "lastSuccessAt": "2026-09-28T21:31:20.526Z"
+      "lastSuccessAt": "2026-09-28T22:26:04.625Z"
     }
   },
   "user": {
@@ -21,7 +21,7 @@
     "followers": 211,
     "publicRepos": 137,
     "createdAt": "2012-09-17T12:49:05Z",
-    "contributionsLastYear": 6520
+    "contributionsLastYear": 6524
   },
   "repos": [
     {
@@ -2639,8 +2639,8 @@
       "forks": 0,
       "language": "TypeScript",
       "languages": {
-        "TypeScript": 185364,
-        "Astro": 74170,
+        "TypeScript": 184018,
+        "Astro": 73895,
         "CSS": 8888,
         "JavaScript": 1526
       },
@@ -2654,7 +2654,7 @@
         "Vitest"
       ],
       "createdAt": "2026-09-28T20:50:59Z",
-      "pushedAt": "2026-09-28T21:31:02Z",
+      "pushedAt": "2026-09-28T22:25:46Z",
       "archived": false,
       "fork": false,
       "license": null,
@@ -3609,7 +3609,7 @@
     {
       "repo": "NousResearch/hermes-agent",
       "url": "https://github.com/NousResearch/hermes-agent",
-      "stars": 249773,
+      "stars": 249781,
       "mergedPrs": 0,
       "prsOpened": 40,
       "commits": 5,
@@ -3621,7 +3621,7 @@
     {
       "repo": "RocketChat/Rocket.Chat",
       "url": "https://github.com/RocketChat/Rocket.Chat",
-      "stars": 46185,
+      "stars": 46186,
       "mergedPrs": 1,
       "prsOpened": 1,
       "commits": 2,
