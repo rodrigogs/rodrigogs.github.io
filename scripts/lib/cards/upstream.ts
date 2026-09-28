@@ -77,8 +77,8 @@ export function upstreamCard(view: SiteView, theme: Theme) {
 
   const header = flex(
     { flexDirection: 'row', alignItems: 'center', gap: 16, paddingBottom: 24, borderBottom: `1px solid ${theme.rule}`, marginBottom: 8 },
-    plate(theme, 'merged', view.sections.upstream.label),
-    text({ fontFamily: SANS, fontWeight: 600, fontSize: 26, color: theme.ink }, view.sections.upstream.claim),
+    plate(theme, 'merged', view.sections.openSource.label),
+    text({ fontFamily: SANS, fontWeight: 600, fontSize: 26, color: theme.ink }, view.sections.openSource.claim),
   );
 
   return flex(

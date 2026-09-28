@@ -25,7 +25,8 @@ import {
   sectionOrder,
   sections,
   status as statusVocab,
-  toolchain,
+  stack,
+  aiCapabilities,
   upstreamCountCommits,
   upstreamNotes,
   work,
@@ -188,11 +189,13 @@ export interface SiteView {
     less: string;
     data: CompareData;
   };
-  toolchain: {
+  stack: {
     ships: { label: string; items: readonly string[] };
     groups: { label: string; items: readonly string[] }[];
-    skillsLabel: string;
-    skills: { name: string; text: string; href: string | null }[];
+  };
+  aiCapabilities: {
+    label: string;
+    items: { name: string; text: string; href: string | null }[];
   };
   totals: {
     stars: string;
@@ -220,6 +223,11 @@ export interface SiteView {
 }
 
 const DAY = 86_400_000;
+
+/** DOM id and URL anchor of a section: its key in kebab case (openSource -> open-source). */
+export function sectionId(key: SectionKey): string {
+  return key.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`);
+}
 
 /** Fill `{key}` placeholders. Returns null when any placeholder has no value. */
 export function fill(template: string, values: Record<string, string | number | null | undefined>): string | null {
@@ -493,7 +501,7 @@ export function buildView(snapshot: Snapshot, locale: Locale, build: BuildInfo):
       since: person.since,
       years,
     },
-    nav: sectionOrder.map((key) => ({ key, label: sections[key].label[locale], href: `#${key}` })),
+    nav: sectionOrder.map((key) => ({ key, label: sections[key].label[locale], href: `#${sectionId(key)}` })),
     hero: {
       title: hero.title[locale],
       notes: heroNotes(snapshot, locale),
@@ -554,11 +562,13 @@ export function buildView(snapshot: Snapshot, locale: Locale, build: BuildInfo):
       less: compare.less[locale],
       data: compareData(snapshot, now),
     },
-    toolchain: {
-      ships: { label: toolchain.ships.label[locale], items: toolchain.ships.items },
-      groups: toolchain.groups.map((g) => ({ label: g.label[locale], items: g.items.map((item) => t(item, locale)) })),
-      skillsLabel: toolchain.skillsLabel[locale],
-      skills: toolchain.skills.map((s) => ({ name: s.name[locale], text: s.text[locale], href: 'href' in s ? s.href : null })),
+    stack: {
+      ships: { label: stack.ships.label[locale], items: stack.ships.items },
+      groups: stack.groups.map((g) => ({ label: g.label[locale], items: g.items.map((item) => t(item, locale)) })),
+    },
+    aiCapabilities: {
+      label: aiCapabilities.label[locale],
+      items: aiCapabilities.items.map((s) => ({ name: s.name[locale], text: s.text[locale], href: 'href' in s ? s.href : null })),
     },
     totals: {
       stars: formatInt(snapshot.totals.stars, locale),
@@ -594,7 +604,7 @@ export function buildView(snapshot: Snapshot, locale: Locale, build: BuildInfo):
       worksFor: { '@type': 'Organization', name: 'Globant' },
       address: { '@type': 'PostalAddress', addressRegion: 'Rio Grande do Sul', addressCountry: 'BR' },
       knowsLanguage: ['pt-BR', 'en'],
-      knowsAbout: [...toolchain.ships.items],
+      knowsAbout: [...stack.ships.items],
       sameAs: [person.github, person.linkedin].filter(Boolean),
     },
   };

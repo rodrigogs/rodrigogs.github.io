@@ -13,14 +13,14 @@ interface Props {
 }
 
 const { view } = Astro.props;
-const s = view.sections.upstream;
+const s = view.sections.openSource;
 const slug = (repo: string) => repo.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 ---
 
-<section class="band field-merged upstream" id="upstream" aria-labelledby="upstream-title">
+<section class="band field-merged open-source" id="open-source" aria-labelledby="open-source-title">
   <div class="wrap">
     <div class="grid head">
-      <SectionHead id="upstream" label={s.label} claim={s.claim} class="head-inner" />
+      <SectionHead id="open-source" label={s.label} claim={s.claim} class="head-inner" />
     </div>
     <ol class="rows">
       {
@@ -71,7 +71,7 @@ const slug = (repo: string) => repo.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 </section>
 
 <style>
-  .upstream {
+  .open-source {
     padding-block: var(--s-9);
   }
   .head {

@@ -13,11 +13,11 @@ import Career from './Career.astro';
 import Contact from './Contact.astro';
 import Hero from './Hero.astro';
 import Konami from './Konami.astro';
+import OpenSource from './OpenSource.astro';
 import Packages from './Packages.astro';
 import SiteFooter from './SiteFooter.astro';
 import SiteHeader from './SiteHeader.astro';
-import Toolchain from './Toolchain.astro';
-import Upstream from './Upstream.astro';
+import Stack from './Stack.astro';
 import Work from './Work.astro';
 
 interface Props {
@@ -38,10 +38,10 @@ const view = buildView(snapshotJson as unknown as Snapshot, locale, {
     <Hero view={view} />
     <AiEngineering view={view} />
     <Work view={view} />
-    <Upstream view={view} />
+    <OpenSource view={view} />
     <Packages view={view} />
     <Career view={view} />
-    <Toolchain view={view} />
+    <Stack view={view} />
     <Contact view={view} />
   </main>
   <SiteFooter view={view} />

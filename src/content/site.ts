@@ -113,7 +113,7 @@ export const sections = {
       'Produtos e bibliotecas que as pessoas usam, cada um com os números para conferir.',
     ),
   },
-  upstream: {
+  openSource: {
     label: l('Open source', 'Open source'),
     claim: l(
       "Fixes and features that landed in other people's projects.",
@@ -136,7 +136,7 @@ export const sections = {
       '{years} anos entregando software para mídia, varejo, área fiscal e saúde.',
     ),
   },
-  toolchain: {
+  stack: {
     label: l('Stack', 'Stack'),
     claim: l(
       'What I ship with, and the tools I work with every day, AI included.',
@@ -157,7 +157,7 @@ export const sections = {
 } as const;
 
 export type SectionKey = keyof typeof sections;
-export const sectionOrder: SectionKey[] = ['ai', 'work', 'upstream', 'packages', 'career', 'toolchain', 'contact'];
+export const sectionOrder: SectionKey[] = ['ai', 'work', 'openSource', 'packages', 'career', 'stack', 'contact'];
 
 /** Field labels of the fixed furniture every entry carries. */
 export const field = {
@@ -597,8 +597,8 @@ export const compare = {
   defaultBase: 2014,
 } as const;
 
-/** Toolchain. Items are names; evidence is in PRODUCT.md and the repos. */
-export const toolchain = {
+/** Stack: what I ship with and the tools I use. Items are names; evidence is in PRODUCT.md and the repos. */
+export const stack = {
   ships: {
     label: l('Ships with', 'Stack principal'),
     items: ['TypeScript', 'Node.js', 'Svelte', 'SvelteKit', 'React', 'Next.js', 'PostgreSQL', 'Python', 'Rust', 'Electron', 'AWS', 'Docker'],
@@ -633,8 +633,12 @@ export const toolchain = {
       items: ['Vitest', 'Playwright', 'Biome', 'semantic-release', 'GitHub Actions'],
     },
   ],
-  skillsLabel: l('What I can do', 'O que eu faço'),
-  skills: [
+} as const;
+
+/** AI capabilities, shown under the AI engineering projects (and as one line in the README). */
+export const aiCapabilities = {
+  label: l('What I can do', 'O que eu faço'),
+  items: [
     {
       name: l('Multi-agent orchestration', 'Orquestração multi-agente'),
       text: l(

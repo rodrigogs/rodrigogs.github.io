@@ -87,7 +87,7 @@ export function renderReadme(view: SiteView): string {
   const links = `[Site](${SITE_URL}/) · [Em português](${SITE_URL}/pt/) · [Email](mailto:${view.person.email})`;
 
   const ai = view.ai.map(aiBullet).join('\n');
-  const capabilities = `**${view.toolchain.skillsLabel}**: ${view.toolchain.skills.map((k) => k.name).join(' · ')}`;
+  const capabilities = `**${view.aiCapabilities.label}**: ${view.aiCapabilities.items.map((k) => k.name).join(' · ')}`;
 
   const workCards = WORK_IDS.map((id) => {
     const entry = view.work.find((w) => w.id === id);
@@ -103,15 +103,15 @@ export function renderReadme(view: SiteView): string {
     '**[PitStop](https://pitstop.sh)**, a management SaaS for auto repair shops.';
 
   const upstream = picture({
-    href: `${SITE_URL}/#upstream`,
+    href: `${SITE_URL}/#open-source`,
     dark: `${CARDS_URL}/upstream-dark.svg`,
     light: `${CARDS_URL}/upstream-light.svg`,
     alt: upstreamTitle(view.upstream),
   });
 
-  const ships = `**Ships with**: ${joinList(view.toolchain.ships.items)}.`;
+  const ships = `**${view.stack.ships.label}**: ${joinList(view.stack.ships.items)}.`;
   // One line per group (Agents, Models, MCP servers...), so the list reads as a manifest, not a badge wall.
-  const tools = view.toolchain.groups
+  const tools = view.stack.groups
     .filter((g) => g.label !== 'Quality')
     .map((g) => `**${g.label}**: ${g.items.join(' · ')}`)
     .join('<br>\n');

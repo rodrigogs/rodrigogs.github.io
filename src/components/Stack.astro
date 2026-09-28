@@ -11,14 +11,14 @@ interface Props {
 }
 
 const { view } = Astro.props;
-const s = view.sections.toolchain;
-const t = view.toolchain;
+const s = view.sections.stack;
+const t = view.stack;
 ---
 
-<section class="band field-sheet toolchain" id="toolchain" aria-labelledby="toolchain-title">
+<section class="band field-sheet stack" id="stack" aria-labelledby="stack-title">
   <div class="wrap grid">
     <div class="lead">
-      <SectionHead id="toolchain" label={s.label} claim={s.claim} />
+      <SectionHead id="stack" label={s.label} claim={s.claim} />
     </div>
 
     <div class="manifest">
@@ -51,7 +51,7 @@ const t = view.toolchain;
 </section>
 
 <style>
-  .toolchain {
+  .stack {
     padding-block: var(--s-9);
   }
   .grid {

@@ -17,7 +17,7 @@ interface Props {
 
 const { view } = Astro.props;
 const s = view.sections.ai;
-const t = view.toolchain;
+const caps = view.aiCapabilities;
 ---
 
 <section class="band field-changed ai" id="ai" aria-labelledby="ai-title">
@@ -42,10 +42,10 @@ const t = view.toolchain;
     </ol>
 
     <div class="skills-wrap">
-      <h3 class="skills-label">{t.skillsLabel}</h3>
+      <h3 class="skills-label">{caps.label}</h3>
       <ul class="skills">
         {
-          t.skills.map((skill) => (
+          caps.items.map((skill) => (
             <li class="skill">
               <h4 class="skill-name">
                 {skill.href ? (
