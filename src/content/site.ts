@@ -45,7 +45,7 @@ export const meta = {
   ),
   description: l(
     'Software engineer since 2010, senior since 2018. I build whole products, from database internals to on-device AI and agent infrastructure. Release history, open source and contact.',
-    'Engenheiro de software desde 2010, sênior desde 2018. Construo produtos completos, dos internals de banco de dados à IA rodando no dispositivo e à infraestrutura de agentes. Histórico de releases, open source e contato.',
+    'Engenheiro de software desde 2010, sênior desde 2018. Construo produtos completos, do motor do banco de dados à IA rodando no dispositivo e à infraestrutura de agentes. Histórico de releases, open source e contato.',
   ),
 } as const;
 
@@ -54,7 +54,7 @@ export const hero = {
   latest: l('Latest', 'Mais recente'),
   title: l(
     'Senior software engineer building whole products, from database internals to on‑device AI.',
-    'Engenheiro de software sênior que constrói produtos completos, dos internals de banco de dados à IA rodando no dispositivo.',
+    'Engenheiro de software sênior que constrói produtos completos, do motor do banco de dados à IA rodando no dispositivo.',
   ),
   /**
    * The three release notes of the first viewport. `role` picks the plate
