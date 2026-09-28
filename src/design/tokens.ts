@@ -6,8 +6,8 @@
  * so the GitHub profile README and the site cannot drift apart.
  *
  * Palette: the four release roles are the whole color system.
- *   added      new and shipped work, `+` lines, the "Latest" plate
- *   changed    work in progress ("Unreleased"), the current role
+ *   added      shipped and active work, `+` lines, the site plate
+ *   changed    the AI engineering field, the current role
  *   merged     upstream contributions to other people's projects
  *   deprecated retired and dormant work, `−` lines
  * All pairs below were checked against WCAG 2.2 AA (text >= 4.5:1).

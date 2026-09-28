@@ -20,9 +20,8 @@ import {
   konami,
   localeTag,
   meta,
-  now as nowEntries,
+  aiProjects,
   person,
-  roleLabel,
   sectionOrder,
   sections,
   status as statusVocab,
@@ -75,7 +74,7 @@ export interface EntryView {
   isPrivate: boolean;
 }
 
-export interface NowView {
+export interface AiProjectView {
   id: string;
   name: string;
   note: string;
@@ -161,17 +160,13 @@ export interface SiteView {
   };
   nav: { key: SectionKey; label: string; href: string }[];
   hero: {
-    calver: string;
-    calverDatetime: string;
-    latestLabel: string;
     title: string;
     notes: HeroNoteView[];
     cta: { email: string; copy: string; copied: string };
   };
   sections: Record<SectionKey, { label: string; claim: string; tag?: string; body?: string }>;
-  roleLabel: Record<Role, string>;
   field: Record<keyof typeof field, string>;
-  now: NowView[];
+  ai: AiProjectView[];
   work: EntryView[];
   upstream: UpstreamView[];
   packages: PackageView[];
@@ -212,6 +207,7 @@ export interface SiteView {
     built: string;
     data: string;
     stale: string | null;
+    staleTag: string;
     source: string;
     sourceHref: string;
     previous: string;
@@ -256,10 +252,6 @@ function isoDate(value: string, locale: Locale): string {
   );
 }
 
-function calver(d: Date): string {
-  const p = (n: number) => String(n).padStart(2, '0');
-  return `${d.getUTCFullYear()}.${p(d.getUTCMonth() + 1)}.${p(d.getUTCDate())}`;
-}
 
 function relativeDays(days: number, locale: Locale): string {
   return new Intl.RelativeTimeFormat(localeTag[locale], { numeric: 'auto' }).format(-days, 'day');
@@ -442,7 +434,7 @@ function heroNotes(snapshot: Snapshot, locale: Locale): HeroNoteView[] {
   const notes: HeroNoteView[] = [];
   for (const note of hero.notes) {
     const text = fill(note.text[locale], values);
-    if (text) notes.push({ role: note.role, label: roleLabel[note.role][locale], text });
+    if (text) notes.push({ role: note.role, label: note.label[locale], text });
   }
   return notes;
 }
@@ -503,17 +495,13 @@ export function buildView(snapshot: Snapshot, locale: Locale, build: BuildInfo):
     },
     nav: sectionOrder.map((key) => ({ key, label: sections[key].label[locale], href: `#${key}` })),
     hero: {
-      calver: calver(now),
-      calverDatetime: now.toISOString().slice(0, 10),
-      latestLabel: hero.latest[locale],
       title: hero.title[locale],
       notes: heroNotes(snapshot, locale),
       cta: { email: hero.cta.email[locale], copy: hero.cta.copy[locale], copied: hero.cta.copied[locale] },
     },
     sections: sectionView,
-    roleLabel: Object.fromEntries(Object.entries(roleLabel).map(([k, v]) => [k, v[locale]])) as Record<Role, string>,
     field: fieldView,
-    now: nowEntries.map((entry) => {
+    ai: aiProjects.map((entry) => {
       const repo = entry.repo ? snapshot.repos.find((r) => r.name === entry.repo) : undefined;
       const up = entry.upstream ? snapshot.upstream.find((u) => u.repo === entry.upstream) : undefined;
       const proofs: ProofView[] = [];
@@ -586,6 +574,7 @@ export function buildView(snapshot: Snapshot, locale: Locale, build: BuildInfo):
         fill(shortSha ? footer.built[locale] : footer.builtNoSha[locale], { date: isoDate(now.toISOString(), locale), sha: shortSha }) ?? '',
       data: fill(footer.data[locale], { age: relativeDays(age.days, locale) }) ?? '',
       stale: failing && oldest ? fill(footer.stale[locale], { date: isoDate(oldest, locale) }) : null,
+      staleTag: footer.staleTag[locale],
       source: footer.source[locale],
       sourceHref: 'https://github.com/rodrigogs/rodrigogs.github.io',
       previous: footer.previous[locale],

@@ -50,26 +50,26 @@ export const meta = {
 } as const;
 
 export const hero = {
-  /** Shown on the "Latest" plate next to the build date (CalVer). */
-  latest: l('Latest', 'Mais recente'),
   title: l(
     'Senior software engineer building whole products, from database internals to on‑device AI.',
     'Engenheiro de software sênior que constrói produtos completos, do motor do banco de dados à IA rodando no dispositivo.',
   ),
   /**
-   * The three release notes of the first viewport. `role` picks the plate
-   * color and label; `{…}` placeholders are filled from the snapshot.
+   * The three notes of the first viewport. `role` picks the plate color,
+   * `label` is the plain noun on it; `{…}` placeholders are filled from the snapshot.
    */
   notes: [
     {
       role: 'changed' as Role,
+      label: l('Role', 'Cargo'),
       text: l(
-        'Senior Software Engineer on the Disney Entertainment account, via Globant, since August 2025.',
-        'Senior Software Engineer na conta da Disney Entertainment, pela Globant, desde agosto de 2025.',
+        'Senior Software Engineer at Globant, on the Disney Entertainment account since August 2025.',
+        'Senior Software Engineer na Globant, na conta da Disney Entertainment desde agosto de 2025.',
       ),
     },
     {
       role: 'added' as Role,
+      label: l('Product', 'Produto'),
       /** {tag} {stars} {downloads} from repo whats-reader. */
       repo: 'whats-reader',
       text: l(
@@ -79,10 +79,11 @@ export const hero = {
     },
     {
       role: 'merged' as Role,
+      label: l('Open source', 'Open source'),
       /** {agentCommits} from NousResearch/hermes-agent, {webuiMerged} from nesquena/hermes-webui. */
       text: l(
-        'Agent infrastructure: {agentCommits} commits landed in Hermes Agent and {webuiMerged} merged PRs in Hermes WebUI.',
-        'Infraestrutura de agentes: {agentCommits} commits integrados ao Hermes Agent e {webuiMerged} PRs mergeados no Hermes WebUI.',
+        'Contributor to the Hermes Agent framework ({agentCommits} commits landed) and to Hermes WebUI ({webuiMerged} merged PRs).',
+        'Contribuidor do framework Hermes Agent ({agentCommits} commits integrados) e do Hermes WebUI ({webuiMerged} PRs mergeados).',
       ),
     },
   ],
@@ -93,25 +94,16 @@ export const hero = {
   },
 } as const;
 
-/** Labels for the release roles (tag plates, legends, diff lines). */
-export const roleLabel: Record<Role, L> = {
-  added: l('Added', 'Adicionado'),
-  changed: l('Changed', 'Alterado'),
-  merged: l('Upstream', 'Upstream'),
-  deprecated: l('Deprecated', 'Descontinuado'),
-};
-
 /**
  * Sections in page order. `label` is the literal noun used in the nav and
  * the heading; `claim` is the one sentence each section opens with.
  */
 export const sections = {
-  now: {
-    label: l('Now', 'Agora'),
-    tag: l('Unreleased', 'Em desenvolvimento'),
+  ai: {
+    label: l('AI engineering', 'Engenharia de IA'),
     claim: l(
-      'Agent infrastructure I am building in the open and upstream.',
-      'Infraestrutura de agentes que construo em público e upstream.',
+      'I build and contribute to AI agent infrastructure: delegation, routing, interoperability and memory.',
+      'Construo e contribuo com infraestrutura de agentes de IA: delegação, roteamento, interoperabilidade e memória.',
     ),
   },
   work: {
@@ -122,7 +114,7 @@ export const sections = {
     ),
   },
   upstream: {
-    label: l('Upstream', 'Upstream'),
+    label: l('Open source', 'Open source'),
     claim: l(
       "Fixes and features that landed in other people's projects.",
       'Correções e funcionalidades aceitas em projetos de outras pessoas.',
@@ -145,10 +137,10 @@ export const sections = {
     ),
   },
   toolchain: {
-    label: l('Toolchain', 'Ferramentas'),
+    label: l('Stack', 'Stack'),
     claim: l(
-      'The stack I ship with and the AI tooling I work with.',
-      'A stack com que entrego e as ferramentas de IA que uso.',
+      'What I ship with, and the tools I work with every day, AI included.',
+      'Com o que eu entrego, e as ferramentas que uso no dia a dia, incluindo IA.',
     ),
   },
   contact: {
@@ -165,12 +157,12 @@ export const sections = {
 } as const;
 
 export type SectionKey = keyof typeof sections;
-export const sectionOrder: SectionKey[] = ['now', 'work', 'upstream', 'packages', 'career', 'toolchain', 'contact'];
+export const sectionOrder: SectionKey[] = ['ai', 'work', 'upstream', 'packages', 'career', 'toolchain', 'contact'];
 
 /** Field labels of the fixed furniture every entry carries. */
 export const field = {
-  born: l('Born', 'Criado'),
-  latest: l('Latest', 'Última versão'),
+  born: l('Since', 'Desde'),
+  latest: l('Latest release', 'Última versão'),
   status: l('Status', 'Status'),
   stars: l('stars', 'estrelas'),
   downloadsMonth: l('downloads / 30 days', 'downloads / 30 dias'),
@@ -210,7 +202,7 @@ export const fieldOne: Partial<Record<keyof typeof field, L>> = {
 export const status = {
   latest: { role: 'added' as Role, label: l('Active', 'Ativo') },
   maintained: { role: 'merged' as Role, label: l('Maintained', 'Mantido') },
-  dormant: { role: 'deprecated' as Role, label: l('Dormant', 'Inativo') },
+  dormant: { role: 'deprecated' as Role, label: l('Legacy', 'Legado') },
   private: { role: 'changed' as Role, label: l('Private, live', 'Privado, no ar') },
   wip: { role: 'changed' as Role, label: l('In progress', 'Em andamento') },
 } as const;
@@ -438,7 +430,7 @@ export const work: WorkEntry[] = [
   },
 ];
 
-/** What landed in Hermes Agent; one wording for the Now entry and the Upstream row. */
+/** What landed in Hermes Agent; one wording for the AI engineering entry and the Open source row. */
 const hermesAgentNote = l(
   'Gateway watchdog fixes against false wedge kills, a Bedrock context-window cache fix and an auth cooldown reset fix.',
   'Correções no watchdog do gateway contra falsos travamentos, no cache da janela de contexto do Bedrock e no reset do cooldown de autenticação.',
@@ -450,7 +442,7 @@ const bridgeNote = l(
   'Uma ponte MCP nos dois sentidos que deixa o Claude Code e o Hermes Agent chamarem um ao outro como provedores de ferramentas entre máquinas, com proteção contra recursão e uma caixa de mensagens compartilhada, só de acréscimo.',
 );
 
-export interface NowEntry {
+export interface AiProject {
   id: string;
   name: string | L;
   repo: string | null;
@@ -461,7 +453,7 @@ export interface NowEntry {
   links: EntryLink[];
 }
 
-export const now: NowEntry[] = [
+export const aiProjects: AiProject[] = [
   {
     id: 'hermes-agent',
     name: 'Hermes Agent',
@@ -641,7 +633,7 @@ export const toolchain = {
       items: ['Vitest', 'Playwright', 'Biome', 'semantic-release', 'GitHub Actions'],
     },
   ],
-  skillsLabel: l('AI engineering', 'Engenharia de IA'),
+  skillsLabel: l('What I can do', 'O que eu faço'),
   skills: [
     {
       name: l('Multi-agent orchestration', 'Orquestração multi-agente'),
@@ -714,11 +706,8 @@ export const konami = {
 /** The 404 page, printed in both languages at once. */
 export const notFound = {
   title: l('Not found', 'Página não encontrada'),
-  text: l(
-    'This address was never released, or it was removed.',
-    'Este endereço nunca foi publicado, ou foi removido.',
-  ),
-  home: l('Go to the latest release', 'Ir para a versão mais recente'),
+  text: l('This page does not exist, or it moved.', 'Esta página não existe, ou mudou de lugar.'),
+  home: l('Go to the home page', 'Ir para a página inicial'),
 } as const;
 
 export const footer = {
@@ -730,6 +719,8 @@ export const footer = {
     'Numbers from GitHub, npm and crates.io, fetched {age}.',
     'Números do GitHub, npm e crates.io, buscados {age}.',
   ),
+  /** Plate on the stale-data warning. */
+  staleTag: l('Outdated', 'Desatualizado'),
   stale: l(
     'Some sources failed on the last run; the numbers shown are from {date}.',
     'Algumas fontes falharam na última execução; os números mostrados são de {date}.',

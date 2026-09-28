@@ -31,7 +31,6 @@ describe.each(['en', 'pt'] as const)('buildView(%s) on the committed snapshot', 
   it('has all three hero notes, with no unfilled placeholders', () => {
     expect(view.hero.notes).toHaveLength(3);
     for (const note of view.hero.notes) expect(note.text).not.toMatch(/[{}]/);
-    expect(view.hero.calver).toBe('2026.09.28');
   });
 
   it('renders every curated work entry with its fixed furniture', () => {
