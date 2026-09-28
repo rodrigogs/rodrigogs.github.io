@@ -19,12 +19,12 @@ OWN-WORLD: Keep a Changelog and release-page grammar on a bright white sheet wit
 
 STORY: The visitor learns that he is a senior engineer who ships whole products and works on agent infrastructure now. The linked numbers make that believable. Then they copy the email or open LinkedIn.
 
-FIRST VIEWPORT: Left seven columns: the green tag plate "2026.09.28 · Latest", then the name in expanded black (about 5.5rem), a one-sentence release title and three tagged notes with proof numbers. The primary "Email me" plate sits below them, with GitHub beside it, and LinkedIn too once the owner confirms its URL. Right five columns: the career version rail from 2010 to now, with the current role lit and a live compare readout.
+FIRST VIEWPORT: Left seven columns: the name in expanded black (about 5.5rem), a one-sentence title and three notes with proof numbers, each on a role plate with a plain label (Role, Product, Open source). No CalVer or "Latest" plate: owner feedback (2026-09-28) was that changelog jargon applied to a person ("Now", "Unreleased", "Changed/Added") read badly, so the world lives in structure and visuals, never in the copy. The primary "Email me" plate sits below them, with GitHub beside it, and LinkedIn too once the owner confirms its URL. Right five columns: the career version rail from 2010 to now, with the current role lit and a live compare readout.
 
 FORM: Release notes / changelog, #4 of 7 on my list, seed eee612c4. The signature interaction is Compare: pick any two years and the page renders a +/− diff of stack and work computed from real repo data. The compare state lives in the URL.
 
 RAISES:
-- From the industrial quote grammar: literal labeling. Every region is named by its plain noun (Now, Work, Upstream, Packages, Career, Toolchain, Contact), so wayfinding is reading.
+- From the industrial quote grammar: literal labeling. Every region is named by its plain noun (AI engineering, Work, Open source, Packages, Career, Stack, Contact), so wayfinding is reading.
 - From the azulejo station hall: a whole-unit grid. Every block snaps to whole rows of a 4px baseline on 12 columns; nothing is fractional.
 - From the Fletcher poster: one idea per section. Each section opens with a single claim sentence that stands without its body.
 - From the character goods catalog: fixed furniture. Every release entry carries identical fields (name, born, latest version, note, proof number, links), and dormant projects print in a retired state.

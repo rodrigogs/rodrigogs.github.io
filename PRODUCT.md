@@ -47,6 +47,7 @@ An engineer shipping since 2010 and senior since 2018 *(public LinkedIn)* who bu
 
 - Name: Rodrigo Gomes da Silva; handle `rodrigogs`.
 - Voice *(inferred)*: plain, first person, specific, no hype, no emoji bullets; numbers and artifacts instead of adjectives.
+- Labels are plain professional nouns (Role, Product, Open source, AI engineering, Stack). The release-notes world lives in structure and visuals only; changelog jargon applied to the person ("Now", "Unreleased", "Changed/Added", CalVer "Latest") is out. (Confirmed by owner feedback, 2026-09-28.)
 - The previous vaporwave identity is retired (treated as evidence of personality: fun, technical, a Konami code easter egg), not carried forward as a visual system.
 
 ## Evidence on Hand
