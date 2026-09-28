@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-09-28T20:57:07.151Z",
+  "fetchedAt": "2026-09-28T21:00:51.482Z",
   "sources": {
     "github": {
       "ok": true,
-      "lastSuccessAt": "2026-09-28T20:57:07.151Z"
+      "lastSuccessAt": "2026-09-28T21:00:51.482Z"
     },
     "npm": {
       "ok": true,
-      "lastSuccessAt": "2026-09-28T20:57:07.151Z"
+      "lastSuccessAt": "2026-09-28T21:00:51.482Z"
     },
     "crates": {
       "ok": true,
-      "lastSuccessAt": "2026-09-28T20:57:07.151Z"
+      "lastSuccessAt": "2026-09-28T21:00:51.482Z"
     }
   },
   "user": {
@@ -168,7 +168,7 @@
       "fullName": "rodrigogs/nodejs-web-jade-scaffold",
       "url": "https://github.com/rodrigogs/nodejs-web-jade-scaffold",
       "description": "Web application featuring Node.js, Express, Jade, Passport, MongoDB and Bootstrap",
-      "homepage": "http://nodejs-web-jade-scaffold.herokuapp.com/",
+      "homepage": null,
       "stars": 167,
       "forks": 11,
       "language": "JavaScript",
@@ -473,7 +473,7 @@
       "fullName": "rodrigogs/barracao-digital",
       "url": "https://github.com/rodrigogs/barracao-digital",
       "description": "Sistema de gerenciamento de fila virtual para os barracões de atendimento do COVID-19",
-      "homepage": "https://barracaodigital.com",
+      "homepage": null,
       "stars": 10,
       "forks": 1,
       "language": "Vue",
@@ -1123,7 +1123,7 @@
       "fullName": "rodrigogs/addressbook",
       "url": "https://github.com/rodrigogs/addressbook",
       "description": null,
-      "homepage": "https://addressbook-.herokuapp.com",
+      "homepage": null,
       "stars": 2,
       "forks": 1,
       "language": "JavaScript",
@@ -2146,7 +2146,7 @@
       "fullName": "rodrigogs/campobom.online",
       "url": "https://github.com/rodrigogs/campobom.online",
       "description": "Campo Bom Online",
-      "homepage": "https://campobom.online",
+      "homepage": null,
       "stars": 0,
       "forks": 0,
       "language": "TypeScript",
@@ -2639,7 +2639,7 @@
       "forks": 0,
       "language": "TypeScript",
       "languages": {
-        "TypeScript": 182191,
+        "TypeScript": 182569,
         "Astro": 74849,
         "CSS": 8888,
         "JavaScript": 1526
@@ -2654,7 +2654,7 @@
         "Vitest"
       ],
       "createdAt": "2026-09-28T20:50:59Z",
-      "pushedAt": "2026-09-28T20:56:51Z",
+      "pushedAt": "2026-09-28T21:00:36Z",
       "archived": false,
       "fork": false,
       "license": null,
