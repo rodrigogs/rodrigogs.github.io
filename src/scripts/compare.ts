@@ -6,7 +6,9 @@
  * on load, keeps the URL in sync with history.replaceState, announces each
  * new diff through a polite live region, and plays the page's one authored
  * motion: lines on their way out are struck through and fade, then new lines
- * are revealed left to right with the exponential ease-out token.
+ * are revealed left to right with the exponential ease-out token. Past
+ * the fold limit, lines wait behind a disclosure button (aria-expanded) that
+ * stays open across range changes once the visitor opens it.
  */
 
 import { diffStacks } from '../lib/derive.ts';
@@ -30,15 +32,19 @@ function init(form: HTMLFormElement): void {
   const data = JSON.parse(raw) as CompareData;
   const nf = new Intl.NumberFormat(form.dataset.lang);
   const num = (n: number) => nf.format(n);
+  const ds = form.dataset;
+  /** Singular form when the count is exactly 1, plural otherwise. */
   const words = {
-    added: form.dataset.added ?? '',
-    removed: form.dataset.removed ?? '',
-    kept: form.dataset.kept ?? '',
-    work: form.dataset.work ?? '',
+    added: (n: number) => (n === 1 ? ds.addedOne : ds.added) ?? '',
+    removed: (n: number) => (n === 1 ? ds.removedOne : ds.removed) ?? '',
+    kept: (n: number) => (n === 1 ? ds.keptOne : ds.kept) ?? '',
+    work: (n: number) => ((n === 1 ? ds.workOne : ds.work) ?? '').replace('{repos}', num(n)),
   };
+  const limit = Number(ds.limit) || Infinity;
 
   const out = <T extends HTMLElement = HTMLElement>(key: string) => form.querySelector<T>(`[data-out="${key}"]`);
   const list = out<HTMLUListElement>('lines');
+  const more = out<HTMLButtonElement>('more');
   const announce = out('announce');
   const range = form.querySelector<HTMLElement>('[data-range]');
   const rail = form.querySelector<HTMLElement>('[data-rail]');
@@ -88,7 +94,38 @@ function init(form: HTMLFormElement): void {
   }
 
   function summary(b: number, h: number, diff: ReturnType<typeof diffStacks>, repos: number): string {
-    return `${b}...${h}: ${num(diff.added.length)} ${words.added}, ${num(diff.removed.length)} ${words.removed}, ${num(diff.kept.length)} ${words.kept}. ${words.work.replace('{repos}', num(repos))}.`;
+    const [a, r, k] = [diff.added.length, diff.removed.length, diff.kept.length];
+    return `${b}...${h}: ${num(a)} ${words.added(a)}, ${num(r)} ${words.removed(r)}, ${num(k)} ${words.kept(k)}. ${words.work(repos)}.`;
+  }
+
+  /** Marks the lines past the limit and sets the disclosure for them. */
+  function fold(nodes: HTMLLIElement[]): void {
+    const folds = nodes.length > limit + 1;
+    let tailAdded = 0;
+    let tailRemoved = 0;
+    nodes.forEach((li, i) => {
+      const inTail = folds && i >= limit;
+      li.toggleAttribute('data-tail', inTail);
+      if (!inTail) return;
+      if (li.dataset.kind === 'add') tailAdded++;
+      else tailRemoved++;
+    });
+    if (!more) return;
+    more.hidden = !folds;
+    if (!folds) return;
+    const set = (key: string, n: number, sign: string) => {
+      const el = out(key);
+      if (!el) return;
+      el.hidden = n === 0;
+      el.textContent = `${sign}${num(n)}`;
+    };
+    set('more-added', tailAdded, '+');
+    set('more-removed', tailRemoved, '−');
+  }
+
+  function setExpanded(open: boolean): void {
+    more?.setAttribute('aria-expanded', String(open));
+    list!.toggleAttribute('data-collapsed', !open);
   }
 
   function render(animate: boolean): void {
@@ -105,9 +142,12 @@ function init(form: HTMLFormElement): void {
     set('base', String(b));
     set('head', String(h));
     set('added', `+${num(diff.added.length)}`);
+    set('added-word', words.added(diff.added.length));
     set('removed', `−${num(diff.removed.length)}`);
+    set('removed-word', words.removed(diff.removed.length));
     set('kept', num(diff.kept.length));
-    set('work', words.work.replace('{repos}', num(repos)));
+    set('kept-word', words.kept(diff.kept.length));
+    set('work', words.work(repos));
     const kinds = blocks(diff.added.length, diff.removed.length);
     out('blocks')
       ?.querySelectorAll('i')
@@ -132,9 +172,10 @@ function init(form: HTMLFormElement): void {
     // Settle anything still leaving from a previous change.
     for (const el of list!.querySelectorAll('.leaving')) el.remove();
 
+    // Removals first, as in a unified diff (and as the server renders them).
     const wanted: [Kind, string][] = [
-      ...diff.added.map((n): [Kind, string] => ['add', n]),
       ...diff.removed.map((n): [Kind, string] => ['rem', n]),
+      ...diff.added.map((n): [Kind, string] => ['add', n]),
     ];
     const wantedKeys = new Set(wanted.map(([k, n]) => `${k}:${n}`));
     const current = new Map<string, HTMLLIElement>();
@@ -151,8 +192,10 @@ function init(form: HTMLFormElement): void {
         return li;
       });
       list!.replaceChildren(...nodes);
+      fold(nodes);
       if (!animate) return;
       fresh.forEach((li, i) => {
+        if (li.hasAttribute('data-tail') && list!.hasAttribute('data-collapsed')) return;
         li.animate(
           [
             { clipPath: 'inset(0 100% 0 0)', opacity: 0.35 },
@@ -195,6 +238,8 @@ function init(form: HTMLFormElement): void {
       render(false);
     }
   }
+
+  more?.addEventListener('click', () => setExpanded(more.getAttribute('aria-expanded') !== 'true'));
 
   form.addEventListener('change', () => {
     state = { base: checked('base', state.base), head: checked('head', state.head) };

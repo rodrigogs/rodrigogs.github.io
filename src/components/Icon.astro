@@ -3,7 +3,7 @@
  * The site's only icon set: drawn on a 16px grid, one 1.5px square-capped
  * stroke, so every glyph matches the square plates.
  */
-export type IconName = 'plus' | 'minus' | 'mail' | 'copy' | 'check' | 'hash' | 'lock' | 'external' | 'up';
+export type IconName = 'plus' | 'minus' | 'mail' | 'copy' | 'check' | 'hash' | 'lock' | 'external' | 'up' | 'unfold' | 'fold';
 
 interface Props {
   name: IconName;
@@ -23,6 +23,8 @@ const paths: Record<IconName, string> = {
   lock: 'M3.25 7.25h9.5v6h-9.5zM5.25 7.25v-2a2.75 2.75 0 0 1 5.5 0v2',
   external: 'M5 11l6-6M6.25 4.75h4.75v4.75',
   up: 'M8 13V3.5M4 7.25l4-4 4 4',
+  unfold: 'M4.75 5.75L8 2.5l3.25 3.25M4.75 10.25L8 13.5l3.25-3.25',
+  fold: 'M4.75 2.75L8 6l3.25-3.25M4.75 13.25L8 10l3.25 3.25',
 };
 ---
 

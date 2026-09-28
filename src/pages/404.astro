@@ -5,7 +5,7 @@
  */
 import Icon from '../components/Icon.astro';
 import Plate from '../components/Plate.astro';
-import { localeTag, locales, notFound } from '../content/site.ts';
+import { footer, localeTag, locales, notFound } from '../content/site.ts';
 import type { Snapshot } from '../data/schema.ts';
 import snapshotJson from '../data/snapshot.json';
 import Base from '../layouts/Base.astro';
@@ -15,7 +15,22 @@ const view = buildView(snapshotJson as unknown as Snapshot, 'en', { now: new Dat
 const home = { en: '/', pt: '/pt/' } as const;
 ---
 
-<Base view={view} title={`404 · ${notFound.title.en} · ${notFound.title.pt}`} noindex>
+<Base
+  view={view}
+  title={`404 · ${notFound.title.en} · ${notFound.title.pt}`}
+  description={`${notFound.text.en} ${notFound.text.pt}`}
+  noindex
+>
+  <Fragment slot="skip">
+    {
+      locales.map((locale, i) => (
+        <>
+          {i > 0 && <span aria-hidden="true"> / </span>}
+          <span lang={localeTag[locale]}>{footer.skip[locale]}</span>
+        </>
+      ))
+    }
+  </Fragment>
   <main id="main" class="nf wrap" tabindex="-1">
     {
       locales.map((locale, i) => (

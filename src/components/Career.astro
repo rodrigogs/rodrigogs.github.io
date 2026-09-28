@@ -65,18 +65,19 @@ const s = view.sections.career;
     column-gap: var(--s-5);
     border-block-start: 1px solid var(--c-ink);
   }
+  /* Every row carries the same inline padding inside the column, so the
+     lit current row's tint ends exactly on the grid. */
   .role {
     display: grid;
     grid-column: 1 / -1;
     grid-template-columns: subgrid;
     align-items: baseline;
     padding-block: var(--s-4);
+    padding-inline: var(--s-3);
     border-block-end: 1px solid var(--c-rule);
   }
   .role[data-current] {
     background: var(--c-changed-tint);
-    padding-inline: var(--s-3);
-    margin-inline: calc(var(--s-3) * -1);
   }
   .when {
     display: flex;

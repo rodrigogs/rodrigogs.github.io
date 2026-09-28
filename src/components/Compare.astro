@@ -4,7 +4,9 @@
  * rail and read the diff of the stack between them. The default range is
  * server-rendered, so it reads the same with JS off; the module in
  * src/scripts/compare.ts takes over from there (URL state, live region,
- * the one authored motion).
+ * the one authored motion). The diff list shows its first LIMIT lines and
+ * folds the rest behind a disclosure, so the readout ends with the rail;
+ * with scripting off the whole list prints.
  */
 import { fill, type SiteView } from '../lib/view.ts';
 import { formatInt } from '../lib/derive.ts';
@@ -23,6 +25,16 @@ const lo = Math.min(d.base, d.head);
 const hi = Math.max(d.base, d.head);
 const repos = d.repoYears.filter((y) => y >= lo && y <= hi).length;
 const num = (n: number) => formatInt(n, view.locale);
+const word = (n: number, many: string, one: string) => (n === 1 ? one : many);
+
+/** Lines shown before the fold; a fold never hides a single line. */
+const LIMIT = 10;
+// Removals first, as in a unified diff, so the fold never hides every − line.
+const lines = [...removed.map((name) => ({ kind: 'rem' as const, name })), ...added.map((name) => ({ kind: 'add' as const, name }))];
+const folds = lines.length > LIMIT + 1;
+const tail = folds ? lines.slice(LIMIT) : [];
+const tailAdded = tail.filter((l) => l.kind === 'add').length;
+const tailRemoved = tail.length - tailAdded;
 
 /** GitHub-style five-block diffstat: blocks split by the added:removed ratio. */
 function blocks(a: number, r: number): ('add' | 'rem' | 'none')[] {
@@ -49,9 +61,14 @@ const payload = JSON.stringify({
   data-compare
   data-lang={view.lang}
   data-added={c.added}
+  data-added-one={c.addedOne}
   data-removed={c.removed}
+  data-removed-one={c.removedOne}
   data-kept={c.kept}
+  data-kept-one={c.keptOne}
   data-work={c.work}
+  data-work-one={c.workOne}
+  data-limit={LIMIT}
 >
   <div class="compare-head">
     <h2 class="compare-title" id="compare-title">{c.label}</h2>
@@ -76,36 +93,52 @@ const payload = JSON.stringify({
       </p>
 
       <div class="stat">
-        <span class="count"><span class="n mono add" data-out="added">+{num(added.length)}</span> {c.added}</span>
-        <span class="count"><span class="n mono rem" data-out="removed">−{num(removed.length)}</span> {c.removed}</span>
+        <span class="count"
+          ><span class="n mono add" data-out="added">+{num(added.length)}</span>{' '}
+          <span data-out="added-word">{word(added.length, c.added, c.addedOne)}</span></span
+        >
+        <span class="count"
+          ><span class="n mono rem" data-out="removed">−{num(removed.length)}</span>{' '}
+          <span data-out="removed-word">{word(removed.length, c.removed, c.removedOne)}</span></span
+        >
         <span class="blocks" aria-hidden="true" data-out="blocks">
           {blocks(added.length, removed.length).map((k) => <i data-kind={k} />)}
         </span>
       </div>
 
       <p class="meta">
-        <span><span class="mono" data-out="kept">{num(kept.length)}</span> {c.kept}</span>
-        <span data-out="work">{fill(c.work, { repos: num(repos) })}</span>
+        <span
+          ><span class="mono" data-out="kept">{num(kept.length)}</span>{' '}
+          <span data-out="kept-word">{word(kept.length, c.kept, c.keptOne)}</span></span
+        >
+        <span data-out="work">{fill(word(repos, c.work, c.workOne), { repos: num(repos) })}</span>
       </p>
 
-      <ul class="lines" data-out="lines" aria-label={c.label}>
+      <ul class="lines" id="compare-lines" data-out="lines" data-collapsed={folds ? '' : undefined} aria-label={c.label}>
         {
-          added.map((name) => (
-            <li class="line" data-kind="add" data-key={`add:${name}`}>
-              <Icon name="plus" size={12} />
-              <span>{name}</span>
-            </li>
-          ))
-        }
-        {
-          removed.map((name) => (
-            <li class="line" data-kind="rem" data-key={`rem:${name}`}>
-              <Icon name="minus" size={12} />
+          lines.map(({ kind, name }, i) => (
+            <li class="line" data-kind={kind} data-key={`${kind}:${name}`} data-tail={i >= LIMIT ? '' : undefined}>
+              <Icon name={kind === 'add' ? 'plus' : 'minus'} size={12} />
               <span>{name}</span>
             </li>
           ))
         }
       </ul>
+      <button
+        class="more mono"
+        type="button"
+        aria-controls="compare-lines"
+        aria-expanded="false"
+        data-out="more"
+        hidden={!folds}
+      >
+        <Icon name="unfold" size={12} class="g-unfold" />
+        <Icon name="fold" size={12} class="g-fold" />
+        <span data-out="more-removed" class="rem" hidden={tailRemoved === 0}>−{num(tailRemoved)}</span>
+        <span data-out="more-added" class="add" hidden={tailAdded === 0}>+{num(tailAdded)}</span>
+        <span class="w-more">{c.more}</span>
+        <span class="w-less">{c.less}</span>
+      </button>
       <p class="sr-only" aria-live="polite" data-out="announce"></p>
     </div>
   </div>
@@ -276,6 +309,64 @@ const payload = JSON.stringify({
   }
   .lines :global(.line.leaving span::after) {
     transform: scaleX(1);
+  }
+
+  /* The fold: with scripting on, lines past LIMIT wait behind the button. */
+  @media (scripting: enabled) {
+    .lines[data-collapsed] > :global([data-tail]) {
+      display: none;
+    }
+  }
+  @media (scripting: none) {
+    .more {
+      display: none;
+    }
+  }
+  .more {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    min-block-size: var(--s-5);
+    margin-block-start: calc(var(--s-2) * -1);
+    padding-inline: var(--s-2);
+    border: 0;
+    border-block-end: 1px solid var(--c-rule);
+    border-radius: 0;
+    background: transparent;
+    color: var(--c-ink2);
+    font-size: var(--t-micro);
+    font-weight: 600;
+    line-height: 1rem;
+    text-align: start;
+    cursor: pointer;
+    transition: background-color var(--d-fast) var(--ease);
+  }
+  .more[hidden] {
+    display: none;
+  }
+  .more:hover {
+    background: color-mix(in srgb, var(--c-ink) 5%, transparent);
+  }
+  .more :global(.icon) {
+    flex: none;
+    color: var(--c-ink3);
+  }
+  .more[aria-expanded='false'] :global(.g-fold),
+  .more[aria-expanded='true'] :global(.g-unfold),
+  .more[aria-expanded='false'] .w-less,
+  .more[aria-expanded='true'] .w-more,
+  .more[aria-expanded='true'] .add,
+  .more[aria-expanded='true'] .rem {
+    display: none;
+  }
+  .w-more,
+  .w-less {
+    font-family: var(--font-archivo);
+    font-weight: 500;
+    color: var(--c-ink2);
+  }
+  .more [hidden] {
+    display: none;
   }
 
   @media (max-width: 29.99rem) {

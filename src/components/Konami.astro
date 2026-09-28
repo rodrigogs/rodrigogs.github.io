@@ -5,10 +5,16 @@
  * The plate is a status message; nothing else changes on the page.
  */
 import Plate from './Plate.astro';
+
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
 ---
 
 <div class="konami" data-konami hidden>
-  <Plate role="merged" size="m"><span class="mono">v0</span> <span aria-hidden="true">·</span> vaporwave (retired)</Plate>
+  <Plate role="merged" size="m"><span class="mono">v0</span> <span aria-hidden="true">·</span> {label}</Plate>
 </div>
 <p class="sr-only" role="status" aria-live="polite" data-konami-status></p>
 
@@ -20,7 +26,7 @@ import Plate from './Plate.astro';
   .konami {
     position: fixed;
     inset-block-end: var(--s-4);
-    inset-inline-start: var(--s-4);
+    inset-inline-end: var(--s-4);
     z-index: 30;
   }
   .konami[hidden] {

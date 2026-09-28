@@ -1,7 +1,8 @@
 ---
 /**
  * Now: the unreleased work, on a full-bleed Changed (amber) field. Quiet
- * density: few entries, large type, generous space.
+ * density: few entries, large type, generous space. The head sits above a
+ * two-up list, six columns each, so no column stands empty beside it.
  */
 import type { SiteView } from '../lib/view.ts';
 import EntryLinks from './EntryLinks.astro';
@@ -50,39 +51,30 @@ const s = view.sections.now;
     padding-block: var(--s-10);
   }
   .grid {
-    row-gap: var(--s-7);
+    row-gap: var(--s-8);
   }
   .lead {
-    grid-column: 1 / span 5;
-  }
-  @media (min-width: 64rem) {
-    .lead :global(.section-head) {
-      position: sticky;
-      inset-block-start: calc(var(--header-h) + var(--s-7));
-    }
+    grid-column: 1 / -1;
   }
   .lead :global(.claim) {
-    max-inline-size: 18ch;
+    max-inline-size: 24ch;
     font-size: clamp(var(--t-h3), 1rem + 1.6vw, 2.25rem);
     line-height: 1.2;
     font-weight: 700;
     letter-spacing: -0.02em;
   }
   .items {
-    grid-column: 7 / -1;
-    display: flex;
-    flex-direction: column;
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--gutter);
   }
   .item {
     display: flex;
     flex-direction: column;
     gap: var(--s-3);
-    padding-block: var(--s-6);
+    padding-block: var(--s-5) var(--s-7);
     border-block-start: 1px solid var(--line);
-  }
-  .item:first-child {
-    padding-block-start: 0;
-    border-block-start: 0;
   }
   .title-row {
     display: flex;
@@ -104,10 +96,12 @@ const s = view.sections.now;
   .item :global(.proofs .n) {
     font-weight: 700;
   }
-  @media (max-width: 63.99rem) {
-    .lead,
+  @media (max-width: 47.99rem) {
     .items {
-      grid-column: 1 / -1;
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .item:last-child {
+      padding-block-end: 0;
     }
   }
 </style>

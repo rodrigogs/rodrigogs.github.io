@@ -1,7 +1,8 @@
 ---
 /**
  * Document shell: language, meta, social cards, hreflang, JSON-LD, fonts
- * (Astro Fonts API) and the token stylesheet. Pages pass a SiteView.
+ * (Astro Fonts API) and the token stylesheet. Pages pass a SiteView; a page
+ * printed in both languages (404) fills the "skip" slot with both labels.
  */
 import { Font } from 'astro:assets';
 import { cssVariables, retiredVariables, themes } from '../design/tokens.ts';
@@ -47,7 +48,7 @@ const jsonLd = JSON.stringify(view.jsonLd).replace(/</g, '\\u003c');
     <meta property="og:site_name" content={view.person.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
+    {!noindex && <meta property="og:url" content={canonical} />}
     <meta property="og:locale" content={ogLocale[view.locale]} />
     <meta property="og:locale:alternate" content={ogLocale[view.alternate.locale]} />
     <meta property="og:image" content={ogImage} />
@@ -72,7 +73,7 @@ const jsonLd = JSON.stringify(view.jsonLd).replace(/</g, '\\u003c');
     <script type="application/ld+json" is:inline set:html={jsonLd} />
   </head>
   <body>
-    <a class="skip" href="#main">{view.footer.skip}</a>
+    <a class="skip" href="#main"><slot name="skip">{view.footer.skip}</slot></a>
     <slot />
   </body>
 </html>

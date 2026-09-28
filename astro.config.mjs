@@ -6,6 +6,8 @@ export default defineConfig({
   site: 'https://rodrigogs.github.io',
   output: 'static',
   trailingSlash: 'ignore',
+  // The whole stylesheet is a few KB: inline it so nothing blocks first paint.
+  build: { inlineStylesheets: 'always' },
   i18n: {
     locales: ['en', 'pt'],
     defaultLocale: 'en',

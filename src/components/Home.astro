@@ -45,5 +45,5 @@ const view = buildView(snapshotJson as unknown as Snapshot, locale, {
     <Contact view={view} />
   </main>
   <SiteFooter view={view} />
-  <Konami />
+  <Konami label={view.konami.label} />
 </Base>
