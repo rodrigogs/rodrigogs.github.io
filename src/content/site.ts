@@ -78,11 +78,10 @@ export const hero = {
     },
     {
       role: 'merged' as Role,
-      label: l('Open source', 'Open source'),
-      /** {agentCommits} from NousResearch/hermes-agent, {webuiMerged} from nesquena/hermes-webui. */
+      label: l('AI', 'IA'),
       text: l(
-        'Contributor to the Hermes Agent framework ({agentCommits} commits landed) and to Hermes WebUI ({webuiMerged} merged PRs).',
-        'Contribuidor do framework Hermes Agent ({agentCommits} commits integrados) e do Hermes WebUI ({webuiMerged} PRs mergeados).',
+        'I work with a team of AI agents: spec first, parallel subagents, adversarial review, and proof in the running app before anything ships.',
+        'Trabalho com um time de agentes de IA: especificação primeiro, subagentes em paralelo, revisão adversarial e prova no app rodando antes de qualquer entrega.',
       ),
     },
   ],
@@ -99,10 +98,10 @@ export const hero = {
  */
 export const sections = {
   ai: {
-    label: l('AI engineering', 'Engenharia de IA'),
+    label: l('How I work with AI', 'Como trabalho com IA'),
     claim: l(
-      'I build and contribute to AI agent infrastructure: delegation, routing, resilient tools and memory.',
-      'Construo e contribuo com infraestrutura de agentes de IA: delegação, roteamento, ferramentas resilientes e memória.',
+      'I set the spec and the bar; a team of AI agents does the fan-out; nothing ships until it is proven.',
+      'Eu defino a especificação e o nível de exigência; um time de agentes de IA distribui o trabalho; nada sai sem prova.',
     ),
   },
   work: {
@@ -590,76 +589,86 @@ export const stack = {
   ],
 } as const;
 
-/** AI capabilities, shown under the AI engineering projects (and as one line in the README). */
-export const aiCapabilities = {
-  label: l('What I can do', 'O que eu faço'),
-  /** Every capability links to public proof: a repo or this site's own source. */
+/**
+ * How I work with AI: the practices, in the order a change goes through
+ * them. Public-safe by construction: tools and methods, never private projects.
+ */
+export const aiWorkflow = {
+  label: l('The method', 'O método'),
   items: [
     {
-      name: l('Multi-agent orchestration', 'Orquestração multi-agente'),
+      name: l('Spec before code', 'Especificação antes do código'),
       text: l(
-        'Spec-first pipelines that plan, fan out to parallel subagents, review adversarially and verify in the running app, with a model and effort policy per task. This site was built that way.',
-        'Pipelines guiados por especificação que planejam, distribuem para subagentes em paralelo, revisam de forma adversarial e verificam no app em execução, com política de modelo e esforço por tarefa. Este site foi feito assim.',
+        'Every non-trivial change starts as a written spec and a plan I review before the first line is written.',
+        'Toda mudança não trivial começa como especificação e plano escritos, que eu reviso antes da primeira linha.',
       ),
-      href: 'https://github.com/rodrigogs/rodrigogs.github.io',
+      tools: ['Claude Code', 'superpowers'],
     },
     {
-      name: l('Capability routing', 'Roteamento por capacidade'),
+      name: l('A team, not a chatbot', 'Um time, não um chatbot'),
       text: l(
-        'Delegated tasks run under the right profile and model, picked by task difficulty, in an isolated process.',
-        'Tarefas delegadas rodam no perfil e no modelo certos, escolhidos pela dificuldade da tarefa, num processo isolado.',
+        'Work fans out to parallel subagents, each with its model and effort picked for the job: fast models for mechanical edits, the strongest for architecture and review.',
+        'O trabalho se divide entre subagentes em paralelo, cada um com modelo e esforço escolhidos para a tarefa: modelos rápidos para edições mecânicas, os mais fortes para arquitetura e revisão.',
       ),
-      href: 'https://github.com/rodrigogs/hermes-smart-router',
+      tools: ['Claude Code', 'Claude on AWS Bedrock'],
     },
     {
-      name: l('Resilient agent tools', 'Ferramentas resilientes para agentes'),
+      name: l('Adversarial review', 'Revisão adversarial'),
       text: l(
-        "Provider chains that keep an agent's web search working when one backend dies, without patching the framework's core.",
-        'Cadeias de provedores que mantêm a busca web do agente funcionando quando um backend cai, sem alterar o núcleo do framework.',
+        'Independent reviewer agents try to refute every finding and audit truth, accessibility and performance before I accept a change.',
+        'Agentes revisores independentes tentam refutar cada achado e auditam verdade, acessibilidade e performance antes de eu aceitar uma mudança.',
       ),
-      href: 'https://github.com/rodrigogs/hermes-web-resilient',
+      tools: ['Claude Code', 'impeccable'],
     },
     {
-      name: l('Auditable agent memory', 'Memória de agente auditável'),
+      name: l('Proof, not "looks right"', 'Prova, não "parece certo"'),
       text: l(
-        'Trust, reach and recall made visible per fact: dense embeddings, holographic vectors and BM25 keyword retrieval, side by side.',
-        'Confiança, alcance e recuperação visíveis por fato: embeddings densos, vetores holográficos e busca BM25 por palavra-chave, lado a lado.',
+        'Done means verified: agents drive the running app in a real browser, check the deployed URL and watch CI before anything is called finished.',
+        'Pronto significa verificado: os agentes usam o app rodando num navegador de verdade, conferem a URL publicada e acompanham o CI antes de qualquer coisa ser dada como pronta.',
       ),
-      href: 'https://github.com/rodrigogs/hermes-one-fact-explorer',
+      tools: ['Playwright', 'Chrome DevTools', 'GitHub Actions'],
     },
     {
-      name: l('Agent observability', 'Observabilidade de agentes'),
+      name: l('Research over memory', 'Pesquisa em vez de memória'),
       text: l(
-        'A live 3D office of an agent fleet: one agent per profile, each with its current task, history, sessions and configuration.',
-        'Um escritório 3D ao vivo de uma frota de agentes: um agente por perfil, cada um com a tarefa atual, o histórico, as sessões e a configuração.',
+        'Before a decision, agents read current docs and search the web instead of trusting what a model remembers.',
+        'Antes de decidir, os agentes leem a documentação atual e pesquisam na web em vez de confiar no que o modelo lembra.',
       ),
-      href: 'https://github.com/rodrigogs/hermes-office-web',
+      tools: ['Context7', 'SearXNG (self-hosted)'],
     },
     {
-      name: l('Local-first AI', 'IA local-first'),
+      name: l('Memory across sessions', 'Memória entre sessões'),
       text: l(
-        'Speech-to-text in the browser over WebGPU: after a one-time model download, no audio or message ever leaves the device, a privacy property users can audit.',
-        'Transcrição de voz no navegador via WebGPU: depois de baixar o modelo uma vez, nenhum áudio ou mensagem sai do dispositivo, uma garantia de privacidade que o usuário pode auditar.',
+        'A persistent memory layer keeps long projects coherent across days and sessions.',
+        'Uma camada de memória persistente mantém projetos longos coerentes entre dias e sessões.',
       ),
-      href: 'https://github.com/rodrigogs/whats-reader',
+      tools: ['claude-mem'],
     },
     {
-      name: l('Messaging bots', 'Bots de mensageria'),
+      name: l('Guardrails', 'Limites claros'),
       text: l(
-        'WhatsApp bots whose auth sessions live in Redis, Postgres or any Keyv backend, so they survive restarts.',
-        'Bots de WhatsApp com sessões de autenticação em Redis, Postgres ou qualquer backend Keyv, para sobreviverem a reinícios.',
+        'Nothing other people can see (pull requests, comments, posts) goes out without my approval, and secrets stay out of every output.',
+        'Nada que outras pessoas possam ver (pull requests, comentários, posts) sai sem a minha aprovação, e segredos ficam fora de qualquer saída.',
       ),
-      href: 'https://github.com/rodrigogs/baileys-store',
+      tools: ['Claude Code'],
     },
     {
-      name: l('Testing AI code', 'Testes para código de IA'),
+      name: l('An agent on call', 'Um agente de plantão'),
       text: l(
-        'AI code held to the same bar as any other: 1,959 tests and 100% branch coverage on the delegation router.',
-        'Código de IA com a mesma exigência de qualquer outro: 1.959 testes e 100% de cobertura de branches no roteador de delegação.',
+        'A self-hosted agent I can reach from my phone over Telegram picks up work when I am away from the desk.',
+        'Um agente auto-hospedado que eu aciono pelo celular, via Telegram, segue trabalhando quando estou longe do computador.',
       ),
-      href: 'https://github.com/rodrigogs/hermes-smart-router',
+      tools: ['Hermes Agent', 'Telegram'],
     },
   ],
+  /** Proof line under the method. */
+  builtWith: l(
+    'This site and my GitHub profile were built this way: planned, built by parallel agents, reviewed adversarially and verified live.',
+    'Este site e o meu perfil do GitHub foram feitos assim: planejados, construídos por agentes em paralelo, revisados de forma adversarial e verificados ao vivo.',
+  ),
+  builtWithHref: 'https://github.com/rodrigogs/rodrigogs.github.io',
+  /** Label for the compact list of public agent projects under the method. */
+  projectsLabel: l('Agent tooling I publish', 'Ferramentas para agentes que publico'),
 } as const;
 
 /** Easter egg: the Konami code brings back the retired 2026 palette. */

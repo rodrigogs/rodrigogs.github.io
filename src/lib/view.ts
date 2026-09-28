@@ -26,7 +26,7 @@ import {
   sections,
   status as statusVocab,
   stack,
-  aiCapabilities,
+  aiWorkflow,
   upstreamCountCommits,
   upstreamNotes,
   work,
@@ -191,9 +191,12 @@ export interface SiteView {
     ships: { label: string; items: readonly string[] };
     groups: { label: string; items: readonly string[] }[];
   };
-  aiCapabilities: {
+  aiWorkflow: {
     label: string;
-    items: { name: string; text: string; href: string | null }[];
+    items: { name: string; text: string; tools: readonly string[] }[];
+    builtWith: string;
+    builtWithHref: string;
+    projectsLabel: string;
   };
   totals: {
     stars: string;
@@ -564,9 +567,12 @@ export function buildView(snapshot: Snapshot, locale: Locale, build: BuildInfo):
       ships: { label: stack.ships.label[locale], items: stack.ships.items },
       groups: stack.groups.map((g) => ({ label: g.label[locale], items: g.items.map((item) => t(item, locale)) })),
     },
-    aiCapabilities: {
-      label: aiCapabilities.label[locale],
-      items: aiCapabilities.items.map((s) => ({ name: s.name[locale], text: s.text[locale], href: 'href' in s ? s.href : null })),
+    aiWorkflow: {
+      label: aiWorkflow.label[locale],
+      items: aiWorkflow.items.map((w) => ({ name: w.name[locale], text: w.text[locale], tools: w.tools })),
+      builtWith: aiWorkflow.builtWith[locale],
+      builtWithHref: aiWorkflow.builtWithHref,
+      projectsLabel: aiWorkflow.projectsLabel[locale],
     },
     totals: {
       stars: formatInt(snapshot.totals.stars, locale),

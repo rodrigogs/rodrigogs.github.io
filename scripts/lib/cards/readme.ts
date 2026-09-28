@@ -87,7 +87,7 @@ export function renderReadme(view: SiteView): string {
   const links = `[Site](${SITE_URL}/) · [Em português](${SITE_URL}/pt/)${linkedin} · [Email](mailto:${view.person.email})`;
 
   const ai = view.ai.map(aiBullet).join('\n');
-  const capabilities = `**${view.aiCapabilities.label}**: ${view.aiCapabilities.items.map((k) => k.name).join(' · ')}`;
+  const capabilities = `**${view.aiWorkflow.label}**: ${view.aiWorkflow.items.map((k) => k.name).join(' · ')}`;
 
   const workCards = WORK_IDS.map((id) => {
     const entry = view.work.find((w) => w.id === id);

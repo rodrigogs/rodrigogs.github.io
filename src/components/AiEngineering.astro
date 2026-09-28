@@ -6,7 +6,6 @@
  */
 import type { SiteView } from '../lib/view.ts';
 import EntryLinks from './EntryLinks.astro';
-import Icon from './Icon.astro';
 import Permalink from './Permalink.astro';
 import Proofs from './Proofs.astro';
 import SectionHead from './SectionHead.astro';
@@ -17,7 +16,7 @@ interface Props {
 
 const { view } = Astro.props;
 const s = view.sections.ai;
-const caps = view.aiCapabilities;
+const caps = view.aiWorkflow;
 ---
 
 <section class="band field-changed ai" id="ai" aria-labelledby="ai-title">
@@ -47,16 +46,7 @@ const caps = view.aiCapabilities;
         {
           caps.items.map((skill) => (
             <li class="skill">
-              <h4 class="skill-name">
-                {skill.href ? (
-                  <a href={skill.href}>
-                    {skill.name}
-                    <Icon name="external" size={12} />
-                  </a>
-                ) : (
-                  skill.name
-                )}
-              </h4>
+              <h4 class="skill-name">{skill.name}</h4>
               <p class="skill-text">{skill.text}</p>
             </li>
           ))
