@@ -9,12 +9,23 @@
 import type { Theme } from '../../../src/design/tokens.ts';
 import type { SiteView } from '../../../src/lib/view.ts';
 import { SANS, SANS_EXPANDED } from './fonts.ts';
+import { measureWidth } from './measure.ts';
 import { calverPlate, flex, hairline, nameLines, plateBox, text } from './pieces.ts';
 
 export const HEADER_WIDTH = 1280;
 export const HEADER_HEIGHT = 400;
 
-export function headerCard(view: SiteView, theme: Theme) {
+/** The role plate on one hero note, sized to its own label. */
+function notePlate(theme: Theme, note: SiteView['hero']['notes'][number], width?: number) {
+  return plateBox(
+    theme,
+    note.role,
+    { padX: 10, padY: 5, ...(width !== undefined ? { width } : {}) },
+    text({ fontFamily: SANS, fontWeight: 700, fontSize: 14, whiteSpace: 'pre' }, note.label),
+  );
+}
+
+export async function headerCard(view: SiteView, theme: Theme) {
   const [line1, line2] = nameLines(view.person.name);
 
   const name = flex(
@@ -34,12 +45,18 @@ export function headerCard(view: SiteView, theme: Theme) {
     flex({ marginTop: 24 }, calverPlate(theme, view.hero.calver, view.hero.latestLabel)),
   );
 
+  // Every note's plate shares one column width (the widest label plus its
+  // padding), so the note text after it always starts at the same x
+  // regardless of whether the label is "Added" or "Upstream".
+  const plateWidths = await Promise.all(view.hero.notes.map((note) => measureWidth(notePlate(theme, note))));
+  const plateColumnWidth = plateWidths.length ? Math.max(...plateWidths) : undefined;
+
   const noteRows = view.hero.notes.map((note, i) =>
     flex(
       { flexDirection: 'column', flexGrow: 1, justifyContent: 'center', paddingTop: i === 0 ? 0 : 20, paddingBottom: i === view.hero.notes.length - 1 ? 0 : 20 },
       flex(
         { flexDirection: 'row', alignItems: 'flex-start', gap: 16 },
-        plateBox(theme, note.role, { padX: 10, padY: 5 }, text({ fontFamily: SANS, fontWeight: 700, fontSize: 14, whiteSpace: 'pre' }, note.label)),
+        notePlate(theme, note, plateColumnWidth),
         text({ fontFamily: SANS, fontWeight: 400, fontSize: 21, lineHeight: 1.35, color: theme.ink, flex: 1 }, note.text),
       ),
     ),

@@ -55,12 +55,14 @@ export function ogCard(view: SiteView, theme: Theme) {
   );
 
   const { added, removed } = view.compare.data.initial;
+  const addedLabel = added.length === 1 ? view.compare.addedOne : view.compare.added;
+  const removedLabel = removed.length === 1 ? view.compare.removedOne : view.compare.removed;
 
   const bottom = flex(
     { flexDirection: 'row', alignItems: 'center', gap: 20, marginTop: 40 },
     calverPlate(theme, view.hero.calver, view.hero.latestLabel, { fontSize: 22, padX: 16, padY: 10 }),
-    diffPlate(theme, 'added', '+', added.length, view.compare.added),
-    diffPlate(theme, 'deprecated', '−', removed.length, view.compare.removed),
+    diffPlate(theme, 'added', '+', added.length, addedLabel),
+    diffPlate(theme, 'deprecated', '−', removed.length, removedLabel),
   );
 
   return flex(

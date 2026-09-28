@@ -22,8 +22,9 @@ import { loadFonts } from './lib/cards/fonts.ts';
 import type { VNode } from './lib/cards/h.ts';
 import { headerCard, HEADER_HEIGHT, HEADER_WIDTH } from './lib/cards/header.ts';
 import { ogCard, OG_HEIGHT, OG_WIDTH } from './lib/cards/og.ts';
+import { renderReadme, WORK_IDS } from './lib/cards/readme.ts';
 import { roundNumbers, withAccessibleTitle } from './lib/cards/svg.ts';
-import { upstreamCard, UPSTREAM_WIDTH } from './lib/cards/upstream.ts';
+import { upstreamCard, upstreamTitle, UPSTREAM_WIDTH } from './lib/cards/upstream.ts';
 import { workCard, WORK_HEIGHT, WORK_WIDTH } from './lib/cards/work.ts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -31,9 +32,6 @@ const ROOT = path.join(__dirname, '..');
 const SNAPSHOT_PATH = path.join(ROOT, 'src', 'data', 'snapshot.json');
 const README_DIR = path.join(ROOT, 'dist', 'readme');
 const OG_DIR = path.join(ROOT, 'dist', 'og');
-
-/** Work entries embedded in the README, in the order README.md lists them. */
-const WORK_IDS = ['whats-reader', 'mysql-events', 'pg-turbo', 'vibewatch', 'baileys-store', 'easyvpn'] as const;
 
 const THEME_NAMES: ThemeName[] = ['light', 'dark'];
 
@@ -72,14 +70,6 @@ async function save(dir: string, filename: string, svg: string): Promise<RenderR
   return { name: filename, width, height, bytes: Buffer.byteLength(svg, 'utf8') };
 }
 
-/** "Hermes Agent, Hermes WebUI, Rocket.Chat and more.": the upstream card's alt text. */
-function upstreamTitle(repos: { repo: string }[]): string {
-  const names = repos.map((r) => r.repo.split('/')[1] ?? r.repo);
-  const shown = names.slice(0, 4);
-  const list = shown.length > 1 ? `${shown.slice(0, -1).join(', ')} and ${shown[shown.length - 1]}` : (shown[0] ?? '');
-  return `Upstream contributions: ${list}${names.length > shown.length ? ' and more.' : '.'}`;
-}
-
 export async function renderAll(snapshot: Snapshot, build: { now: Date; sha: string }): Promise<RenderResult[]> {
   const viewEn = buildView(snapshot, 'en', build);
   const viewPt = buildView(snapshot, 'pt', build);
@@ -93,7 +83,7 @@ export async function renderAll(snapshot: Snapshot, build: { now: Date; sha: str
     const theme = themes[themeName];
 
     const headerSvg = await renderSvg(
-      headerCard(viewEn, theme),
+      await headerCard(viewEn, theme),
       { width: HEADER_WIDTH, height: HEADER_HEIGHT },
       `${viewEn.person.name}. ${viewEn.hero.title}`,
     );
@@ -116,6 +106,12 @@ export async function renderAll(snapshot: Snapshot, build: { now: Date; sha: str
     await writeFile(path.join(OG_DIR, `${locale}.png`), png);
     results.push({ name: `og/${locale}.png`, width: OG_WIDTH, height: OG_HEIGHT, bytes: png.length });
   }
+
+  // Generated from the same view as the cards above, so the profile
+  // README's alt texts and prose can never drift from what they say.
+  const readme = renderReadme(viewEn);
+  await writeFile(path.join(README_DIR, 'README.md'), readme, 'utf8');
+  results.push({ name: 'readme/README.md', width: 0, height: 0, bytes: Buffer.byteLength(readme, 'utf8') });
 
   return results;
 }

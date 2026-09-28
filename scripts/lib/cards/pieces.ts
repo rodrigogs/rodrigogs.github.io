@@ -30,13 +30,30 @@ export interface PlateOpts {
   padX?: number;
   padY?: number;
   weight?: number;
+  /**
+   * Fixed outer width (border-box, so it already covers `padX`), for a row
+   * of plates that must share one column regardless of label length. Omit
+   * to size the plate to its content, the usual case.
+   */
+  width?: number;
+  justifyContent?: string;
 }
 
 /** The bare solid-fill box, for plates that mix fonts (e.g. a mono value next to a sans label). */
 export function plateBox(theme: Theme, role: Role, opts: PlateOpts = {}, ...children: (Child | Child[])[]): VNode {
   const { bg, fg } = roleColors(theme, role);
-  const { padX = 10, padY = 6 } = opts;
-  return flex({ alignItems: 'center', backgroundColor: bg, color: fg, padding: `${padY}px ${padX}px` }, ...children);
+  const { padX = 10, padY = 6, width, justifyContent } = opts;
+  return flex(
+    {
+      alignItems: 'center',
+      ...(justifyContent ? { justifyContent } : {}),
+      ...(width !== undefined ? { width, flexShrink: 0, boxSizing: 'border-box' } : {}),
+      backgroundColor: bg,
+      color: fg,
+      padding: `${padY}px ${padX}px`,
+    },
+    ...children,
+  );
 }
 
 /** A solid role plate: the tag used for statuses, release roles and section marks. */

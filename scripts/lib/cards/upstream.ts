@@ -50,6 +50,28 @@ function upstreamRowNode(row: UpstreamView, field: SiteView['field'], theme: The
   );
 }
 
+/** How many repos the accessible title names before falling back to "and more." */
+const TITLE_NAMES = 4;
+
+/**
+ * "Upstream contributions: hermes-agent, Rocket.Chat, hermes-webui and
+ * moleculer.": the card's accessible title, and the alt text for its
+ * README embed. Built as one Oxford-free list; "and more" is appended
+ * only when rows are omitted, and never doubled with the list's own "and".
+ */
+export function upstreamTitle(rows: UpstreamView[]): string {
+  const names = rows.map((r) => r.repo.split('/')[1] ?? r.repo);
+  const shown = names.slice(0, TITLE_NAMES);
+  const omitted = names.length > shown.length;
+  const list =
+    shown.length <= 1
+      ? (shown[0] ?? '')
+      : omitted
+        ? shown.join(', ')
+        : `${shown.slice(0, -1).join(', ')} and ${shown[shown.length - 1]}`;
+  return `Upstream contributions: ${list}${omitted ? ' and more.' : '.'}`;
+}
+
 export function upstreamCard(view: SiteView, theme: Theme) {
   const rows = view.upstream.slice(0, UPSTREAM_MAX_ROWS);
 
