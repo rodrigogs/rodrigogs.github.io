@@ -599,6 +599,9 @@ export const compare = {
   /** {repos} */
   work: l('{repos} repos started in this range', '{repos} repos criados neste período'),
   workOne: l('{repos} repo started in this range', '{repos} repo criado neste período'),
+  /** The fold under the diff lines: "+13 more" / "Show fewer". */
+  more: l('more', 'a mais'),
+  less: l('Show fewer', 'Mostrar menos'),
   defaultBase: 2014,
 } as const;
 

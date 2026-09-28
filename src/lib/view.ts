@@ -189,6 +189,8 @@ export interface SiteView {
     keptOne: string;
     work: string;
     workOne: string;
+    more: string;
+    less: string;
     data: CompareData;
   };
   toolchain: {
@@ -560,6 +562,8 @@ export function buildView(snapshot: Snapshot, locale: Locale, build: BuildInfo):
       keptOne: compare.keptOne[locale],
       work: compare.work[locale],
       workOne: compare.workOne[locale],
+      more: compare.more[locale],
+      less: compare.less[locale],
       data: compareData(snapshot, now),
     },
     toolchain: {
