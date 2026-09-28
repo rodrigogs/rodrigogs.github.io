@@ -8,11 +8,11 @@ import type { Snapshot } from '../data/schema.ts';
 import snapshotJson from '../data/snapshot.json';
 import Base from '../layouts/Base.astro';
 import { buildView } from '../lib/view.ts';
+import AiEngineering from './AiEngineering.astro';
 import Career from './Career.astro';
 import Contact from './Contact.astro';
 import Hero from './Hero.astro';
 import Konami from './Konami.astro';
-import Now from './Now.astro';
 import Packages from './Packages.astro';
 import SiteFooter from './SiteFooter.astro';
 import SiteHeader from './SiteHeader.astro';
@@ -36,7 +36,7 @@ const view = buildView(snapshotJson as unknown as Snapshot, locale, {
   <SiteHeader view={view} />
   <main id="main" tabindex="-1">
     <Hero view={view} />
-    <Now view={view} />
+    <AiEngineering view={view} />
     <Work view={view} />
     <Upstream view={view} />
     <Packages view={view} />

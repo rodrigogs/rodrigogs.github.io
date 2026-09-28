@@ -1,8 +1,7 @@
 ---
 /**
- * The first viewport, read as the latest release: the name as the release
- * heading with its CalVer "Latest" plate on the baseline, the release title,
- * three tagged notes and the primary action. The right five columns carry
+ * The first viewport: the name, the one-sentence title, three labeled notes
+ * (role, product, open source) and the primary action. The right five columns carry
  * the version rail and the live Compare readout.
  */
 import type { SiteView } from '../lib/view.ts';
@@ -27,11 +26,6 @@ const line2 = words.slice(2).join(' ');
     <div class="release">
       <div class="release-head">
         <h1 class="display name" id="release-name">{line1}{line2 && <br />}{line2}</h1>
-        <Plate role="added" class="latest">
-          <time class="mono" datetime={hero.calverDatetime}>{hero.calver}</time>
-          <span class="sep" aria-hidden="true">·</span>
-          <span>{hero.latestLabel}</span>
-        </Plate>
       </div>
 
       <p class="release-title">{hero.title}</p>
@@ -104,22 +98,6 @@ const line2 = words.slice(2).join(' ');
     display: inline;
     font-size: 1em;
     line-height: inherit;
-  }
-  .release-head :global(.latest) {
-    position: relative;
-    inset-block-start: -0.06em;
-    margin-inline-start: var(--s-3);
-    block-size: var(--s-6);
-    padding-inline: var(--s-3);
-    font-size: var(--t-small);
-    vertical-align: baseline;
-  }
-  .release-head :global(.latest .mono) {
-    font-size: var(--t-micro);
-    font-weight: 600;
-  }
-  .sep {
-    opacity: 0.8;
   }
 
   .release-title {

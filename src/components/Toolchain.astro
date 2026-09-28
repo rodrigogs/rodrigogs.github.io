@@ -1,11 +1,9 @@
 ---
 /**
- * Toolchain, printed as a manifest: the "Ships with" line first, then the
- * grouped tooling, then the AI engineering skills (name, one sentence, and
- * a link where there is public proof).
+ * Stack, printed as a manifest: the "Ships with" line first, then the
+ * grouped tooling. The AI capabilities live in the AI engineering section.
  */
 import type { SiteView } from '../lib/view.ts';
-import Icon from './Icon.astro';
 import SectionHead from './SectionHead.astro';
 
 interface Props {
@@ -49,28 +47,6 @@ const t = view.toolchain;
       </dl>
     </div>
 
-    <div class="skills-wrap">
-      <h3 class="skills-label">{t.skillsLabel}</h3>
-      <ul class="skills">
-        {
-          t.skills.map((skill) => (
-            <li class="skill">
-              <h4 class="skill-name">
-                {skill.href ? (
-                  <a href={skill.href}>
-                    {skill.name}
-                    <Icon name="external" size={12} />
-                  </a>
-                ) : (
-                  skill.name
-                )}
-              </h4>
-              <p class="skill-text">{skill.text}</p>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
   </div>
 </section>
 
@@ -97,8 +73,7 @@ const t = view.toolchain;
     padding-block-end: var(--s-6);
     border-block-end: 1px solid var(--c-ink);
   }
-  .ships-label,
-  .skills-label {
+  .ships-label {
     font-size: var(--t-small);
     font-weight: 700;
     line-height: 1.25rem;
@@ -146,51 +121,14 @@ const t = view.toolchain;
     content: ',';
   }
 
-  .skills-wrap {
-    grid-column: 5 / -1;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-4);
-  }
-  .skills {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: var(--s-6);
-  }
-  .skill {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-1);
-    padding-block: var(--s-4) var(--s-5);
-    border-block-start: 1px solid var(--c-rule);
-  }
-  .skill-name {
-    font-size: var(--t-body);
-    font-weight: 700;
-    line-height: 1.5rem;
-  }
-  .skill-name a {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--s-1);
-  }
-  .skill-text {
-    color: var(--c-ink2);
-    font-size: var(--t-small);
-    line-height: 1.25rem;
-  }
   @media (max-width: 63.99rem) {
     .lead,
-    .manifest,
-    .skills-wrap {
+    .manifest {
       grid-column: 1 / -1;
     }
   }
   @media (max-width: 47.99rem) {
     .group {
-      grid-template-columns: minmax(0, 1fr);
-    }
-    .skills {
       grid-template-columns: minmax(0, 1fr);
     }
   }
