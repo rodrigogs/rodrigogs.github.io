@@ -24,7 +24,7 @@ The personal site and GitHub profile of Rodrigo Gomes da Silva (GitHub `rodrigog
 
 ## Positioning
 
-A senior engineer with 15+ years of shipping *(LinkedIn: since 2010)* who builds whole products end to end and whose claims are checkable: software people actually install and download (about 21k npm downloads a month, 1.5k+ GitHub stars, a desktop app with 30 releases), live products in regulated or demanding domains (cardiac CT planning in the browser, a repair-shop SaaS), and current work on AI agent infrastructure upstream in Hermes Agent. The mechanism a neighbor cannot copy: the range runs from MySQL binlog change data capture and resumable Postgres COPY streaming to on-device Whisper over WebGPU and multi-agent orchestration, and every piece has a public artifact behind it.
+An engineer shipping since 2010 and senior since 2018 *(public LinkedIn)* who builds whole products end to end and whose claims are checkable: software people actually install and download (about 21k npm downloads a month, 1.5k+ GitHub stars, a desktop app with 90+ releases), live products in regulated or demanding domains (cardiac CT planning in the browser, a repair-shop SaaS), and current work on AI agent infrastructure upstream in Hermes Agent. The mechanism a neighbor cannot copy: the range runs from MySQL binlog change data capture and resumable Postgres COPY streaming to on-device Whisper over WebGPU and multi-agent orchestration, and every piece has a public artifact behind it.
 
 ## Operating Context
 
@@ -53,11 +53,12 @@ A senior engineer with 15+ years of shipping *(LinkedIn: since 2010)* who builds
 All fetched on 2026-09-28; raw data in `/tmp/rg-profile/` during the build, then committed as the build snapshot.
 
 - Career timeline (public LinkedIn): Secullum (2010–2012), Safetech (2011–2015, Java/Grails, NF-e), Stefanini (2015–2016), ntxdev (2016–2017), Involves (2017–2018), Meltwater (2018–2020), Stilingue (2021–2022), Globant (2022–present) on Warner Bros. Discovery (2022–2025) and Disney Entertainment (2025–present) accounts. Based in Rio Grande do Sul, Brazil. Portuguese native, English fluent.
-- Flagships: whats-reader (272★, 30 releases, 4.6k release downloads, local Whisper over WebGPU, 10 README languages), @rodrigogs/mysql-events (139★, 77k downloads a year), easyvpn (519★), pg-turbo, vibewatch (Rust, crates.io, 90% coverage), baileys-store, hermes-smart-router (1,959 tests, 100% branch coverage), kairos, mongoose-timezone (24k downloads a year).
+- Flagships: whats-reader (272★, 93 releases, 7k release downloads, local Whisper over WebGPU after a one-time model download, 10 README languages), @rodrigogs/mysql-events (139★, 77k downloads a year), easyvpn (519★), pg-turbo, vibewatch (Rust, crates.io, 187 tests, 91% coverage), baileys-store (151 tests), hermes-smart-router (1,959 tests, 100% branch coverage), kairos, mongoose-timezone (24k downloads a year).
 - Live products: taviacardio.com (TAVI planning from CT angiography), pitstop.sh (repair-shop management SaaS).
 - Upstream: contributor to NousResearch/hermes-agent (5 commits landed upstream, 40 PRs opened), 5 merged PRs to nesquena/hermes-webui, earlier merged PRs to Rocket.Chat and moleculer.
 - Impact story: barracao-digital, a virtual queue for COVID-19 screening centers (site offline; tell it as a story, link the repo).
-- Absences future work must not fabricate: no testimonials, no talks, no blog posts, no company logos used as endorsements, no salary or availability claims, no merged-PR claims for hermes-agent.
+- Excluded everywhere: `ilsap` (a DMCA-disabled repo; its stars are not counted) and trivial list-entry PRs (InternetSemLimites).
+- Absences future work must not fabricate: no testimonials, no talks, no blog posts, no company logos used as endorsements, no salary or availability claims, no merged-PR claims for hermes-agent (its commits were cherry-picked by the maintainer), no "senior since 2010" (first senior title: 2018), no Discord/Slack claims for the self-hosted gateway (only Telegram is live).
 
 ## Product Principles
 
