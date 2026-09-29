@@ -36,6 +36,27 @@ export function buildingHeight(count: number, axisTop: number): number {
   return axisTop > 0 ? ((BASE - TOP) * count) / axisTop : 0;
 }
 
+/** The smallest "1/2/5 x 10^n" number at or above `value`: a clean, honest axis ceiling. */
+export function niceCeiling(value: number): number {
+  if (value <= 0) return 1;
+  const pow = 10 ** Math.floor(Math.log10(value));
+  for (const d of [1, 2, 5]) {
+    const step = d * pow;
+    if (step >= value) return step;
+  }
+  return 10 * pow;
+}
+
+/**
+ * The scale for the ordinary weeks (every week but the record one, which is
+ * drawn off-scale with its own exact label): a round top just above the
+ * second-highest week, in two even steps.
+ */
+export function ordinaryAxis(secondHighest: number): { top: number; step: number } {
+  const top = niceCeiling(Math.max(secondHighest, 1));
+  return { top, step: top / 2 };
+}
+
 const r1 = (n: number) => Math.round(n * 10) / 10;
 
 function monthYear(iso: string): string {
@@ -74,6 +95,21 @@ function building(x: number, w: number, h: number, i: number, best: boolean, ran
   return out;
 }
 
+/**
+ * A "scale break" mark: two small light chevrons stacked inside the
+ * record-week tower, near its top edge, saying "this tower is capped here,
+ * its real value runs higher". Never drawn above `y` (the tower's own top).
+ */
+function breakMark(cx: number, y: number): string {
+  const half = 8;
+  const rise = 4.5;
+  const gap = 7;
+  const chevron = (cy: number) => `M${r1(cx - half)} ${r1(cy + rise)}L${r1(cx)} ${r1(cy - rise)}L${r1(cx + half)} ${r1(cy + rise)}`;
+  const dark = (d: string) => `<path d="${d}" fill="none" stroke="${T.night}" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+  const light = (d: string) => `<path d="${d}" fill="none" stroke="${T.ink}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+  return dark(chevron(y)) + dark(chevron(y + gap)) + light(chevron(y)) + light(chevron(y + gap));
+}
+
 export async function skylineCard(view: SiteView): Promise<string> {
   const year = view.contributionYear;
   const defs =
@@ -95,30 +131,52 @@ export async function skylineCard(view: SiteView): Promise<string> {
   const n = year.weeks.length;
   const pitch = (X1 - X0) / n;
   const bw = Math.max(4, Math.round(pitch * 0.72));
-  const axis = axisFor(Math.max(...year.weeks));
+  const bestIndex = year.best?.index ?? -1;
+  // The ordinary weeks' own scale: the record week is drawn off it, on purpose (see below).
+  const secondHighest = Math.max(0, ...year.weeks.filter((_, i) => i !== bestIndex));
+  const axis = ordinaryAxis(secondHighest);
   const rand = prng(53);
 
   let city = '';
+  let breaks = '';
   const gridY: { y: number; value: number }[] = [];
   for (let v = axis.step; v <= axis.top; v += axis.step) gridY.push({ y: r1(BASE - buildingHeight(v, axis.top)), value: v });
   const grid = gridY
     .map((g) => `<path d="M${X0 - 6} ${g.y}H${X1}" stroke="${T.ink3}" stroke-width="1" stroke-dasharray="3 6" opacity="0.55"/>`)
     .join('');
 
+  // The record week is far off this scale (~15x an ordinary week): capping it
+  // at the chart's own top, with a break mark, keeps every other week
+  // readable instead of flattening them under one 15x outlier. No bar is
+  // ever drawn past its value's true y: only this one, explicitly marked, is
+  // ever shorter than its true value.
+  let bestOffScale = false;
   year.weeks.forEach((count, i) => {
     const x = X0 + i * pitch + (pitch - bw) / 2;
-    city += building(x, bw, buildingHeight(count, axis.top), i, year.best?.index === i, rand);
+    const natural = buildingHeight(count, axis.top);
+    const offScale = i === bestIndex && natural > BASE - TOP;
+    const h = offScale ? BASE - TOP : natural;
+    city += building(x, bw, h, i, i === bestIndex, rand);
+    if (offScale) {
+      breaks += breakMark(x + bw / 2, TOP + 18);
+      bestOffScale = true;
+    }
   });
 
   const bestX = year.best ? X0 + year.best.index * pitch + pitch / 2 : 0;
-  const bestTop = year.best ? BASE - buildingHeight(year.best.countRaw, axis.top) : 0;
-  const leader = year.best
-    ? `<path d="M${r1(bestX)} ${r1(bestTop - 6)}V${58}" stroke="${S.neonCyan}" stroke-width="2"/><circle cx="${r1(bestX)}" cy="${r1(bestTop - 6)}" r="3" fill="${S.neonCyan}"/>`
-    : '';
 
   const fmt = new Intl.NumberFormat('en-US');
-  const scaleStyle = { fontFamily: HUD, fontWeight: 700, fontSize: 14, lineHeight: 1, color: T.ink3, whiteSpace: 'pre' };
+  const scaleStyle = {
+    fontFamily: HUD,
+    fontWeight: 700,
+    fontSize: 20,
+    lineHeight: 1,
+    color: T.ink3,
+    WebkitTextStroke: `3px ${S.silhouette}`,
+    whiteSpace: 'pre',
+  };
   const dateStyle = { fontFamily: SANS, fontWeight: 600, fontSize: 18, lineHeight: 1, color: T.ink3, whiteSpace: 'pre' };
+  const capStyle = { fontFamily: SANS, fontWeight: 600, fontSize: 15, lineHeight: 1.2, color: T.ink3, WebkitTextStroke: `3px ${S.silhouette}`, whiteSpace: 'pre' };
 
   const layer = await textLayer(
     [
@@ -145,7 +203,17 @@ export async function skylineCard(view: SiteView): Promise<string> {
             ),
           ]
         : []),
-      ...gridY.map((g) => at(X0 - 12, g.y - 7, text(scaleStyle, fmt.format(g.value)), { transform: 'translateX(-100%)' })),
+      ...(bestOffScale
+        ? [
+            at(
+              bestX - 14,
+              52,
+              text(capStyle, 'Tallest tower is off the scale; labeled with its real value.'),
+              { transform: 'translateX(-100%)' },
+            ),
+          ]
+        : []),
+      ...gridY.map((g) => at(X0 - 12, g.y - 9, text(scaleStyle, fmt.format(g.value)), { transform: 'translateX(-100%)' })),
       at(X0, H - 34, text(dateStyle, monthYear(year.weekStarts[0]!))),
       at(X1, H - 34, text(dateStyle, monthYear(year.weekStarts[n - 1]!)), { transform: 'translateX(-100%)' }),
     ],
@@ -153,6 +221,6 @@ export async function skylineCard(view: SiteView): Promise<string> {
   );
 
   const reflection = `<g mask="url(#sk-reflect)" opacity="0.3"><g transform="translate(0 ${2 * BASE}) scale(1 -1)">${city}</g></g>`;
-  const body = scene + veil + grid + reflection + city + leader + layer;
+  const body = scene + veil + grid + reflection + city + breaks + layer;
   return svgDocument({ width: W, height: H, title: skylineTitle(year), defs, body });
 }

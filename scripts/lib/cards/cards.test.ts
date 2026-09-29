@@ -6,8 +6,8 @@ import { stack, aiWorkflow } from '../../../src/content/site.ts';
 import { subsetFont } from './fontembed.ts';
 import { faceData, FACES } from './fonts.ts';
 import { hudStats } from './hud.ts';
-import { axisFor, buildingHeight, skylineCard, skylineTitle } from './skyline.ts';
-import { SHIP_MARKS, TOOL_MARKS } from './stack.ts';
+import { axisFor, buildingHeight, niceCeiling, ordinaryAxis, skylineCard, skylineTitle } from './skyline.ts';
+import { METHOD_TOOLS, SHIP_MARKS, TOOL_MARKS } from './stack.ts';
 import { workProofs } from './work.ts';
 
 const snapshot = snapshotJson as unknown as Snapshot;
@@ -34,6 +34,21 @@ describe('skyline scale', () => {
     expect(svg).toContain('Contribution data was unavailable on the last build.');
     expect(skylineTitle(null)).toMatch(/unavailable/);
   });
+
+  it('rounds the ordinary-weeks ceiling up to a clean 1/2/5 number', () => {
+    expect(niceCeiling(414)).toBe(500);
+    expect(niceCeiling(77)).toBe(100);
+    expect(niceCeiling(930)).toBe(1000);
+    expect(ordinaryAxis(414)).toEqual({ top: 500, step: 250 });
+  });
+
+  it('draws the record week off the ordinary scale, capped at the chart top, never past it', async () => {
+    const svg = await skylineCard(view);
+    // The record week (1,294) dwarfs the rest of this snapshot's weeks: it must be
+    // capped, marked with a break, and never rendered by the old, unbounded leader.
+    expect(svg).toContain('Tallest tower is off the scale');
+    expect(svg).not.toContain('V58"');
+  });
 });
 
 describe('stack marks', () => {
@@ -45,12 +60,19 @@ describe('stack marks', () => {
 
   it('only draws technologies the stack or the method names', () => {
     for (const m of [...SHIP_MARKS, ...TOOL_MARKS]) expect(said, m.label).toContain(m.label);
+    for (const label of METHOD_TOOLS) expect(said, label).toContain(label);
   });
 
-  it('draws about eighteen real simple-icons marks', () => {
+  it('draws over a dozen real simple-icons marks, one per ship or method tool that has one', () => {
     const marks = [...SHIP_MARKS, ...TOOL_MARKS];
-    expect(marks.length).toBeGreaterThanOrEqual(16);
+    expect(marks.length).toBeGreaterThanOrEqual(12);
     for (const m of marks) expect(m.icon.path).toMatch(/^[Mm]/);
+  });
+
+  it('never draws a mark for the method tools that have none in simple-icons', () => {
+    const marked = new Set(TOOL_MARKS.map((m) => m.label));
+    const chipOnly = METHOD_TOOLS.filter((label) => !marked.has(label));
+    expect(chipOnly).toEqual(['Playwright', 'Context7', 'claude-mem', 'Hermes Agent']);
   });
 });
 

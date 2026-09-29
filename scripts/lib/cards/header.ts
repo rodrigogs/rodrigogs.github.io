@@ -2,14 +2,15 @@
  * header.svg: 1280x420, animated. The README masthead: the night-drive
  * scene (src/design/scene-svg.ts, SMIL so it plays inside GitHub's <img>)
  * with the signature lockup, the role line and the site plate on a left
- * scrim, and the time zone as a HUD readout in the top-right sky. The sun
- * sits at 68% x, clear of every word.
+ * scrim, and the place paired with its time zone as a HUD readout in the
+ * top-right sky (never alone: a bare UTC offset means nothing without the
+ * place it is relative to). The sun sits at 68% x, clear of every word.
  */
 
 import { sceneGeometry, sceneSvg } from '../../../src/design/scene-svg.ts';
 import type { SiteView } from '../../../src/lib/view.ts';
 import { at, embedSvg, svgDocument, textLayer } from './compose.ts';
-import { bodyStyle, glowDefs, hud, lockup, scrimDefs, sitePlate, T, text } from './pieces.ts';
+import { bodyStyle, flex, glowDefs, hud, lockup, scrimDefs, sitePlate, T, text } from './pieces.ts';
 
 export const HEADER_WIDTH = 1280;
 export const HEADER_HEIGHT = 420;
@@ -30,7 +31,17 @@ export async function headerCard(view: SiteView): Promise<string> {
       at(X, 150, surname),
       at(X, 244, text({ ...bodyStyle(26, T.ink, 600), width: textRight - X }, view.hero.title)),
       at(X, 334, sitePlate(view.person.site)),
-      at(W - 56, 28, hud(view.person.timezone.replace('−', '-'), 30, T.added), { transform: 'translateX(-100%)' }),
+      at(
+        W - 40,
+        24,
+        flex(
+          { flexDirection: 'row', alignItems: 'center', gap: 10 },
+          text({ ...bodyStyle(20, T.ink2, 600), whiteSpace: 'pre' }, view.person.location),
+          text({ ...bodyStyle(20, T.ink2, 600), whiteSpace: 'pre' }, '·'),
+          hud(view.person.timezone, 26, T.added),
+        ),
+        { transform: 'translateX(-100%)' },
+      ),
     ],
     { width: W, height: H, id: 'ht' },
   );

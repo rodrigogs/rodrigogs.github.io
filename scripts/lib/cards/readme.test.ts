@@ -34,6 +34,15 @@ describe('renderReadme', () => {
     expect(ai).toMatch(/<details><summary>The method as text<\/summary>\n\n1\. /);
   });
 
+  it('keeps the proof sentence inside the collapsed text alternative, not repeated as its own visible paragraph', () => {
+    const ai = section('## How I work with AI', '## Selected work');
+    const collapsed = ai.split('<details>')[1]!;
+    const visibleAfterCard = ai.split('method.svg')[1]!.split('<details>')[0]!;
+    expect(collapsed).toContain(view.aiWorkflow.builtWith);
+    expect(visibleAfterCard).not.toContain(view.aiWorkflow.builtWith);
+    expect(readme).toContain(`Source: [rodrigogs/rodrigogs.github.io](${view.aiWorkflow.builtWithHref})`);
+  });
+
   it('puts each pair of work cards on one source line, one pair per row', () => {
     const lines = section('## Selected work', '## Stack').split('\n').filter((l) => l.startsWith('<a '));
     expect(lines).toHaveLength(WORK_IDS.length / 2);

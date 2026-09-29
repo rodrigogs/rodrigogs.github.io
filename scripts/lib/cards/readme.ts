@@ -84,7 +84,9 @@ export function renderReadme(view: SiteView): string {
 
   const method = card({ href: `${SITE_URL}/#${sectionId('ai')}`, file: 'method.svg', alt: methodTitle(view) });
   const steps = view.aiWorkflow.items.map((s, i) => `${i + 1}. **${s.name}**: ${s.text}`).join('\n');
-  const builtWith = `${view.aiWorkflow.builtWith} [Source](${view.aiWorkflow.builtWithHref}).`;
+  // The proof sentence is already on the method card itself; only its source link repeats here,
+  // with the full sentence kept in the collapsed text alternative below for screen readers and search.
+  const sourceLine = `Source: [rodrigogs/rodrigogs.github.io](${view.aiWorkflow.builtWithHref}).`;
 
   const hud = card({ href: `${SITE_URL}/`, file: 'hud.svg', alt: hudTitle(view) });
   const skyline = card({ href: view.person.github, file: 'skyline.svg', alt: skylineTitle(view.contributionYear) });
@@ -98,8 +100,7 @@ export function renderReadme(view: SiteView): string {
     .map((pair) => pair.join(' '))
     .join('\n');
 
-  const stack = card({ href: `${SITE_URL}/#${sectionId('stack')}`, file: 'stack.svg', alt: stackTitle() });
-  const ships = `**${view.stack.ships.label}**: ${joinList(view.stack.ships.items)}.`;
+  const stack = card({ href: `${SITE_URL}/#${sectionId('stack')}`, file: 'stack.svg', alt: stackTitle(view) });
   const tools = view.stack.groups
     .filter((g) => STACK_GROUPS.includes(g.label))
     .map((g) => `**${g.label}**: ${g.items.join(' · ')}`)
@@ -125,9 +126,11 @@ export function renderReadme(view: SiteView): string {
     '',
     steps,
     '',
+    view.aiWorkflow.builtWith,
+    '',
     '</details>',
     '',
-    builtWith,
+    sourceLine,
     '',
     hud,
     skyline,
@@ -141,8 +144,6 @@ export function renderReadme(view: SiteView): string {
     '## Stack',
     '',
     stack,
-    '',
-    ships,
     '',
     tools,
     '',

@@ -1,37 +1,35 @@
 /**
  * stack.svg: 1280x360. A curated strip of the technologies I ship with
- * and the AI and quality tools I work with, as neon-tinted marks from
- * simple-icons (CC0) in a console-menu frame, each labeled. Only marks
- * that exist in the installed simple-icons are used (SvelteKit, AWS,
- * OpenAI and Playwright have none there, so they are left to the text
- * list under the card rather than drawn with an invented mark).
+ * and the tools the method itself runs on, as neon-tinted marks from
+ * simple-icons (CC0) in a console-menu frame, each labeled. Every item
+ * in each row is drawn, in the view's own order: where simple-icons has
+ * no mark for it (SvelteKit, AWS, Playwright, Context7, claude-mem,
+ * Hermes Agent), it draws as a text chip in the same neon-outlined style
+ * instead of an invented icon. Chrome DevTools draws with the Google
+ * Chrome mark: it is that product, just not its own simple-icons entry.
  */
 
 import {
-  siBiome,
   siClaude,
   siDocker,
   siElectron,
   siGithubactions,
-  siLangchain,
+  siGooglechrome,
   siNextdotjs,
   siNodedotjs,
-  siOllama,
   siPostgresql,
   siPython,
   siReact,
   siRust,
   siSvelte,
-  siTelegram,
   siTypescript,
   siVitest,
-  siWebgpu,
   type SimpleIcon,
 } from 'simple-icons';
 import type { SiteView } from '../../../src/lib/view.ts';
 import { at, svgDocument, textLayer } from './compose.ts';
 import { SANS } from './fonts.ts';
-import { display, glowDefs, menuFrame, nightBandDefs, S, scanlineDefs, stars, T, text } from './pieces.ts';
+import { chip, display, glowDefs, menuFrame, nightBandDefs, S, scanlineDefs, stars, T, text } from './pieces.ts';
 
 export const STACK_WIDTH = 1280;
 export const STACK_HEIGHT = 360;
@@ -41,7 +39,7 @@ export interface StackMark {
   icon: SimpleIcon;
 }
 
-/** What I ship with: the view's `ships` list, in its order, where a mark exists. */
+/** Ship-with labels matched to a real simple-icons mark (SvelteKit and AWS have none there: they draw as chips). */
 export const SHIP_MARKS: readonly StackMark[] = [
   { label: 'TypeScript', icon: siTypescript },
   { label: 'Node.js', icon: siNodedotjs },
@@ -55,22 +53,32 @@ export const SHIP_MARKS: readonly StackMark[] = [
   { label: 'Docker', icon: siDocker },
 ];
 
-/** The AI and quality tools from the view's stack groups and method. */
+/** The method's own tools, in the order the README lists the method (see aiProjectsLine/tools in readme.ts). */
+export const METHOD_TOOLS: readonly string[] = [
+  'Claude Code',
+  'Playwright',
+  'Chrome DevTools',
+  'Context7',
+  'claude-mem',
+  'Hermes Agent',
+  'GitHub Actions',
+  'Vitest',
+];
+
+/** Method-tool labels matched to a real simple-icons mark (Playwright, Context7, claude-mem and Hermes Agent draw as chips). */
 export const TOOL_MARKS: readonly StackMark[] = [
-  { label: 'Claude', icon: siClaude },
-  { label: 'Ollama', icon: siOllama },
-  { label: 'LangChain', icon: siLangchain },
-  { label: 'WebGPU', icon: siWebgpu },
+  { label: 'Claude Code', icon: siClaude },
+  { label: 'Chrome DevTools', icon: siGooglechrome },
   { label: 'GitHub Actions', icon: siGithubactions },
   { label: 'Vitest', icon: siVitest },
-  { label: 'Biome', icon: siBiome },
-  { label: 'Telegram', icon: siTelegram },
 ];
 
 const NEON = [S.neonPink, S.neonCyan, T.changed, T.mergedText, T.deprecated];
 
-export const stackTitle = (): string =>
-  `Stack. Ships with ${SHIP_MARKS.map((m) => m.label).join(', ')}. AI and tooling: ${TOOL_MARKS.map((m) => m.label).join(', ')}.`;
+const markFor = (label: string): SimpleIcon | undefined => [...SHIP_MARKS, ...TOOL_MARKS].find((m) => m.label === label)?.icon;
+
+export const stackTitle = (view: SiteView): string =>
+  `Stack. Ships with ${view.stack.ships.items.join(', ')}. The method's tools: ${METHOD_TOOLS.join(', ')}.`;
 
 const ICON = 46;
 const X0 = 76;
@@ -79,26 +87,33 @@ const X1 = STACK_WIDTH - 76;
 export async function stackCard(view: SiteView): Promise<string> {
   const W = STACK_WIDTH;
   const H = STACK_HEIGHT;
-  const rows = [
-    { label: view.stack.ships.label, marks: SHIP_MARKS, y: 88 },
-    { label: 'AI and tooling', marks: TOOL_MARKS, y: 236 },
+  const rows: { label: string; items: readonly string[]; y: number }[] = [
+    { label: view.stack.ships.label, items: view.stack.ships.items, y: 88 },
+    { label: "The method's tools", items: METHOD_TOOLS, y: 236 },
   ];
 
   let marks = '';
   const labels = [];
   for (const [r, row] of rows.entries()) {
-    const slot = (X1 - X0) / row.marks.length;
+    const slot = (X1 - X0) / row.items.length;
     labels.push(at(X0, row.y - 34, display(row.label.toUpperCase(), 24, T.brand)));
-    for (const [i, m] of row.marks.entries()) {
+    for (const [i, label] of row.items.entries()) {
       const cx = X0 + slot * i + slot / 2;
       const color = NEON[(i + r * 2) % NEON.length]!;
-      const k = ICON / 24;
-      marks += `<g transform="translate(${Math.round((cx - ICON / 2) * 10) / 10} ${row.y + 10}) scale(${Math.round(k * 1000) / 1000})"><path d="${m.icon.path}" fill="${color}"/></g>`;
-      labels.push(
-        at(cx, row.y + ICON + 20, text({ fontFamily: SANS, fontWeight: 600, fontSize: 18, lineHeight: 1, color: T.ink, whiteSpace: 'pre' }, m.label), {
-          transform: 'translateX(-50%)',
-        }),
-      );
+      const icon = markFor(label);
+      if (icon) {
+        const k = ICON / 24;
+        marks += `<g transform="translate(${Math.round((cx - ICON / 2) * 10) / 10} ${row.y + 10}) scale(${Math.round(k * 1000) / 1000})"><path d="${icon.path}" fill="${color}"/></g>`;
+        labels.push(
+          at(cx, row.y + ICON + 20, text({ fontFamily: SANS, fontWeight: 600, fontSize: 18, lineHeight: 1, color: T.ink, whiteSpace: 'pre' }, label), {
+            transform: 'translateX(-50%)',
+          }),
+        );
+      } else {
+        labels.push(
+          at(cx, row.y + 10 + ICON / 2, chip(label, color, { fontSize: 15, padX: 9, padY: 5 }), { transform: 'translate(-50%, -50%)' }),
+        );
+      }
     }
   }
 
@@ -111,5 +126,5 @@ export async function stackCard(view: SiteView): Promise<string> {
     `<rect x="36" y="30" width="${W - 72}" height="${H - 60}" fill="url(#st-scan)"/>` +
     `<g filter="url(#st-glow)">${marks}</g>` +
     layer;
-  return svgDocument({ width: W, height: H, title: stackTitle(), defs, body });
+  return svgDocument({ width: W, height: H, title: stackTitle(view), defs, body });
 }

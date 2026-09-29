@@ -9,7 +9,7 @@
 import { sceneGeometry, sceneSvg } from '../../../src/design/scene-svg.ts';
 import type { EntryView } from '../../../src/lib/view.ts';
 import { at, embedSvg, svgDocument, textLayer } from './compose.ts';
-import { HUD, SANS } from './fonts.ts';
+import { HUD } from './fonts.ts';
 import { bodyStyle, display, flex, rolePlate, S, scrimDefs, T, text } from './pieces.ts';
 
 export const WORK_WIDTH = 840;
@@ -56,7 +56,16 @@ export async function workCard(entry: EntryView, sinceLabel: string): Promise<st
         X,
         88,
         text(
-          { ...bodyStyle(24, T.ink, 400), lineHeight: 1.3, width: colW, display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 3, overflow: 'hidden' },
+          {
+            ...bodyStyle(26, T.ink, 400),
+            lineHeight: 1.3,
+            width: colW,
+            display: '-webkit-box',
+            WebkitBoxOrient: 'vertical',
+            WebkitLineClamp: 3,
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+          },
           entry.note,
         ),
       ),

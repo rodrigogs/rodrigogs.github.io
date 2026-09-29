@@ -30,7 +30,8 @@ export interface HudStat {
 export function hudStats(view: SiteView): HudStat[] {
   const stats: (HudStat | null)[] = [
     { icon: 'star', value: view.totals.stars, label: 'GitHub stars', color: T.brand },
-    { icon: 'download', value: view.totals.monthlyDownloads, label: 'npm downloads / 30 days', color: T.select },
+    // The total folds in crates.io, not just npm; sun yellow, since green here means "selected".
+    { icon: 'download', value: view.totals.monthlyDownloads, label: 'downloads / 30 days', color: T.changed },
     view.totals.contributions
       ? { icon: 'calendar', value: view.totals.contributions, label: 'contributions / year', color: T.added }
       : null,
