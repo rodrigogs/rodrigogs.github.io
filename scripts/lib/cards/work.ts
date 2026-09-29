@@ -1,74 +1,89 @@
 /**
- * work-<id>-{light,dark}.svg — 840x300, shown in the README at 49% width
- * (about 410px), so every size here is chosen to still read at roughly
- * half scale: nothing below 26px.
+ * work-<id>.svg: 840x300, a "loading screen" per project: the sunset,
+ * the sun and the palms on the right, and on a left scrim the project
+ * name as an outlined title, its one-line note, its two strongest proofs
+ * as HUD numerals, and a plate with its status and first year. Shown two
+ * per row in the README (about 410px wide), so nothing is under 22px.
  */
 
-import type { Theme } from '../../../src/design/tokens.ts';
-import type { EntryView, SiteView } from '../../../src/lib/view.ts';
-import { MONO, SANS, SANS_EXPANDED } from './fonts.ts';
-import { flex, hairline, joinProofs, plate, text } from './pieces.ts';
+import { sceneGeometry, sceneSvg } from '../../../src/design/scene-svg.ts';
+import type { EntryView } from '../../../src/lib/view.ts';
+import { at, embedSvg, svgDocument, textLayer } from './compose.ts';
+import { HUD, SANS } from './fonts.ts';
+import { bodyStyle, display, flex, rolePlate, S, scrimDefs, T, text } from './pieces.ts';
 
 export const WORK_WIDTH = 840;
 export const WORK_HEIGHT = 300;
 
-export function workCard(entry: EntryView, field: SiteView['field'], theme: Theme) {
-  const nameText = text(
-    { fontFamily: SANS_EXPANDED, fontWeight: 700, fontSize: 34, letterSpacing: '-0.01em', color: theme.ink },
-    entry.name,
-  );
+const SUN_X = 0.8;
+const PROOF_COLORS = [S.neonCyan, T.changed];
 
-  const headerRow = flex(
-    { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' },
-    nameText,
-    plate(theme, entry.statusRole, entry.statusLabel, { fontSize: 15, padX: 10, padY: 5 }),
-  );
+export const workTitle = (entry: EntryView): string => `${entry.name}: ${entry.note}`;
 
-  const noteText = text(
-    {
-      fontFamily: SANS,
-      fontWeight: 400,
-      fontSize: 26,
-      lineHeight: 1.32,
-      color: theme.ink2,
-      marginTop: 14,
-      display: '-webkit-box',
-      WebkitBoxOrient: 'vertical',
-      WebkitLineClamp: 3,
-      overflow: 'hidden',
-    },
-    entry.note,
-  );
+/** The two proofs shown on the card: at most two, and short enough for one line. */
+export function workProofs(entry: EntryView): { value: string; label: string }[] {
+  const out: { value: string; label: string }[] = [];
+  let chars = 0;
+  for (const p of entry.proofs) {
+    const len = p.value.length + p.label.length + 4;
+    if (out.length >= 2 || (out.length > 0 && chars + len > 40)) break;
+    out.push({ value: p.value, label: p.label });
+    chars += len;
+  }
+  return out;
+}
 
-  const proofRow = text(
-    { fontFamily: MONO, fontWeight: 400, fontSize: 22, color: theme.ink3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' },
-    joinProofs(entry.proofs, 3),
-  );
+export async function workCard(entry: EntryView, sinceLabel: string): Promise<string> {
+  const W = WORK_WIDTH;
+  const H = WORK_HEIGHT;
+  const geo = sceneGeometry(W, H, SUN_X);
+  const X = 32;
+  const colW = Math.round(geo.sun.cx - geo.sun.r - 28 - X);
+  const id = `w-${entry.id}`;
 
-  const labeled = (label: string, value: string) =>
+  const proofs = workProofs(entry).map((p, i) =>
     flex(
-      { flexDirection: 'row', alignItems: 'baseline' },
-      text({ fontFamily: SANS, fontWeight: 600, fontSize: 20, color: theme.ink3, marginRight: 8 }, label),
-      text({ fontFamily: MONO, fontWeight: 400, fontSize: 20, color: theme.ink2 }, value),
-    );
-
-  const metaRow = flex(
-    { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline', marginTop: 14 },
-    entry.latest ? labeled(field.latest, entry.latest.date ? `${entry.latest.tag} · ${entry.latest.date}` : entry.latest.tag) : text({}, ''),
-    entry.born ? labeled(field.born, String(entry.born)) : text({}, ''),
+      { flexDirection: 'row', alignItems: 'flex-end', gap: 8 },
+      text({ fontFamily: HUD, fontWeight: 900, fontSize: 30, lineHeight: 1, color: PROOF_COLORS[i % PROOF_COLORS.length], whiteSpace: 'pre' }, p.value),
+      text({ ...bodyStyle(22, T.ink, 600), lineHeight: 1, whiteSpace: 'pre', paddingBottom: 1 }, p.label),
+    ),
   );
 
-  return flex(
-    {
-      width: WORK_WIDTH,
-      height: WORK_HEIGHT,
-      backgroundColor: theme.paper,
-      border: `1px solid ${theme.rule}`,
-      padding: 28,
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-    },
-    flex({ flexDirection: 'column' }, headerRow, noteText),
-    flex({ flexDirection: 'column' }, hairline(theme, { marginBottom: 14 }), proofRow, metaRow),
+  const layer = await textLayer(
+    [
+      at(X, 22, display(entry.name.toUpperCase(), 50)),
+      at(
+        X,
+        88,
+        text(
+          { ...bodyStyle(24, T.ink, 400), lineHeight: 1.3, width: colW, display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 3, overflow: 'hidden' },
+          entry.note,
+        ),
+      ),
+      at(X, 196, flex({ flexDirection: 'row', gap: 26 }, ...proofs)),
+      at(
+        X,
+        244,
+        flex(
+          { flexDirection: 'row', alignItems: 'center', gap: 14 },
+          rolePlate(entry.statusRole, entry.statusLabel, { fontSize: 20, padX: 12, padY: 6, weight: 800 }),
+          text({ fontFamily: HUD, fontWeight: 700, fontSize: 22, lineHeight: 1, color: T.ink2, whiteSpace: 'pre' }, `${sinceLabel.toUpperCase()} ${entry.born}`),
+          entry.latest ? text({ ...bodyStyle(22, T.ink3, 600), lineHeight: 1, whiteSpace: 'pre' }, entry.latest.tag) : null,
+        ),
+      ),
+    ],
+    { width: W, height: H, id: `${id}-t` },
   );
+
+  const body =
+    embedSvg(sceneSvg({ width: W, height: H, skyline: false, sunX: SUN_X, idPrefix: `${id}-s-` })) +
+    `<rect width="${Math.round(colW + X + 110)}" height="${H}" fill="url(#${id}-scrim)"/>`;
+
+  return svgDocument({
+    width: W,
+    height: H,
+    title: workTitle(entry),
+    defs: scrimDefs(`${id}-scrim`, 0.92),
+    body: body + layer,
+  });
 }

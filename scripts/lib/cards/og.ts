@@ -1,83 +1,50 @@
 /**
- * og/{en,pt}.png — 1200x630 social preview, light theme (the scene is a
- * link unfurl card, always rendered on a light chrome by the platforms that
- * show it). Name, role, the release title, the site plate and a diff
- * strip (+added / -removed) as the world's signature mark, compact enough
- * to read at social-card thumbnail size.
+ * og/{en,pt}.png: the 1200x630 social preview, rasterized by resvg. The
+ * static poster of the night-drive scene with the signature lockup, the
+ * role line and the site plate on a left scrim, so a shared link looks
+ * like the site's first viewport. Text is drawn as glyph outlines here
+ * (resvg reads no @font-face).
  */
 
-import type { Theme } from '../../../src/design/tokens.ts';
+import { sceneGeometry, sceneSvg } from '../../../src/design/scene-svg.ts';
 import type { SiteView } from '../../../src/lib/view.ts';
-import { MONO, SANS, SANS_EXPANDED } from './fonts.ts';
-import { flex, nameLines, plateBox, sitePlate, text } from './pieces.ts';
+import { at, embedSvg, svgDocument, textLayer } from './compose.ts';
+import { bodyStyle, flex, glowDefs, lockup, scrimDefs, sitePlate, T, text } from './pieces.ts';
 
 export const OG_WIDTH = 1200;
 export const OG_HEIGHT = 630;
 
-function diffPlate(theme: Theme, role: 'added' | 'deprecated', sign: string, count: number, label: string) {
-  return plateBox(
-    theme,
-    role,
-    { padX: 16, padY: 10 },
-    text({ fontFamily: MONO, fontWeight: 600, fontSize: 24, lineHeight: 1 }, `${sign}${count}`),
-    text({ fontFamily: SANS, fontWeight: 700, fontSize: 18, lineHeight: 1, marginLeft: 10 }, label),
-  );
-}
+export async function ogCard(view: SiteView): Promise<string> {
+  const W = OG_WIDTH;
+  const H = OG_HEIGHT;
+  const geo = sceneGeometry(W, H);
+  const textRight = geo.sun.cx - geo.sun.r - 36;
+  const { script, surname } = lockup(view.person.name, 1.22);
+  const X = 64;
 
-export function ogCard(view: SiteView, theme: Theme) {
-  const [line1, line2] = nameLines(view.person.name);
-
-  const name = flex(
-    { flexDirection: 'column' },
-    text({ fontFamily: SANS_EXPANDED, fontWeight: 900, fontSize: 72, lineHeight: 1.02, letterSpacing: '-0.02em', color: theme.ink }, line1),
-    line2
-      ? text({ fontFamily: SANS_EXPANDED, fontWeight: 900, fontSize: 72, lineHeight: 1.02, letterSpacing: '-0.02em', color: theme.ink }, line2)
-      : null,
-  );
-
-  const roleLine = text({ fontFamily: SANS, fontWeight: 600, fontSize: 28, color: theme.ink2, marginTop: 20 }, view.person.role);
-
-  const title = text(
-    {
-      fontFamily: SANS,
-      fontWeight: 400,
-      fontSize: 30,
-      lineHeight: 1.35,
-      color: theme.ink,
-      marginTop: 28,
-      maxWidth: 920,
-      display: '-webkit-box',
-      WebkitBoxOrient: 'vertical',
-      WebkitLineClamp: 2,
-      overflow: 'hidden',
-    },
-    view.hero.title,
+  const scriptLayer = await textLayer([at(X - 8, 58, script)], { width: W, height: H, id: 'os', glyphs: true });
+  const mainLayer = await textLayer(
+    [
+      at(X, 236, surname),
+      at(
+        X,
+        350,
+        flex(
+          { flexDirection: 'column', alignItems: 'flex-start', gap: 26, width: textRight - X },
+          text({ ...bodyStyle(30, T.ink, 600), lineHeight: 1.3 }, view.hero.title),
+          sitePlate(view.person.site, 26),
+        ),
+      ),
+    ],
+    { width: W, height: H, id: 'ot', glyphs: true },
   );
 
-  const { added, removed } = view.compare.data.initial;
-  const addedLabel = added.length === 1 ? view.compare.addedOne : view.compare.added;
-  const removedLabel = removed.length === 1 ? view.compare.removedOne : view.compare.removed;
+  const defs = glowDefs('oc-glow', W, H, 9) + scrimDefs('oc-scrim');
+  const body =
+    embedSvg(sceneSvg({ width: W, height: H, idPrefix: 'os-' })) +
+    `<rect width="${Math.round(textRight + 80)}" height="${H}" fill="url(#oc-scrim)"/>` +
+    `<g filter="url(#oc-glow)">${scriptLayer}</g>` +
+    mainLayer;
 
-  const bottom = flex(
-    { flexDirection: 'row', alignItems: 'center', gap: 20, marginTop: 40 },
-    sitePlate(theme, view.person.site, { fontSize: 22, padX: 16, padY: 10 }),
-    diffPlate(theme, 'added', '+', added.length, addedLabel),
-    diffPlate(theme, 'deprecated', '−', removed.length, removedLabel),
-  );
-
-  return flex(
-    {
-      width: OG_WIDTH,
-      height: OG_HEIGHT,
-      backgroundColor: theme.paper,
-      border: `1px solid ${theme.rule}`,
-      padding: 64,
-      flexDirection: 'column',
-      justifyContent: 'center',
-    },
-    name,
-    roleLine,
-    title,
-    bottom,
-  );
+  return svgDocument({ width: W, height: H, title: `${view.person.name}. ${view.hero.title}`, defs, body });
 }

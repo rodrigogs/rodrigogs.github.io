@@ -9,7 +9,7 @@ import { crc32 } from 'node:zlib';
 export const PROVENANCE_KEY = 'impeccable:prompt';
 
 export const OG_PROVENANCE =
-  'origin: rendered at build time by scripts/render-cards.ts (Satori + resvg) from src/data/snapshot.json and src/content/site.ts; no image generation';
+  'origin: rendered at build time by scripts/render-cards.ts (Satori + resvg) from src/data/snapshot.json, src/content/site.ts and the scene in src/design/scene-svg.ts; no image generation';
 
 /** Returns a copy of `png` with a tEXt chunk inserted before IEND. */
 export function withPngText(png: Uint8Array, key: string, text: string): Buffer {

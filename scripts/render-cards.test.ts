@@ -1,69 +1,77 @@
 import { describe, expect, it } from 'vitest';
 import type { Snapshot } from '../src/data/schema.ts';
 import snapshotJson from '../src/data/snapshot.json' with { type: 'json' };
-import { themes } from '../src/design/tokens.ts';
 import { buildView } from '../src/lib/view.ts';
-import type { VNode } from './lib/cards/h.ts';
-import { headerCard, HEADER_HEIGHT, HEADER_WIDTH } from './lib/cards/header.ts';
-import { workCard, WORK_HEIGHT, WORK_WIDTH } from './lib/cards/work.ts';
-import { withAccessibleTitle } from './lib/cards/svg.ts';
-import { renderSvg } from './render-cards.ts';
+import { readPngText, PROVENANCE_KEY } from './lib/cards/png.ts';
+import { WORK_IDS } from './lib/cards/readme.ts';
+import { BUDGET, renderOgPng, renderReadmeCards } from './render-cards.ts';
 
 const snapshot = snapshotJson as unknown as Snapshot;
 const build = { now: new Date('2026-09-28T12:00:00Z'), sha: 'abcdef1234567' };
 const view = buildView(snapshot, 'en', build);
+const cards = new Map(await renderReadmeCards(view));
 
-/** Collects every vnode in the tree whose style matches `pred`. */
-function collectByStyle(node: unknown, pred: (style: Record<string, unknown>) => boolean, out: VNode[] = []): VNode[] {
-  if (Array.isArray(node)) {
-    for (const child of node) collectByStyle(child, pred, out);
-    return out;
-  }
-  if (node && typeof node === 'object' && 'props' in node) {
-    const v = node as VNode;
-    const style = (v.props as { style?: Record<string, unknown> }).style;
-    if (style && pred(style)) out.push(v);
-    collectByStyle((v.props as { children?: unknown }).children, pred, out);
-  }
-  return out;
-}
+const dims = (svg: string) => {
+  const m = /^<svg[^>]*\swidth="(\d+)"[^>]*\sheight="(\d+)"/.exec(svg);
+  return m ? { width: Number(m[1]), height: Number(m[2]) } : null;
+};
 
-describe('headerCard', () => {
-  it('gives every hero-note role plate the same fixed column width', async () => {
-    const node = await headerCard(view, themes.light);
-    const plates = collectByStyle(node, (s) => s.boxSizing === 'border-box');
-    expect(plates).toHaveLength(view.hero.notes.length);
-    const widths = plates.map((p) => (p.props as { style: { width: number } }).style.width);
-    expect(new Set(widths).size).toBe(1);
-    expect(widths[0]).toBeGreaterThan(0);
+describe('renderReadmeCards', () => {
+  it('renders one night card per README image, and nothing else', () => {
+    expect([...cards.keys()]).toEqual(['header.svg', 'method.svg', 'hud.svg', 'skyline.svg', 'stack.svg', ...WORK_IDS.map((id) => `work-${id}.svg`)]);
+  });
+
+  it('gives every card its size', () => {
+    expect(dims(cards.get('header.svg')!)).toEqual({ width: 1280, height: 420 });
+    expect(dims(cards.get('hud.svg')!)).toEqual({ width: 1280, height: 220 });
+    expect(dims(cards.get('skyline.svg')!)).toEqual({ width: 1280, height: 300 });
+    expect(dims(cards.get('method.svg')!)?.width).toBe(1280);
+    expect(dims(cards.get('method.svg')!)?.height).toBeGreaterThan(900);
+    for (const id of WORK_IDS) expect(dims(cards.get(`work-${id}.svg`)!)).toEqual({ width: 840, height: 300 });
+  });
+
+  it.each([...cards.keys()])('%s is accessible, self-contained and inside its budget', (name) => {
+    const svg = cards.get(name)!;
+    expect(svg).toMatch(/^<svg xmlns="http:\/\/www\.w3\.org\/2000\/svg"[^>]* role="img" aria-label="[^"]{10,}"/);
+    expect(svg).toMatch(/<title>[^<]{10,}<\/title>/);
+    // Nothing fetched from outside: GitHub's <img> sandbox would drop it.
+    expect(svg.replace(/xmlns="http:\/\/www\.w3\.org\/2000\/svg"/g, '')).not.toMatch(/https?:\/\//);
+    expect(svg).not.toMatch(/<(foreignObject|image|script)\b/);
+    expect(svg).not.toMatch(/href="(?!#)/);
+    const ids = [...svg.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);
+    expect(new Set(ids).size).toBe(ids.length);
+    for (const ref of svg.matchAll(/url\(#([^)]+)\)/g)) expect(ids).toContain(ref[1]);
+    expect(Buffer.byteLength(svg)).toBeLessThan(name === 'header.svg' ? BUDGET.header : BUDGET.card);
+  });
+
+  it('embeds a subset font for every face its text uses', () => {
+    for (const [name, svg] of cards) {
+      const families = new Set([...svg.matchAll(/font-family="([^"]+)"/g)].map((m) => m[1]));
+      for (const family of families) expect(svg, `${name}: ${family}`).toContain(`@font-face{font-family:'${family}'`);
+    }
+  });
+
+  it('animates the header and keeps the rest of its text off the sun', () => {
+    expect(cards.get('header.svg')).toMatch(/<animate\b/);
+  });
+
+  it('puts every method step on the method card', () => {
+    const svg = cards.get('method.svg')!;
+    for (const step of view.aiWorkflow.items) expect(svg).toContain(step.name.replace(/"/g, '&quot;'));
+  });
+
+  it('prints the real HUD numbers', () => {
+    const svg = cards.get('hud.svg')!;
+    for (const value of [view.totals.stars, view.totals.monthlyDownloads, view.totals.followers, view.totals.releases]) expect(svg).toContain(`>${value}<`);
   });
 });
 
-describe('withAccessibleTitle', () => {
-  it('adds a role, aria-label and <title> without touching the rest of the markup', () => {
-    const svg = withAccessibleTitle('<svg width="10" height="10"><rect/></svg>', 'A "quoted" name & more');
-    expect(svg).toMatch(/^<svg role="img" aria-label="A &quot;quoted&quot; name &amp; more"/);
-    expect(svg).toContain('<title>A &quot;quoted&quot; name &amp; more</title>');
-    expect(svg).toContain('<rect/>');
-  });
-});
-
-describe.each(['light', 'dark'] as const)('renderSvg(%s)', (themeName) => {
-  const theme = themes[themeName];
-
-  it('renders the header at 1280x400 with an accessible title', async () => {
-    const svg = await renderSvg(await headerCard(view, theme), { width: HEADER_WIDTH, height: HEADER_HEIGHT }, `${view.person.name}. ${view.hero.title}`);
-    expect(svg).toMatch(/^<svg role="img" aria-label="Rodrigo Gomes da Silva\./);
-    expect(svg).toContain('<title>Rodrigo Gomes da Silva.');
-    expect(svg).toMatch(/<svg[^>]*\swidth="1280"[^>]*\sheight="400"/);
-  });
-
-  it('renders a work card at 840x300 with an accessible title', async () => {
-    const entry = view.work.find((w) => w.id === 'whats-reader');
-    expect(entry).toBeTruthy();
-    const svg = await renderSvg(workCard(entry!, view.field, theme), { width: WORK_WIDTH, height: WORK_HEIGHT }, `${entry!.name}: ${entry!.note}`);
-    expect(svg).toMatch(/^<svg role="img" aria-label="whats-reader:/);
-    expect(svg).toContain('<title>whats-reader:');
-    expect(svg).toMatch(/<svg[^>]*\swidth="840"[^>]*\sheight="300"/);
+describe('renderOgPng', () => {
+  it('renders a PNG with its provenance chunk', async () => {
+    const png = await renderOgPng(view);
+    expect(png.subarray(1, 4).toString('latin1')).toBe('PNG');
+    expect(png.readUInt32BE(16)).toBe(1200);
+    expect(png.readUInt32BE(20)).toBe(630);
+    expect(readPngText(png)[PROVENANCE_KEY]).toMatch(/^origin: rendered at build time/);
   });
 });
