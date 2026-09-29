@@ -3,8 +3,8 @@
  *
  * Numbers never live here. Anything countable (stars, downloads, releases,
  * PRs, contributions) comes from src/data/snapshot.json and is joined by
- * repo or package name. Facts here are ones no API can fetch (test counts
- * from a README, a career timeline from the public LinkedIn profile).
+ * repo or package name. What lives here is what no API can fetch (the notes,
+ * a career timeline from the public LinkedIn profile).
  *
  * Copy rules: plain first person, specific, no hype, no emoji, no em dashes.
  * Templates use {placeholders} filled from the snapshot at render time.
@@ -43,15 +43,15 @@ export const meta = {
     'Rodrigo Gomes da Silva, engenheiro de software sênior',
   ),
   description: l(
-    'Shipping software since 2010, senior since 2018. I build whole products, from database internals to on-device AI and agent infrastructure. Release history, open source and contact.',
-    'Entregando software desde 2010, sênior desde 2018. Construo produtos completos, do motor do banco de dados à IA rodando no dispositivo e à infraestrutura de agentes. Histórico de releases, open source e contato.',
+    'Shipping software since 2010, senior since 2018. I build whole products, from data tooling to on-device AI. Work, open source, career and contact.',
+    'Entregando software desde 2010, sênior desde 2018. Construo produtos completos, de ferramentas de dados à IA rodando no dispositivo. Trabalho, open source, carreira e contato.',
   ),
 } as const;
 
 export const hero = {
   title: l(
-    'Senior software engineer building whole products, from database internals to on‑device AI.',
-    'Engenheiro de software sênior que constrói produtos completos, do motor do banco de dados à IA rodando no dispositivo.',
+    'Senior software engineer building whole products, from data tooling to on‑device AI.',
+    'Engenheiro de software sênior que constrói produtos completos, de ferramentas de dados à IA rodando no dispositivo.',
   ),
   /**
    * The three notes of the first viewport. `role` picks the plate color,
@@ -72,16 +72,16 @@ export const hero = {
       /** {tag} {stars} {downloads} from repo whats-reader. */
       repo: 'whats-reader',
       text: l(
-        'whats-reader {tag}: a privacy-first WhatsApp archive reader with {stars} stars and {downloads} downloads.',
-        'whats-reader {tag}: um leitor de conversas exportadas do WhatsApp com foco em privacidade, com {stars} estrelas e {downloads} downloads.',
+        'whats-reader: a privacy-first WhatsApp archive reader with {stars} stars and {downloads} downloads.',
+        'whats-reader: um leitor de conversas exportadas do WhatsApp com foco em privacidade, com {stars} estrelas e {downloads} downloads.',
       ),
     },
     {
       role: 'merged' as Role,
       label: l('AI', 'IA'),
       text: l(
-        'I work with a team of AI agents: spec first, parallel subagents, adversarial review, and proof in the running app before anything ships.',
-        'Trabalho com um time de agentes de IA: especificação primeiro, subagentes em paralelo, revisão adversarial e verificação no app rodando antes de qualquer entrega.',
+        'I use AI agents every day to plan, build and review, and nothing ships without tests and a real run.',
+        'Uso agentes de IA todo dia para planejar, construir e revisar, e nada vai para produção sem testes e uma execução real.',
       ),
     },
   ],
@@ -97,18 +97,22 @@ export const hero = {
  * the heading; `claim` is the one sentence each section opens with.
  */
 export const sections = {
-  ai: {
-    label: l('How I work with AI', 'Como trabalho com IA'),
+  about: {
+    label: l('About', 'Sobre'),
     claim: l(
-      'I set the spec and the bar; a team of AI agents does the fan-out; nothing ships until it is proven.',
-      'Eu defino a especificação e o padrão de qualidade; um time de agentes de IA executa em paralelo; nada é entregue sem ser comprovado.',
+      "I've been shipping software since 2010, mostly for media and retail companies. Today I'm a Senior Software Engineer at Globant, working with Disney Entertainment, and I like owning a product end to end: the data, the API, the interface and the release.",
+      'Entrego software desde 2010, principalmente para empresas de mídia e varejo. Hoje sou Senior Software Engineer na Globant, atendendo a Disney Entertainment, e gosto de cuidar de um produto de ponta a ponta: dados, API, interface e release.',
+    ),
+    body: l(
+      'AI is part of how I work every day. I plan, build and review with Claude Code and a few MCP tools (a real browser, GitHub, current docs and web search), and I hold the result to the same bar as my own code: tests, review and a real run before anything ships.',
+      'IA faz parte do meu dia a dia. Planejo, construo e reviso com o Claude Code e algumas ferramentas MCP (um navegador de verdade, GitHub, documentação atual e busca na web), e cobro do resultado o mesmo que cobro do meu código: testes, revisão e uma execução real antes de qualquer entrega.',
     ),
   },
   work: {
     label: l('Work', 'Trabalho'),
     claim: l(
-      'Products and libraries people use, each with the numbers to check.',
-      'Produtos e bibliotecas que as pessoas usam, cada um com os números para conferir.',
+      'Products and libraries I built and maintain, with live numbers.',
+      'Produtos e bibliotecas que construí e mantenho, com números ao vivo.',
     ),
   },
   openSource: {
@@ -116,14 +120,6 @@ export const sections = {
     claim: l(
       "Fixes and features that landed in other people's projects.",
       'Correções e funcionalidades aceitas em projetos de outras pessoas.',
-    ),
-  },
-  packages: {
-    label: l('Packages', 'Pacotes'),
-    /** {count} {monthly} */
-    claim: l(
-      '{count} published packages, {monthly} downloads in the last 30 days.',
-      '{count} pacotes publicados, {monthly} downloads nos últimos 30 dias.',
     ),
   },
   career: {
@@ -134,84 +130,45 @@ export const sections = {
       '{years} anos entregando software para mídia, varejo e área fiscal.',
     ),
   },
-  stack: {
-    label: l('Stack', 'Stack'),
-    claim: l(
-      'What I ship with, and the tools I work with, AI included.',
-      'As tecnologias com que entrego e as ferramentas que uso no trabalho, IA incluída.',
-    ),
-  },
   contact: {
     label: l('Contact', 'Contato'),
     claim: l(
       'Hiring for a senior or staff role? Write to me.',
       'Está contratando para uma vaga sênior ou staff? Me escreva.',
     ),
-    body: l(
-      'Email is the fastest way to reach me. I work remotely from Rio Grande do Sul, Brazil, on UTC−3, which overlaps the US and European working day.',
-      'E-mail é o jeito mais rápido de falar comigo. Trabalho remotamente do Rio Grande do Sul, em UTC−3, com horário compatível com o dos EUA e da Europa.',
-    ),
   },
 } as const;
 
 export type SectionKey = keyof typeof sections;
-export const sectionOrder: SectionKey[] = ['ai', 'work', 'openSource', 'packages', 'career', 'stack', 'contact'];
+export const sectionOrder: SectionKey[] = ['about', 'work', 'openSource', 'career', 'contact'];
 
-/** Field labels of the fixed furniture every entry carries. */
+/** Labels of the proof numbers and links an entry carries. */
 export const field = {
-  born: l('Since', 'Desde'),
-  latest: l('Latest release', 'Última versão'),
-  status: l('Status', 'Status'),
   stars: l('stars', 'estrelas'),
   downloadsMonth: l('downloads / 30 days', 'downloads / 30 dias'),
   downloadsYear: l('downloads / year', 'downloads / ano'),
   downloadsTotal: l('downloads, all time', 'downloads no total'),
-  releaseDownloads: l('release downloads', 'downloads de releases'),
   releases: l('releases', 'releases'),
   mergedPrs: l('merged PRs', 'PRs mergeados'),
-  prsOpened: l('PRs opened', 'PRs abertos'),
   commits: l('commits upstream', 'commits upstream'),
   repo: l('Repository', 'Repositório'),
-  site: l('Live site', 'Site no ar'),
   demo: l('Live demo', 'Demo'),
-  package: l('Package', 'Pacote'),
-  docs: l('Docs', 'Documentação'),
   permalink: l('Link to this entry', 'Link para esta entrada'),
-  commitsLink: l('My commits', 'Meus commits'),
-  registry: l('Registry', 'Registro'),
-  name: l('Name', 'Nome'),
-  version: l('Version', 'Versão'),
-  /** {count} */
-  allPackages: l('All {count} packages', 'Todos os {count} pacotes'),
 } as const;
 
 /** Singular forms of counted field labels, used when the count is exactly 1. */
 export const fieldOne: Partial<Record<keyof typeof field, L>> = {
   stars: l('star', 'estrela'),
   releases: l('release', 'release'),
-  releaseDownloads: l('release download', 'download de release'),
   mergedPrs: l('merged PR', 'PR mergeado'),
-  prsOpened: l('PR opened', 'PR aberto'),
   commits: l('commit upstream', 'commit upstream'),
 };
 
-/** Status vocabulary, computed from the repo's last push. */
-export const status = {
-  latest: { role: 'added' as Role, label: l('Active', 'Ativo') },
-  maintained: { role: 'merged' as Role, label: l('Maintained', 'Mantido') },
-  dormant: { role: 'deprecated' as Role, label: l('Legacy', 'Legado') },
-} as const;
-export type StatusKey = keyof typeof status;
-
-export interface Fact {
-  /** Formatted per locale at render time (1,959 in EN, 1.959 in PT). */
-  value: number;
-  unit?: '%';
-  label: L;
-}
+/** Package links are labeled by their registry, the name a visitor recognizes. */
+export const registryLabel = { npm: 'npm', crates: 'crates.io' } as const;
 
 export interface EntryLink {
-  kind: 'repo' | 'site' | 'demo' | 'package' | 'docs' | 'commits';
+  kind: 'repo' | 'demo' | 'package';
   href: string;
 }
 
@@ -225,9 +182,8 @@ export interface WorkEntry {
   package?: { registry: 'npm' | 'crates'; name: string };
   note: L;
   detail: L;
+  /** Three or four names at most: what the project is made of, not every dependency. */
   stack: string[];
-  /** Facts no API returns (from the project's own README). */
-  facts?: Fact[];
   links: EntryLink[];
 }
 
@@ -244,8 +200,7 @@ export const work: WorkEntry[] = [
       'A desktop and web app for WhatsApp exports. Messages, photos and voice notes never leave the machine: Whisper runs in the browser over WebGPU, so after a one-time model download transcription needs no server. It handles chats with more than ten thousand messages, and the desktop app updates itself.',
       'Um app desktop e web para exportações do WhatsApp. Mensagens, fotos e áudios nunca saem da máquina: o Whisper roda no navegador via WebGPU, então, depois de baixar o modelo uma vez, a transcrição não precisa de servidor. Aguenta conversas com mais de dez mil mensagens, e o app desktop se atualiza sozinho.',
     ),
-    stack: ['SvelteKit', 'Svelte 5', 'Electron', 'TypeScript', 'Transformers.js', 'WebGPU', 'Playwright', 'Vitest'],
-    facts: [{ value: 10, label: l('README languages', 'idiomas no README') }],
+    stack: ['SvelteKit', 'Electron', 'Transformers.js', 'WebGPU'],
     links: [
       { kind: 'demo', href: 'https://rodrigogs.github.io/whats-reader/' },
       { kind: 'repo', href: 'https://github.com/rodrigogs/whats-reader' },
@@ -303,10 +258,6 @@ export const work: WorkEntry[] = [
       'Assíncrono com Tokio e debounce, binários prontos para cinco plataformas, publicado no crates.io.',
     ),
     stack: ['Rust', 'Tokio'],
-    facts: [
-      { value: 187, label: l('tests', 'testes') },
-      { value: 91, unit: '%', label: l('coverage', 'de cobertura') },
-    ],
     links: [
       { kind: 'repo', href: 'https://github.com/rodrigogs/vibewatch' },
       { kind: 'package', href: 'https://crates.io/crates/vibewatch' },
@@ -325,8 +276,7 @@ export const work: WorkEntry[] = [
       'A drop-in store for the Baileys WhatsApp library, typed end to end.',
       'Um store plugável para a biblioteca Baileys de WhatsApp, tipado de ponta a ponta.',
     ),
-    stack: ['TypeScript', 'Keyv', 'Redis', 'Baileys'],
-    facts: [{ value: 151, label: l('tests', 'testes') }],
+    stack: ['TypeScript', 'Keyv', 'Redis'],
     links: [
       { kind: 'repo', href: 'https://github.com/rodrigogs/baileys-store' },
       { kind: 'package', href: 'https://www.npmjs.com/package/@rodrigogs/baileys-store' },
@@ -351,101 +301,17 @@ export const work: WorkEntry[] = [
       { kind: 'package', href: 'https://www.npmjs.com/package/easyvpn' },
     ],
   },
-  {
-    id: 'kairos',
-    name: 'kairos',
-    repo: 'kairos',
-    package: { registry: 'npm', name: 'kairos' },
-    note: l(
-      'A time calculator without dates: add, subtract and multiply time expressions like 01:30 + 00:45.',
-      'Uma calculadora de tempo sem datas: soma, subtrai e multiplica expressões como 01:30 + 00:45.',
-    ),
-    detail: l(
-      'Time expressions combined with math expressions, with several output representations. Documented, with live examples.',
-      'Expressões de tempo combinadas com expressões matemáticas, com várias representações de saída. Documentada, com exemplos interativos.',
-    ),
-    stack: ['JavaScript'],
-    links: [
-      { kind: 'docs', href: 'https://rodrigogs.github.io/kairos/' },
-      { kind: 'repo', href: 'https://github.com/rodrigogs/kairos' },
-    ],
-  },
-  {
-    id: 'barracao-digital',
-    name: 'barracao-digital',
-    repo: 'barracao-digital',
-    note: l(
-      'A virtual queue and remote triage for COVID-19 screening tents, so patients could wait at home instead of crowding emergency rooms.',
-      'Fila virtual e triagem remota para os barracões de atendimento da COVID-19, para que os pacientes esperassem em casa em vez de lotar as emergências.',
-    ),
-    detail: l(
-      'Built in 2020 to stand up decentralized triage points fast. Serverless on AWS (Lambda, API Gateway, CloudFront). The service is offline now; the code stays public.',
-      'Construído em 2020 para montar rapidamente pontos de triagem descentralizados. Serverless na AWS (Lambda, API Gateway, CloudFront). O serviço está fora do ar; o código continua público.',
-    ),
-    stack: ['Vue', 'Node.js', 'Serverless Framework', 'AWS'],
-    links: [{ kind: 'repo', href: 'https://github.com/rodrigogs/barracao-digital' }],
-  },
-];
-
-/** What landed in Hermes Agent; one wording for the AI engineering entry and the Open source row. */
-const hermesAgentNote = l(
-  'Gateway watchdog fixes against false wedge kills, a Bedrock context-window cache fix and an auth cooldown reset fix.',
-  'Correções no watchdog do gateway contra reinícios indevidos por falso travamento, no cache da janela de contexto do Bedrock e no reset do cooldown de autenticação.',
-);
-
-export interface AiProject {
-  id: string;
-  name: string | L;
-  /** Public repo the owner publishes (contributions to others live in Open source). */
-  repo: string;
-  note: L;
-  facts?: Fact[];
-  links: EntryLink[];
-}
-
-export const aiProjects: AiProject[] = [
-  {
-    id: 'hermes-smart-router',
-    name: 'hermes-smart-router',
-    repo: 'hermes-smart-router',
-    note: l(
-      'A Hermes Agent plugin that runs delegated tasks under another profile in an isolated process, with an optional router that picks the profile and model by task difficulty.',
-      'Um plugin do Hermes Agent que executa tarefas delegadas em outro perfil, num processo isolado, com um roteador opcional que escolhe perfil e modelo pela dificuldade da tarefa.',
-    ),
-    facts: [
-      { value: 1959, label: l('tests', 'testes') },
-      { value: 100, unit: '%', label: l('branch coverage', 'de cobertura de branches') },
-    ],
-    links: [{ kind: 'repo', href: 'https://github.com/rodrigogs/hermes-smart-router' }],
-  },
-  {
-    id: 'hermes-web-resilient',
-    name: 'hermes-web-resilient',
-    repo: 'hermes-web-resilient',
-    note: l(
-      'A Hermes Agent plugin that chains web search providers and moves to the next one when a backend fails (expired key, outage, captcha), ending on a keyless free tier.',
-      'Um plugin do Hermes Agent que encadeia provedores de busca web e passa para o próximo quando um falha (chave expirada, queda, captcha), terminando num nível gratuito sem chave.',
-    ),
-    links: [{ kind: 'repo', href: 'https://github.com/rodrigogs/hermes-web-resilient' }],
-  },
-  {
-    id: 'hermes-one-fact-explorer',
-    name: 'hermes-one-fact-explorer',
-    repo: 'hermes-one-fact-explorer',
-    note: l(
-      "A read-only explorer for an agent's memory store: what it knows, why a fact is trusted, which retrieval path can reach it, and what keyword recall would return.",
-      'Um explorador somente leitura da memória de um agente: o que ele sabe, por que um fato é confiável, qual caminho de recuperação o alcança e o que a busca por palavra-chave retornaria.',
-    ),
-    links: [{ kind: 'repo', href: 'https://github.com/rodrigogs/hermes-one-fact-explorer' }],
-  },
 ];
 
 /** One-line notes for upstream repos; numbers come from snapshot.upstream. */
 export const upstreamNotes: Record<string, L> = {
-  'NousResearch/hermes-agent': hermesAgentNote,
+  'NousResearch/hermes-agent': l(
+    'Stopped the gateway watchdog from killing healthy sessions as hung, plus Bedrock context-window caching and auth cooldown fixes.',
+    'Impedi que o watchdog do gateway matasse sessões saudáveis como travadas, além de correções no cache da janela de contexto do Bedrock e no cooldown de autenticação.',
+  ),
   'nesquena/hermes-webui': l(
-    'Session sidecar performance, project CLI sessions kept visible, an aria-expanded accessibility fix.',
-    'Performance do sidecar de sessões, sessões CLI de projeto mantidas visíveis e uma correção de acessibilidade em aria-expanded.',
+    'Faster session loading, CLI sessions kept visible in projects, and an accessibility fix.',
+    'Carregamento de sessões mais rápido, sessões CLI visíveis nos projetos e uma correção de acessibilidade.',
   ),
   'RocketChat/Rocket.Chat': l('Fixed multiline code block overflow.', 'Correção do overflow de blocos de código multilinha.'),
   'moleculerjs/moleculer': l('Refactored the health status provider.', 'Refatoração do provedor de health status.'),
@@ -469,7 +335,6 @@ export interface Role_ {
   org: string;
   via?: string;
   title: L;
-  note?: L;
 }
 
 /** Public LinkedIn timeline, newest first. */
@@ -503,169 +368,14 @@ export const career: Role_[] = [
     to: '2015',
     org: 'Safetech',
     title: l('Java Developer', 'Desenvolvedor Java'),
-    note: l(
-      'Electronic fiscal documents (NF-e) and reporting on Grails, Groovy and Java.',
-      'Documentos fiscais eletrônicos (NF-e) e relatórios em Grails, Groovy e Java.',
-    ),
   },
   { from: '2010', to: '2012', org: 'Secullum', title: l('Corporate Consultant', 'Consultor Corporativo') },
 ];
 
 /**
- * Curated stack ranges for the Compare view, only where a public source
- * supports them (LinkedIn titles and project notes). Repo data covers the rest.
- */
-export const careerStack: { from: number; to: number; stack: string[] }[] = [
-  { from: 2011, to: 2015, stack: ['Java', 'Grails', 'Groovy'] },
-  { from: 2013, to: 2013, stack: ['Android'] },
-  { from: 2022, to: new Date().getFullYear(), stack: ['Node.js'] },
-];
-
-export const compare = {
-  label: l('Compare', 'Comparar'),
-  hint: l('Pick two years to diff the stack.', 'Escolha dois anos para comparar a stack.'),
-  base: l('From', 'De'),
-  head: l('To', 'Até'),
-  /** Plural forms; the *One variants are used when the count is exactly 1. */
-  added: l('added', 'entraram'),
-  addedOne: l('added', 'entrou'),
-  removed: l('removed', 'saíram'),
-  removedOne: l('removed', 'saiu'),
-  kept: l('kept', 'ficaram'),
-  keptOne: l('kept', 'ficou'),
-  /** {repos} */
-  work: l('{repos} repos started in this range', '{repos} repos criados neste período'),
-  workOne: l('{repos} repo started in this range', '{repos} repo criado neste período'),
-  /** The fold under the diff lines: "+13 more" / "Show fewer". */
-  more: l('more', 'a mais'),
-  less: l('Show fewer', 'Mostrar menos'),
-  defaultBase: 2014,
-} as const;
-
-/** Stack: what I ship with and the tools I use. Items are names; evidence is in PRODUCT.md and the repos. */
-export const stack = {
-  ships: {
-    label: l('Ships with', 'Stack principal'),
-    items: ['TypeScript', 'Node.js', 'Svelte', 'SvelteKit', 'React', 'Next.js', 'PostgreSQL', 'Python', 'Rust', 'Electron', 'AWS', 'Docker'],
-  },
-  groups: [
-    {
-      label: l('Agents', 'Agentes'),
-      items: ['Claude Code', l('Hermes Agent (self-hosted)', 'Hermes Agent (auto-hospedado)'), l('Subagent workflows', 'Fluxos com subagentes')],
-    },
-    {
-      label: l('Models', 'Modelos'),
-      items: [l('Claude on AWS Bedrock', 'Claude via AWS Bedrock'), l('OpenAI GPT and Whisper', 'OpenAI GPT e Whisper'), 'DeepSeek', 'Z.ai GLM', 'Ollama', 'LM Studio', 'llama.cpp'],
-    },
-    {
-      label: l('MCP servers', 'Servidores MCP'),
-      items: ['Playwright', 'Chrome DevTools', 'GitHub', l('SearXNG (self-hosted)', 'SearXNG (auto-hospedado)'), 'Context7', 'Peekaboo', 'Godot'],
-    },
-    {
-      label: l('Memory and skills', 'Memória e skills'),
-      items: ['claude-mem', 'superpowers', 'impeccable'],
-    },
-    {
-      label: l('AI libraries', 'Bibliotecas de IA'),
-      items: [l('Transformers.js on WebGPU', 'Transformers.js com WebGPU'), 'LangChain', 'LangGraph', 'OpenAI SDK', 'Unity ML-Agents'],
-    },
-    {
-      label: l('Retrieval', 'Busca e recuperação'),
-      items: ['ChromaDB', l('BM25 keyword recall', 'Busca por palavra-chave BM25')],
-    },
-    {
-      label: l('Quality', 'Qualidade'),
-      items: ['Vitest', 'Playwright', 'Biome', 'semantic-release', 'GitHub Actions'],
-    },
-  ],
-} as const;
-
-/**
- * How I work with AI: the practices, in the order a change goes through
- * them. Public-safe by construction: tools and methods, never private projects.
- */
-export const aiWorkflow = {
-  label: l('The method', 'O método'),
-  items: [
-    {
-      name: l('Spec before code', 'Especificação antes do código'),
-      text: l(
-        "Big changes start as a written spec and a plan before any code; bugs start from the symptom, and finding the cause is the agents' job.",
-        'Mudanças grandes começam com especificação e plano escritos antes de qualquer código; bugs começam pelo sintoma, e achar a causa é trabalho dos agentes.',
-      ),
-      tools: ['Claude Code', 'superpowers'],
-    },
-    {
-      name: l('A team, not a chatbot', 'Um time, não um chatbot'),
-      text: l(
-        'Work fans out to parallel subagents, each with its model and effort picked for the job: fast models for mechanical edits, the strongest for architecture and review.',
-        'O trabalho se divide entre subagentes em paralelo, cada um com o modelo e o nível de raciocínio escolhidos para a tarefa: modelos rápidos para edições mecânicas, os mais fortes para arquitetura e revisão.',
-      ),
-      tools: ['Claude Code', 'Claude on AWS Bedrock'],
-    },
-    {
-      name: l('Adversarial review', 'Revisão adversarial'),
-      text: l(
-        'Independent reviewer agents try to refute every finding and audit truth, accessibility and performance before I accept a change.',
-        'Agentes revisores independentes tentam refutar cada achado e auditam a veracidade, a acessibilidade e a performance antes de eu aceitar uma mudança.',
-      ),
-      tools: ['Claude Code', 'impeccable'],
-    },
-    {
-      name: l('Proof, not "looks right"', 'Prova, não "parece certo"'),
-      text: l(
-        'Done means verified: agents drive the running app in a real browser, check the deployed URL and watch CI before anything is called finished.',
-        'Pronto significa verificado: os agentes usam o app rodando num navegador de verdade, conferem a URL publicada e acompanham o CI antes de qualquer coisa ser dada como concluída.',
-      ),
-      tools: ['Playwright', 'Chrome DevTools', 'GitHub Actions'],
-    },
-    {
-      name: l('Research over memory', 'Pesquisa em vez de memória'),
-      text: l(
-        'Before a decision, agents read current docs and search the web instead of trusting what a model remembers.',
-        'Antes de decidir, os agentes leem a documentação atual e pesquisam na web em vez de confiar no que o modelo lembra.',
-      ),
-      tools: ['Context7', 'SearXNG (self-hosted)'],
-    },
-    {
-      name: l('Memory across sessions', 'Memória entre sessões'),
-      text: l(
-        'A persistent memory layer keeps long projects coherent across days and sessions.',
-        'Uma camada de memória persistente mantém projetos longos coerentes entre dias e sessões.',
-      ),
-      tools: ['claude-mem'],
-    },
-    {
-      name: l('Guardrails', 'Limites claros'),
-      text: l(
-        'Nothing other people can see (pull requests, comments, posts) goes out without my approval, and secrets stay out of every output.',
-        'Nada que outras pessoas possam ver (pull requests, comentários, posts) sai sem a minha aprovação, e segredos nunca aparecem em nenhum resultado.',
-      ),
-      tools: ['Claude Code'],
-    },
-    {
-      name: l('An agent on call', 'Um agente de plantão'),
-      text: l(
-        'A self-hosted agent I can reach from my phone over Telegram picks up work when I am away from the desk.',
-        'Um agente auto-hospedado que eu aciono pelo celular, via Telegram, segue trabalhando quando estou longe do computador.',
-      ),
-      tools: ['Hermes Agent', 'Telegram'],
-    },
-  ],
-  /** Proof line under the method. */
-  builtWith: l(
-    'This site and my GitHub profile were built this way: planned, built by parallel agents, reviewed adversarially and verified live.',
-    'Este site e o meu perfil do GitHub foram feitos assim: planejados, construídos por agentes em paralelo, revisados de forma adversarial e verificados ao vivo.',
-  ),
-  builtWithHref: 'https://github.com/rodrigogs/rodrigogs.github.io',
-  /** Label for the compact list of public agent projects under the method. */
-  projectsLabel: l('Agent tooling I publish', 'Ferramentas para agentes que publico'),
-} as const;
-
-/**
- * UI strings of the site surface: the HUD, the toast, the radio-tuner
- * controls of Compare, the cheat code and the closing sign. Game vocabulary
- * lives only here, as UI flavor, never as a claim about the person.
+ * UI strings of the site surface: the HUD, the toast, the cheat code and
+ * the closing sign. Game vocabulary lives only here, as UI flavor, never as
+ * a claim about the person.
  */
 export const ui = {
   /** The pause-menu nav and the HUD over the hero scene. */
@@ -678,15 +388,50 @@ export const ui = {
   toast: l('Email copied!', 'E-mail copiado!'),
   /** {email} */
   toastSub: l('{email} is on your clipboard', '{email} está na sua área de transferência'),
-  /** Compare as a radio tuner. */
-  station: l('Stack FM', 'Stack FM'),
-  earlier: l('Earlier year', 'Ano anterior'),
-  later: l('Later year', 'Ano seguinte'),
   /** Typing VAPORWAVE toggles the owner's original vaporwave grid. */
   cheatOn: l('Cheat activated', 'Cheat ativado'),
   cheatOff: l('Cheat deactivated', 'Cheat desativado'),
-  /** Decorative neon sign over the Contact heading. */
+  /** The neon sign that is the visible Contact heading (the section label stays the landmark name). */
   sign: l("Let's talk", 'Vamos conversar'),
+} as const;
+
+/** The two short lines under About: what I ship with, and the AI tools I use daily. */
+export const about = {
+  stack: {
+    label: l('Stack', 'Stack'),
+    items: ['TypeScript', 'Node.js', 'Svelte', 'React', 'Next.js', 'PostgreSQL', 'Python', 'Rust', 'Electron', 'AWS', 'Docker'],
+  },
+  aiTools: {
+    label: l('AI tools I use daily', 'Ferramentas de IA que uso todo dia'),
+    items: ['Claude Code', 'Playwright MCP', 'Chrome DevTools MCP', 'GitHub MCP', 'Context7'],
+  },
+} as const;
+
+/** Smaller public work, one line each under the featured projects. */
+export const moreWork = {
+  label: l('Also', 'Também'),
+  items: [
+    {
+      name: 'kairos',
+      href: 'https://github.com/rodrigogs/kairos',
+      note: l('a time calculator without dates', 'uma calculadora de tempo sem datas'),
+    },
+    {
+      name: 'barracao-digital',
+      href: 'https://github.com/rodrigogs/barracao-digital',
+      note: l('a virtual queue for COVID-19 screening tents (2020)', 'fila virtual para os barracões de triagem da COVID-19 (2020)'),
+    },
+    {
+      name: 'mongoose-timezone',
+      href: 'https://github.com/rodrigogs/mongoose-timezone',
+      note: l('a Mongoose plugin that normalizes stored dates', 'um plugin do Mongoose que normaliza datas salvas'),
+    },
+    {
+      name: 'hermes-smart-router',
+      href: 'https://github.com/rodrigogs/hermes-smart-router',
+      note: l('task routing for an open source AI agent', 'roteamento de tarefas para um agente de IA open source'),
+    },
+  ],
 } as const;
 
 /** The 404 page, printed in both languages at once. */
@@ -712,7 +457,7 @@ export const footer = {
     'Algumas fontes falharam na última execução; os números mostrados são de {date}.',
   ),
   source: l('Source', 'Código-fonte'),
-  previous: l('Previous version (2026, vaporwave)', 'Versão anterior (2026, vaporwave)'),
+  previous: l('Previous site (early 2026)', 'Site anterior (início de 2026)'),
   previousHref: 'https://github.com/rodrigogs/rodrigogs/tree/legacy-vaporwave',
   switchTo: l('Português', 'English'),
   skip: l('Skip to content', 'Pular para o conteúdo'),

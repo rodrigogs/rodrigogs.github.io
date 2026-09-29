@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import snapshotJson from '../data/snapshot.json' with { type: 'json' };
 import type { Snapshot } from '../data/schema.ts';
-import { aiProjects, work } from '../content/site.ts';
-import { buildView, fill, repoStatus } from './view.ts';
+import { moreWork, work } from '../content/site.ts';
+import { buildView, fill, MAX_PROOFS } from './view.ts';
 
 const snapshot = snapshotJson as unknown as Snapshot;
 const build = { now: new Date('2026-09-28T12:00:00Z'), sha: 'abcdef1234567' };
@@ -17,15 +17,6 @@ describe('fill', () => {
   });
 });
 
-describe('repoStatus', () => {
-  const base = snapshot.repos[0]!;
-  it('maps last push age to active / maintained / dormant', () => {
-    expect(repoStatus({ ...base, pushedAt: '2026-08-01T00:00:00Z' }, build.now)).toBe('latest');
-    expect(repoStatus({ ...base, pushedAt: '2025-06-01T00:00:00Z' }, build.now)).toBe('maintained');
-    expect(repoStatus({ ...base, pushedAt: '2019-01-01T00:00:00Z' }, build.now)).toBe('dormant');
-  });
-});
-
 describe.each(['en', 'pt'] as const)('buildView(%s) on the committed snapshot', (locale) => {
   const view = buildView(snapshot, locale, build);
 
@@ -34,21 +25,53 @@ describe.each(['en', 'pt'] as const)('buildView(%s) on the committed snapshot', 
     for (const note of view.hero.notes) expect(note.text).not.toMatch(/[{}]/);
   });
 
-  it('renders every curated work entry with its fixed furniture', () => {
-    expect(view.work.length).toBeGreaterThanOrEqual(8);
+  it('keeps the page short: About, Work, Open source, Career, Contact', () => {
+    expect(view.nav.map((n) => n.href)).toEqual(['#about', '#work', '#open-source', '#career', '#contact']);
+  });
+
+  it('features six projects, each with a note, a detail, a short stack and at most two proofs', () => {
+    expect(view.work).toHaveLength(6);
     for (const entry of view.work) {
       expect(entry.name).toBeTruthy();
       expect(entry.note).toBeTruthy();
-      expect(entry.statusLabel).toBeTruthy();
-      expect(entry.born).toBeGreaterThan(2000);
+      expect(entry.detail).toBeTruthy();
+      expect(entry.stack.length).toBeGreaterThan(0);
+      expect(entry.stack.length).toBeLessThanOrEqual(4);
       expect(entry.proofs.length).toBeGreaterThan(0);
+      expect(entry.proofs.length).toBeLessThanOrEqual(MAX_PROOFS);
+      expect(entry.links.length).toBeGreaterThan(0);
     }
   });
 
-  it('only shows public work: every entry resolves to a public repo the owner publishes', () => {
+  it('leads with stars, then downloads; never test, coverage or release-download counts', () => {
+    const labels = view.work.flatMap((e) => e.proofs.map((p) => p.label));
+    expect(labels.join(' ')).not.toMatch(/test|coverage|cobertura|README|release download|download de release/i);
+    const mysql = view.work.find((e) => e.id === 'mysql-events')!;
+    expect(mysql.proofs.map((p) => p.label)).toEqual([view.field.stars, view.field.downloadsYear]);
+  });
+
+  it('exposes About with both paragraphs and the two short lines', () => {
+    expect(view.about.label).toBe(view.sections.about.label);
+    expect(view.about.claim).toBeTruthy();
+    expect(view.about.body).toBeTruthy();
+    expect(view.about.stack.items.length).toBeGreaterThan(4);
+    expect(view.about.aiTools.items).toContain('Claude Code');
+  });
+
+  it('lists smaller work as one line of linked names', () => {
+    expect(view.moreWork.items.length).toBe(moreWork.items.length);
+    for (const item of view.moreWork.items) {
+      expect(item.href).toMatch(/^https:\/\/github\.com\/rodrigogs\//);
+      expect(item.note).toBeTruthy();
+    }
+    const featured = new Set(view.work.map((e) => e.id));
+    for (const item of view.moreWork.items) expect(featured.has(item.name)).toBe(false);
+  });
+
+  it('only shows public work: every entry and every smaller project resolves to a public repo', () => {
     const publicRepos = new Set(snapshot.repos.map((r) => r.name));
     for (const entry of work) expect(publicRepos.has(entry.repo)).toBe(true);
-    for (const entry of aiProjects) expect(publicRepos.has(entry.repo)).toBe(true);
+    for (const item of moreWork.items) expect(publicRepos.has(item.href.split('/').pop()!)).toBe(true);
   });
 
   it('never counts merged PRs for hermes-agent', () => {
@@ -57,18 +80,14 @@ describe.each(['en', 'pt'] as const)('buildView(%s) on the committed snapshot', 
   });
 
   it('never exposes excluded packages or repos', () => {
-    expect(view.packages.some((p) => p.name === '@rodrigogs/serverless')).toBe(false);
-    expect(JSON.stringify(view)).not.toContain('ilsap');
+    const json = JSON.stringify(view);
+    expect(json).not.toContain('@rodrigogs/serverless');
+    expect(json).not.toContain('ilsap');
   });
 
-  it('fills every section claim', () => {
-    for (const s of Object.values(view.sections)) expect(s.claim).not.toMatch(/[{}]/);
-  });
-
-  it('offers a compare range with a non-empty diff', () => {
-    const { data } = view.compare;
-    expect(data.years.length).toBeGreaterThan(5);
-    expect(data.initial.added.length + data.initial.removed.length).toBeGreaterThan(0);
+  it('leaves no placeholder unfilled anywhere in the view', () => {
+    const { jsonLd: _jsonLd, ...rest } = view;
+    expect(JSON.stringify(rest)).not.toMatch(/\{[a-z]\w*\}/i);
   });
 });
 
