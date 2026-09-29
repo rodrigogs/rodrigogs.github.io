@@ -417,6 +417,30 @@ export function resolveSource<T>(
 }
 
 // ---------------------------------------------------------------------------
+// Contribution calendar
+// ---------------------------------------------------------------------------
+
+/** How many weeks of the contribution calendar the snapshot keeps. */
+export const CONTRIBUTION_WEEKS = 53;
+
+export interface RawContributionWeek {
+  contributionDays?: { contributionCount?: number | null }[] | null;
+}
+
+/**
+ * Sums each calendar week's days, oldest first, keeping the last
+ * `CONTRIBUTION_WEEKS`. Returns null when the calendar has no weeks, so a
+ * broken response never renders as a year of zeros.
+ */
+export function weeklyContributionTotals(weeks: RawContributionWeek[] | null | undefined, max = CONTRIBUTION_WEEKS): number[] | null {
+  if (!Array.isArray(weeks) || weeks.length === 0) return null;
+  const totals = weeks.map((week) =>
+    (week.contributionDays ?? []).reduce((sum, day) => sum + (typeof day.contributionCount === 'number' ? day.contributionCount : 0), 0),
+  );
+  return totals.slice(-max);
+}
+
+// ---------------------------------------------------------------------------
 // Stable ordering
 // ---------------------------------------------------------------------------
 

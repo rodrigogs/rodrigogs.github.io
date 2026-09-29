@@ -40,6 +40,7 @@ import {
   sortByStarsThenName,
   sumReleaseDownloads,
   upstreamProofUrl,
+  weeklyContributionTotals,
   workspaceGlobs,
   type PackageJsonManifest,
   type RawRelease,
@@ -320,28 +321,34 @@ async function buildRepoStat(raw: any, token: string | null): Promise<RepoStat> 
 // User + contributions
 // ---------------------------------------------------------------------------
 
-async function fetchContributionsLastYear(token: string | null): Promise<number | null> {
-  if (!token) return null;
+interface ContributionCalendar {
+  total: number | null;
+  weeks: number[] | null;
+}
+
+async function fetchContributionCalendar(token: string | null): Promise<ContributionCalendar> {
+  if (!token) return { total: null, weeks: null };
   const res = await fetch(`${GITHUB_API}/graphql`, {
     method: 'POST',
     headers: { ...githubHeaders(token), 'content-type': 'application/json' },
     body: JSON.stringify({
-      query: `query { user(login: "${GITHUB_LOGIN}") { contributionsCollection { contributionCalendar { totalContributions } } } }`,
+      query: `query { user(login: "${GITHUB_LOGIN}") { contributionsCollection { contributionCalendar { totalContributions weeks { contributionDays { contributionCount } } } } } }`,
     }),
   });
   if (!res.ok) throw new Error(`GraphQL ${res.status}`);
   const json: any = await res.json();
   if (json.errors) throw new Error(`GraphQL errors: ${JSON.stringify(json.errors)}`);
-  const total = json?.data?.user?.contributionsCollection?.contributionCalendar?.totalContributions;
-  return typeof total === 'number' ? total : null;
+  const calendar = json?.data?.user?.contributionsCollection?.contributionCalendar;
+  const total = calendar?.totalContributions;
+  return { total: typeof total === 'number' ? total : null, weeks: weeklyContributionTotals(calendar?.weeks) };
 }
 
 async function fetchUserStat(token: string | null): Promise<UserStat> {
   const raw = await githubJson(`${GITHUB_API}/users/${GITHUB_LOGIN}`, token);
 
-  let contributionsLastYear: number | null = null;
+  let calendar: ContributionCalendar = { total: null, weeks: null };
   try {
-    contributionsLastYear = await fetchContributionsLastYear(token);
+    calendar = await fetchContributionCalendar(token);
   } catch (err) {
     console.error(`[github] contributions graphql failed: ${(err as Error).message}`);
   }
@@ -352,7 +359,8 @@ async function fetchUserStat(token: string | null): Promise<UserStat> {
     followers: raw.followers ?? 0,
     publicRepos: raw.public_repos ?? 0,
     createdAt: raw.created_at,
-    contributionsLastYear,
+    contributionsLastYear: calendar.total,
+    contributionWeeks: calendar.weeks,
   };
 }
 
@@ -636,6 +644,7 @@ async function main(): Promise<void> {
     publicRepos: 0,
     createdAt: now,
     contributionsLastYear: null,
+    contributionWeeks: null,
   };
   const previousGithub: GithubData = previous
     ? { user: previous.user, repos: previous.repos, upstream: previous.upstream }

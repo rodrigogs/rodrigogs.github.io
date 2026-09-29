@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { PackageStat, RepoStat, Snapshot } from '../data/schema.ts';
-import { activeYears, compact, diffStacks, diffWork, formatInt, snapshotAge, stackByYear, techOfRepo } from './derive.ts';
+import { activeYears, bestWeek, compact, contributionWeekStarts, diffStacks, diffWork, formatInt, snapshotAge, stackByYear, techOfRepo } from './derive.ts';
 
 function repo(overrides: Partial<RepoStat> = {}): RepoStat {
   return {
@@ -223,6 +223,7 @@ describe('snapshotAge', () => {
         publicRepos: 0,
         createdAt: fetchedAt,
         contributionsLastYear: null,
+        contributionWeeks: null,
       },
       repos: [],
       packages: [],
@@ -243,5 +244,27 @@ describe('snapshotAge', () => {
     const { days, stale } = snapshotAge(snapshot('2026-09-20T00:00:00Z'), now);
     expect(days).toBe(8);
     expect(stale).toBe(true);
+  });
+});
+
+describe('contributionWeekStarts', () => {
+  it('ends on the Sunday of the fetch week and steps back one week at a time', () => {
+    // 2026-09-28 is a Monday.
+    expect(contributionWeekStarts('2026-09-28T22:26:04Z', 3)).toEqual(['2026-09-13', '2026-09-20', '2026-09-27']);
+  });
+
+  it('keeps a Sunday fetch in its own week', () => {
+    expect(contributionWeekStarts('2026-09-27T01:00:00Z', 1)).toEqual(['2026-09-27']);
+  });
+});
+
+describe('bestWeek', () => {
+  it('returns the busiest week, the earliest on a tie', () => {
+    expect(bestWeek([3, 9, 2, 9])).toEqual({ index: 1, count: 9 });
+  });
+
+  it('returns null for no activity', () => {
+    expect(bestWeek([])).toBeNull();
+    expect(bestWeek([0, 0])).toBeNull();
   });
 });

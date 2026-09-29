@@ -41,6 +41,12 @@ export interface UserStat {
   createdAt: string;
   /** Contributions in the last 12 months (GitHub contribution calendar), null when unavailable. */
   contributionsLastYear: number | null;
+  /**
+   * Contributions per week over the same calendar, the last 53 weeks,
+   * oldest first (each week is the sum of its days; the first and the
+   * current week may be partial). Null when unavailable.
+   */
+  contributionWeeks: number[] | null;
 }
 
 export interface ReleaseInfo {

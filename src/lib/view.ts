@@ -17,7 +17,7 @@ import {
   fieldOne,
   footer,
   hero,
-  konami,
+  ui,
   localeTag,
   meta,
   aiProjects,
@@ -38,7 +38,7 @@ import {
   type StatusKey,
   type WorkEntry,
 } from '../content/site.ts';
-import { compact, diffStacks, formatInt, snapshotAge, stackByYear } from './derive.ts';
+import { bestWeek, compact, contributionWeekStarts, diffStacks, formatInt, snapshotAge, stackByYear } from './derive.ts';
 
 export interface BuildInfo {
   /** Build time. */
@@ -205,8 +205,31 @@ export interface SiteView {
     packages: string;
     contributions: string | null;
     followers: string;
+    // --- README cards block (scripts/render-cards.ts) ---
+    /** Releases published across the public repos in the snapshot. */
+    releases: string;
+    /** Contributions per week, the last 53 weeks, oldest first; null when unavailable. */
+    contributionWeeks: number[] | null;
+    // --- end README cards block ---
   };
-  konami: { label: string };
+  /** README cards block: the contribution year drawn by the skyline card; null when unavailable. */
+  contributionYear: ContributionYearView | null;
+  // --- Site surface block (src/components): UI strings of the hero, HUD, toast, tuner and cheat code ---
+  ui: {
+    nav: string;
+    hud: string;
+    time: string;
+    contributions: string;
+    toast: string;
+    toastSub: string;
+    station: string;
+    earlier: string;
+    later: string;
+    cheatOn: string;
+    cheatOff: string;
+    sign: string;
+  };
+  // --- end site surface block ---
   footer: {
     built: string;
     data: string;
@@ -581,8 +604,28 @@ export function buildView(snapshot: Snapshot, locale: Locale, build: BuildInfo):
       packages: formatInt(snapshot.totals.packages, locale),
       contributions: snapshot.user.contributionsLastYear === null ? null : formatInt(snapshot.user.contributionsLastYear, locale),
       followers: formatInt(snapshot.user.followers, locale),
+      // --- README cards block ---
+      releases: formatInt(snapshot.repos.reduce((sum, r) => sum + r.releaseCount, 0), locale),
+      contributionWeeks: snapshot.user.contributionWeeks ?? null,
+      // --- end README cards block ---
     },
-    konami: { label: konami.label[locale] },
+    contributionYear: contributionYearView(snapshot, locale),
+    // --- Site surface block ---
+    ui: {
+      nav: ui.nav[locale],
+      hud: ui.hud[locale],
+      time: fill(ui.time[locale], { tz: person.timezone }) ?? ui.time[locale],
+      contributions: ui.contributions[locale],
+      toast: ui.toast[locale],
+      toastSub: fill(ui.toastSub[locale], { email: person.email }) ?? ui.toastSub[locale],
+      station: ui.station[locale],
+      earlier: ui.earlier[locale],
+      later: ui.later[locale],
+      cheatOn: ui.cheatOn[locale],
+      cheatOff: ui.cheatOff[locale],
+      sign: ui.sign[locale],
+    },
+    // --- end site surface block ---
     footer: {
       built:
         fill(shortSha ? footer.built[locale] : footer.builtNoSha[locale], { date: isoDate(now.toISOString(), locale), sha: shortSha }) ?? '',
@@ -611,5 +654,44 @@ export function buildView(snapshot: Snapshot, locale: Locale, build: BuildInfo):
       knowsAbout: [...stack.ships.items],
       sameAs: [person.github, person.linkedin].filter(Boolean),
     },
+  };
+}
+
+// ---------------------------------------------------------------------------
+// README cards block (scripts/render-cards.ts): the contribution year.
+// ---------------------------------------------------------------------------
+
+export interface ContributionYearView {
+  /** Contributions per week, oldest first. */
+  weeks: number[];
+  /** Sunday that starts each week, "YYYY-MM-DD", parallel to `weeks`. */
+  weekStarts: string[];
+  /** Sum of `weeks` (the drawn weeks, which can differ slightly from the calendar total). */
+  total: string;
+  totalRaw: number;
+  best: { index: number; count: string; countRaw: number; weekOf: string } | null;
+}
+
+function contributionYearView(snapshot: Snapshot, locale: Locale): ContributionYearView | null {
+  const weeks = snapshot.user.contributionWeeks;
+  if (!weeks || weeks.length === 0) return null;
+  const weekStarts = contributionWeekStarts(snapshot.fetchedAt, weeks.length);
+  const totalRaw = weeks.reduce((sum, n) => sum + n, 0);
+  const top = bestWeek(weeks);
+  return {
+    weeks: [...weeks],
+    weekStarts,
+    total: formatInt(totalRaw, locale),
+    totalRaw,
+    best: top
+      ? {
+          index: top.index,
+          count: formatInt(top.count, locale),
+          countRaw: top.count,
+          weekOf: new Intl.DateTimeFormat(localeTag[locale], { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(
+            new Date(`${weekStarts[top.index]}T00:00:00Z`),
+          ),
+        }
+      : null,
   };
 }

@@ -74,3 +74,34 @@ describe.each(['en', 'pt'] as const)('buildView(%s) on the committed snapshot', 
     expect(data.initial.added.length + data.initial.removed.length).toBeGreaterThan(0);
   });
 });
+
+describe('contributionYear (README cards block)', () => {
+  const withWeeks = (weeks: number[] | null): Snapshot => ({
+    ...snapshot,
+    fetchedAt: '2026-09-28T22:26:04Z',
+    user: { ...snapshot.user, contributionWeeks: weeks },
+  });
+
+  it('is null when the snapshot has no weeks', () => {
+    expect(buildView(withWeeks(null), 'en', build).contributionYear).toBeNull();
+    expect(buildView(withWeeks(null), 'en', build).totals.contributionWeeks).toBeNull();
+  });
+
+  it('sums the weeks, dates them and names the best week', () => {
+    const view = buildView(withWeeks([10, 250, 40]), 'en', build);
+    expect(view.totals.contributionWeeks).toEqual([10, 250, 40]);
+    expect(view.contributionYear).toMatchObject({
+      weeks: [10, 250, 40],
+      weekStarts: ['2026-09-13', '2026-09-20', '2026-09-27'],
+      total: '300',
+      totalRaw: 300,
+      best: { index: 1, count: '250', countRaw: 250, weekOf: 'Sep 20, 2026' },
+    });
+  });
+
+  it('counts releases across the public repos', () => {
+    const view = buildView(snapshot, 'en', build);
+    const releases = snapshot.repos.reduce((sum, r) => sum + r.releaseCount, 0);
+    expect(view.totals.releases).toBe(new Intl.NumberFormat('en-US').format(releases));
+  });
+});

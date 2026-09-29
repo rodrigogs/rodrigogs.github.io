@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  CONTRIBUTION_WEEKS,
   chunkPackageNamesForDownloadsApi,
   deriveCrateDownloads,
   frameworksFromCargoToml,
@@ -17,6 +18,7 @@ import {
   sortByStarsThenName,
   sumReleaseDownloads,
   upstreamProofUrl,
+  weeklyContributionTotals,
   workspaceGlobs,
   resolveSimpleWorkspaceDir,
 } from './lib/fetch-helpers.ts';
@@ -314,5 +316,31 @@ describe('stable ordering helpers', () => {
   it('sorts upstream by stars desc', () => {
     const items = [{ stars: 5 }, { stars: 500 }, { stars: 50 }];
     expect(sortByStarsDesc(items).map((i) => i.stars)).toEqual([500, 50, 5]);
+  });
+});
+
+describe('weeklyContributionTotals', () => {
+  const week = (...days: number[]) => ({ contributionDays: days.map((contributionCount) => ({ contributionCount })) });
+
+  it('sums each week, oldest first', () => {
+    expect(weeklyContributionTotals([week(1, 2, 3), week(0, 0), week(5)])).toEqual([6, 0, 5]);
+  });
+
+  it('keeps only the last 53 weeks', () => {
+    const weeks = Array.from({ length: 54 }, (_, i) => week(i));
+    const out = weeklyContributionTotals(weeks)!;
+    expect(out).toHaveLength(CONTRIBUTION_WEEKS);
+    expect(out[0]).toBe(1);
+    expect(out.at(-1)).toBe(53);
+  });
+
+  it('treats missing days and counts as zero', () => {
+    expect(weeklyContributionTotals([{}, { contributionDays: null }, { contributionDays: [{ contributionCount: null }, { contributionCount: 4 }] }])).toEqual([0, 0, 4]);
+  });
+
+  it('returns null for an empty or missing calendar', () => {
+    expect(weeklyContributionTotals([])).toBeNull();
+    expect(weeklyContributionTotals(undefined)).toBeNull();
+    expect(weeklyContributionTotals(null)).toBeNull();
   });
 });
