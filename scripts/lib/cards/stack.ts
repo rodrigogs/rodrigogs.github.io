@@ -1,19 +1,19 @@
 /**
- * stack.svg: 1280x360. A curated strip of the technologies I ship with
- * and the tools the method itself runs on, as neon-tinted marks from
- * simple-icons (CC0) in a console-menu frame, each labeled. Every item
- * in each row is drawn, in the view's own order: where simple-icons has
- * no mark for it (SvelteKit, AWS, Playwright, Context7, claude-mem,
- * Hermes Agent), it draws as a text chip in the same neon-outlined style
- * instead of an invented icon. Chrome DevTools draws with the Google
- * Chrome mark: it is that product, just not its own simple-icons entry.
+ * stack.svg: 1280x360. The two short lines of the site's About section
+ * (what I ship with, the AI tools I use daily) as neon-tinted marks from
+ * simple-icons (CC0) in a console-menu frame, each labeled. Every item in
+ * each row is drawn, in the view's own order: where simple-icons has no
+ * mark for it (AWS, Playwright MCP, Context7, claude-mem), it draws as a
+ * text chip in the same neon-outlined style instead of an invented icon.
+ * Chrome DevTools MCP draws with the Google Chrome mark and GitHub MCP with
+ * the GitHub mark: they are those products' tools.
  */
 
 import {
   siClaude,
   siDocker,
   siElectron,
-  siGithubactions,
+  siGithub,
   siGooglechrome,
   siNextdotjs,
   siNodedotjs,
@@ -23,7 +23,6 @@ import {
   siRust,
   siSvelte,
   siTypescript,
-  siVitest,
   type SimpleIcon,
 } from 'simple-icons';
 import type { SiteView } from '../../../src/lib/view.ts';
@@ -39,7 +38,7 @@ export interface StackMark {
   icon: SimpleIcon;
 }
 
-/** Ship-with labels matched to a real simple-icons mark (SvelteKit and AWS have none there: they draw as chips). */
+/** Stack labels matched to a real simple-icons mark (AWS has none there: it draws as a chip). */
 export const SHIP_MARKS: readonly StackMark[] = [
   { label: 'TypeScript', icon: siTypescript },
   { label: 'Node.js', icon: siNodedotjs },
@@ -53,24 +52,11 @@ export const SHIP_MARKS: readonly StackMark[] = [
   { label: 'Docker', icon: siDocker },
 ];
 
-/** The method's own tools, in the order the README lists the method (see aiProjectsLine/tools in readme.ts). */
-export const METHOD_TOOLS: readonly string[] = [
-  'Claude Code',
-  'Playwright',
-  'Chrome DevTools',
-  'Context7',
-  'claude-mem',
-  'Hermes Agent',
-  'GitHub Actions',
-  'Vitest',
-];
-
-/** Method-tool labels matched to a real simple-icons mark (Playwright, Context7, claude-mem and Hermes Agent draw as chips). */
+/** AI-tool labels matched to a real simple-icons mark (Playwright MCP, Context7 and claude-mem draw as chips). */
 export const TOOL_MARKS: readonly StackMark[] = [
   { label: 'Claude Code', icon: siClaude },
-  { label: 'Chrome DevTools', icon: siGooglechrome },
-  { label: 'GitHub Actions', icon: siGithubactions },
-  { label: 'Vitest', icon: siVitest },
+  { label: 'Chrome DevTools MCP', icon: siGooglechrome },
+  { label: 'GitHub MCP', icon: siGithub },
 ];
 
 const NEON = [S.neonPink, S.neonCyan, T.changed, T.mergedText, T.deprecated];
@@ -78,7 +64,7 @@ const NEON = [S.neonPink, S.neonCyan, T.changed, T.mergedText, T.deprecated];
 const markFor = (label: string): SimpleIcon | undefined => [...SHIP_MARKS, ...TOOL_MARKS].find((m) => m.label === label)?.icon;
 
 export const stackTitle = (view: SiteView): string =>
-  `Stack. Ships with ${view.stack.ships.items.join(', ')}. The method's tools: ${METHOD_TOOLS.join(', ')}.`;
+  `${view.about.stack.label}: ${view.about.stack.items.join(', ')}. ${view.about.aiTools.label}: ${view.about.aiTools.items.join(', ')}.`;
 
 const ICON = 46;
 const X0 = 76;
@@ -88,8 +74,8 @@ export async function stackCard(view: SiteView): Promise<string> {
   const W = STACK_WIDTH;
   const H = STACK_HEIGHT;
   const rows: { label: string; items: readonly string[]; y: number }[] = [
-    { label: view.stack.ships.label, items: view.stack.ships.items, y: 88 },
-    { label: "The method's tools", items: METHOD_TOOLS, y: 236 },
+    { label: view.about.stack.label, items: view.about.stack.items, y: 88 },
+    { label: view.about.aiTools.label, items: view.about.aiTools.items, y: 236 },
   ];
 
   let marks = '';

@@ -2,15 +2,15 @@
  * work-<id>.svg: 840x300, a "loading screen" per project: the sunset,
  * the sun and the palms on the right, and on a left scrim the project
  * name as an outlined title, its one-line note, its two strongest proofs
- * as HUD numerals, and a plate with its status and first year. Shown two
- * per row in the README (about 410px wide), so nothing is under 22px.
+ * as HUD numerals, and what it is made of. Shown two per row in the
+ * README (about 410px wide), so nothing is under 22px.
  */
 
 import { sceneGeometry, sceneSvg } from '../../../src/design/scene-svg.ts';
 import type { EntryView } from '../../../src/lib/view.ts';
 import { at, embedSvg, svgDocument, textLayer } from './compose.ts';
 import { HUD } from './fonts.ts';
-import { bodyStyle, display, flex, rolePlate, S, scrimDefs, T, text } from './pieces.ts';
+import { bodyStyle, display, flex, S, scrimDefs, T, text } from './pieces.ts';
 
 export const WORK_WIDTH = 840;
 export const WORK_HEIGHT = 300;
@@ -33,7 +33,7 @@ export function workProofs(entry: EntryView): { value: string; label: string }[]
   return out;
 }
 
-export async function workCard(entry: EntryView, sinceLabel: string): Promise<string> {
+export async function workCard(entry: EntryView): Promise<string> {
   const W = WORK_WIDTH;
   const H = WORK_HEIGHT;
   const geo = sceneGeometry(W, H, SUN_X);
@@ -73,12 +73,7 @@ export async function workCard(entry: EntryView, sinceLabel: string): Promise<st
       at(
         X,
         244,
-        flex(
-          { flexDirection: 'row', alignItems: 'center', gap: 14 },
-          rolePlate(entry.statusRole, entry.statusLabel, { fontSize: 20, padX: 12, padY: 6, weight: 800 }),
-          text({ fontFamily: HUD, fontWeight: 700, fontSize: 22, lineHeight: 1, color: T.ink2, whiteSpace: 'pre' }, `${sinceLabel.toUpperCase()} ${entry.born}`),
-          entry.latest ? text({ ...bodyStyle(22, T.ink3, 600), lineHeight: 1, whiteSpace: 'pre' }, entry.latest.tag) : null,
-        ),
+        text({ ...bodyStyle(22, T.ink2, 600), lineHeight: 1, whiteSpace: 'pre' }, entry.stack.join(' · ')),
       ),
     ],
     { width: W, height: H, id: `${id}-t` },

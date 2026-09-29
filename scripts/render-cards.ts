@@ -23,7 +23,6 @@ import { buildView, type SiteView } from '../src/lib/view.ts';
 import { FONT_FILES } from './lib/cards/fonts.ts';
 import { headerCard } from './lib/cards/header.ts';
 import { hudCard } from './lib/cards/hud.ts';
-import { methodCard } from './lib/cards/method.ts';
 import { ogCard, OG_HEIGHT, OG_WIDTH } from './lib/cards/og.ts';
 import { OG_PROVENANCE, PROVENANCE_KEY, withPngText } from './lib/cards/png.ts';
 import { renderReadme, WORK_IDS } from './lib/cards/readme.ts';
@@ -54,7 +53,6 @@ function svgDims(svg: string): { width: number; height: number } {
 export async function renderReadmeCards(view: SiteView): Promise<[string, string][]> {
   const cards: [string, string][] = [
     ['header.svg', await headerCard(view)],
-    ['method.svg', await methodCard(view)],
     ['hud.svg', await hudCard(view)],
     ['skyline.svg', await skylineCard(view)],
     ['stack.svg', await stackCard(view)],
@@ -62,7 +60,7 @@ export async function renderReadmeCards(view: SiteView): Promise<[string, string
   for (const id of WORK_IDS) {
     const entry = view.work.find((w) => w.id === id);
     if (!entry) throw new Error(`render-cards: work entry "${id}" not found in the view (check src/content/site.ts)`);
-    cards.push([`work-${id}.svg`, await workCard(entry, view.field.born)]);
+    cards.push([`work-${id}.svg`, await workCard(entry)]);
   }
   return cards;
 }

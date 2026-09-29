@@ -18,15 +18,14 @@ const dims = (svg: string) => {
 
 describe('renderReadmeCards', () => {
   it('renders one night card per README image, and nothing else', () => {
-    expect([...cards.keys()]).toEqual(['header.svg', 'method.svg', 'hud.svg', 'skyline.svg', 'stack.svg', ...WORK_IDS.map((id) => `work-${id}.svg`)]);
+    expect([...cards.keys()]).toEqual(['header.svg', 'hud.svg', 'skyline.svg', 'stack.svg', ...WORK_IDS.map((id) => `work-${id}.svg`)]);
   });
 
   it('gives every card its size', () => {
     expect(dims(cards.get('header.svg')!)).toEqual({ width: 1280, height: 420 });
     expect(dims(cards.get('hud.svg')!)).toEqual({ width: 1280, height: 220 });
     expect(dims(cards.get('skyline.svg')!)).toEqual({ width: 1280, height: 300 });
-    expect(dims(cards.get('method.svg')!)?.width).toBe(1280);
-    expect(dims(cards.get('method.svg')!)?.height).toBeGreaterThan(900);
+    expect(dims(cards.get('stack.svg')!)).toEqual({ width: 1280, height: 360 });
     for (const id of WORK_IDS) expect(dims(cards.get(`work-${id}.svg`)!)).toEqual({ width: 840, height: 300 });
   });
 
@@ -55,9 +54,9 @@ describe('renderReadmeCards', () => {
     expect(cards.get('header.svg')).toMatch(/<animate\b/);
   });
 
-  it('puts every method step on the method card', () => {
-    const svg = cards.get('method.svg')!;
-    for (const step of view.aiWorkflow.items) expect(svg).toContain(step.name.replace(/"/g, '&quot;'));
+  it('draws both About lines on the stack card', () => {
+    const svg = cards.get('stack.svg')!;
+    for (const item of [...view.about.stack.items, ...view.about.aiTools.items]) expect(svg).toContain(item);
   });
 
   it('prints the real HUD numbers', () => {

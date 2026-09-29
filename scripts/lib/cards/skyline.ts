@@ -65,8 +65,7 @@ function monthYear(iso: string): string {
 
 export function skylineTitle(year: ContributionYearView | null): string {
   if (!year) return 'Contributions over the last year: data unavailable on the last build.';
-  const best = year.best ? `, the busiest week ${year.best.count} (week of ${year.best.weekOf})` : '';
-  return `Contributions over the last ${year.weeks.length} weeks, drawn as a skyline: ${year.total} in total${best}.`;
+  return `Contributions over the last ${year.weeks.length} weeks, drawn as a skyline: ${year.total} in total.`;
 }
 
 function building(x: number, w: number, h: number, i: number, best: boolean, rand: () => number): string {
@@ -150,7 +149,6 @@ export async function skylineCard(view: SiteView): Promise<string> {
   // readable instead of flattening them under one 15x outlier. No bar is
   // ever drawn past its value's true y: only this one, explicitly marked, is
   // ever shorter than its true value.
-  let bestOffScale = false;
   year.weeks.forEach((count, i) => {
     const x = X0 + i * pitch + (pitch - bw) / 2;
     const natural = buildingHeight(count, axis.top);
@@ -159,11 +157,8 @@ export async function skylineCard(view: SiteView): Promise<string> {
     city += building(x, bw, h, i, i === bestIndex, rand);
     if (offScale) {
       breaks += breakMark(x + bw / 2, TOP + 18);
-      bestOffScale = true;
     }
   });
-
-  const bestX = year.best ? X0 + year.best.index * pitch + pitch / 2 : 0;
 
   const fmt = new Intl.NumberFormat('en-US');
   const scaleStyle = {
@@ -176,7 +171,6 @@ export async function skylineCard(view: SiteView): Promise<string> {
     whiteSpace: 'pre',
   };
   const dateStyle = { fontFamily: SANS, fontWeight: 600, fontSize: 18, lineHeight: 1, color: T.ink3, whiteSpace: 'pre' };
-  const capStyle = { fontFamily: SANS, fontWeight: 600, fontSize: 15, lineHeight: 1.2, color: T.ink3, WebkitTextStroke: `3px ${S.silhouette}`, whiteSpace: 'pre' };
 
   const layer = await textLayer(
     [
@@ -189,30 +183,6 @@ export async function skylineCard(view: SiteView): Promise<string> {
           text({ ...bodyStyle(22, T.ink, 600), paddingBottom: 4 }, 'contributions in the last year'),
         ),
       ),
-      ...(year.best
-        ? [
-            at(
-              bestX - 14,
-              22,
-              flex(
-                { flexDirection: 'row', alignItems: 'flex-end', gap: 10 },
-                text({ ...bodyStyle(20, T.ink2, 600), paddingBottom: 2 }, `Best week, ${year.best.weekOf}`),
-                text({ fontFamily: HUD, fontWeight: 900, fontSize: 28, lineHeight: 1, color: S.neonCyan, whiteSpace: 'pre' }, year.best.count),
-              ),
-              { transform: 'translateX(-100%)' },
-            ),
-          ]
-        : []),
-      ...(bestOffScale
-        ? [
-            at(
-              bestX - 14,
-              52,
-              text(capStyle, 'Tallest tower is off the scale; labeled with its real value.'),
-              { transform: 'translateX(-100%)' },
-            ),
-          ]
-        : []),
       ...gridY.map((g) => at(X0 - 12, g.y - 9, text(scaleStyle, fmt.format(g.value)), { transform: 'translateX(-100%)' })),
       at(X0, H - 34, text(dateStyle, monthYear(year.weekStarts[0]!))),
       at(X1, H - 34, text(dateStyle, monthYear(year.weekStarts[n - 1]!)), { transform: 'translateX(-100%)' }),

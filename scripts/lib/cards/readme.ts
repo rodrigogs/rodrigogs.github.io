@@ -4,16 +4,16 @@
  * what the cards say. English only: the profile README has no locale
  * switch.
  *
- * Its weight is on how I work with AI (the method card, repeated as a
- * plain list for screen readers and search); the AI projects and
- * collaborations are one line.
+ * It opens with the same two About paragraphs as the site (who I am, and
+ * how AI fits into my day, in plain prose), then the numbers, the
+ * featured work, one line of smaller work, one line of upstream work and
+ * the stack.
  */
 
 import type { SiteView } from '../../../src/lib/view.ts';
 import { sectionId } from '../../../src/lib/view.ts';
 import { headerTitle } from './header.ts';
 import { hudTitle } from './hud.ts';
-import { methodTitle } from './method.ts';
 import { skylineTitle } from './skyline.ts';
 import { stackTitle } from './stack.ts';
 import { workTitle } from './work.ts';
@@ -23,12 +23,6 @@ export const WORK_IDS = ['whats-reader', 'mysql-events', 'pg-turbo', 'vibewatch'
 
 const SITE_URL = 'https://rodrigogs.github.io';
 const CARDS_URL = `${SITE_URL}/readme`;
-
-/** Display names for the upstream repos named in the collaborations line. */
-const UPSTREAM_NAMES: Record<string, string> = { 'nesquena/hermes-webui': 'Hermes WebUI' };
-
-/** Stack groups listed as text under the stack card (the rest live on the site). */
-const STACK_GROUPS = ['Agents', 'Models', 'MCP servers', 'Quality'];
 
 /** Escapes the handful of characters that would break an HTML attribute. */
 function escapeAttr(s: string): string {
@@ -40,12 +34,6 @@ function card(opts: { href: string; file: string; alt: string; width?: string })
   return `<a href="${opts.href}"><img alt="${escapeAttr(opts.alt)}" src="${CARDS_URL}/${opts.file}" width="${opts.width ?? '100%'}"></a>`;
 }
 
-/** Oxford-free English list: "a", "a and b", or "a, b and c". */
-function joinList(items: readonly string[]): string {
-  if (items.length <= 1) return items[0] ?? '';
-  return `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`;
-}
-
 /** Groups a flat array into fixed-size chunks, the last one short if needed. */
 function chunk<T>(items: readonly T[], size: number): T[][] {
   const out: T[][] = [];
@@ -53,40 +41,25 @@ function chunk<T>(items: readonly T[], size: number): T[][] {
   return out;
 }
 
-/** The one line for AI projects and collaborations. */
-export function aiProjectsLine(view: SiteView): string {
-  const link = (name: string, href: string | undefined) => (href ? `[${name}](${href})` : name);
-  const tooling = view.ai.filter((p) => p.id !== 'hermes-agent').map((p) => link(p.name, p.links[0]?.href));
-  const agent = view.ai.find((p) => p.id === 'hermes-agent');
-  const upstream = [
-    ...(agent ? [link(agent.name, agent.links[0]?.href)] : []),
-    ...view.upstream
-      .filter((u) => UPSTREAM_NAMES[u.repo])
-      .map((u) => link(UPSTREAM_NAMES[u.repo]!, u.proofUrl)),
-  ];
-  const parts = [
-    tooling.length ? `I also publish agent tooling (${joinList(tooling)})` : '',
-    upstream.length ? `contribute to ${joinList(upstream)}` : '',
-  ].filter(Boolean);
-  if (parts.length === 0) return '';
-  const sentence = parts.length === 2 ? `${parts[0]} and ${parts[1]}` : parts[0]!.replace(/^contribute/, 'I also contribute');
-  return `${sentence}.`;
+/** The site's "Also" line: smaller public work, name linked, a short note each. */
+export function alsoLine(view: SiteView): string {
+  const items = view.moreWork.items.map((m) => `[${m.name}](${m.href}), ${m.note}`);
+  return items.length ? `${view.moreWork.label}: ${items.join(' · ')}.` : '';
+}
+
+/** Upstream work in one line, the count linking to its proof. */
+export function upstreamLine(view: SiteView): string {
+  const items = view.upstream.map((u) => `[${u.repo}](${u.url}) ([${u.count}](${u.proofUrl}))`);
+  return items.length ? `Open source: ${items.join(' · ')}.` : '';
 }
 
 export function renderReadme(view: SiteView): string {
   const header = card({ href: `${SITE_URL}/`, file: 'header.svg', alt: headerTitle(view) });
 
-  const intro =
-    `I'm a Senior Software Engineer at Globant on the Disney Entertainment account, shipping software since ${view.person.since}, ` +
-    `remote from ${view.person.location}.`;
   const linkedin = view.person.linkedin ? ` · [LinkedIn](${view.person.linkedin})` : '';
-  const links = `[Site](${SITE_URL}/) · [Em português](${SITE_URL}/pt/)${linkedin} · [Email](mailto:${view.person.email})`;
-
-  const method = card({ href: `${SITE_URL}/#${sectionId('ai')}`, file: 'method.svg', alt: methodTitle(view) });
-  const steps = view.aiWorkflow.items.map((s, i) => `${i + 1}. **${s.name}**: ${s.text}`).join('\n');
-  // The proof sentence is already on the method card itself; only its source link repeats here,
-  // with the full sentence kept in the collapsed text alternative below for screen readers and search.
-  const sourceLine = `Source: [rodrigogs/rodrigogs.github.io](${view.aiWorkflow.builtWithHref}).`;
+  const links =
+    `Remote from ${view.person.location} (${view.person.timezone}) · ` +
+    `[Site](${SITE_URL}/) · [Em português](${SITE_URL}/pt/)${linkedin} · [Email](mailto:${view.person.email})`;
 
   const hud = card({ href: `${SITE_URL}/`, file: 'hud.svg', alt: hudTitle(view) });
   const skyline = card({ href: view.person.github, file: 'skyline.svg', alt: skylineTitle(view.contributionYear) });
@@ -100,37 +73,19 @@ export function renderReadme(view: SiteView): string {
     .map((pair) => pair.join(' '))
     .join('\n');
 
-  const stack = card({ href: `${SITE_URL}/#${sectionId('stack')}`, file: 'stack.svg', alt: stackTitle(view) });
-  const tools = view.stack.groups
-    .filter((g) => STACK_GROUPS.includes(g.label))
-    .map((g) => `**${g.label}**: ${g.items.join(' · ')}`)
-    .join('<br>\n');
+  const stack = card({ href: `${SITE_URL}/#${sectionId('about')}`, file: 'stack.svg', alt: stackTitle(view) });
+  // The stack card's two rows as text, for screen readers and search.
 
-  const closing =
-    '<sub>Cards refresh daily from GitHub, npm and crates.io. The full history of the work, including a stack diff ' +
-    `between any two years, is at <a href="${SITE_URL}/">rodrigogs.github.io</a>.</sub>`;
+  const closing = `<sub>Cards refresh daily from GitHub, npm and crates.io. More at <a href="${SITE_URL}/">rodrigogs.github.io</a>.</sub>`;
 
   return [
     header,
     '',
-    intro,
+    view.about.claim,
+    '',
+    view.about.body,
     '',
     links,
-    '',
-    '## How I work with AI',
-    '',
-    method,
-    '',
-    // The same steps as text, for screen readers and search, folded so the card stays the thing you see.
-    '<details><summary>The method as text</summary>',
-    '',
-    steps,
-    '',
-    view.aiWorkflow.builtWith,
-    '',
-    '</details>',
-    '',
-    sourceLine,
     '',
     hud,
     skyline,
@@ -139,13 +94,13 @@ export function renderReadme(view: SiteView): string {
     '',
     work,
     '',
-    aiProjectsLine(view),
+    alsoLine(view),
+    '',
+    upstreamLine(view),
     '',
     '## Stack',
     '',
     stack,
-    '',
-    tools,
     '',
     closing,
     '',

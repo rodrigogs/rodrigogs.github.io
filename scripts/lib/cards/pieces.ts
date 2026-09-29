@@ -107,7 +107,7 @@ export function rolePlate(role: Role, label: string, opts: PlateOpts = {}): VNod
   return plate(label, bg, fg, opts);
 }
 
-/** An outlined chip (tool names under a method step): neon edge, dark fill. */
+/** An outlined chip (a stack or tool name with no simple-icons mark): neon edge, dark fill. */
 export function chip(label: string, color: string, opts: PlateOpts = {}): VNode {
   const { fontSize = 18, padX = 12, padY = 5 } = opts;
   return flex(
