@@ -47,7 +47,9 @@ An engineer shipping since 2010 and senior since 2018 *(public LinkedIn)* who bu
 - Name: Rodrigo Gomes da Silva; handle `rodrigogs`.
 - Voice *(inferred)*: plain, first person, specific, no hype, no emoji bullets; numbers and artifacts instead of adjectives.
 - Labels are plain professional nouns (Role, Product, Open source, AI engineering, Stack). The release-notes world lives in structure and visuals only; changelog jargon applied to the person ("Now", "Unreleased", "Changed/Added", CalVer "Latest") is out. (Confirmed by owner feedback, 2026-09-28.)
-- The previous vaporwave identity is retired (treated as evidence of personality: fun, technical, a Konami code easter egg), not carried forward as a visual system.
+- **Pinned aesthetic (owner, 2026-09-28):** the site evokes GTA Vice City (1986 Miami at night: sunset over the ocean, palm silhouettes, Art Deco facades lit by neon, a game-menu and HUD UI) on top of the owner's own vaporwave taste (his palette #ff6ec7, #00d9ff, #ffea00, #bd00ff; he liked the sliced sun, the stars, the glitch on hover and the easter egg). The earlier sober, editorial rebuild was rejected ("ficou uma merda"); do not drift back to it.
+- **Homage, not copy:** built from our own shapes and words. Never use Rockstar or Take-Two logos, the words "Grand Theft Auto" or "Vice City" as branding, game art or screenshots, fonts extracted from the game, radio station names or audio. Pricedown is not used: its free license forbids webfont embedding.
+- **Profile README focus (owner, 2026-09-28):** say more about how he works with AI day to day (the method) and less about AI projects and collaborations, which stay to a line.
 
 ## Evidence on Hand
 
