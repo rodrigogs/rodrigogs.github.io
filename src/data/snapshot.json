@@ -1,27 +1,27 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-09-29T02:35:47.657Z",
+  "fetchedAt": "2026-09-29T06:33:04.334Z",
   "sources": {
     "github": {
       "ok": true,
-      "lastSuccessAt": "2026-09-29T02:35:47.657Z"
+      "lastSuccessAt": "2026-09-29T06:33:04.334Z"
     },
     "npm": {
       "ok": true,
-      "lastSuccessAt": "2026-09-29T02:35:47.657Z"
+      "lastSuccessAt": "2026-09-29T06:33:04.334Z"
     },
     "crates": {
       "ok": true,
-      "lastSuccessAt": "2026-09-29T02:35:47.657Z"
+      "lastSuccessAt": "2026-09-29T06:33:04.334Z"
     }
   },
   "user": {
     "login": "rodrigogs",
     "name": "Rodrigo Gomes da Silva",
-    "followers": 211,
+    "followers": 212,
     "publicRepos": 137,
     "createdAt": "2012-09-17T12:49:05Z",
-    "contributionsLastYear": 6744,
+    "contributionsLastYear": 6759,
     "contributionWeeks": [
       43,
       77,
@@ -75,7 +75,7 @@
       270,
       414,
       1294,
-      497
+      512
     ]
   },
   "repos": [
@@ -216,7 +216,7 @@
         "url": "https://github.com/rodrigogs/whats-reader/releases/tag/v1.31.0"
       },
       "releaseCount": 93,
-      "releaseDownloads": 7053
+      "releaseDownloads": 7055
     },
     {
       "name": "nodejs-web-jade-scaffold",
@@ -2694,9 +2694,9 @@
       "forks": 0,
       "language": "TypeScript",
       "languages": {
-        "TypeScript": 277248,
-        "Astro": 82854,
-        "CSS": 9368,
+        "TypeScript": 241472,
+        "Astro": 62108,
+        "CSS": 9479,
         "JavaScript": 2188
       },
       "topics": [
@@ -2709,7 +2709,7 @@
         "Vitest"
       ],
       "createdAt": "2026-09-28T20:50:59Z",
-      "pushedAt": "2026-09-29T02:35:26Z",
+      "pushedAt": "2026-09-29T06:32:39Z",
       "archived": false,
       "fork": false,
       "license": null,
@@ -2875,7 +2875,7 @@
       "description": "Resolves debug namespace like magic.",
       "version": "1.0.0",
       "monthlyDownloads": 5660,
-      "yearlyDownloads": 80280,
+      "yearlyDownloads": 80535,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2887,7 +2887,7 @@
       "description": "A mysql binlog listener running on Node.js",
       "version": "0.4.14",
       "monthlyDownloads": 5303,
-      "yearlyDownloads": 76312,
+      "yearlyDownloads": 76559,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2911,7 +2911,7 @@
       "description": "pornhub.com api implementation.",
       "version": "0.6.0",
       "monthlyDownloads": 1964,
-      "yearlyDownloads": 5710,
+      "yearlyDownloads": 5804,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2923,7 +2923,7 @@
       "description": "[![Build Status](https://travis-ci.org/rodrigogs/mongoose-timezone.svg?branch=master)](https://travis-ci.org/rodrigogs/mongoose-timezone) [![Code Climate](https://codeclimate.com/github/rodrigogs/mongoose-timezone/badges/gpa.svg)](https://codeclimate.com/",
       "version": "1.3.0",
       "monthlyDownloads": 678,
-      "yearlyDownloads": 24245,
+      "yearlyDownloads": 24284,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2935,7 +2935,7 @@
       "description": "A non date-based time calculator",
       "version": "2.1.3",
       "monthlyDownloads": 623,
-      "yearlyDownloads": 7606,
+      "yearlyDownloads": 7648,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2959,7 +2959,7 @@
       "description": "Baileys Store",
       "version": "2.0.0",
       "monthlyDownloads": 457,
-      "yearlyDownloads": 19848,
+      "yearlyDownloads": 19876,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2983,7 +2983,7 @@
       "description": "Plugin for Mongoose that turns duplicate errors into regular Mongoose validation errors",
       "version": "0.1.0",
       "monthlyDownloads": 133,
-      "yearlyDownloads": 933,
+      "yearlyDownloads": 937,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2995,7 +2995,7 @@
       "description": "Easy way to get a VPN connection.",
       "version": "1.3.1",
       "monthlyDownloads": 115,
-      "yearlyDownloads": 824,
+      "yearlyDownloads": 840,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3019,7 +3019,7 @@
       "description": "Bidirectional dot notation conversion.",
       "version": "1.1.2",
       "monthlyDownloads": 95,
-      "yearlyDownloads": 576,
+      "yearlyDownloads": 582,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3031,7 +3031,7 @@
       "description": "TypeScript SDK for the FocusNFe Brazilian fiscal document API",
       "version": "0.1.0",
       "monthlyDownloads": 70,
-      "yearlyDownloads": 1667,
+      "yearlyDownloads": 1668,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3055,7 +3055,7 @@
       "description": "This promise pool keeps looping `Promise.all`'s promises until the last generator item is submitted to the processor.",
       "version": "2.0.0",
       "monthlyDownloads": 46,
-      "yearlyDownloads": 1865,
+      "yearlyDownloads": 1870,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3067,7 +3067,7 @@
       "description": null,
       "version": "0.0.0",
       "monthlyDownloads": 45,
-      "yearlyDownloads": 1003,
+      "yearlyDownloads": 1008,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3079,7 +3079,7 @@
       "description": "",
       "version": "0.0.7",
       "monthlyDownloads": 39,
-      "yearlyDownloads": 280,
+      "yearlyDownloads": 288,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3091,7 +3091,7 @@
       "description": "[![Build Status](https://travis-ci.org/rodrigogs/fastify-router.svg?branch=master)](https://travis-ci.org/rodrigogs/fastify-router) [![Code Climate](https://codeclimate.com/github/rodrigogs/fastify-router/badges/gpa.svg)](https://codeclimate.com/github/ro",
       "version": "1.1.0",
       "monthlyDownloads": 38,
-      "yearlyDownloads": 276,
+      "yearlyDownloads": 281,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3103,7 +3103,7 @@
       "description": "### Install ```bash $ npm install involves-changelog-store -g ```",
       "version": "0.3.0",
       "monthlyDownloads": 38,
-      "yearlyDownloads": 572,
+      "yearlyDownloads": 584,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3115,7 +3115,7 @@
       "description": "A proxy crawler.",
       "version": "2.0.0",
       "monthlyDownloads": 38,
-      "yearlyDownloads": 302,
+      "yearlyDownloads": 311,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3127,7 +3127,7 @@
       "description": "Sarahah flodder",
       "version": "2.0.0",
       "monthlyDownloads": 38,
-      "yearlyDownloads": 265,
+      "yearlyDownloads": 271,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3139,7 +3139,7 @@
       "description": "Load environment variables from the cloud. cenv may be loaded from the code or used as a cli.",
       "version": "1.0.0-alpha",
       "monthlyDownloads": 37,
-      "yearlyDownloads": 307,
+      "yearlyDownloads": 315,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3151,7 +3151,7 @@
       "description": null,
       "version": "0.0.0",
       "monthlyDownloads": 32,
-      "yearlyDownloads": 127,
+      "yearlyDownloads": 130,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3163,7 +3163,7 @@
       "description": "",
       "version": "1.0.0",
       "monthlyDownloads": 31,
-      "yearlyDownloads": 212,
+      "yearlyDownloads": 213,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3175,7 +3175,7 @@
       "description": "[![Build Status](https://travis-ci.org/rodrigogs/pulchra.svg?branch=master)](https://travis-ci.org/rodrigogs/pulchra) [![Maintainability](https://api.codeclimate.com/v1/badges/a9e8a6a7fde22f6582b3/maintainability)](https://codeclimate.com/github/rodrigogs",
       "version": "1.0.7-aplha",
       "monthlyDownloads": 28,
-      "yearlyDownloads": 336,
+      "yearlyDownloads": 354,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3187,7 +3187,7 @@
       "description": "Page scrapper that retrieves proxy server information from FreeProxyLists website",
       "version": "0.4.1",
       "monthlyDownloads": 27,
-      "yearlyDownloads": 525,
+      "yearlyDownloads": 536,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3199,7 +3199,7 @@
       "description": "Resilient PostgreSQL dump & restore with direct COPY protocol",
       "version": "0.1.4",
       "monthlyDownloads": 25,
-      "yearlyDownloads": 691,
+      "yearlyDownloads": 704,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3211,7 +3211,7 @@
       "description": "A TypeScript library designed to streamline queries and integrate with APIs like OpenAI GPT and others. The project is modular, making it simple to maintain and extend functionality.",
       "version": "1.0.0",
       "monthlyDownloads": 24,
-      "yearlyDownloads": 181,
+      "yearlyDownloads": 191,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3223,7 +3223,7 @@
       "description": null,
       "version": "0.0.0",
       "monthlyDownloads": 24,
-      "yearlyDownloads": 107,
+      "yearlyDownloads": 110,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3235,7 +3235,7 @@
       "description": "Check if the program is running on a Raspberry Pi",
       "version": "1.1.1",
       "monthlyDownloads": 22,
-      "yearlyDownloads": 332,
+      "yearlyDownloads": 338,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3247,7 +3247,7 @@
       "description": "Easily download OnlyFans content",
       "version": "1.0.0",
       "monthlyDownloads": 21,
-      "yearlyDownloads": 88,
+      "yearlyDownloads": 92,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3271,7 +3271,7 @@
       "description": "### Install ```bash $ npm install involves-changelog-server -g ```",
       "version": "0.3.0",
       "monthlyDownloads": 20,
-      "yearlyDownloads": 197,
+      "yearlyDownloads": 201,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3283,7 +3283,7 @@
       "description": "[![Build Status](https://travis-ci.org/apogeu/apogeu.svg?branch=master)](https://travis-ci.org/apogeu/apogeu) [![Code Climate](https://codeclimate.com/github/apogeu/apogeu/badges/gpa.svg)](https://codeclimate.com/github/apogeu/apogeu) [![Dependency Status",
       "version": "0.1.1",
       "monthlyDownloads": 19,
-      "yearlyDownloads": 242,
+      "yearlyDownloads": 245,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3295,7 +3295,7 @@
       "description": "Detects coinmarketcap fresh added coins",
       "version": "1.0.0",
       "monthlyDownloads": 19,
-      "yearlyDownloads": 135,
+      "yearlyDownloads": 139,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3319,7 +3319,7 @@
       "description": null,
       "version": "0.0.0",
       "monthlyDownloads": 19,
-      "yearlyDownloads": 85,
+      "yearlyDownloads": 87,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3343,7 +3343,7 @@
       "description": null,
       "version": "0.0.0",
       "monthlyDownloads": 18,
-      "yearlyDownloads": 89,
+      "yearlyDownloads": 91,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3355,7 +3355,7 @@
       "description": "Convert any encoding to any encoding",
       "version": "1.1.0",
       "monthlyDownloads": 17,
-      "yearlyDownloads": 163,
+      "yearlyDownloads": 169,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3367,7 +3367,7 @@
       "description": "Simple library created in a hurry to test and log HTTP requests.",
       "version": "0.1.1",
       "monthlyDownloads": 16,
-      "yearlyDownloads": 169,
+      "yearlyDownloads": 172,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3379,7 +3379,7 @@
       "description": "The adapter for the supporting of using Amplify APIs in Next.js.",
       "version": "1.3.0-next15.0",
       "monthlyDownloads": 15,
-      "yearlyDownloads": 169,
+      "yearlyDownloads": 171,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3391,7 +3391,7 @@
       "description": "",
       "version": "0.0.0",
       "monthlyDownloads": 15,
-      "yearlyDownloads": 94,
+      "yearlyDownloads": 95,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3415,7 +3415,7 @@
       "description": "Fluid and promisified file system helpers",
       "version": "0.3.0",
       "monthlyDownloads": 14,
-      "yearlyDownloads": 276,
+      "yearlyDownloads": 280,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3427,7 +3427,7 @@
       "description": "Noty plugin for Vue.js 2 and 3",
       "version": "0.1.5-beta-2",
       "monthlyDownloads": 14,
-      "yearlyDownloads": 117,
+      "yearlyDownloads": 121,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3439,7 +3439,7 @@
       "description": "",
       "version": "1.0.0",
       "monthlyDownloads": 14,
-      "yearlyDownloads": 92,
+      "yearlyDownloads": 94,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3451,7 +3451,7 @@
       "description": "[![Code Climate](https://codeclimate.com/github/rodrigogs/ilsap/badges/gpa.svg)](https://codeclimate.com/github/rodrigogs/ilsap) [![dependencies Status](https://david-dm.org/rodrigogs/ilsap/status.svg)](https://david-dm.org/rodrigogs/ilsap) [![devDependen",
       "version": "0.0.0",
       "monthlyDownloads": 14,
-      "yearlyDownloads": 156,
+      "yearlyDownloads": 158,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3463,7 +3463,7 @@
       "description": "",
       "version": "0.0.0",
       "monthlyDownloads": 14,
-      "yearlyDownloads": 80,
+      "yearlyDownloads": 82,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3475,7 +3475,7 @@
       "description": "Stupidly small and fast object deep cloner",
       "version": "1.0.0",
       "monthlyDownloads": 14,
-      "yearlyDownloads": 79,
+      "yearlyDownloads": 82,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3487,7 +3487,7 @@
       "description": "Serverless Framework - Build web, mobile and IoT applications with serverless architectures using AWS Lambda, Azure Functions, Google CloudFunctions & more",
       "version": "3.22.0-patched",
       "monthlyDownloads": 13,
-      "yearlyDownloads": 142,
+      "yearlyDownloads": 147,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3499,7 +3499,7 @@
       "description": "Serverless, minimalist, pluggable, universal router.",
       "version": "0.0.1",
       "monthlyDownloads": 13,
-      "yearlyDownloads": 103,
+      "yearlyDownloads": 105,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3511,7 +3511,7 @@
       "description": null,
       "version": "0.0.0",
       "monthlyDownloads": 13,
-      "yearlyDownloads": 99,
+      "yearlyDownloads": 101,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3523,7 +3523,7 @@
       "description": null,
       "version": "0.0.0",
       "monthlyDownloads": 13,
-      "yearlyDownloads": 82,
+      "yearlyDownloads": 83,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3535,7 +3535,7 @@
       "description": "",
       "version": "0.0.0",
       "monthlyDownloads": 13,
-      "yearlyDownloads": 80,
+      "yearlyDownloads": 82,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3547,7 +3547,7 @@
       "description": "[![CI](https://github.com/rodrigogs/asaas-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/rodrigogs/asaas-sdk/actions/workflows/ci.yml) [![npm version](https://img.shields.io/npm/v/%40rodrigogs%2Fasaas-sdk)](https://www.npmjs.com/package/@rodr",
       "version": "0.1.1",
       "monthlyDownloads": 12,
-      "yearlyDownloads": 1437,
+      "yearlyDownloads": 1440,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3559,7 +3559,7 @@
       "description": null,
       "version": "0.0.0-SCRAP",
       "monthlyDownloads": 12,
-      "yearlyDownloads": 138,
+      "yearlyDownloads": 141,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3571,7 +3571,7 @@
       "description": "",
       "version": "0.0.0",
       "monthlyDownloads": 12,
-      "yearlyDownloads": 76,
+      "yearlyDownloads": 78,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3595,7 +3595,7 @@
       "description": null,
       "version": "0.0.0",
       "monthlyDownloads": 11,
-      "yearlyDownloads": 186,
+      "yearlyDownloads": 187,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3607,7 +3607,7 @@
       "description": "An extension of the serverless-webpack plugin that bundles your ES6 + TypeScript Node.js Lambda functions. Without node-sass.",
       "version": "5.0.1",
       "monthlyDownloads": 10,
-      "yearlyDownloads": 278,
+      "yearlyDownloads": 282,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3619,7 +3619,7 @@
       "description": "A Dynamoose plugin that implements optimistic locking for db writes",
       "version": "0.0.1",
       "monthlyDownloads": 9,
-      "yearlyDownloads": 79,
+      "yearlyDownloads": 81,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3631,7 +3631,7 @@
       "description": "Yet to describe",
       "version": "0.0.0",
       "monthlyDownloads": 9,
-      "yearlyDownloads": 104,
+      "yearlyDownloads": 105,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3643,7 +3643,7 @@
       "description": "Deploy your serverless static website to AWS S3.",
       "version": "3.0.0",
       "monthlyDownloads": 8,
-      "yearlyDownloads": 86,
+      "yearlyDownloads": 88,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3664,7 +3664,7 @@
     {
       "repo": "NousResearch/hermes-agent",
       "url": "https://github.com/NousResearch/hermes-agent",
-      "stars": 249822,
+      "stars": 249875,
       "mergedPrs": 0,
       "prsOpened": 40,
       "commits": 5,
@@ -3694,7 +3694,7 @@
     {
       "repo": "nesquena/hermes-webui",
       "url": "https://github.com/nesquena/hermes-webui",
-      "stars": 18655,
+      "stars": 18660,
       "mergedPrs": 5,
       "prsOpened": 8,
       "commits": 52,
@@ -3789,6 +3789,6 @@
     "repos": 92,
     "monthlyDownloads": 21863,
     "packages": 43,
-    "releaseDownloads": 7095
+    "releaseDownloads": 7097
   }
 }
