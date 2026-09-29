@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { sceneGeometry, sceneGridSvg, sceneSilhouettesSvg, sceneSvg } from './scene-svg.ts';
+import { sceneActors, sceneGeometry, sceneGridSvg, sceneSilhouettesSvg, sceneSvg } from './scene-svg.ts';
 import { scene } from './tokens.ts';
 
 const poster = { width: 1600, height: 900 };
@@ -76,5 +76,38 @@ describe('sceneGeometry', () => {
     // The sun sits on the horizon: its lower part is under the water line.
     expect(g.sun.cy + g.sun.r).toBeGreaterThan(g.horizon);
     expect(g.sun.cy - g.sun.r).toBeLessThan(g.horizon);
+  });
+});
+
+describe('sceneActors', () => {
+  const actors = sceneActors({ ...poster, idPrefix: 'ha-' });
+  const svgs = [actors.car.svg, actors.plane.svg, ...actors.palms.map((p) => p.svg)];
+
+  it('draws self-contained layers in palette colors only, with no text, filters or outside references', () => {
+    const allowed = new Set([...Object.values(scene).filter((v) => typeof v === 'string'), '#FFF6FB'].map((v) => String(v).toUpperCase()));
+    for (const svg of svgs) {
+      expect(svg).not.toMatch(/<(text|foreignObject|image|script|filter)\b/);
+      expect(svg).not.toMatch(/href="(?!#)/);
+      for (const [c] of svg.matchAll(/#[0-9A-Fa-f]{3,6}\b/g)) expect(allowed).toContain(c.toUpperCase());
+      for (const [, id] of svg.matchAll(/\bid="([^"]+)"/g)) expect(id!.startsWith('ha-')).toBe(true);
+    }
+  });
+
+  it('puts the car on the causeway, below the horizon, and the plane over the sun', () => {
+    const g = sceneGeometry(poster.width, poster.height);
+    expect(actors.car.y + actors.car.height).toBeGreaterThan(g.horizon);
+    expect(Math.abs(actors.plane.y - g.sun.cy)).toBeLessThan(g.sun.r);
+    expect(sceneSilhouettesSvg({ ...poster, causeway: true })).toContain('causeway');
+  });
+
+  it('sways every palm from its foot, at the bottom of its box', () => {
+    expect(actors.palms).toHaveLength(4);
+    for (const palm of actors.palms) {
+      expect(palm.originY).toBeGreaterThan(0.95);
+      expect(palm.originX).toBeGreaterThan(0.1);
+      expect(palm.originX).toBeLessThan(0.9);
+    }
+    // Scenes that animate the palms as layers draw only the shore themselves.
+    expect(sceneSilhouettesSvg({ ...poster, trees: false })).not.toContain('<use');
   });
 });

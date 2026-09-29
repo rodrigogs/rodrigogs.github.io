@@ -1,7 +1,8 @@
 ---
 /**
- * Contact, the close: a neon sign ("Let's talk", a decorative echo of the
- * lockup), the plain heading and claim, the address, and the actions.
+ * Contact, the close: the neon sign ("Let's talk", an echo of the lockup)
+ * is the heading; the landmark keeps the plain section noun the nav uses.
+ * Then the claim, the address, the actions and where I work from.
  */
 import type { SiteView } from '../lib/view.ts';
 import CopyEmail from './CopyEmail.astro';
@@ -16,12 +17,10 @@ const s = view.sections.contact;
 const { person, hero, ui } = view;
 ---
 
-<section class="band contact" id="contact" aria-labelledby="contact-title">
+<section class="band contact" id="contact" aria-label={s.label}>
   <div class="wrap inner">
-    <p class="sign" aria-hidden="true">{ui.sign}</p>
-    <h2 class="display section-title" id="contact-title">{s.label}</h2>
+    <h2 class="sign">{ui.sign}</h2>
     <p class="claim">{s.claim}</p>
-    {s.body && <p class="body">{s.body}</p>}
     <a class="email" href={`mailto:${person.email}`}>{person.email}</a>
     <div class="actions">
       <a class="action action-primary" href={`mailto:${person.email}`}>
@@ -43,9 +42,7 @@ const { person, hero, ui } = view;
       }
     </div>
     <p class="where">
-      {person.location} <span aria-hidden="true">·</span> <span class="tz">{person.timezone}</span>
-      <span aria-hidden="true">·</span>
-      {person.spoken}
+      {person.location}{' '}<span aria-hidden="true">·</span>{' '}<span class="tz">{person.timezone}</span>{' '}<span aria-hidden="true">·</span>{' '}{person.spoken}
     </p>
   </div>
 </section>
@@ -65,8 +62,10 @@ const { person, hero, ui } = view;
     text-align: center;
   }
   .sign {
+    margin-block-end: var(--s-2);
     color: var(--c-brand);
     font-family: var(--script);
+    font-weight: 400;
     font-size: clamp(3.5rem, 2rem + 6vw, 6rem);
     line-height: 1.1;
     transform: rotate(-5deg);
@@ -101,10 +100,6 @@ const { person, hero, ui } = view;
   .claim {
     max-inline-size: 36ch;
     color: var(--c-ink);
-  }
-  .body {
-    max-inline-size: 58ch;
-    color: var(--c-ink2);
   }
   .email {
     color: var(--c-added);

@@ -1,5 +1,5 @@
 ---
-/** Work: each product or library as a loading-screen card in a menu frame. */
+/** Work: six featured projects in menu frames, then one line of smaller work. */
 import type { SiteView } from '../lib/view.ts';
 import Entry from './Entry.astro';
 import SectionHead from './SectionHead.astro';
@@ -10,6 +10,7 @@ interface Props {
 
 const { view } = Astro.props;
 const s = view.sections.work;
+const more = view.moreWork;
 ---
 
 <section class="band work" id="work" aria-labelledby="work-title">
@@ -18,6 +19,17 @@ const s = view.sections.work;
     <div class="cards">
       {view.work.map((entry) => <Entry entry={entry} field={view.field} />)}
     </div>
+    <p class="also">
+      <span class="also-label">{more.label}:</span>{' '}
+      {
+        more.items.map((item, i) => (
+          <>
+            {i > 0 && <span class="sep" aria-hidden="true"> · </span>}
+            <a href={item.href}>{item.name}</a>, {item.note}
+          </>
+        ))
+      }
+    </p>
   </div>
 </section>
 
@@ -25,11 +37,29 @@ const s = view.sections.work;
   .cards {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--s-8) var(--s-7);
+    gap: var(--s-7) var(--s-6);
   }
-  @media (max-width: 63.99rem) {
+  @media (max-width: 47.99rem) {
     .cards {
       grid-template-columns: minmax(0, 1fr);
+      gap: var(--s-6);
     }
+  }
+  .also {
+    max-inline-size: 90ch;
+    margin-block-start: var(--s-8);
+    color: var(--c-ink2);
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+  .also-label {
+    color: var(--c-ink);
+    font-weight: 700;
+  }
+  .also a {
+    font-weight: 600;
+  }
+  .sep {
+    color: var(--c-ink3);
   }
 </style>

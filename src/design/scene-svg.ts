@@ -28,7 +28,11 @@ export interface SceneSvgOptions {
   /** Prefix for every id and class, so several scenes can share a document. */
   idPrefix?: string;
   palms?: boolean;
+  /** With `palms`: draw the palm trees too (off leaves only the shore, for scenes that animate the trees as their own layers). */
+  trees?: boolean;
   skyline?: boolean;
+  /** The causeway across the bay, where the hero's car drives. */
+  causeway?: boolean;
   /** The vaporwave perspective grid over the ocean. */
   grid?: boolean;
   /** Sun center as a fraction of the width, 0..1. Default 0.68. */
@@ -108,6 +112,7 @@ interface Ctx {
   g: SceneGeometry;
   p: string;
   animated: boolean;
+  trees: boolean;
 }
 
 function defs(c: Ctx, parts: { backdrop: boolean; palms: boolean }): string {
@@ -133,7 +138,7 @@ function defs(c: Ctx, parts: { backdrop: boolean; palms: boolean }): string {
         `<stop offset=".5" stop-color="${scene.sunTop}"/><stop offset="1" stop-color="${scene.sunTop}" stop-opacity="0"/></linearGradient>`,
     );
   }
-  if (parts.palms) out.push(palmSymbol(c));
+  if (parts.palms && c.trees) out.push(palmSymbol(c));
   return out.length ? `<defs>${out.join('')}</defs>` : '';
 }
 
@@ -420,8 +425,8 @@ function frond(angle: number, length: number, droop: number): string {
   return `M0 0L${upper.join('L')}L${lower.join('L')}Z`;
 }
 
-function palmSymbol(c: Ctx): string {
-  const { p } = c;
+/** The palm's three paths (trunk, trunk rings, fronds), crown at 0 0, trunk foot at 54..88 x 560. */
+function palmPaths(): [string, string, string] {
   const trunk = 'M-5 6C10 150 30 330 54 560L88 560C58 330 30 150 7 4Z';
   const rings: string[] = [];
   for (let k = 0; k < 11; k++) {
@@ -440,40 +445,204 @@ function palmSymbol(c: Ctx): string {
     frond(150, 110, 60),
     frond(28, 120, 82),
   ];
-  return (
-    `<symbol id="${p}palm" overflow="visible"><path d="${trunk}"/>` +
-    `<path d="${rings.join('')}" fill="${scene.skyTop}" opacity=".55"/><path d="${fronds.join('')}"/>` +
-    `<circle cx="2" cy="6" r="9"/></symbol>`
-  );
+  return [trunk, rings.join(''), fronds.join('')];
 }
 
-function palms(c: Ctx): string {
-  const { g, p } = c;
+/** The palm's shapes, inheriting the silhouette fill from their parent. */
+function palmMarkup(): string {
+  const [trunk, rings, fronds] = palmPaths();
+  return `<path d="${trunk}"/><path d="${rings}" fill="${scene.skyTop}" opacity=".55"/><path d="${fronds}"/><circle cx="2" cy="6" r="9"/>`;
+}
+
+function palmSymbol(c: Ctx): string {
+  return `<symbol id="${c.p}palm" overflow="visible">${palmMarkup()}</symbol>`;
+}
+
+/** [crown x, crown y, scale, mirrored] of each palm; the right side is measured from the right edge. */
+function palmSet(g: SceneGeometry): [number, number, number, boolean][] {
   const u = g.u;
-  // [crown x, crown y, scale, mirrored]; right side measured from the right edge.
-  const set: [number, number, number, boolean][] = [
+  return [
     [g.width - 150 * u, 250 * u, 1.05 * u, true],
     [g.width - 262 * u, 382 * u, 0.72 * u, false],
     [110 * u, 214 * u, 1.1 * u, false],
     [-24 * u, 330 * u, 0.86 * u, true],
   ];
+}
+
+function palms(c: Ctx): string {
+  const { g, p } = c;
+  const u = g.u;
   const W = g.width;
   const H = g.height;
   // A dark foreground shore on both sides, where the palms stand.
   const shore =
     `<path d="M0 ${n(H - 120 * u)}C${n(160 * u)} ${n(H - 132 * u)} ${n(300 * u)} ${n(H - 70 * u)} ${n(420 * u)} ${n(H)}H0Z` +
     `M${n(W)} ${n(H - 150 * u)}C${n(W - 190 * u)} ${n(H - 160 * u)} ${n(W - 360 * u)} ${n(H - 80 * u)} ${n(W - 470 * u)} ${n(H)}H${n(W)}Z"/>`;
+  const trees = c.trees
+    ? palmSet(g)
+        .map(
+          ([x, y, s, m]) =>
+            `<use href="#${p}palm" transform="translate(${n(x)} ${n(y)}) scale(${m ? '-' : ''}${n(s)} ${n(s)})"/>`,
+        )
+        .join('')
+    : '';
+  return `<g class="${p}palms" fill="${scene.silhouette}">${shore}${trees}</g>`;
+}
+
+// ---------------------------------------------------------------------------
+// The causeway and what moves over the scene (the hero animates these as
+// their own layers: a car, a plane and the palms)
+// ---------------------------------------------------------------------------
+
+/** Top of the causeway deck, where the car's wheels touch, in scene units. */
+function roadY(g: SceneGeometry): number {
+  return g.horizon + 18 * g.u;
+}
+
+/** A low causeway across the bay: a dark deck, a pink neon edge, lamps along it. */
+function causeway(c: Ctx): string {
+  const { g, p } = c;
+  const u = g.u;
+  const y = roadY(g);
+  const lamps: string[] = [];
+  for (let x = 40 * u; x < g.width; x += 118 * u) lamps.push(`M${n(x)} ${n(y - 6 * u)}h${n(2.2 * u)}v${n(2.2 * u)}h-${n(2.2 * u)}z`);
   return (
-    `<g class="${p}palms" fill="${scene.silhouette}">` +
-    shore +
-    set
-      .map(
-        ([x, y, s, m]) =>
-          `<use href="#${p}palm" transform="translate(${n(x)} ${n(y)}) scale(${m ? '-' : ''}${n(s)} ${n(s)})"/>`,
-      )
-      .join('') +
-    `</g>`
+    `<g class="${p}causeway"><rect y="${n(y)}" width="${n(g.width)}" height="${n(3.2 * u)}" fill="${scene.silhouette}"/>` +
+    `<rect y="${n(y - 0.4 * u)}" width="${n(g.width)}" height="${n(0.9 * u)}" fill="${scene.neonPink}" opacity=".45"/>` +
+    `<path d="${lamps.join('')}" fill="${scene.sunTop}" opacity=".7"/></g>`
   );
+}
+
+/** One animated layer: its box in scene units and a self-contained <svg> drawn to fill it. */
+export interface SceneActor {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  svg: string;
+}
+
+export interface ScenePalmActor extends SceneActor {
+  /** Where the trunk meets the shore, as fractions of the box: the pivot the palm sways from. */
+  originX: number;
+  originY: number;
+}
+
+export interface SceneActors {
+  /** The car and its light trails, facing right; `y` puts the wheels on the causeway, `x` is 0. */
+  car: SceneActor;
+  /** A small plane, facing left, crossing the sky in front of the sun's upper half; `x` is 0. Its lights are `beacons`, as fractions of its box. */
+  plane: SceneActor & { beacons: { x: number; y: number; kind: 'red' | 'white' }[] };
+  palms: ScenePalmActor[];
+}
+
+/** Bounding box of the palm in its own units (crown at 0 0), measured from the trunk and fronds it draws. */
+function palmBox(): { x0: number; y0: number; x1: number; y1: number } {
+  const [trunk, , fronds] = palmPaths();
+  // Both paths are absolute M/L/C commands only, so their numbers alternate x, y.
+  const nums = `${trunk} ${fronds}`.match(/-?\d+(\.\d+)?/g)!.map(Number);
+  // The crown knot (a circle of r 9 at 2 6) seeds the box.
+  let [x0, y0, x1, y1] = [-7, -3, 11, 15];
+  for (let i = 0; i + 1 < nums.length; i += 2) {
+    x0 = Math.min(x0, nums[i]!);
+    x1 = Math.max(x1, nums[i]!);
+    y0 = Math.min(y0, nums[i + 1]!);
+    y1 = Math.max(y1, nums[i + 1]!);
+  }
+  return { x0: Math.floor(x0) - 2, y0: Math.floor(y0) - 2, x1: Math.ceil(x1) + 2, y1: Math.ceil(y1) + 2 };
+}
+
+/** The trunk's foot in the palm's own units: the middle of the trunk's bottom edge (see palmSymbol). */
+const PALM_FOOT = { x: 71, y: 560 };
+
+export function sceneActors(opts: { width: number; height: number; idPrefix?: string }): SceneActors {
+  const g = sceneGeometry(opts.width, opts.height);
+  const p = opts.idPrefix ?? 'ra-';
+  const u = g.u;
+
+  // The car: our own low 1980s wedge (long hood, raked windshield, flat
+  // roof, squared tail), a cyan side stripe, glowing tail lights and the
+  // pink and cyan light trails it leaves behind. Drawn at 72 x 20 units.
+  const trail = 170;
+  const cw = trail + 86;
+  const ch = 22;
+  const body =
+    'M0 17V9.5L3 8.5L20 8L29 3L45 2.6L55 8.2L69 10.4L72 13.4V16L71 17H62A5 5 0 0 0 52 17H20A5 5 0 0 0 10 17Z';
+  const car =
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${cw} ${ch}" preserveAspectRatio="none">` +
+    `<defs><linearGradient id="${p}tp"><stop offset="0" stop-color="${scene.neonPink}" stop-opacity="0"/><stop offset="1" stop-color="${scene.neonPink}"/></linearGradient>` +
+    `<linearGradient id="${p}tc"><stop offset="0" stop-color="${scene.neonCyan}" stop-opacity="0"/><stop offset="1" stop-color="${scene.neonCyan}"/></linearGradient>` +
+    `<radialGradient id="${p}tl"><stop offset="0" stop-color="${scene.sunBottom}" stop-opacity=".9"/><stop offset="1" stop-color="${scene.sunBottom}" stop-opacity="0"/></radialGradient>` +
+    `<radialGradient id="${p}hl"><stop offset="0" stop-color="${scene.sunTop}" stop-opacity=".55"/><stop offset="1" stop-color="${scene.sunTop}" stop-opacity="0"/></radialGradient></defs>` +
+    // Trails: a soft wide wash and a bright core each, fading out behind the car.
+    `<rect x="0" y="7.5" width="${trail + 2}" height="7" fill="url(#${p}tp)" opacity=".22"/>` +
+    `<rect x="18" y="10" width="${trail - 16}" height="2" fill="url(#${p}tp)"/>` +
+    `<rect x="46" y="13.6" width="${trail - 42}" height="1.3" fill="url(#${p}tc)" opacity=".9"/>` +
+    `<g transform="translate(${trail} 0)">` +
+    `<ellipse cx="80" cy="13.6" rx="12" ry="3.4" fill="url(#${p}hl)"/>` +
+    `<circle cx="0" cy="11" r="7" fill="url(#${p}tl)"/>` +
+    `<path d="${body}" fill="${scene.silhouette}"/>` +
+    `<path d="M22 8.2L30 4.1L43 3.8L51 8.2Z" fill="${scene.neonCyan}" opacity=".32"/>` +
+    `<path d="M0 9.5L3 8.5L20 8L29 3L45 2.6L55 8.2L69 10.4L72 13.4" fill="none" stroke="${scene.neonPink}" stroke-width="1" stroke-linejoin="round"/>` +
+    `<rect x="4" y="12" width="46" height=".9" fill="${scene.neonCyan}" opacity=".75"/>` +
+    `<rect x="-.4" y="9.8" width="2.6" height="2.6" fill="${scene.sunBottom}"/>` +
+    `<circle cx="15" cy="17" r="3.6" fill="${scene.silhouette}" stroke="${scene.neonCyan}" stroke-width=".7" stroke-opacity=".6"/>` +
+    `<circle cx="57" cy="17" r="3.6" fill="${scene.silhouette}" stroke="${scene.neonCyan}" stroke-width=".7" stroke-opacity=".6"/>` +
+    `</g></svg>`;
+
+  // The plane: a small airliner seen from the side, lit windows along it,
+  // drawn at 34 x 12 units and shown a little larger. It flies across the
+  // sun's upper half (clear of the slices), where its silhouette reads.
+  const pw = 34;
+  const ph = 12;
+  const planeScale = 1.6;
+  const windows: string[] = [];
+  for (let x = 8; x < 24; x += 2.4) windows.push(`M${n(x)} 5h1.1v.9h-1.1z`);
+  const plane =
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${pw} ${ph}" preserveAspectRatio="none">` +
+    `<path d="M1 6.4Q2.6 4.4 7 4.3H26L30 1H32.4L31.4 5.2Q32.6 6.4 30.4 7.4H7Q2.6 7.4 1 6.4Z" fill="${scene.silhouette}" stroke="${scene.skyMid}" stroke-width=".6"/>` +
+    `<path d="M13 6.6L19.6 10.6H22.4L18.6 6.6Z" fill="${scene.silhouette}" stroke="${scene.skyMid}" stroke-width=".6"/>` +
+    `<path d="${windows.join('')}" fill="${scene.sunTop}" opacity=".6"/></svg>`;
+
+  // The palms, one layer each, so each can sway from its own foot.
+  const box = palmBox();
+  const bw = box.x1 - box.x0;
+  const bh = box.y1 - box.y0;
+  const palmSvg = (mirror: boolean) =>
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${mirror ? -box.x1 : box.x0} ${box.y0} ${bw} ${bh}" preserveAspectRatio="none">` +
+    `<g fill="${scene.silhouette}"${mirror ? ' transform="scale(-1 1)"' : ''}>${palmMarkup()}</g></svg>`;
+  const palmActors = palmSet(g).map(([x, y, s, m]): ScenePalmActor => {
+    const left = m ? x - box.x1 * s : x + box.x0 * s;
+    const top = y + box.y0 * s;
+    const footX = m ? x - PALM_FOOT.x * s : x + PALM_FOOT.x * s;
+    const footY = y + PALM_FOOT.y * s;
+    return {
+      x: r1(left),
+      y: r1(top),
+      width: r1(bw * s),
+      height: r1(bh * s),
+      originX: Math.round(((footX - left) / (bw * s)) * 1000) / 1000,
+      originY: Math.round(((footY - top) / (bh * s)) * 1000) / 1000,
+      svg: palmSvg(m),
+    };
+  });
+
+  return {
+    car: { x: 0, y: r1(roadY(g) - 18.6 * u), width: r1(cw * u), height: r1(ch * u), svg: car },
+    plane: {
+      x: 0,
+      y: r1(g.sun.cy - 0.62 * g.sun.r),
+      width: r1(pw * planeScale * u),
+      height: r1(ph * planeScale * u),
+      svg: plane,
+      beacons: [
+        { x: 16 / pw, y: 4.1 / ph, kind: 'red' },
+        { x: 32 / pw, y: 1.2 / ph, kind: 'white' },
+        { x: 21.5 / pw, y: 10.4 / ph, kind: 'white' },
+      ],
+    },
+    palms: palmActors,
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -490,6 +659,7 @@ function ctx(opts: SceneSvgOptions): Ctx {
     g: sceneGeometry(opts.width, opts.height, opts.sunX ?? SUN_X),
     p: opts.idPrefix ?? 'rg-',
     animated: Boolean(opts.animated),
+    trees: opts.trees ?? true,
   };
 }
 
@@ -508,6 +678,7 @@ export function sceneSvg(opts: SceneSvgOptions): string {
     ocean(c) +
     (opts.grid ? grid(c) : '') +
     (showSkyline ? skyline(c) : '') +
+    (opts.causeway ? causeway(c) : '') +
     (showPalms ? palms(c) : '') +
     `</svg>`
   );
@@ -521,6 +692,7 @@ export function sceneSilhouettesSvg(opts: SceneSvgOptions): string {
     open(opts) +
     defs(c, { backdrop: false, palms: showPalms }) +
     ((opts.skyline ?? true) ? skyline(c) : '') +
+    (opts.causeway ? causeway(c) : '') +
     (showPalms ? palms(c) : '') +
     `</svg>`
   );

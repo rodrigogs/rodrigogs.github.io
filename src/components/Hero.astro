@@ -4,13 +4,16 @@
  *   L0 the static SVG scene (first paint, and the fallback everywhere),
  *   L1 the live WebGL canvas, faded in after its first frame,
  *   the cheat-code floor grid (only while the canvas is not running),
- *   L2 the skyline with neon edges and the palms, crisp SVG,
- *   L3 the text, on a scrim, left of the sun.
+ *   L2 the skyline with neon edges, the causeway and the shore, crisp SVG,
+ *   L3 what moves over it, each its own small layer animated by CSS
+ *      transforms only: a plane crossing the sky, a car with light trails
+ *      on the causeway, and the palms swaying from their feet,
+ *   L4 the text, on a scrim, left of the sun.
  * Top right: the HUD (live local time and real numbers, each linking to
  * its proof). The sun is placed by the same rule in CSS and in the shader
  * (see --sun-at), so it never sits under the text.
  */
-import { SUN_X, sceneGeometry, sceneGridSvg, sceneSilhouettesSvg, sceneSvg } from '../design/scene-svg.ts';
+import { SUN_X, sceneActors, sceneGeometry, sceneGridSvg, sceneSilhouettesSvg, sceneSvg } from '../design/scene-svg.ts';
 import type { SiteView } from '../lib/view.ts';
 import CopyEmail from './CopyEmail.astro';
 import Icon, { type IconName } from './Icon.astro';
@@ -26,7 +29,18 @@ const [first, ...rest] = person.name.split(' ');
 const size = { width: 1600, height: 900 };
 const poster = sceneSvg({ ...size, idPrefix: 'hp-', palms: false, skyline: false });
 const floor = sceneGridSvg({ ...size, idPrefix: 'hg-' });
-const silhouettes = sceneSilhouettesSvg({ ...size, idPrefix: 'hs-' });
+const silhouettes = sceneSilhouettesSvg({ ...size, idPrefix: 'hs-', trees: false, causeway: true });
+const actors = sceneActors({ ...size, idPrefix: 'ha-' });
+/** Palm sway: period, phase and amplitude per tree, so no two move together. */
+const sway = [
+  { dur: 7.4, delay: -1.2, amp: 1.4 },
+  { dur: 6.3, delay: -4.1, amp: 1.7 },
+  { dur: 8.6, delay: -2.6, amp: 1.3 },
+  { dur: 7.9, delay: -5.8, amp: 1.5 },
+];
+/** Scene units as custom properties on a stage child (1 unit = 1/1600 of the stage width). */
+const box = (a: { x: number; y: number; width: number; height: number }) =>
+  `--x: ${a.x}; --y: ${a.y}; --bw: ${a.width}; --bh: ${a.height}`;
 /** The sun radius as a fraction of the scene width, so the CSS can find the disk's left edge. */
 const sunR = sceneGeometry(size.width, size.height).sun.r / size.width;
 
@@ -52,6 +66,28 @@ const stats: Stat[] = [
     <canvas class="live" data-scene></canvas>
     <div class="layer floor" set:html={floor} />
     <div class="layer skyline" set:html={silhouettes} />
+    <div class="layer skyline actors">
+      <div class="stage">
+        <div class="track fly" style={box(actors.plane)}>
+          <div class="plane" style={box(actors.plane)}>
+            <Fragment set:html={actors.plane.svg} />
+            {actors.plane.beacons.map((b) => <span class="beacon" data-kind={b.kind} style={`--bx: ${b.x}; --by: ${b.y}`} />)}
+          </div>
+        </div>
+        <div class="track drive" style={box(actors.car)}>
+          <div class="car" style={box(actors.car)} set:html={actors.car.svg} />
+        </div>
+        {
+          actors.palms.map((palm, i) => (
+            <div
+              class="palm"
+              style={`${box(palm)}; --ox: ${palm.originX}; --oy: ${palm.originY}; --dur: ${sway[i % sway.length]!.dur}s; --delay: ${sway[i % sway.length]!.delay}s; --amp: ${sway[i % sway.length]!.amp}deg`}
+              set:html={palm.svg}
+            />
+          ))
+        }
+      </div>
+    </div>
     <div class="scrim"></div>
   </div>
 
@@ -140,6 +176,8 @@ const stats: Stat[] = [
   // The live scene loads after the page, on idle, and only where it can run well.
   const canvas = document.querySelector<HTMLCanvasElement>('canvas[data-scene]');
   const hero = document.querySelector<HTMLElement>('[data-hero]');
+  // The CSS actors (plane, car, palms) pause while the hero is off screen.
+  if (hero) new IntersectionObserver(([e]) => hero.toggleAttribute('data-away', !e?.isIntersecting)).observe(hero);
   const nav = navigator as Navigator & { connection?: { saveData?: boolean }; deviceMemory?: number };
   const weak =
     nav.connection?.saveData === true ||
@@ -230,6 +268,125 @@ const stats: Stat[] = [
   @media (min-width: 64rem) {
     .skyline {
       mask-image: linear-gradient(90deg, rgb(0 0 0 / 0.4) var(--col-end), #000 var(--sun-left));
+    }
+  }
+
+  /* Actors: the same box as the scene SVGs, in scene units (1600 across).
+     Everything here moves by transform only, on its own small layer. */
+  .stage {
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-start: var(--x0);
+    inline-size: var(--w);
+    block-size: calc(var(--w) * 0.5625);
+    container-type: size;
+  }
+  .stage > *,
+  .track > * {
+    --u: calc(100cqw / 1600);
+    position: absolute;
+  }
+  .plane,
+  .car,
+  .palm {
+    inset-inline-start: calc(var(--x) * var(--u));
+    inline-size: calc(var(--bw) * var(--u));
+    block-size: calc(var(--bh) * var(--u));
+  }
+  .palm {
+    inset-block-start: calc(var(--y) * var(--u));
+    transform-origin: calc(var(--ox) * 100%) calc(var(--oy) * 100%);
+    animation: sway var(--dur) ease-in-out var(--delay) infinite alternate;
+  }
+  .stage :global(svg) {
+    inline-size: 100%;
+    block-size: 100%;
+  }
+  /* A track spans the stage at its actor's height; the actor starts just off one edge. */
+  .track {
+    inset-inline: 0;
+    inset-block-start: calc(var(--y) * var(--u));
+    block-size: calc(var(--bh) * var(--u));
+    will-change: transform;
+  }
+  .track > * {
+    inset-block-start: 0;
+  }
+  .drive {
+    animation: drive 17s linear -3s infinite;
+  }
+  .drive .car {
+    inset-inline-start: calc(var(--bw) * var(--u) * -1);
+  }
+  .fly {
+    animation: fly 31s linear -4s infinite;
+  }
+  .fly .plane {
+    inset-inline-start: 100%;
+  }
+  .beacon {
+    position: absolute;
+    inset-inline-start: calc(var(--bx) * 100%);
+    inset-block-start: calc(var(--by) * 100%);
+    inline-size: calc(var(--u) * 3.2);
+    block-size: calc(var(--u) * 3.2);
+    margin: calc(var(--u) * -1.6);
+    border-radius: 50%;
+    background: var(--scene-sun-bottom);
+    box-shadow: 0 0 calc(var(--u) * 6) calc(var(--u) * 1.5) var(--scene-sun-bottom);
+    animation: blink 1.5s steps(1) infinite;
+  }
+  .beacon[data-kind='white'] {
+    background: var(--c-ink);
+    box-shadow: 0 0 calc(var(--u) * 6) calc(var(--u) * 1.5) var(--c-ink);
+    animation-duration: 1.1s;
+    animation-delay: -0.4s;
+  }
+  @keyframes sway {
+    from {
+      transform: rotate(calc(var(--amp) * -1));
+    }
+    to {
+      transform: rotate(var(--amp));
+    }
+  }
+  /* 13.6 s across, then a short empty road before the next pass. */
+  @keyframes drive {
+    from {
+      transform: translateX(0);
+    }
+    80%,
+    to {
+      transform: translateX(calc(100cqw + var(--bw) * var(--u)));
+    }
+  }
+  @keyframes fly {
+    from {
+      transform: translateX(0);
+    }
+    85%,
+    to {
+      transform: translateX(calc(-100cqw - var(--bw) * var(--u)));
+    }
+  }
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    40% {
+      opacity: 0.15;
+    }
+  }
+  .hero[data-away] .actors * {
+    animation-play-state: paused;
+  }
+  /* Reduced motion: nothing drives, flies or sways; the car and the plane stay off stage. */
+  @media (prefers-reduced-motion: reduce) {
+    .palm,
+    .track,
+    .beacon {
+      animation: none;
     }
   }
 
@@ -520,6 +677,16 @@ const stats: Stat[] = [
     .copy {
       padding-block-start: var(--s-4);
       background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--c-night) 80%, transparent) 5rem);
+    }
+  }
+  /* Phones: the name is the first thing read; the HUD follows the actions. */
+  @media (max-width: 47.99rem) {
+    .hud {
+      position: relative;
+      inset: auto;
+      order: 2;
+      margin-block-start: var(--s-6);
+      padding-inline: var(--pad);
     }
   }
   @media (max-width: 29.99rem) {

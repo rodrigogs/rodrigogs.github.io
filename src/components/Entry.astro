@@ -1,14 +1,12 @@
 ---
 /**
- * A work entry as a loading screen: the "screen" on top is a small night
- * sky with a sliced sun at its right edge and the title in the outlined
- * display face (never over the sun), then the same furniture on every
- * card: status, since, latest release, note, detail, proofs, stack, links.
+ * A featured project in a menu frame: its name, one sentence on what it
+ * does, the short detail, at most two proof numbers, what it is made of,
+ * and where to check it.
  */
 import type { EntryView, SiteView } from '../lib/view.ts';
 import EntryLinks from './EntryLinks.astro';
 import Permalink from './Permalink.astro';
-import Plate from './Plate.astro';
 import Proofs from './Proofs.astro';
 
 interface Props {
@@ -19,41 +17,25 @@ interface Props {
 const { entry, field } = Astro.props;
 ---
 
-<article class="frame card" id={entry.id} data-entry data-status={entry.status} aria-labelledby={`${entry.id}-name`}>
-  <div class="screen">
-    <div class="title-row">
-      <h3 class="display card-title" id={`${entry.id}-name`}>{entry.name}</h3>
-      <Permalink id={entry.id} name={entry.name} label={field.permalink} />
-    </div>
-    <dl class="meta">
-      <div>
-        <dt class="sr-only">{field.status}</dt>
-        <dd><Plate role={entry.statusRole}>{entry.statusLabel}</Plate></dd>
-      </div>
-      <div>
-        <dt>{field.born}</dt>
-        <dd class="hud-v"><time datetime={String(entry.born)}>{entry.born}</time></dd>
-      </div>
-      {
-        entry.latest && (
-          <div>
-            <dt>{field.latest}</dt>
-            <dd class="hud-v">
-              {entry.latest.href ? <a href={entry.latest.href}>{entry.latest.tag}</a> : <span>{entry.latest.tag}</span>}
-            </dd>
-          </div>
-        )
-      }
-    </dl>
+<article class="frame card" id={entry.id} data-entry aria-labelledby={`${entry.id}-name`}>
+  <div class="title-row">
+    <h3 class="display card-title" id={`${entry.id}-name`}>{entry.name}</h3>
+    <Permalink id={entry.id} name={entry.name} label={field.permalink} />
   </div>
-
-  <div class="body">
-    <p class="note">{entry.note}</p>
-    <p class="detail">{entry.detail}</p>
+  <p class="note">{entry.note}</p>
+  <p class="detail">{entry.detail}</p>
+  <div class="foot">
     <Proofs proofs={entry.proofs} />
-    <ul class="chips">
-      {entry.stack.map((s) => <li>{s}</li>)}
-    </ul>
+    <p class="stack">
+      {
+        entry.stack.map((name, i) => (
+          <>
+            {i > 0 && <span aria-hidden="true"> · </span>}
+            <span class="tech">{name}</span>
+          </>
+        ))
+      }
+    </p>
     <EntryLinks links={entry.links} />
   </div>
 </article>
@@ -62,85 +44,17 @@ const { entry, field } = Astro.props;
   .card {
     display: flex;
     flex-direction: column;
-    gap: var(--s-5);
-    padding: var(--s-3) var(--s-3) var(--s-6);
-  }
-  /* The loading screen: a dusk strip with a sliced sun setting at the right. */
-  .screen {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-4);
-    padding: var(--s-6) 8.5rem var(--s-5) var(--s-5);
-    overflow: hidden;
-    border-radius: 8px;
-    background:
-      linear-gradient(to top, color-mix(in srgb, var(--scene-horizon) 45%, transparent) 0, transparent 3px),
-      linear-gradient(180deg, var(--scene-sky-top) 0%, var(--scene-sky-mid) 100%);
-  }
-  .screen::after {
-    content: '';
-    position: absolute;
-    inset-inline-end: 1.75rem;
-    inset-block-end: 0;
-    inline-size: 5.5rem;
-    block-size: 3.25rem;
-    border-radius: 999px 999px 0 0;
-    background: linear-gradient(180deg, var(--scene-sun-top), var(--scene-sun-bottom));
-    mask-image: linear-gradient(
-      180deg,
-      #000 0 42%,
-      transparent 42% 48%,
-      #000 48% 62%,
-      transparent 62% 70%,
-      #000 70% 80%,
-      transparent 80% 90%,
-      #000 90%
-    );
-    box-shadow: 0 0 2rem var(--glow-pink);
-  }
-  .card[data-status='dormant'] .screen {
-    background:
-      linear-gradient(to top, color-mix(in srgb, var(--scene-horizon) 25%, transparent) 0, transparent 3px),
-      linear-gradient(180deg, var(--scene-sky-top) 0%, color-mix(in srgb, var(--scene-sky-mid) 55%, var(--scene-sky-top)) 100%);
+    gap: var(--s-3);
   }
   .title-row {
     display: flex;
     align-items: center;
     gap: var(--s-2);
+    margin-block-end: var(--s-1);
   }
   .card-title {
-    font-size: clamp(1.75rem, 1.2rem + 1.4vw, 2.5rem);
+    font-size: clamp(1.625rem, 1.2rem + 1vw, 2.125rem);
     overflow-wrap: anywhere;
-  }
-  .meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--s-2) var(--s-5);
-    font-size: var(--t-micro);
-  }
-  .meta > div {
-    display: flex;
-    align-items: baseline;
-    gap: var(--s-2);
-  }
-  .meta dt {
-    color: var(--c-ink2);
-    font-weight: 600;
-  }
-  .hud-v {
-    font-variant-numeric: tabular-nums;
-    color: var(--c-ink);
-    font-family: var(--hud);
-    font-weight: 700;
-    letter-spacing: 0.04em;
-  }
-  .body {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-4);
-    padding-inline: var(--s-4);
   }
   .note {
     color: var(--c-ink);
@@ -153,10 +67,19 @@ const { entry, field } = Astro.props;
     font-size: 1rem;
     line-height: 1.6;
   }
-  @media (max-width: 29.99rem) {
-    .screen {
-      padding-inline-end: var(--s-5);
-      padding-block-end: 4.25rem;
-    }
+  /* Proofs, stack and links sit on the card's floor, so cards of unequal copy still align. */
+  .foot {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-block-start: auto;
+    padding-block-start: var(--s-3);
+  }
+  .stack {
+    color: var(--c-ink3);
+    font-size: var(--t-small);
+  }
+  .tech {
+    white-space: nowrap;
   }
 </style>

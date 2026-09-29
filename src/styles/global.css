@@ -1,6 +1,6 @@
 /*
  * Global layer of the 1986 night: reset, browser surfaces, the four type
- * roles, the grid, and the shared primitives (menu frames, plates, chips,
+ * roles, the layout wrapper, and the shared primitives (menu frames, plates,
  * actions, HUD numerals). Every color, size and step comes from the token
  * stylesheet emitted by cssVariables() (src/design/tokens.ts).
  *
@@ -119,11 +119,10 @@ select {
   color: inherit;
 }
 
-/* Tabular figures only where numbers are data (readouts, figure columns,
-   dates, the tuner): running text and names keep Inter's proportional
-   figures and its narrow hyphen. */
+/* Tabular figures only where numbers are data (readouts and dates):
+   running text and names keep Inter's proportional figures and its
+   narrow hyphen. */
 time,
-select,
 .hud-n {
   font-variant-numeric: tabular-nums;
 }
@@ -184,24 +183,11 @@ a:hover {
   padding-inline: var(--pad);
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: var(--gutter);
-}
-
-@media (max-width: 47.99rem) {
-  .grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .grid > * {
-    grid-column: 1 / -1 !important;
-  }
-}
-
-/* A section is a clean night band; a neon horizon line separates bands. */
+/* A section is a clean night band; a neon horizon line separates bands,
+   and a soft light (a headlight far off) drifts along it now and then. */
 .band {
   position: relative;
+  overflow-x: clip;
   padding-block: clamp(var(--s-8), 9vw, var(--s-10));
 }
 
@@ -222,12 +208,50 @@ a:hover {
   opacity: 0.55;
 }
 
+.band::after {
+  content: '';
+  position: absolute;
+  inset-block-start: -0.25rem;
+  inset-inline-start: 0;
+  inline-size: 16rem;
+  block-size: calc(0.5rem + 2px);
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--c-ink) 70%, transparent), var(--glow-pink) 45%, transparent);
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .band::after {
+    animation: horizon-light 19s linear infinite;
+  }
+  .band:nth-of-type(even)::after {
+    animation-duration: 23s;
+    animation-delay: -11s;
+    animation-direction: reverse;
+  }
+}
+
+@keyframes horizon-light {
+  from {
+    opacity: 0.8;
+    transform: translateX(-100%);
+  }
+  60%,
+  to {
+    opacity: 0.8;
+    transform: translateX(100vw);
+  }
+}
+
 /* Type roles ------------------------------------------------------------ */
 
 /* Titles: white, heavy dark outline, hard drop, as the brief pins. */
+/* Luckiest Guy's lowercase sits at cap height and reads as typos next to its
+   capitals, so the display face is always set in capitals. */
 .display {
   font-family: var(--display);
   font-weight: 400;
+  text-transform: uppercase;
   color: var(--c-ink);
   letter-spacing: 0.02em;
   line-height: 1;
@@ -294,16 +318,6 @@ a:hover {
   --tilt: 0.45deg;
 }
 
-/* The small pink label in the frame's corner, as on a menu screen. */
-.frame-label {
-  font-family: var(--hud);
-  font-size: var(--t-micro);
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--c-brand);
-}
-
 /* Plates: the role tag, a solid role fill with on-role text. */
 .plate {
   --plate-bg: var(--c-ink);
@@ -340,27 +354,6 @@ a:hover {
 .plate[data-role='deprecated'] {
   --plate-bg: var(--c-deprecated);
   --plate-fg: var(--c-on-deprecated);
-}
-
-/* Chips: tool and stack names. */
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s-2);
-}
-
-.chips li {
-  display: inline-flex;
-  align-items: center;
-  min-block-size: 1.75rem;
-  padding: 0.125rem 0.625rem;
-  border: 1px solid var(--c-rule);
-  border-radius: 999px;
-  background: var(--c-merged-tint);
-  color: var(--c-ink2);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  line-height: 1.2;
 }
 
 /* Actions: plates with a dark outline; hover takes the selection bar. */
@@ -402,6 +395,7 @@ a:hover {
   background: var(--c-brand);
   color: var(--c-on-brand);
   font-family: var(--display);
+  text-transform: uppercase;
   font-weight: 400;
   font-size: 1.1875rem;
   letter-spacing: 0.04em;

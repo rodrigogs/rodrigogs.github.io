@@ -1,0 +1,95 @@
+---
+/**
+ * About: who I am in two plain paragraphs, then two short lines (what I
+ * ship with, the AI tools I use daily) as plain inline lists.
+ */
+import type { SiteView } from '../lib/view.ts';
+
+interface Props {
+  view: SiteView;
+}
+
+const { view } = Astro.props;
+const a = view.about;
+---
+
+<section class="band about" id="about" aria-labelledby="about-title">
+  <div class="wrap layout">
+    <h2 class="display section-title" id="about-title">{a.label}</h2>
+    <div class="text">
+      <p class="lead">{a.claim}</p>
+      <p>{a.body}</p>
+    </div>
+    <dl class="lines">
+      {
+        [a.stack, a.aiTools].map((line) => (
+          <div>
+            <dt>{line.label}:</dt>
+            <dd>{line.items.join(', ')}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<style>
+  /* Wide screens: the paragraphs at a reading measure, the two lines beside them. */
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 40rem) minmax(0, 1fr);
+    grid-template-areas:
+      'title title'
+      'text lines';
+    align-items: start;
+    gap: var(--s-6) var(--s-8);
+  }
+  .section-title {
+    grid-area: title;
+  }
+  .text {
+    grid-area: text;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    color: var(--c-ink2);
+    font-size: 1.125rem;
+    line-height: 1.65;
+  }
+  .lead {
+    color: var(--c-ink);
+  }
+  .lines {
+    grid-area: lines;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    max-inline-size: 36rem;
+    padding-block-start: var(--s-1);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  .lines dt {
+    color: var(--c-ink);
+    font-weight: 700;
+  }
+  .lines dd {
+    color: var(--c-ink2);
+  }
+  @media (max-width: 63.99rem) {
+    .layout {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas:
+        'title'
+        'text'
+        'lines';
+    }
+    .text {
+      max-inline-size: 40rem;
+    }
+    .lines {
+      padding-block-start: var(--s-5);
+      border-block-start: 1px solid var(--c-rule);
+    }
+  }
+</style>

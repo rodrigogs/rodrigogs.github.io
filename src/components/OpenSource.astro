@@ -1,12 +1,10 @@
 ---
 /**
  * Open source: work that landed in other people's projects, as one compact
- * list in a menu frame. Each row: the repository, its stars, the count that
- * links to the proof, the years, one line on what landed and the merged
- * pull requests by title.
+ * list in a menu frame. Each row: the repository, the count that links to
+ * its proof, and one line on what landed.
  */
 import type { SiteView } from '../lib/view.ts';
-import Permalink from './Permalink.astro';
 import SectionHead from './SectionHead.astro';
 
 interface Props {
@@ -15,89 +13,51 @@ interface Props {
 
 const { view } = Astro.props;
 const s = view.sections.openSource;
-const slug = (repo: string) => repo.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 ---
 
 <section class="band open-source" id="open-source" aria-labelledby="open-source-title">
   <div class="wrap">
     <SectionHead id="open-source" label={s.label} claim={s.claim} />
-    <ol class="frame rows">
+    <ul class="frame rows">
       {
         view.upstream.map((row) => {
-          const id = slug(row.repo);
           const [owner, name] = row.repo.split('/');
           return (
-            <li class="row" id={id} data-entry>
-              <div class="repo">
-                <h3 class="name">
-                  <a href={row.url}>
-                    <span class="owner">{owner}/</span>
-                    {name}
-                  </a>
-                </h3>
-                <Permalink id={id} name={row.repo} label={view.field.permalink} />
-              </div>
+            <li class="row">
+              <h3 class="name">
+                <a href={row.url}>
+                  <span class="owner">{owner}/</span><wbr />{name}
+                </a>
+              </h3>
               <p class="count">
                 <a href={row.proofUrl}>
                   <span class="n">{row.countValue}</span> {row.countLabel}
                 </a>
               </p>
-              <p class="facts">
-                <span>
-                  <span class="n2">{row.stars}</span> {view.field.stars}
-                </span>
-                {row.years && <span class="n2">{row.years}</span>}
-              </p>
-              <div class="what">
-                <p class="note">{row.note}</p>
-                {row.highlights.length > 0 && (
-                  <ul class="prs">
-                    {row.highlights.map((h) => (
-                      <li>
-                        <a href={h.url}>{h.title}</a> <span class="date">{h.date}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
+              <p class="note">{row.note}</p>
             </li>
           );
         })
       }
-    </ol>
+    </ul>
   </div>
 </section>
 
 <style>
-  .rows {
-    display: grid;
-    gap: 0;
-  }
   .row {
     display: grid;
     grid-template-columns: minmax(0, 17rem) minmax(0, 11rem) minmax(0, 1fr);
-    grid-template-areas:
-      'repo count what'
-      'facts facts what';
-    grid-template-rows: auto 1fr;
-    align-items: start;
+    align-items: baseline;
     gap: var(--s-1) var(--s-6);
-    padding-block: var(--s-5);
+    padding-block: var(--s-4);
   }
   .row + .row {
     border-block-start: 1px solid var(--c-rule);
   }
-  .repo {
-    grid-area: repo;
-    display: flex;
-    align-items: center;
-    gap: var(--s-1);
-    min-inline-size: 0;
-  }
   .name {
     font-size: 1.0625rem;
     font-weight: 700;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
   }
   .owner {
     color: var(--c-ink3);
@@ -107,8 +67,8 @@ const slug = (repo: string) => repo.toLowerCase().replace(/[^a-z0-9]+/g, '-');
     color: inherit;
   }
   .count {
-    grid-area: count;
     font-size: var(--t-small);
+    white-space: nowrap;
   }
   .count a {
     text-decoration: none;
@@ -117,59 +77,28 @@ const slug = (repo: string) => repo.toLowerCase().replace(/[^a-z0-9]+/g, '-');
     font-variant-numeric: tabular-nums;
     color: var(--c-merged-text);
     font-family: var(--hud);
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: 800;
   }
   .count a:hover .n {
     color: inherit;
   }
-  .facts {
-    grid-area: facts;
-    display: flex;
-    gap: var(--s-4);
-    color: var(--c-ink3);
-    font-size: var(--t-micro);
-  }
-  .n2 {
-    font-variant-numeric: tabular-nums;
-    color: var(--c-ink2);
-    font-family: var(--hud);
-    font-weight: 700;
-  }
-  .what {
-    grid-area: what;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-2);
-  }
   .note {
-    color: var(--c-ink);
-    font-size: 1rem;
-    max-inline-size: 64ch;
-  }
-  .prs {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-1);
-    font-size: var(--t-small);
     color: var(--c-ink2);
-  }
-  .date {
-    font-variant-numeric: tabular-nums;
-    color: var(--c-ink3);
-    font-size: var(--t-micro);
-    white-space: nowrap;
+    font-size: 1rem;
+    max-inline-size: 70ch;
   }
   @media (max-width: 63.99rem) {
     .row {
       grid-template-columns: minmax(0, 1fr) auto;
-      grid-template-areas:
-        'repo count'
-        'facts facts'
-        'what what';
     }
-    .what {
-      margin-block-start: var(--s-2);
+    .note {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 29.99rem) {
+    .row {
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 </style>
