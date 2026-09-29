@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-09-28T23:35:31.275Z",
+  "fetchedAt": "2026-09-29T02:28:48.189Z",
   "sources": {
     "github": {
       "ok": true,
-      "lastSuccessAt": "2026-09-28T23:35:31.275Z"
+      "lastSuccessAt": "2026-09-29T02:28:48.189Z"
     },
     "npm": {
       "ok": true,
-      "lastSuccessAt": "2026-09-28T23:35:31.275Z"
+      "lastSuccessAt": "2026-09-29T02:28:48.189Z"
     },
     "crates": {
       "ok": true,
-      "lastSuccessAt": "2026-09-28T23:35:31.275Z"
+      "lastSuccessAt": "2026-09-29T02:28:48.189Z"
     }
   },
   "user": {
@@ -21,7 +21,7 @@
     "followers": 211,
     "publicRepos": 137,
     "createdAt": "2012-09-17T12:49:05Z",
-    "contributionsLastYear": 6562,
+    "contributionsLastYear": 6731,
     "contributionWeeks": [
       43,
       77,
@@ -75,7 +75,7 @@
       270,
       414,
       1294,
-      315
+      484
     ]
   },
   "repos": [
@@ -216,7 +216,7 @@
         "url": "https://github.com/rodrigogs/whats-reader/releases/tag/v1.31.0"
       },
       "releaseCount": 93,
-      "releaseDownloads": 7051
+      "releaseDownloads": 7053
     },
     {
       "name": "nodejs-web-jade-scaffold",
@@ -2694,10 +2694,10 @@
       "forks": 0,
       "language": "TypeScript",
       "languages": {
-        "TypeScript": 184018,
-        "Astro": 73895,
-        "CSS": 8888,
-        "JavaScript": 1526
+        "TypeScript": 277248,
+        "Astro": 82854,
+        "CSS": 9368,
+        "JavaScript": 2188
       },
       "topics": [
         "astro",
@@ -2709,7 +2709,7 @@
         "Vitest"
       ],
       "createdAt": "2026-09-28T20:50:59Z",
-      "pushedAt": "2026-09-28T22:27:35Z",
+      "pushedAt": "2026-09-29T02:28:26Z",
       "archived": false,
       "fork": false,
       "license": null,
@@ -3664,7 +3664,7 @@
     {
       "repo": "NousResearch/hermes-agent",
       "url": "https://github.com/NousResearch/hermes-agent",
-      "stars": 249789,
+      "stars": 249820,
       "mergedPrs": 0,
       "prsOpened": 40,
       "commits": 5,
@@ -3694,7 +3694,7 @@
     {
       "repo": "nesquena/hermes-webui",
       "url": "https://github.com/nesquena/hermes-webui",
-      "stars": 18653,
+      "stars": 18655,
       "mergedPrs": 5,
       "prsOpened": 8,
       "commits": 52,
@@ -3789,6 +3789,6 @@
     "repos": 92,
     "monthlyDownloads": 21863,
     "packages": 43,
-    "releaseDownloads": 7093
+    "releaseDownloads": 7095
   }
 }
