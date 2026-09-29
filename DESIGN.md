@@ -1,82 +1,140 @@
 ---
-name: Rodrigo Gomes — Release History
-description: A personal site read as a Keep a Changelog entry, where every claim is a dated, linked release.
+name: Rodrigo Gomes — 1986 Miami Night
+description: A night drive through 1986 Miami rendered as a console-menu UI, where every neon number still links to its proof.
 colors:
-  paper: "#FAFBFC"
-  sheet: "#FFFFFF"
-  ink: "#12161D"
-  ink-2: "#3E4552"
-  ink-3: "#5D6573"
-  rule: "#DDE1E7"
-  added: "#127543"
-  on-added: "#FFFFFF"
-  added-tint: "#E3F4EA"
-  changed: "#F2B71F"
-  on-changed: "#12161D"
-  changed-tint: "#FDF3D6"
-  merged: "#2447D6"
+  night: "#0E0826"
+  panel: "#1C1440"
+  rule: "#3A2C72"
+  ink: "#FFF6FB"
+  ink-2: "#E4D6FF"
+  ink-3: "#B8A6E6"
+  brand: "#FF6EC7"
+  on-brand: "#1A0526"
+  select: "#00FF97"
+  on-select: "#04140C"
+  added: "#00D9FF"
+  on-added: "#06101F"
+  added-tint: "#062A3A"
+  changed: "#FFEA00"
+  on-changed: "#1A1400"
+  changed-tint: "#2E2A06"
+  merged: "#BD00FF"
+  merged-text: "#D580FF"
   on-merged: "#FFFFFF"
-  merged-tint: "#E4EAFD"
-  deprecated: "#BF361B"
-  on-deprecated: "#FFFFFF"
-  deprecated-tint: "#FBE6E0"
+  merged-tint: "#2A0A40"
+  deprecated: "#FF8C42"
+  on-deprecated: "#1A0800"
+  deprecated-tint: "#3A1A0A"
 typography:
-  display:
-    fontFamily: "Archivo, system-ui, sans-serif"
-    fontSize: "clamp(2rem, 6vw, 6rem)"
-    fontWeight: 900
-    fontVariation: "font-stretch: 125% (expanded)"
-    lineHeight: 0.92
-    letterSpacing: "-0.025em"
-  display-name:
-    fontFamily: "Archivo, system-ui, sans-serif"
-    fontSize: "clamp(2rem, 6vw - 0.375rem, 4.25rem)"
-    fontWeight: 900
-    fontVariation: "font-stretch: 125% (expanded)"
-    lineHeight: 0.94
-    letterSpacing: "-0.025em"
-  display-close:
-    fontFamily: "Archivo, system-ui, sans-serif"
-    fontSize: "clamp(2rem, 1rem + 3.6vw, 4rem)"
-    fontWeight: 900
-    fontVariation: "font-stretch: 125% (expanded)"
-    lineHeight: 1
-    letterSpacing: "-0.025em"
-  display-email:
-    fontFamily: "Archivo, system-ui, sans-serif"
-    fontSize: "clamp(1.25rem, 0.6rem + 3vw, 3rem)"
-    fontWeight: 800
-    lineHeight: 1.1
-    letterSpacing: "-0.02em"
-  headline:
-    fontFamily: "Archivo, system-ui, sans-serif"
-    fontSize: "clamp(1.5rem, 3.2vw, 2.25rem)"
-    fontWeight: 900
-    fontVariation: "font-stretch: 125% (expanded)"
-    lineHeight: 1.1
-    letterSpacing: "-0.02em"
-  title:
-    fontFamily: "Archivo, system-ui, sans-serif"
-    fontSize: "1.5rem"
-    fontWeight: 800
-    fontVariation: "font-stretch: 125% (expanded)"
-    lineHeight: 2rem
-    letterSpacing: "-0.015em"
-  body:
-    fontFamily: "Archivo, system-ui, sans-serif"
-    fontSize: "1rem"
+  script:
+    fontFamily: "Yellowtail, cursive"
+    fontSize: "clamp(3.5rem, 1.6rem + 5.2vw, 6rem)"
     fontWeight: 400
-    fontVariation: "font-stretch: 100% (normal)"
-    lineHeight: 1.5
-  label:
-    fontFamily: "Martian Mono, ui-monospace, monospace"
-    fontSize: "0.8125em"
+    lineHeight: 1.1
+  display:
+    fontFamily: "Luckiest Guy, system-ui, sans-serif"
+    fontSize: "clamp(2.5rem, 0.6rem + 4.3vw, 5.25rem)"
+    fontWeight: 400
+    lineHeight: 1
+    letterSpacing: "0.02em"
+  section-title:
+    fontFamily: "Luckiest Guy, system-ui, sans-serif"
+    fontSize: "clamp(2.25rem, 1.3rem + 3.4vw, 4rem)"
+    fontWeight: 400
+    lineHeight: 1
+  toast-title:
+    fontFamily: "Luckiest Guy, system-ui, sans-serif"
+    fontSize: "clamp(2.75rem, 1rem + 7vw, 6rem)"
+    fontWeight: 400
+    lineHeight: 1
+  card-title:
+    fontFamily: "Luckiest Guy, system-ui, sans-serif"
+    fontSize: "clamp(1.75rem, 1.2rem + 1.4vw, 2.5rem)"
+    fontWeight: 400
+    lineHeight: 1
+  claim:
+    fontFamily: "Inter, system-ui, sans-serif"
+    fontSize: "clamp(1.125rem, 1rem + 0.5vw, 1.375rem)"
+    fontWeight: 500
+    lineHeight: 1.45
+  role:
+    fontFamily: "Inter, system-ui, sans-serif"
+    fontSize: "clamp(1.1875rem, 1rem + 0.7vw, 1.5rem)"
     fontWeight: 600
-    letterSpacing: "-0.01em"
+    lineHeight: 1.35
+  body:
+    fontFamily: "Inter, system-ui, sans-serif"
+    fontSize: "1.0625rem"
+    fontWeight: 400
+    lineHeight: 1.6
+  label:
+    fontFamily: "Inter, system-ui, sans-serif"
+    fontSize: "0.875rem"
+    fontWeight: 700
+  hud:
+    fontFamily: "Orbitron, system-ui, sans-serif"
+    fontSize: "1.375rem"
+    fontWeight: 800
+    letterSpacing: "0.02em"
+  micro:
+    fontFamily: "Orbitron, system-ui, sans-serif"
+    fontSize: "0.75rem"
+    fontWeight: 700
+    letterSpacing: "0.14em"
+  small:
+    fontFamily: "Inter, system-ui, sans-serif"
+    fontSize: "0.875rem"
+    fontWeight: 500
+  meta:
+    fontFamily: "Orbitron, system-ui, sans-serif"
+    fontSize: "0.6875rem"
+    fontWeight: 800
+  data:
+    fontFamily: "Orbitron, system-ui, sans-serif"
+    fontSize: "0.8125rem"
+    fontWeight: 700
+  lead:
+    fontFamily: "Inter, system-ui, sans-serif"
+    fontSize: "1.25rem"
+    fontWeight: 700
+  stat:
+    fontFamily: "Orbitron, system-ui, sans-serif"
+    fontSize: "1.375rem"
+    fontWeight: 800
+  station-title:
+    fontFamily: "Luckiest Guy, system-ui, sans-serif"
+    fontSize: "1.75rem"
+    fontWeight: 400
+  tuner-digit:
+    fontFamily: "Orbitron, system-ui, sans-serif"
+    fontSize: "1.625rem"
+    fontWeight: 800
+  method-num:
+    fontFamily: "Orbitron, system-ui, sans-serif"
+    fontSize: "2.25rem"
+    fontWeight: 800
+  clock:
+    fontFamily: "Orbitron, system-ui, sans-serif"
+    fontSize: "2.5rem"
+    fontWeight: 800
+  code-404:
+    fontFamily: "Luckiest Guy, system-ui, sans-serif"
+    fontSize: "2rem"
+    fontWeight: 400
+  email:
+    fontFamily: "Orbitron, system-ui, sans-serif"
+    fontSize: "clamp(1rem, 0.6rem + 1.6vw, 1.75rem)"
+    fontWeight: 700
 rounded:
   hairline: "1px"
-  rule: "2px"
-  sm: "2px"
+  link: "3px"
+  diff: "2px"
+  sm: "4px"
+  chip: "6px"
+  screen: "8px"
+  action: "10px"
+  frame: "14px"
+  pill: "999px"
 spacing:
   "1": "4px"
   "2": "8px"
@@ -101,8 +159,8 @@ components:
     rounded: "{rounded.sm}"
     padding: "0 8px"
   plate-merged:
-    backgroundColor: "{colors.merged}"
-    textColor: "{colors.on-merged}"
+    backgroundColor: "{colors.merged-text}"
+    textColor: "{colors.night}"
     rounded: "{rounded.sm}"
     padding: "0 8px"
   plate-deprecated:
@@ -110,158 +168,172 @@ components:
     textColor: "{colors.on-deprecated}"
     rounded: "{rounded.sm}"
     padding: "0 8px"
-  button-primary:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.paper}"
-    rounded: "{rounded.sm}"
+  action-primary:
+    backgroundColor: "{colors.brand}"
+    textColor: "{colors.on-brand}"
+    rounded: "{rounded.action}"
     padding: "0 24px"
     height: "48px"
-  button-ghost:
+  action-ghost:
     backgroundColor: "transparent"
     textColor: "{colors.ink}"
-    rounded: "{rounded.sm}"
+    rounded: "{rounded.action}"
     padding: "0 24px"
     height: "48px"
+  action-primary-hover:
+    backgroundColor: "{colors.select}"
+    textColor: "{colors.on-select}"
 ---
 
-# Design System: Rodrigo Gomes — Release History
+# Design System: Rodrigo Gomes — 1986 Miami Night
 
 ## Overview
 
-**Creative North Star: "The Living Changelog"**
+**Creative North Star: "The Pause Menu Over the Sunset"**
 
-The site reads its own owner's work as software: dated entries, a diffstat and a compare view, on the bright, near-clinical white sheet of a real release page — not a portfolio pretending to be one. The whole palette is four release roles (Added, Changed, Merged, Deprecated) applied only as solid tag plates, tinted diff lines and diffstat blocks; there is no fifth decorative accent. Archivo's width axis does the work other systems give to a second typeface: expanded and black for names, titles and section nouns, normal weight for running prose, while Martian Mono is held in reserve for anything that is data — versions, dates, hashes, counts, diff numbers.
+The site is a night drive through 1986 Miami: a live WebGL sunset over the ocean, palm and Art Deco silhouettes, and the real work — proof, numbers, a career, a stack — laid over it as a console-menu UI, an owner-pinned homage to the era's console crime games (PRODUCT.md, "Pinned aesthetic"). It is a brief-pinned world, not a rolled one: every neon color, both display faces, the menu-frame geometry and the green selection bar existed as a decision before the build and now exist as shipped tokens in `src/design/tokens.ts`, read by the CSS, the WebGL shader, and the GitHub-profile README card renderer alike, so the site and the README cannot drift apart.
 
-The changelog grammar describes the *work* — versioned software entries, their diffstat, their compare view — never the person. Every label the visitor reads about Rodrigo himself is a plain professional noun: **Role**, **Product** and **Open source** on the three hero note plates; **AI engineering** and **Stack** as section nouns; **Since** and **Status** as entry fields. The hero carries no CalVer date and no "Latest" plate — a person is not a software release, and the owner confirmed that framing read badly (2026-09-28). The README masthead and OG social cards follow the same rule: a solid green plate still sits beside the name, in the same role and position a "Latest" plate would have used, but it now names the site (`rodrigogs.github.io`), not a fake release date.
+The system draws a hard line between two registers. The **scene and its frame furniture** are unapologetically game-menu: a brush-script signature, an outlined display face with a hard drop, HUD numerals with no panel, thick-bordered tilted frames, a radio tuner, a toast stamp, scanlines, and a chromatic glitch that fires on hover. The **content read as prose** — every claim about the person — stays plain: Role, Product, AI, Work, Open source, Packages, Career, Stack, Contact are literal professional nouns, never changelog or game jargon. Game vocabulary is UI flavor only (a toast, a cheat, a tuner), never a claim about him. One color, a synthetic green (`#00FF97`) absent from the vaporwave four, is the single selection state across the whole system: every hover, focus ring, and current nav item uses it and nothing else, exactly as the pause menus it pays homage to use one highlight color.
 
-Density is editorial-technical: hairline rules separate every entry, a left rail carries status and dates the way a git log carries metadata, and every section opens with one literal noun as its heading (AI engineering, Work, Open source, Packages, Career, Stack, Contact) followed by exactly one claim sentence. The system explicitly refuses the dev-portfolio default (hero imagery, bento-grid cards, skill-badge walls, dark neon glow) and its editorial-serif opposite; nothing here is illustrative or ornamental. The retired 2026 "vaporwave" palette (cyan/yellow/magenta/pink) exists only behind the Konami-code easter egg (`:root[data-theme='vaporwave']`) as evidence of personality — it is a swapped token set for the same four roles, not a second design system, and it never appears in normal navigation.
+Homage, not copy is load-bearing, not decorative: no Rockstar/Take-Two marks, no "Grand Theft Auto"/"Vice City" branding, no game art, no extracted game fonts (Pricedown's license forbids webfont embedding), no radio names or audio. Every shape (the tilted menu frame, the sliced-sun scene, the four typefaces, the icon set) is drawn from the site's own SVG, shader and font choices.
 
 **Key Characteristics:**
-- Four release-role colors are the entire color system; no neutral accent beyond ink/paper.
-- Archivo's width axis (expanded ↔ normal) substitutes for a second display face.
-- Martian Mono is reserved exclusively for versions, dates, hashes, counts and diff numbers.
-- Square-cornered plates and a 4px whole-unit spacing grid; no soft or generous rounding anywhere.
-- Flat by default: no ambient shadows; the only `box-shadow` uses are inset focus rings, radio "knob" fills and the transient `:target` highlight glow.
+- One selection color (`#00FF97`) for every hover, focus and current-item state; no other color plays that role.
+- Four faces, four jobs: Yellowtail script (the name only), Luckiest Guy outlined display (titles, big numbers, never body), Inter (everything read), Orbitron (HUD numerals and readouts, no panel).
+- Menu frames are thick dark-bordered panels tilted ±0.5deg like a framed postcard; HUD readouts float with no panel at all — an icon plus an outlined colored number.
+- A single 4px spacing unit; every block snaps to a whole step (`--s-1`…`--s-11`).
+- Plain professional nouns label the person; game vocabulary (toast, cheat, tuner, "STATION") stays confined to UI flavor on the signature interactions, never to a section heading or a claim about him.
 
 ## Colors
 
-The palette is the four Keep-a-Changelog roles, each a solid, AA-checked pair of role color and on-role text, plus a light tint for diff backgrounds. There is no separate "brand" accent: the role colors are the brand.
+The palette is the owner's own vaporwave four plus one dedicated selection color; there is no fifth decorative accent beyond the ones with an assigned role.
 
 ### Primary
-- **Added Green** (`#127543`, text `#FFFFFF`, tint `#E3F4EA`): shipped/active work, the site plate in the README and OG masthead, `+` diff lines and diffstat blocks.
-- **Changed Amber** (`#F2B71F`, text `#12161D`, tint `#FDF3D6`): the AI engineering field's full-bleed band, the current job on the career rail, the text-selection color, the focus ring inside `.field-ink` regions.
-- **Merged Cobalt** (`#2447D6`, text `#FFFFFF`, tint `#E4EAFD`): open-source contributions to other people's projects; also the site-wide default focus-ring color (`--focus: var(--c-merged)`).
-- **Deprecated Vermilion** (`#BF361B`, text `#FFFFFF`, tint `#FBE6E0`): legacy/retired work, `−` diff lines and diffstat blocks.
-
-### Neutral
-- **Paper** (`#FAFBFC`): page ground.
-- **Sheet** (`#FFFFFF`): raised bands (`.field-sheet`), entry cards.
-- **Ink** (`#12161D`): primary text, default focus outline on paper, default link color.
-- **Ink 2** (`#3E4552`): secondary text (release notes, entry detail).
-- **Ink 3** (`#5D6573`): meta text — dates, counts, captions, legacy-entry text.
-- **Rule** (`#DDE1E7`): hairline dividers between entries and sections.
-
-All values above are the light theme, the frontmatter-normative source. A dark theme exists (`prefers-color-scheme: dark`, e.g. paper `#0F1216`, ink `#EEF1F5`, added `#3CC97C`) as a straight token swap of the same six neutral + four role slots — never a separate visual system.
+- **Hot Pink (Brand)** (`#FF6EC7`): the name (Yellowtail script), the primary "Email me" action, the neon sign on Contact, the glitch's pink channel. The brand color, used sparingly and always on type or a filled primary action.
+- **Cyan (Added)** (`#00D9FF`): the HUD clock, product/download stats, `+` diff lines and diffstat blocks, the Packages download bars, the tuner's LCD digits.
+- **Sun Yellow (Changed)** (`#FFEA00`): the current career role, the "Role" hero note plate, the sun's core gradient stop.
+- **Violet (Merged)** (`#BD00FF`, text form `#D580FF` — violet is too dark for text on the night): AI/open-source work, stack chip backgrounds (tinted), the AI project proof numerals.
+- **Sunset Orange (Deprecated)** (`#FF8C42`): legacy/retired work, `−` diff lines and diffstat blocks.
 
 ### Named Rules
-**The Four Roles Rule.** The entire color system is four release roles (Added, Changed, Merged, Deprecated). A new surface must map its states onto these four before reaching for a new color; there is no fifth accent to invent.
+**The One Selection Color Rule.** `#00FF97` (green) is the only hover, focus-visible and current-item color anywhere in the system. Every `:hover`, `:focus-visible` and `[aria-current]`/`[data-current]` state resolves to this one color, never to brand pink or any role color, as in the menus this world pays homage to.
 
-**The Solid Plate Rule.** Role colors render only as solid tag plates, diff-line tints, and diffstat blocks — never as decorative gradients, glows, or large color fields outside these three forms.
+### Neutral
+- **Night** (`#0E0826`): page ground, the sky's base and the scene's water-near tone.
+- **Panel** (`#1C1440`): menu-frame fill, the sticky pause-menu bar, table listing frames.
+- **Rule** (`#3A2C72`): hairlines between entries and inside listings.
+- **Ink** (`#FFF6FB`): primary text, display-title fill.
+- **Ink 2** (`#E4D6FF`): secondary text (claims, notes, career titles).
+- **Ink 3** (`#B8A6E6`): meta text — dates, captions, "where" line.
+
+All values are the single `night` theme (`src/design/tokens.ts`); the world has no daytime variant. Every text pair is checked against WCAG 2.2 AA on `night` and `panel`.
 
 ## Typography
 
-**Display/Headline/Title Font:** Archivo (expanded width, `font-stretch: 125%`), with system-ui/sans-serif fallback.
-**Body Font:** Archivo (normal width, `font-stretch: 100%`).
-**Label/Mono Font:** Martian Mono (`ui-monospace`, monospace fallback), reserved for data.
+**Script Font:** Yellowtail (cursive fallback) — the name only, nowhere else.
+**Display Font:** Luckiest Guy (system-ui fallback) — titles, big numbers, the toast stamp; always white ink with a heavy dark outline and a hard drop, never body text.
+**Body Font:** Inter (system-ui sans-serif fallback) — everything read: claims, notes, entries, labels, UI copy.
+**HUD Font:** Orbitron (system-ui fallback) — numerals and short readouts only: the clock, stat counters, the tuner's year digits, career dates, package figures. Always tabular-nums.
 
-**Character:** One typeface family carries the whole system across its width axis instead of pairing a display serif with a body sans; Martian Mono is the sole second voice, and it only ever speaks numbers.
+**Character:** A brush-script signature and a heavy outlined display face carry the game-menu register; Inter carries every sentence a hiring manager actually reads; Orbitron is reserved for anything that is a live or measured number, so the HUD reads as instrumentation, not decoration.
 
 ### Hierarchy
-- **Display** (900, `clamp(2rem, 6vw, 6rem)`, line-height 0.92, `-0.025em`, expanded 125%): the base display class.
-- **Display name** (900, `clamp(2rem, 6vw - 0.375rem, 4.25rem)`, line-height 0.94, expanded 125%): the owner's name, H1 in the hero, sized so "Rodrigo Gomes" holds one line in seven columns (up to `clamp(2rem, 9vw, 4.25rem)` once the hero stacks).
-- **Display close** (900, `clamp(2rem, 1rem + 3.6vw, 4rem)`, expanded 125%): the Contact headline and the 404 title (`clamp(2.25rem, 1rem + 3.5vw, 4rem)`).
-- **Display email** (800, `clamp(1.25rem, 0.6rem + 3vw, 3rem)`): the email address set large in the Contact close.
-- **Headline / Section title** (900, `clamp(1.5rem, 3.2vw, 2.25rem)`, line-height 1.1, `-0.02em`, expanded 125%): the literal-noun section heading (AI engineering, Work, Career, Stack, etc.).
-- **Title** (800, 1.5rem/2rem, `-0.015em`, expanded 125%): entry names inside a release or project list.
-- **Claim** (600, `clamp(1.25rem, 2.2vw, 1.5rem)`, line-height 1.34, max 34–42ch): the one claim sentence that opens each section and the hero release title.
-- **Body** (400, 1rem, line-height 1.5): running prose, entry notes and detail.
-- **Label/Meta** (600, `0.75rem`, line-height 1rem): field labels (`dt`), micro captions.
-- **Mono/data** (Martian Mono, `0.8125em`, tabular-nums + slashed-zero): version numerals, dates, hashes, version tags, diff counts.
+- **Script** (400, `clamp(3.5rem, 1.6rem + 5.2vw, 6rem)`, line-height 1.1): the first name only, in the hero lockup and the Contact neon sign (`clamp(3.5rem, 2rem + 6vw, 6rem)` there).
+- **Display** (400, `clamp(2.5rem, 0.6rem + 4.3vw, 5.25rem)`, line-height 1, `0.02em`, outlined + hard drop): the surname in the hero lockup, all uppercase.
+- **Section title** (400, `clamp(2.25rem, 1.3rem + 3.4vw, 4rem)`): every section's plain-noun heading (`SectionHead`), the Contact heading, the 404 title.
+- **Card title** (400, `clamp(1.75rem, 1.2rem + 1.4vw, 2.5rem)`): a Work/Open-source entry's name, set over its own loading-screen scene.
+- **Toast title** (400, `clamp(2.75rem, 1rem + 7vw, 6rem)`, skewed −10deg): the copy-email stamp only.
+- **Claim** (500, `clamp(1.125rem, 1rem + 0.5vw, 1.375rem)`, line-height 1.45, max 46ch): the one sentence under every section heading and the hero role line's sibling text.
+- **Role** (600, `clamp(1.1875rem, 1rem + 0.7vw, 1.5rem)`, line-height 1.35): the hero's job-title line.
+- **Body** (400, 1.0625rem base, line-height 1.6): running prose — entry notes, detail, hints.
+- **Label** (700, 0.875rem, uppercase, `0.08–0.14em` tracking): frame-corner labels ("STATION"), group labels, plate text.
+- **HUD numeral** (800, tabular-nums, outlined, no panel): the clock, stat counts, tuner years, career dates, package figures — always `--hud` (Orbitron).
 
 ### Named Rules
-**The Data Voice Rule.** Anything that is a measured quantity — a version, date, hash, count, or diff number — renders in Martian Mono with tabular figures. Archivo never carries a number that stands for a proof.
+**The Outline Rule.** Every display-face title and every HUD numeral carries a heavy dark outline (`-webkit-text-stroke` in `var(--outline)`, a darkened night) with `paint-order: stroke fill`, so white or neon type stays legible directly over the scene with no background panel underneath it.
 
-**The Width-Axis Rule.** Emphasis is expressed by moving Archivo's width axis to expanded/black (names, titles, headings, plates), never by switching typeface or adding a second display face.
+**The HUD-Has-No-Panel Rule.** HUD readouts (the clock, the stat counters, the tuner digits) are never set inside a bordered panel or card. They are an icon and an outlined colored number floating straight over the scene or the night — the outline alone carries legibility, as on the console HUDs this world pays homage to.
 
 ## Layout
 
-A strict 12-column grid (`.grid`, `column-gap: var(--gutter)` = 24px) inside a max-width sheet (`--max` = 1280px, fluid inline padding `clamp(16px, 4vw, 48px)`). Below 48rem the grid collapses to a single column and every grid child spans full width. The hero splits 7/5 (release copy left, career rail + Compare right); entries split a 3-column metadata rail against a 9-column body via CSS subgrid. The AI engineering section is a dedicated full-bleed `.field-changed` band: two-up agent-project entries first, then a four-up capabilities grid below them.
+A 12-column grid (`.grid`, `column-gap: var(--gutter)` = 24px) inside a max-width sheet (`--max` = 1280px, fluid inline padding `clamp(var(--s-4), 4vw, var(--s-7))`, i.e. 16px–48px). Below 48rem the grid collapses to one column. The hero splits into a left text column and a right HUD/scene column; below 64rem the scene becomes a height-bound band (`--scene-h`) and the HUD moves to a narrow column left of the sun. The Stack section splits 7/5 (manifest / Compare tuner), collapsing to one column below 64rem.
 
-Vertical rhythm runs on a single 4px unit (`--s-1` … `--s-11`: 4/8/12/16/24/32/48/64/96/128/192px) — every block snaps to a whole step; nothing in the build uses a fractional or off-scale spacing value. Entries stack with a 1px hairline rule between them (`border-block-start`), not a shadow or a card boundary.
+Vertical rhythm runs on a single 4px unit (`--s-1`…`--s-11`: 4/8/12/16/24/32/48/64/96/128/192px); sections use a fluid multiple of this scale for their block padding (`.band`, `clamp(var(--s-8), 9vw, var(--s-10))`). Menu frames pad on `clamp(var(--s-5), 3vw, var(--s-7))`. A career "boardwalk" timeline runs a two-rail plank motif down its own left gutter; work/open-source entries are menu frames with a "loading screen" strip on top.
 
 ## Elevation & Depth
 
-The system is flat by default; depth is conveyed by ink weight, tint fields and rule lines, not by shadow. The only `box-shadow` uses in the entire build are: (1) inset rings that fill the Compare rail's radio "knobs" on selection, (2) the default focus-visible outline (`outline`, not shadow), and (3) the transient glow on a `:target`-linked permalink entry, which fades within 1.8s and is disabled under reduced motion.
+The system is not flat: menu frames are deliberately raised panels with a thick dark border, an inset hairline, and a soft ambient drop shadow (`var(--shadow)`: `0 1.25rem 2.5rem -1rem` at 70% black) — read as a physical console panel floating on the night, not a card lifting on hover. Depth is otherwise conveyed by glow, not lift: neon text-shadows (`--glow-pink`, `--glow-cyan`) sit behind brand/HUD type and the sun's silhouette-scene elements, and interactive elements never translate or scale on hover — only their color changes to the selection green.
+
+### Shadow Vocabulary
+- **Frame shadow** (`var(--shadow)`: `0 1.25rem 2.5rem -1rem rgba(0,0,0,0.7)`): every menu frame (`.frame::before`), the pause-menu bar and its open panel.
+- **Glow-pink / glow-cyan** (`color-mix` at ~50–55% of brand/added): text-shadow behind the script signature, HUD clock, and the toast stamp; also the sun-slice drop-shadow on entry "loading screens".
+- **Action shadow** (`0 0.5rem 1rem -0.5rem rgba(0,0,0,0.7)`): the small ambient lift under filled `.action` buttons, dropped for `.action-ghost`.
+- **Compare-bar glow** (`0 0 0.6rem var(--glow-cyan)`): the Packages download-share bar and the tuner readouts.
 
 ### Named Rules
-**The Flat Ledger Rule.** Surfaces never lift on hover or elevate on interaction. The only state changes are color (background/text) and the hairline-bounded fields (`.field-changed`, `.field-merged`, `.field-ink`) that recolor an entire section band to a role color.
+**The No-Lift-On-Hover Rule.** Nothing translates, scales, or gains a new shadow on hover or focus. State change is color only — to the one selection green — matching the menu-select behavior this world pays homage to. (`.action:active` is the sole exception: a 1px press-down translate, not a hover effect.)
 
 ## Shapes
 
-Square corners throughout: the shared radius token is 2px (`--radius`, from `shape.radius`), applied to plates and action buttons alike — legible as a printed tag, not a soft rounded UI chip. Hairlines are 1px; the heavier rule weight (2px) marks emphasis (the "Unreleased/compare" range border, nav underline). There is no card border beyond the entry hairline and the `.field-sheet` top/bottom 1px rule; nothing is clipped into a rounded container.
+Two coexisting form languages, by design: **menu frames** (10px hairline, but a thick 4px dark border, 14px corner radius, and a deliberate ±0.5deg tilt on the backdrop only — text inside stays straight and sharp) for anything presented as a console panel — the AI-workflow method, the compare tuner, the pause-menu header, the package listing, work/open-source cards, 404. **Small controls** use a tighter, calmer radius scale: 4px for plates and diff-line tints, 6px for chips and small nav/menu links, 10px for actions, dial rows and the "+N more" disclosure, 999px for pill chips and the Packages download bar. Circles appear once, deliberately: the 50%-radius career timeline node.
 
 ## Components
 
-### Buttons ("Action plates")
-- **Shape:** square-cornered (2px radius), 1px border in the current text color.
-- **Primary:** filled with the current foreground color (`--fg`, ink on paper by default), text in the ground color, min-height 48px (`--s-7`), horizontal padding 16–24px.
-- **Ghost/quiet:** transparent fill, border in `--c-rule` instead of `--fg`.
-- **Hover:** background tints toward foreground/ground mix (`color-mix`); no shadow, no scale transform.
+### Actions (buttons)
+- **Shape:** 10px radius, 3px solid dark-outline border (`var(--outline)`), min-height 48px.
+- **Primary:** filled brand pink, `on-brand` ink-dark text, set in the display face at 1.1875rem — the "Email me" CTA on Hero and Contact.
+- **Ghost:** transparent fill over the scene/night, `--c-rule` border, no ambient shadow — GitHub/LinkedIn links.
+- **Hover / Focus:** background and text swap to the one selection green (`--c-select`/`--c-on-select`); `:active` presses down 1px. No scale, no new shadow.
 
-### Plates (signature tag component)
-- **Shape:** square-cornered (2px radius), fixed height (24–32px depending on `size`), inline-flex with a leading gap for an icon/mono value.
-- **Color assignment:** `data-role` selects one of the four role fills with its AA-paired on-role text; `data-inverse` swaps fill and text for a plate sitting on its own role-colored field.
-- **Usage:** the hero note plates (each carrying a plain label — Role, Product, Open source — never a jargon term), entry status, section-head tags, diff icons, and the green site plate on the README/OG masthead (`rodrigogs.github.io`, replacing the retired CalVer "Latest" plate) — always a role tag with a plain-language or literal value, never a free-standing decorative color chip.
+### Plates (role tag)
+- **Shape:** 4px radius, fixed 1.5rem height, Orbitron/HUD face, uppercase, tight tracking.
+- **Color assignment:** `data-role` selects one of the four role fills (added/cyan, changed/yellow, merged/violet-text, deprecated/orange) with its on-role text.
+- **Usage:** hero note labels (Role, Product, AI — plain nouns only), entry status, the career "current role" tag, diff-line icons by proxy of role color.
+
+### Menu Frame (signature component)
+- **Shape:** thick 4px dark border, 14px radius, ±0.5deg tilt on the backdrop layer, inset 1px hairline plus the ambient frame shadow.
+- **Usage:** the AI-workflow method panel, the Compare tuner, work/open-source/package entries, the pause-menu header and its mobile overlay, the 404 card.
+- **Corner label:** an optional small uppercase Orbitron tag in the frame's corner ("STATION", the method label) — a station-display flourish that belongs to the frame furniture itself, not a heading kicker; it is never applied above a `SectionHead` title.
 
 ### Cards / Entries
-- **Corner style:** none (no radius) — an entry is a horizontal band, not a boxed card.
-- **Background:** paper/sheet; legacy entries desaturate their name/note/tag to ink-3 and swap the timeline node to an outlined (not filled) square.
-- **Shadow strategy:** none (see Elevation & Depth).
-- **Border:** 1px hairline rule above each entry only.
-- **Internal padding:** vertical `--s-6` (32px); metadata rail padded `--s-6` from the timeline node.
-- **Metadata fields:** `Since` (when the project started) and `Latest release` (version tag) on the rail; `Status` reads `Active`, `Maintained`, `Legacy`, `Private, live` or `In progress` — never the old "Dormant" wording.
+- **Corner style:** menu-frame radius (14px) with an inner 8px-radius "loading screen" strip on top (a small night sky with a sliced sun at its right edge, never behind the title).
+- **Background:** panel fill; the screen strip uses the scene gradient tokens directly so entry and hero share one sky.
+- **Shadow strategy:** frame shadow only (see Elevation & Depth); the sun slice carries its own pink glow.
+- **Internal padding:** `--s-3`/`--s-6` around the screen, `--s-4` on the body.
 
-### Inputs / Fields
-- **Style (Compare rail "knobs"):** square, 20px, no radius, layered inset box-shadows simulating a ring rather than a native radio appearance.
-- **Focus:** the shared `:focus-visible` 2px outline in the current focus color (role-dependent inside colored fields).
-- **Selected state:** knob fills solid with its assigned role color (Added for "To", Deprecated for "From").
+### Inputs / Fields (Compare radio tuner)
+- **Style:** an LCD-strip dial (`◄ 2015 ►`) inside a 10px-radius, 3px-bordered row; Orbitron digits in cyan with a cyan text-glow.
+- **Focus:** the shared selection-green background/text swap, offset inward (`outline-offset: -3px`) so it reads inside the dial row.
+- **Disabled (no-JS default):** the dials render the server-computed default range and are visually identical but inert, so the diff reads correctly with scripts off.
 
-### Navigation
-- **Style:** sticky top bar, paper background, 1px bottom hairline; nav links are ink-2, moving to ink with a 2px underline that animates in via `scaleX` on hover/`aria-current`.
-- **Section nouns:** AI engineering, Work, Open source, Packages, Career, Stack, Contact — plain professional nouns, never a changelog term borrowed from software release notes.
-- **Mobile:** the nav row breaks onto its own scrollable strip below the wordmark/language switch, no radius change, same hairline language.
+### Navigation (pause menu)
+- **Style:** a floating menu-frame bar; the script handle plus plain-noun links in pink Luckiest Guy, sticky at the top.
+- **Default/hover/active:** links are pink; hover and `aria-current` both resolve to the one selection-green bar.
+- **Mobile (< 70rem):** the row folds behind a compact "MENU" toggle (pause-bar icon) that opens the nouns as an overlay panel under the frame, dimming the page behind it; without scripts the row stays a single horizontally-scrolling strip.
 
-### AI engineering (signature component)
-A dedicated full-bleed amber (`.field-changed`) band holding two things the "Now"/"Unreleased" section used to split apart: the agent-infrastructure projects (two-up entries, each with a permalink, proofs and links) and, below them, the "What I can do" capabilities grid (moved out of Stack) — name, one sentence, and a link where there is public proof. One section, one plain noun heading, one claim sentence.
+### HUD readout (signature component)
+No panel: an icon plus an outlined, role-colored Orbitron number set directly over the scene (the hero's live local-time clock and stats: stars, monthly downloads, yearly contributions, each linking to its proof). Hover swaps the whole readout to the selection-green pill; the outline disappears since the fill already contrasts.
 
-### Compare (signature component)
-The URL-addressable diff view: pick two years on the career rail's radio "knobs" and the readout re-renders a GitHub-style five-block diffstat plus an added/removed line list (Added-green / Deprecated-vermilion tints), capped at 10 lines behind a disclosure. It is the one authored motion in the system: a `cubic-bezier(0.16, 1, 0.3, 1)` ease-out at 160/320/560ms (fast/base/slow), used for the range highlight sliding on the rail and the strike-through/fade when a diff line leaves.
+### Toast (signature component)
+A full-viewport, un-boxed stamp: giant skewed pink Luckiest Guy title ("EMAIL COPIED!") with a small Orbitron subtitle, on a soft radial dusk behind it (not a box), animated in with a 1.6s scale/blur-in and hold. Reduced motion drops the animation but keeps the stamp state.
+
+### Cheat easter egg (signature component)
+Typing the code "VAPORWAVE" swaps the scene's floor to the owner's original vaporwave perspective grid (`vaporwave` tokens; the grid only renders while the WebGL canvas is off or as a CSS floor layer) and flashes a small Orbitron "CHEAT ACTIVATED" line for ~2.4s (`src/scripts/cheat.ts`, `Cheat.astro`).
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** keep the palette to the four release roles (Added/Changed/Merged/Deprecated); a new surface reuses these before adding a color.
-- **Do** render every measured quantity (version, date, hash, count) in Martian Mono with tabular numerals.
-- **Do** use Archivo's width axis (expanded/black for emphasis, normal for prose) instead of a second typeface.
-- **Do** open each section with its literal plain-noun heading and exactly one claim sentence.
-- **Do** keep corners square (2px radius token) and depth flat; state changes are color, not shadow or lift.
-- **Do** label anything that describes the person — hero notes, section nouns, entry fields, status words — with a plain professional noun (Role, Product, Open source, AI engineering, Stack, Since, Status, Legacy). The changelog grammar (roles, plates, diffstat, compare) stays; changelog *vocabulary* aimed at the person does not.
-- **Do** embed a provenance `tEXt` chunk (key `impeccable:prompt`) in every shipped OG PNG, naming it as code-rendered, not generated.
+- **Do** keep `#00FF97` (green) as the only hover/focus/current-item color across the whole system; a new surface reuses it before reaching for any other state color.
+- **Do** hold Yellowtail to the name only, Luckiest Guy to titles/numbers/the toast (always outlined + hard drop, never body copy), Inter to everything read, and Orbitron to numerals and readouts only.
+- **Do** label anything describing the person with a plain professional noun (Role, Product, AI, Work, Open source, Packages, Career, Stack, Contact); confine game vocabulary (toast, cheat, tuner, "STATION") to UI flavor on the signature interactions, never to a section heading or a claim about him.
+- **Do** set HUD readouts with no panel — an icon and an outlined colored number straight over the scene or the night.
+- **Do** keep the scene's performance budget: hero JS under 5KB gzip, no three.js/bloom/ray-marching/particles, capped DPR, paused offscreen/hidden-tab, a still frame under reduced motion, and WebGL context loss handled by falling back to the always-present SVG poster.
+- **Do** snap every block to the 4px spacing scale (`--s-1`…`--s-11`); nothing in the build uses an off-scale spacing value.
 
 ### Don't:
-- **Don't** add a decorative accent color outside the four release roles.
-- **Don't** apply role colors as gradients, glows, or large ambient fields; they render only as plates, diff tints and diffstat blocks.
-- **Don't** add hard offset/neobrutalist shadows, drop shadows, or elevation on hover — this world is flat by construction.
-- **Don't** carry the retired vaporwave palette (Konami easter egg) into normal navigation or any new component; it is a swapped token set behind an easter egg, not a usable system palette.
-- **Don't** introduce kickers/eyebrows above headings; the section noun itself is the heading (`SectionHead`'s literal-label rule), with no small label sitting above it.
-- **Don't** reintroduce a CalVer date or a "Latest" plate on the hero, or any changelog noun ("Now", "Unreleased", "Changed"/"Added" as a status word, "Dormant", "Born") as a label describing the person; that jargon read as a defect on a person's site and was replaced with plain nouns (Role, Product, Open source, AI engineering, Stack, Since, Legacy) — it is not a style to bring back for a new surface.
+- **Don't** use a second color for hover, focus, or "current" state; every such state resolves to the one selection green.
+- **Don't** apply changelog vocabulary ("Now", "Unreleased", CalVer dates, "Latest" plates) to the person — this is a Miami-night console world, not a release ledger, and that jargon was already rejected once for a prior world; it does not belong in this one either.
+- **Don't** add a hard-offset neobrutalist box-shadow anywhere; the "hard drop" that exists on display titles and the toast stamp is a `text-shadow` on the display/HUD faces specifically, pinned by the direction contract — it is not a general-purpose shadow device for new components.
+- **Don't** promote a frame's corner label ("STATION") into a kicker/eyebrow sitting above a `SectionHead` title; it belongs to the menu-frame furniture, never to the section-heading pattern (which stays one literal noun, then one claim sentence, no label above it).
+- **Don't** use Rockstar/Take-Two marks, the words "Grand Theft Auto" or "Vice City" as branding, game art or screenshots, fonts extracted from the game (Pricedown is never webfont-embedded — its license forbids it), or radio station names/audio; this world is built only from its own SVG, shader and font choices (PRODUCT.md, "Homage, not copy").
+- **Don't** lift, scale, or add a new shadow on hover; state change is color-only (see The No-Lift-On-Hover Rule).

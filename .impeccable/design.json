@@ -1,146 +1,441 @@
 {
   "schemaVersion": 2,
   "generatedAt": "2026-09-28T00:00:00Z",
-  "title": "Design System: Rodrigo Gomes — Release History",
+  "title": "Design System: Rodrigo Gomes \u2014 1986 Miami Night",
   "extensions": {
     "colorMeta": {
-      "paper": { "role": "neutral", "displayName": "Paper", "canonical": "#FAFBFC" },
-      "sheet": { "role": "neutral", "displayName": "Sheet", "canonical": "#FFFFFF" },
-      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#12161D", "tonalRamp": ["#0A0C10", "#12161D", "#1E232C", "#3E4552", "#5D6573", "#8C95A3", "#B8C0CC", "#DDE1E7"] },
-      "ink-2": { "role": "neutral", "displayName": "Ink 2 (secondary text)", "canonical": "#3E4552" },
-      "ink-3": { "role": "neutral", "displayName": "Ink 3 (meta text)", "canonical": "#5D6573" },
-      "rule": { "role": "neutral", "displayName": "Rule (hairline)", "canonical": "#DDE1E7" },
-      "added": { "role": "primary", "displayName": "Added Green", "canonical": "#127543", "tonalRamp": ["#052A17", "#0A4A29", "#127543", "#1D9B58", "#3CC97C", "#7EDDA8", "#B8ECD0", "#E3F4EA"] },
-      "changed": { "role": "primary", "displayName": "Changed Amber", "canonical": "#F2B71F", "tonalRamp": ["#3D2C00", "#6B4C00", "#A17300", "#D89A0A", "#F2B71F", "#F5C23D", "#F9DA8A", "#FDF3D6"] },
-      "merged": { "role": "primary", "displayName": "Merged Cobalt", "canonical": "#2447D6", "tonalRamp": ["#0A1440", "#122870", "#1A35A8", "#2447D6", "#5C71E3", "#7D96FF", "#B3C0FA", "#E4EAFD"] },
-      "deprecated": { "role": "primary", "displayName": "Deprecated Vermilion", "canonical": "#BF361B", "tonalRamp": ["#3A0F05", "#5E1A0B", "#8C2712", "#BF361B", "#E0522F", "#FF7556", "#FFAF9B", "#FBE6E0"] }
+      "night": {
+        "role": "neutral",
+        "displayName": "Night",
+        "canonical": "#0E0826",
+        "tonalRamp": [
+          "#050312",
+          "#0E0826",
+          "#1C1440",
+          "#2A1C5C",
+          "#3A2C72",
+          "#5B4A9C",
+          "#8C7ACC",
+          "#D6CBF2"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Panel",
+        "canonical": "#1C1440"
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule (hairline)",
+        "canonical": "#3A2C72"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#FFF6FB"
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Ink 2 (secondary text)",
+        "canonical": "#E4D6FF"
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Ink 3 (meta text)",
+        "canonical": "#B8A6E6"
+      },
+      "brand": {
+        "role": "primary",
+        "displayName": "Hot Pink (Brand)",
+        "canonical": "#FF6EC7",
+        "tonalRamp": [
+          "#3D0A2A",
+          "#6B1249",
+          "#A31D72",
+          "#DB2E9C",
+          "#FF6EC7",
+          "#FF9AD9",
+          "#FFC2E8",
+          "#FFE8F5"
+        ]
+      },
+      "select": {
+        "role": "primary",
+        "displayName": "Selection Green",
+        "canonical": "#00FF97",
+        "tonalRamp": [
+          "#00291A",
+          "#00472C",
+          "#00753F",
+          "#00A35B",
+          "#00FF97",
+          "#5EFFC0",
+          "#A6FFD9",
+          "#E0FFF0"
+        ]
+      },
+      "added": {
+        "role": "primary",
+        "displayName": "Cyan (Added)",
+        "canonical": "#00D9FF",
+        "tonalRamp": [
+          "#00252E",
+          "#00404F",
+          "#006B80",
+          "#00A3C2",
+          "#00D9FF",
+          "#5CE9FF",
+          "#A3F1FF",
+          "#DEFAFF"
+        ]
+      },
+      "changed": {
+        "role": "primary",
+        "displayName": "Sun Yellow (Changed)",
+        "canonical": "#FFEA00",
+        "tonalRamp": [
+          "#332D00",
+          "#5C5000",
+          "#8C7900",
+          "#C2A700",
+          "#FFEA00",
+          "#FFF25C",
+          "#FFF7A3",
+          "#FFFBDE"
+        ]
+      },
+      "merged": {
+        "role": "primary",
+        "displayName": "Violet (Merged)",
+        "canonical": "#BD00FF",
+        "tonalRamp": [
+          "#26002E",
+          "#450052",
+          "#6E0080",
+          "#9500AD",
+          "#BD00FF",
+          "#D580FF",
+          "#E8B3FF",
+          "#F6E0FF"
+        ]
+      },
+      "deprecated": {
+        "role": "primary",
+        "displayName": "Sunset Orange (Deprecated)",
+        "canonical": "#FF8C42",
+        "tonalRamp": [
+          "#331B08",
+          "#5C300E",
+          "#8C4A16",
+          "#C26A25",
+          "#FF8C42",
+          "#FFB07D",
+          "#FFCEAD",
+          "#FFE9DA"
+        ]
+      }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Hero H1 only: the owner's name." },
-      "headline": { "displayName": "Headline / Section title", "purpose": "The literal-noun section headings (AI engineering, Work, Career, Stack, Contact)." },
-      "title": { "displayName": "Title", "purpose": "Entry names inside a release or project list." },
-      "body": { "displayName": "Body", "purpose": "Running prose: notes, entry detail, hints." },
-      "label": { "displayName": "Label / data", "purpose": "Martian Mono: versions, dates, hashes, counts, diff numbers. Never used for prose." }
+      "script": {
+        "displayName": "Script (Yellowtail)",
+        "purpose": "The first name only, in the hero lockup and the Contact neon sign. Never used elsewhere."
+      },
+      "display": {
+        "displayName": "Display (Luckiest Guy)",
+        "purpose": "Titles, big numbers, the toast stamp; always outlined white with a hard drop. Never body copy."
+      },
+      "hud": {
+        "displayName": "HUD (Orbitron)",
+        "purpose": "Numerals and short readouts only: clock, stat counts, tuner years, career dates, package figures. Tabular-nums, no panel."
+      },
+      "body": {
+        "displayName": "Body (Inter)",
+        "purpose": "Everything read: claims, notes, entries, labels, UI copy."
+      },
+      "micro": {
+        "displayName": "Micro (Orbitron)",
+        "purpose": "Frame-corner labels, group labels, plate/uppercase tags."
+      },
+      "small": {
+        "displayName": "Small (Inter)",
+        "purpose": "Meta text, hints, secondary labels."
+      },
+      "meta": {
+        "displayName": "Meta numeral (Orbitron)",
+        "purpose": "Entry meta figures (since/latest release)."
+      },
+      "data": {
+        "displayName": "Data numeral (Orbitron)",
+        "purpose": "Package table figures, tuner sub-numerals."
+      },
+      "lead": {
+        "displayName": "Lead (Inter)",
+        "purpose": "Career org titles, note text, entry note emphasis."
+      },
+      "stat": {
+        "displayName": "Stat (Orbitron)",
+        "purpose": "Hero HUD stat counters."
+      },
+      "station-title": {
+        "displayName": "Station title (Luckiest Guy)",
+        "purpose": "The Compare tuner's frame title."
+      },
+      "tuner-digit": {
+        "displayName": "Tuner digit (Orbitron)",
+        "purpose": "The Compare dial's year figures."
+      },
+      "method-num": {
+        "displayName": "Method number (Orbitron)",
+        "purpose": "The AI-workflow method's step numerals."
+      },
+      "clock": {
+        "displayName": "Clock (Orbitron)",
+        "purpose": "The hero's live local-time readout."
+      },
+      "code-404": {
+        "displayName": "404 code (Luckiest Guy)",
+        "purpose": "The 404 page's side headings."
+      },
+      "email": {
+        "displayName": "Email (Orbitron)",
+        "purpose": "The Contact section's large email readout."
+      }
     },
     "shadows": [
-      { "name": "focus-ring", "value": "outline: 2px solid var(--focus); outline-offset: 2px", "purpose": "Default focus-visible ring; not a box-shadow, and the only always-on emphasis device." },
-      { "name": "compare-knob-fill", "value": "inset 0 0 0 7px var(--c-paper), inset 0 0 0 8px var(--c-ink3)", "purpose": "Simulates a custom radio ring on the Compare rail's From/To knobs; hover/checked states swap the outer inset color." },
-      { "name": "target-mark", "value": "0 0 0 var(--s-2) color-mix(in srgb, var(--c-selection) 55%, transparent)", "purpose": "Transient 1.8s glow when a permalinked entry is the :target; disabled under prefers-reduced-motion." }
+      {
+        "name": "frame-shadow",
+        "value": "0 1.25rem 2.5rem -1rem color-mix(in srgb, black 70%, transparent)",
+        "purpose": "The ambient lift under every menu frame (.frame::before), the pause-menu bar and its mobile overlay panel."
+      },
+      {
+        "name": "glow-pink",
+        "value": "text-shadow with color-mix(in srgb, var(--c-brand) 55%, transparent)",
+        "purpose": "Behind the script signature, the Contact neon sign, the toast stamp, the entry sun-slice."
+      },
+      {
+        "name": "glow-cyan",
+        "value": "text-shadow / box-shadow with color-mix(in srgb, var(--c-added) 50%, transparent)",
+        "purpose": "Behind the HUD clock, tuner LCD digits, the Packages download-share bar."
+      },
+      {
+        "name": "action-shadow",
+        "value": "0 0.5rem 1rem -0.5rem color-mix(in srgb, black 70%, transparent)",
+        "purpose": "Small ambient lift under filled .action buttons; dropped on .action-ghost."
+      },
+      {
+        "name": "target-mark",
+        "value": "outline: 3px solid var(--c-select); outline-offset: 6px, animated over 1.8s",
+        "purpose": "Transient permalink highlight on :target entries; disabled under prefers-reduced-motion."
+      }
     ],
     "motion": [
-      { "name": "ease-standard", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The one authored moment: Compare's range highlight, diff-line strike-through/fade, nav underline, link decoration." },
-      { "name": "duration-fast", "value": "160ms", "purpose": "Link/action hover, focus-ring, diff-line strike." },
-      { "name": "duration-base", "value": "320ms", "purpose": "Compare range-highlight slide, nav underline reveal." },
-      { "name": "duration-slow", "value": "560ms", "purpose": "Reserved slow tier; not directly observed in a specific rule at time of writing." }
+      {
+        "name": "ease-standard",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The system-wide ease: scene fade-in, toast stamp, tuner diff-line motion, action/nav hover."
+      },
+      {
+        "name": "duration-fast",
+        "value": "160ms",
+        "purpose": "Action/nav hover, dial hover, diff-line strike."
+      },
+      {
+        "name": "duration-base",
+        "value": "320ms",
+        "purpose": "Floor-grid fade under the cheat code, nav underline reveal."
+      },
+      {
+        "name": "duration-slow",
+        "value": "560ms",
+        "purpose": "Reserved slow tier for larger state changes (e.g. scene layer cross-fades)."
+      },
+      {
+        "name": "glitch-hover",
+        "value": "700ms steps(1) infinite chromatic offset on .lockup:hover",
+        "purpose": "The signature chromatic glitch: fires only on hover of the hero name lockup, cyan/pink channel split plus a clip-path flicker; disabled under prefers-reduced-motion."
+      },
+      {
+        "name": "toast-stamp",
+        "value": "1600ms var(--ease) both scale/blur-in and hold",
+        "purpose": "The 'EMAIL COPIED!' stamp animation."
+      },
+      {
+        "name": "cheat-blink",
+        "value": "1.2s steps(1) x2",
+        "purpose": "The 'CHEAT ACTIVATED' line blink."
+      },
+      {
+        "name": "scene-live-fade",
+        "value": "opacity 900ms var(--ease)",
+        "purpose": "The live WebGL canvas fading in over the SVG poster once its first frame is ready."
+      }
     ],
     "breakpoints": [
-      { "name": "mobile", "value": "max-width: 47.99rem", "purpose": "Grid collapses to 1 column; nav moves to a scrollable strip; entries stack vertically." },
-      { "name": "tablet", "value": "max-width: 63.99rem", "purpose": "Hero splits to full-width stacked release/aside; header wraps to two rows." }
+      {
+        "name": "mobile",
+        "value": "max-width: 29.99rem",
+        "purpose": "Tightest phone tier: stat/lockup sizes step down, notes stack to one column."
+      },
+      {
+        "name": "tablet",
+        "value": "max-width: 47.99rem",
+        "purpose": "Grid collapses to 1 column; package table drops registry/version columns; career stops stack."
+      },
+      {
+        "name": "hero-band",
+        "value": "max-width: 63.99rem",
+        "purpose": "Hero scene becomes a height-bound band with the HUD moved beside the sun; Stack layout collapses to 1 column."
+      },
+      {
+        "name": "menu-fold",
+        "value": "max-width: 69.99rem",
+        "purpose": "Pause-menu nav folds behind the compact MENU toggle (src/scripts/menu.ts)."
+      }
     ],
-    "provenance": {
-      "pngTextKey": "impeccable:prompt",
-      "purpose": "Every shipped OG PNG (scripts/lib/cards/png.ts) carries a tEXt chunk recording that it was rendered at build time from code and data, not generated."
+    "scenePerformanceBudget": {
+      "heroJsGzipMax": "5KB",
+      "forbidden": [
+        "three.js",
+        "bloom",
+        "ray marching",
+        "particle systems"
+      ],
+      "adaptive": [
+        "capped devicePixelRatio",
+        "paused offscreen and on hidden tabs",
+        "still frame under prefers-reduced-motion",
+        "adaptive quality that freezes on slow machines",
+        "WebGL context-loss handled, SVG poster always underneath as fallback"
+      ],
+      "purpose": "src/scripts/scene.ts: the one raw-WebGL fragment shader (no library) carrying the sky, sliced sun, stars, horizon glow, ocean shimmer and the cheat-code grid."
+    },
+    "easterEgg": {
+      "trigger": "typed cheat code \"VAPORWAVE\" (src/scripts/cheat.ts)",
+      "effect": "swaps the hero scene's floor to the owner's original vaporwave perspective grid (vaporwave tokens in src/design/tokens.ts) and shows a small 'CHEAT ACTIVATED' Orbitron line for ~2.4s",
+      "scope": "hero scene only; does not change the site-wide palette or navigation"
     }
   },
   "components": [
     {
-      "name": "Plate — hero note label (Role/Product/Open source)",
+      "name": "Primary action (Email me)",
+      "kind": "button",
+      "refersTo": "action-primary",
+      "description": "Filled brand-pink CTA in the display face, 3px dark-outline border, no lift on hover \u2014 only a color swap to the selection green.",
+      "html": "<a class=\"ds-action ds-action-primary\" href=\"mailto:example@example.com\">Email me</a>",
+      "css": ".ds-action-primary { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding-inline: 24px; border: 3px solid #05010F; border-radius: 10px; background: #FF6EC7; color: #1A0526; font-family: 'Luckiest Guy', system-ui, sans-serif; font-weight: 400; font-size: 1.1875rem; letter-spacing: 0.04em; text-decoration: none; box-shadow: 0 0.5rem 1rem -0.5rem rgba(0,0,0,0.7); transition: background-color 160ms cubic-bezier(0.16,1,0.3,1), color 160ms cubic-bezier(0.16,1,0.3,1); } .ds-action-primary:hover { background: #00FF97; color: #04140C; box-shadow: 0 0.5rem 1rem -0.5rem rgba(0,0,0,0.7); } .ds-action-primary:focus-visible { outline: 3px solid #00FF97; outline-offset: 3px; }"
+    },
+    {
+      "name": "Ghost action (GitHub / LinkedIn)",
+      "kind": "button",
+      "refersTo": "action-ghost",
+      "description": "Transparent secondary action sharing the action geometry, no ambient shadow.",
+      "html": "<a class=\"ds-action ds-action-ghost\" href=\"#\">GitHub</a>",
+      "css": ".ds-action-ghost { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding-inline: 24px; border: 3px solid #3A2C72; border-radius: 10px; background: color-mix(in srgb, #0E0826 70%, transparent); color: #FFF6FB; font-family: Inter, system-ui, sans-serif; font-weight: 700; font-size: 1rem; text-decoration: none; transition: background-color 160ms cubic-bezier(0.16,1,0.3,1), color 160ms cubic-bezier(0.16,1,0.3,1); } .ds-action-ghost:hover { background: #00FF97; color: #04140C; }"
+    },
+    {
+      "name": "Plate \u2014 Role (hero note)",
       "kind": "chip",
       "refersTo": "plate-changed",
-      "description": "Plain-noun label plate on a hero note: Role, Product or Open source, never a changelog term.",
+      "description": "Plain-noun role plate, sun-yellow fill, set in the HUD face, uppercase.",
       "html": "<span class=\"ds-plate\" data-role=\"changed\">Role</span>",
-      "css": ".ds-plate { display: inline-flex; align-items: center; gap: 8px; height: 24px; padding-inline: 8px; border-radius: 2px; background: #F2B71F; color: #12161D; font-family: Archivo, system-ui, sans-serif; font-stretch: 100%; font-size: 0.75rem; font-weight: 700; line-height: 1; letter-spacing: 0.01em; white-space: nowrap; }"
+      "css": ".ds-plate { display: inline-flex; align-items: center; height: 24px; padding-inline: 8px; border-radius: 4px; background: #FFEA00; color: #1A1400; font-family: Orbitron, system-ui, sans-serif; font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }"
     },
     {
-      "name": "Plate — site (README / OG masthead)",
+      "name": "Plate \u2014 Product (Added/cyan)",
       "kind": "chip",
       "refersTo": "plate-added",
-      "description": "Green site plate naming rodrigogs.github.io, in the position and role a CalVer 'Latest' plate used to hold; replaces the retired person-facing changelog date.",
-      "html": "<span class=\"ds-plate ds-plate--site\"><span class=\"ds-mono\">rodrigogs.github.io</span></span>",
-      "css": ".ds-plate--site { display: inline-flex; align-items: center; height: 24px; padding-inline: 8px; border-radius: 2px; background: #127543; color: #FFFFFF; } .ds-plate--site .ds-mono { font-family: 'Martian Mono', ui-monospace, monospace; font-size: 0.8125em; font-weight: 600; }"
+      "description": "Product/proof role plate.",
+      "html": "<span class=\"ds-plate\" data-role=\"added\">Product</span>",
+      "css": ".ds-plate--added { background: #00D9FF; color: #06101F; }"
     },
     {
-      "name": "Plate — Deprecated",
-      "kind": "chip",
-      "refersTo": "plate-deprecated",
-      "description": "Role tag for legacy/retired entries and removed diff lines.",
-      "html": "<span class=\"ds-plate ds-plate--deprecated\">Legacy</span>",
-      "css": ".ds-plate--deprecated { display: inline-flex; align-items: center; height: 24px; padding-inline: 8px; border-radius: 2px; background: #BF361B; color: #FFFFFF; font-family: Archivo, system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; line-height: 1; }"
-    },
-    {
-      "name": "Primary action button",
-      "kind": "button",
-      "refersTo": "button-primary",
-      "description": "The 'Email me' CTA: filled, square-cornered, no shadow, tints on hover.",
-      "html": "<a class=\"ds-btn-primary\" href=\"mailto:example@example.com\">Email me</a>",
-      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding-inline: 24px; border: 1px solid #12161D; border-radius: 2px; background: #12161D; color: #FAFBFC; font-family: Archivo, system-ui, sans-serif; font-weight: 700; font-size: 1rem; text-decoration: none; transition: background-color 160ms cubic-bezier(0.16,1,0.3,1); } .ds-btn-primary:hover { background: #2b3038; } .ds-btn-primary:focus-visible { outline: 2px solid #2447D6; outline-offset: 2px; }"
-    },
-    {
-      "name": "Ghost action button",
-      "kind": "button",
-      "refersTo": "button-ghost",
-      "description": "Secondary link-styled action (GitHub, LinkedIn) sharing the plate/button geometry.",
-      "html": "<a class=\"ds-btn-ghost\" href=\"#\">GitHub</a>",
-      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding-inline: 24px; border: 1px solid #DDE1E7; border-radius: 2px; background: transparent; color: #12161D; font-family: Archivo, system-ui, sans-serif; font-weight: 700; font-size: 1rem; text-decoration: none; transition: background-color 160ms cubic-bezier(0.16,1,0.3,1); } .ds-btn-ghost:hover { background: color-mix(in srgb, #12161D 8%, transparent); }"
-    },
-    {
-      "name": "Release entry",
+      "name": "Menu frame (signature panel)",
       "kind": "card",
-      "refersTo": "entry",
-      "description": "Fixed-furniture release row: status plate, since/latest-release metadata rail, name, note, stack, proofs and links, separated by a hairline, no shadow or radius.",
-      "html": "<article class=\"ds-entry\"><div class=\"ds-entry-rail\"><span class=\"ds-plate\" data-role=\"added\">Active</span><dl class=\"ds-entry-meta\"><dt>Since</dt><dd class=\"ds-mono\">2021</dd></dl></div><div class=\"ds-entry-body\"><h3 class=\"ds-entry-name\">whats-reader</h3><p class=\"ds-entry-note\">Local Whisper over WebGPU.</p></div></article>",
-      "css": ".ds-entry { display: flex; gap: 24px; padding-block: 32px; border-block-start: 1px solid #DDE1E7; } .ds-entry-rail { display: flex; flex-direction: column; gap: 12px; min-width: 8rem; } .ds-entry-meta dt { font-size: 0.75rem; font-weight: 600; color: #5D6573; } .ds-entry-meta dd { font-family: 'Martian Mono', ui-monospace, monospace; font-size: 0.8125em; } .ds-entry-name { font-stretch: 125%; font-weight: 800; font-size: 1.5rem; line-height: 2rem; letter-spacing: -0.015em; margin: 0; } .ds-entry-note { font-size: 1.25rem; line-height: 1.75rem; font-weight: 500; margin: 8px 0 0; }"
+      "refersTo": "custom",
+      "description": "The console-menu frame: thick dark border, 14deg-corner tilt on the backdrop only, an inset hairline and an ambient drop shadow. Used for the AI-workflow method, the Compare tuner, work/open-source/package entries and the 404 card.",
+      "html": "<div class=\"ds-frame\"><p class=\"ds-frame-label\">STATION</p><h3 class=\"ds-frame-title\">COMPARE</h3></div>",
+      "css": ".ds-frame { position: relative; isolation: isolate; padding: clamp(24px, 3vw, 48px); } .ds-frame::before { content: ''; position: absolute; inset: 0; z-index: -1; border: 4px solid #05010F; border-radius: 14px; background: linear-gradient(180deg, color-mix(in srgb, #BD00FF 10%, transparent), transparent 40%), #1C1440; box-shadow: inset 0 0 0 1px #3A2C72, 0 1.25rem 2.5rem -1rem rgba(0,0,0,0.7); transform: rotate(-0.5deg); } .ds-frame-label { font-family: Orbitron, system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #FF6EC7; } .ds-frame-title { font-family: 'Luckiest Guy', system-ui, sans-serif; color: #FFF6FB; -webkit-text-stroke: 0.14em #0B0620; paint-order: stroke fill; }"
     },
     {
-      "name": "Sticky nav header",
+      "name": "HUD readout (no panel)",
+      "kind": "custom",
+      "refersTo": "custom",
+      "description": "An icon and an outlined, role-colored Orbitron number floating directly over the scene: the live clock and the hero stat counters (stars, downloads, contributions), each linking to its proof. Hover swaps the whole readout to the selection-green pill.",
+      "html": "<a class=\"ds-hud\" href=\"#\" data-tone=\"cyan\"><span class=\"ds-hud-n\">1,721</span><span class=\"ds-hud-l\">stars</span></a>",
+      "css": ".ds-hud { display: inline-flex; align-items: center; gap: 8px; padding: 2px 8px; border-radius: 6px; text-decoration: none; color: #00D9FF; } .ds-hud:hover { background: #00FF97; color: #04140C; } .ds-hud-n { font-family: Orbitron, system-ui, sans-serif; font-weight: 800; font-size: 1.375rem; -webkit-text-stroke: 0.2em #0B0620; paint-order: stroke fill; } .ds-hud:hover .ds-hud-n { -webkit-text-stroke: 0; }"
+    },
+    {
+      "name": "Pause menu (site header nav)",
       "kind": "nav",
-      "refersTo": "site-header",
-      "description": "Thin sticky bar: wordmark, literal section nouns (AI engineering, Work, Career, Open source, Packages, Stack, Contact), language switch; active link gets an animated underline.",
-      "html": "<header class=\"ds-header\"><a class=\"ds-wordmark\" href=\"#\">rodrigogs</a><nav class=\"ds-nav\"><a href=\"#\" aria-current=\"true\">AI engineering</a><a href=\"#\">Work</a><a href=\"#\">Career</a></nav><a class=\"ds-lang\" href=\"#\">PT</a></header>",
-      "css": ".ds-header { display: flex; align-items: center; gap: 32px; height: 52px; background: #FAFBFC; border-block-end: 1px solid #DDE1E7; padding-inline: 24px; } .ds-wordmark { font-stretch: 125%; font-weight: 800; font-size: 1rem; color: #12161D; text-decoration: none; } .ds-nav { display: flex; gap: 4px; flex: 1; } .ds-nav a { position: relative; display: inline-flex; align-items: center; height: 52px; padding-inline: 12px; color: #3E4552; font-size: 0.875rem; font-weight: 600; text-decoration: none; } .ds-nav a::after { content: ''; position: absolute; inset-inline: 12px; bottom: -1px; height: 2px; background: #12161D; transform: scaleX(0); transition: transform 320ms cubic-bezier(0.16,1,0.3,1); } .ds-nav a[aria-current='true'] { color: #12161D; } .ds-nav a[aria-current='true']::after { transform: none; } .ds-lang { margin-inline-start: auto; color: #12161D; text-decoration: underline; text-decoration-color: #DDE1E7; }"
+      "refersTo": "custom",
+      "description": "Sticky floating menu-frame bar: pink script handle, plain-noun links in outlined Luckiest Guy, current/hover on the selection-green bar; folds behind a MENU toggle under 70rem.",
+      "html": "<header class=\"ds-menu\"><a class=\"ds-handle\">rodrigogs</a><nav class=\"ds-nav\"><a href=\"#\" aria-current=\"true\">Work</a><a href=\"#\">Career</a></nav></header>",
+      "css": ".ds-menu { display: flex; align-items: center; gap: 16px; height: 52px; padding-inline: 16px 8px; border: 3px solid #05010F; border-radius: 14px; background: color-mix(in srgb, #1C1440 94%, transparent); box-shadow: 0 1.25rem 2.5rem -1rem rgba(0,0,0,0.7); } .ds-handle { color: #FF6EC7; font-family: Yellowtail, cursive; font-size: 1.625rem; text-decoration: none; text-shadow: 0 0 0.35em color-mix(in srgb, #FF6EC7 55%, transparent); } .ds-nav a { display: inline-flex; align-items: center; height: 36px; padding-inline: 12px; border-radius: 8px; color: #FF6EC7; font-family: 'Luckiest Guy', system-ui, sans-serif; font-size: 1rem; letter-spacing: 0.04em; text-decoration: none; } .ds-nav a:hover, .ds-nav a[aria-current='true'] { background: #00FF97; color: #04140C; }"
     },
     {
-      "name": "Compare rail knob",
+      "name": "Compare tuner dial",
       "kind": "input",
-      "refersTo": "compare",
-      "description": "The signature interaction's picker control: a square knob on the career rail, filled with its role color when checked.",
-      "html": "<input type=\"radio\" class=\"ds-knob ds-knob--added\" checked aria-label=\"To 2026\" />",
-      "css": ".ds-knob { appearance: none; width: 24px; height: 24px; margin: 0; border-radius: 0; background: #FAFBFC; box-shadow: inset 0 0 0 7px #FAFBFC, inset 0 0 0 8px #8C95A3; cursor: pointer; transition: background-color 160ms cubic-bezier(0.16,1,0.3,1), box-shadow 160ms cubic-bezier(0.16,1,0.3,1); } .ds-knob:hover { box-shadow: inset 0 0 0 6px #FAFBFC, inset 0 0 0 8px #12161D; } .ds-knob--added:checked { background: #127543; box-shadow: inset 0 0 0 6px #FAFBFC; }"
+      "refersTo": "custom",
+      "description": "The signature interaction's LCD-strip year dial (prev/next arrows either side), Orbitron digits in cyan with a cyan glow, disabled by default so the server-rendered diff reads with JS off.",
+      "html": "<div class=\"ds-dial\"><button class=\"ds-step\">&#9668;</button><span class=\"ds-year\">2026</span><button class=\"ds-step\">&#9658;</button></div>",
+      "css": ".ds-dial { display: grid; grid-template-columns: 44px minmax(0,1fr) 44px; border: 3px solid #05010F; border-radius: 10px; background: #06101F; overflow: hidden; } .ds-step { display: grid; place-items: center; min-height: 48px; border: 0; background: color-mix(in srgb, #00D9FF 16%, #06101F); color: #00D9FF; cursor: pointer; } .ds-step:hover { background: #00FF97; color: #04140C; } .ds-year { display: grid; place-items: center; color: #00D9FF; font-family: Orbitron, system-ui, sans-serif; font-size: 1.625rem; font-weight: 800; text-shadow: 0 0 0.4em color-mix(in srgb, #00D9FF 50%, transparent); }"
+    },
+    {
+      "name": "Toast stamp (Email copied)",
+      "kind": "custom",
+      "refersTo": "custom",
+      "description": "Full-viewport unboxed stamp: giant skewed pink outlined display title with an Orbitron subtitle, on a soft radial dusk (not a box). The signature copy-confirmation moment.",
+      "html": "<div class=\"ds-toast\"><p class=\"ds-toast-title\">EMAIL COPIED!</p><p class=\"ds-toast-sub\">rodrigo@example.com IS ON YOUR CLIPBOARD</p></div>",
+      "css": ".ds-toast { display: grid; place-content: center; justify-items: center; gap: 12px; text-align: center; background: radial-gradient(50% 34% at 50% 50%, color-mix(in srgb, #0E0826 78%, transparent), transparent 100%); } .ds-toast-title { color: #FF6EC7; font-family: 'Luckiest Guy', system-ui, sans-serif; font-size: clamp(2.75rem, 1rem + 7vw, 6rem); text-transform: uppercase; transform: skewX(-10deg); text-shadow: 0.06em 0.07em 0 #0B0620, 0 0 0.3em color-mix(in srgb, #FF6EC7 55%, transparent); } .ds-toast-sub { color: #FFF6FB; font-family: Orbitron, system-ui, sans-serif; font-size: clamp(0.8125rem, 0.7rem + 0.5vw, 1rem); font-weight: 700; letter-spacing: 0.06em; -webkit-text-stroke: 0.3em #0B0620; paint-order: stroke fill; }"
     }
   ],
   "narrative": {
-    "northStar": "The Living Changelog",
-    "overview": "The site reads its own owner's work as software: dated entries, a diffstat and a compare view, on the bright, near-clinical white sheet of a real release page — not a portfolio pretending to be one. The whole palette is four release roles (Added, Changed, Merged, Deprecated) applied only as solid tag plates, tinted diff lines and diffstat blocks; there is no fifth decorative accent. Archivo's width axis does the work other systems give to a second typeface: expanded and black for names, titles and section nouns, normal weight for running prose, while Martian Mono is held in reserve for anything that is data — versions, dates, hashes, counts, diff numbers.\n\nThe changelog grammar describes the work — versioned software entries, their diffstat, their compare view — never the person. Every label the visitor reads about Rodrigo himself is a plain professional noun: Role, Product and Open source on the three hero note plates; AI engineering and Stack as section nouns; Since and Status as entry fields. The hero carries no CalVer date and no 'Latest' plate — a person is not a software release, and the owner confirmed that framing read badly (2026-09-28). The README masthead and OG social cards follow the same rule: a solid green plate still sits beside the name, in the same role and position a 'Latest' plate would have used, but it now names the site (rodrigogs.github.io), not a fake release date.\n\nDensity is editorial-technical: hairline rules separate every entry, a left rail carries status and dates the way a git log carries metadata, and every section opens with one literal noun as its heading (AI engineering, Work, Open source, Packages, Career, Stack, Contact) followed by exactly one claim sentence. The system explicitly refuses the dev-portfolio default (hero imagery, bento-grid cards, skill-badge walls, dark neon glow) and its editorial-serif opposite; nothing here is illustrative or ornamental. The retired 2026 'vaporwave' palette (cyan/yellow/magenta/pink) exists only behind the Konami-code easter egg (`:root[data-theme='vaporwave']`) as evidence of personality — it is a swapped token set for the same four roles, not a second design system, and it never appears in normal navigation.",
+    "northStar": "The Pause Menu Over the Sunset",
+    "overview": "The site is a night drive through 1986 Miami: a live WebGL sunset over the ocean, palm and Art Deco silhouettes, and the real work \u2014 proof, numbers, a career, a stack \u2014 laid over it as a console-menu UI, an owner-pinned homage to the era's console crime games (PRODUCT.md, 'Pinned aesthetic'). It is a brief-pinned world, not a rolled one: every neon color, both display faces, the menu-frame geometry and the green selection bar existed as a decision before the build and now exist as shipped tokens in src/design/tokens.ts, read by the CSS, the WebGL shader, and the GitHub-profile README card renderer alike, so the site and the README cannot drift apart.\n\nThe system draws a hard line between two registers. The scene and its frame furniture are unapologetically game-menu: a brush-script signature, an outlined display face with a hard drop, HUD numerals with no panel, thick-bordered tilted frames, a radio tuner, a toast stamp, scanlines, and a chromatic glitch that fires on hover. The content read as prose \u2014 every claim about the person \u2014 stays plain: Role, Product, AI, Work, Open source, Packages, Career, Stack, Contact are literal professional nouns, never changelog or game jargon. Game vocabulary is UI flavor only (a toast, a cheat, a tuner), never a claim about him. One color, a synthetic green (#00FF97) absent from the vaporwave four, is the single selection state across the whole system: every hover, focus ring, and current nav item uses it and nothing else, exactly as the pause menus it pays homage to use one highlight color.\n\nHomage, not copy is load-bearing, not decorative: no Rockstar/Take-Two marks, no 'Grand Theft Auto'/'Vice City' branding, no game art, no extracted game fonts (Pricedown's license forbids webfont embedding), no radio names or audio. Every shape (the tilted menu frame, the sliced-sun scene, the four typefaces, the icon set) is drawn from the site's own SVG, shader and font choices.",
     "keyCharacteristics": [
-      "Four release-role colors are the entire color system; no neutral accent beyond ink/paper.",
-      "Archivo's width axis (expanded ↔ normal) substitutes for a second display face.",
-      "Martian Mono is reserved exclusively for versions, dates, hashes, counts and diff numbers.",
-      "Square-cornered plates and a 4px whole-unit spacing grid; no soft or generous rounding anywhere.",
-      "Flat by default: no ambient shadows; the only box-shadow uses are inset focus rings, radio 'knob' fills and the transient :target highlight glow."
+      "One selection color (#00FF97) for every hover, focus and current-item state; no other color plays that role.",
+      "Four faces, four jobs: Yellowtail script (the name only), Luckiest Guy outlined display (titles, big numbers, never body), Inter (everything read), Orbitron (HUD numerals and readouts, no panel).",
+      "Menu frames are thick dark-bordered panels tilted +/-0.5deg like a framed postcard; HUD readouts float with no panel at all -- an icon plus an outlined colored number.",
+      "A single 4px spacing unit; every block snaps to a whole step (--s-1...--s-11).",
+      "Plain professional nouns label the person; game vocabulary (toast, cheat, tuner, 'STATION') stays confined to UI flavor on the signature interactions, never to a section heading or a claim about him."
     ],
     "rules": [
-      { "name": "The Four Roles Rule", "body": "The entire color system is four release roles (Added, Changed, Merged, Deprecated). A new surface must map its states onto these four before reaching for a new color; there is no fifth accent to invent.", "section": "colors" },
-      { "name": "The Solid Plate Rule", "body": "Role colors render only as solid tag plates, diff-line tints, and diffstat blocks — never as decorative gradients, glows, or large color fields outside these three forms.", "section": "colors" },
-      { "name": "The Data Voice Rule", "body": "Anything that is a measured quantity — a version, date, hash, count, or diff number — renders in Martian Mono with tabular figures. Archivo never carries a number that stands for a proof.", "section": "typography" },
-      { "name": "The Width-Axis Rule", "body": "Emphasis is expressed by moving Archivo's width axis to expanded/black (names, titles, headings, plates), never by switching typeface or adding a second display face.", "section": "typography" },
-      { "name": "The Flat Ledger Rule", "body": "Surfaces never lift on hover or elevate on interaction. The only state changes are color (background/text) and the hairline-bounded fields that recolor an entire section band to a role color.", "section": "elevation" }
+      {
+        "name": "The One Selection Color Rule",
+        "body": "#00FF97 (green) is the only hover, focus-visible and current-item color anywhere in the system. Every :hover, :focus-visible and [aria-current]/[data-current] state resolves to this one color, never to brand pink or any role color, as in the menus this world pays homage to.",
+        "section": "colors"
+      },
+      {
+        "name": "The Outline Rule",
+        "body": "Every display-face title and every HUD numeral carries a heavy dark outline (-webkit-text-stroke in var(--outline)) with paint-order: stroke fill, so white or neon type stays legible directly over the scene with no background panel underneath it.",
+        "section": "typography"
+      },
+      {
+        "name": "The HUD-Has-No-Panel Rule",
+        "body": "HUD readouts (the clock, the stat counters, the tuner digits) are never set inside a bordered panel or card. They are an icon and an outlined colored number floating straight over the scene or the night.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Lift-On-Hover Rule",
+        "body": "Nothing translates, scales, or gains a new shadow on hover or focus. State change is color-only, to the one selection green, matching the menu-select behavior this world pays homage to.",
+        "section": "elevation"
+      }
     ],
     "dos": [
-      "Do keep the palette to the four release roles (Added/Changed/Merged/Deprecated); a new surface reuses these before adding a color.",
-      "Do render every measured quantity (version, date, hash, count) in Martian Mono with tabular numerals.",
-      "Do use Archivo's width axis (expanded/black for emphasis, normal for prose) instead of a second typeface.",
-      "Do open each section with its literal plain-noun heading and exactly one claim sentence.",
-      "Do keep corners square (2px radius token) and depth flat; state changes are color, not shadow or lift.",
-      "Do label anything that describes the person — hero notes, section nouns, entry fields, status words — with a plain professional noun (Role, Product, Open source, AI engineering, Stack, Since, Status, Legacy). The changelog grammar (roles, plates, diffstat, compare) stays; changelog vocabulary aimed at the person does not.",
-      "Do embed a provenance tEXt chunk (key impeccable:prompt) in every shipped OG PNG, naming it as code-rendered, not generated."
+      "Do keep #00FF97 (green) as the only hover/focus/current-item color across the whole system; a new surface reuses it before reaching for any other state color.",
+      "Do hold Yellowtail to the name only, Luckiest Guy to titles/numbers/the toast (always outlined + hard drop, never body copy), Inter to everything read, and Orbitron to numerals and readouts only.",
+      "Do label anything describing the person with a plain professional noun (Role, Product, AI, Work, Open source, Packages, Career, Stack, Contact); confine game vocabulary (toast, cheat, tuner, 'STATION') to UI flavor on the signature interactions, never to a section heading or a claim about him.",
+      "Do set HUD readouts with no panel -- an icon and an outlined colored number straight over the scene or the night.",
+      "Do keep the scene's performance budget: hero JS under 5KB gzip, no three.js/bloom/ray-marching/particles, capped DPR, paused offscreen/hidden-tab, a still frame under reduced motion, and WebGL context loss handled by falling back to the always-present SVG poster.",
+      "Do snap every block to the 4px spacing scale (--s-1...--s-11); nothing in the build uses an off-scale spacing value."
     ],
     "donts": [
-      "Don't add a decorative accent color outside the four release roles.",
-      "Don't apply role colors as gradients, glows, or large ambient fields; they render only as plates, diff tints and diffstat blocks.",
-      "Don't add hard offset/neobrutalist shadows, drop shadows, or elevation on hover — this world is flat by construction.",
-      "Don't carry the retired vaporwave palette (Konami easter egg) into normal navigation or any new component; it is a swapped token set behind an easter egg, not a usable system palette.",
-      "Don't introduce kickers/eyebrows above headings; the section noun itself is the heading, with no small label sitting above it.",
-      "Don't reintroduce a CalVer date or a 'Latest' plate on the hero, or any changelog noun ('Now', 'Unreleased', 'Changed'/'Added' as a status word, 'Dormant', 'Born') as a label describing the person; that jargon read as a defect on a person's site and was replaced with plain nouns (Role, Product, Open source, AI engineering, Stack, Since, Legacy) — it is not a style to bring back for a new surface."
+      "Don't use a second color for hover, focus, or 'current' state; every such state resolves to the one selection green.",
+      "Don't apply changelog vocabulary ('Now', 'Unreleased', CalVer dates, 'Latest' plates) to the person -- this is a Miami-night console world, not a release ledger, and that jargon was already rejected once for a prior world; it does not belong in this one either.",
+      "Don't add a hard-offset neobrutalist box-shadow anywhere; the 'hard drop' that exists on display titles and the toast stamp is a text-shadow on the display/HUD faces specifically, pinned by the direction contract -- it is not a general-purpose shadow device for new components.",
+      "Don't promote a frame's corner label ('STATION') into a kicker/eyebrow sitting above a SectionHead title; it belongs to the menu-frame furniture, never to the section-heading pattern (which stays one literal noun, then one claim sentence, no label above it).",
+      "Don't use Rockstar/Take-Two marks, the words 'Grand Theft Auto' or 'Vice City' as branding, game art or screenshots, fonts extracted from the game (Pricedown is never webfont-embedded), or radio station names/audio; this world is built only from its own SVG, shader and font choices.",
+      "Don't lift, scale, or add a new shadow on hover; state change is color-only."
     ]
   }
 }
