@@ -52,7 +52,6 @@ body {
   line-height: 1.6;
   caret-color: var(--c-select);
   -webkit-font-smoothing: antialiased;
-  font-variant-numeric: tabular-nums;
 }
 
 /* CRT scanlines: static, faint, never in the way. */
@@ -118,6 +117,15 @@ input,
 select {
   font: inherit;
   color: inherit;
+}
+
+/* Tabular figures only where numbers are data (readouts, figure columns,
+   dates, the tuner): running text and names keep Inter's proportional
+   figures and its narrow hyphen. */
+time,
+select,
+.hud-n {
+  font-variant-numeric: tabular-nums;
 }
 
 ::selection {
@@ -245,7 +253,6 @@ a:hover {
   font-family: var(--hud);
   font-weight: 800;
   letter-spacing: 0.02em;
-  font-variant-numeric: tabular-nums;
   -webkit-text-stroke: 0.2em var(--outline);
   paint-order: stroke fill;
 }

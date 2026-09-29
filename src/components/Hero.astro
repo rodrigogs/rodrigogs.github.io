@@ -10,7 +10,7 @@
  * its proof). The sun is placed by the same rule in CSS and in the shader
  * (see --sun-at), so it never sits under the text.
  */
-import { SUN_X, sceneGridSvg, sceneSilhouettesSvg, sceneSvg } from '../design/scene-svg.ts';
+import { SUN_X, sceneGeometry, sceneGridSvg, sceneSilhouettesSvg, sceneSvg } from '../design/scene-svg.ts';
 import type { SiteView } from '../lib/view.ts';
 import CopyEmail from './CopyEmail.astro';
 import Icon, { type IconName } from './Icon.astro';
@@ -27,6 +27,8 @@ const size = { width: 1600, height: 900 };
 const poster = sceneSvg({ ...size, idPrefix: 'hp-', palms: false, skyline: false });
 const floor = sceneGridSvg({ ...size, idPrefix: 'hg-' });
 const silhouettes = sceneSilhouettesSvg({ ...size, idPrefix: 'hs-' });
+/** The sun radius as a fraction of the scene width, so the CSS can find the disk's left edge. */
+const sunR = sceneGeometry(size.width, size.height).sun.r / size.width;
 
 interface Stat {
   icon: IconName;
@@ -45,11 +47,11 @@ const stats: Stat[] = [
 ---
 
 <section class="hero" id="hero" aria-labelledby="hero-name" data-hero>
-  <div class="scene" aria-hidden="true" style={`--sun-x: ${SUN_X}`}>
+  <div class="scene" aria-hidden="true" style={`--sun-x: ${SUN_X}; --sun-r: ${sunR}`}>
     <div class="layer" set:html={poster} />
     <canvas class="live" data-scene></canvas>
     <div class="layer floor" set:html={floor} />
-    <div class="layer" set:html={silhouettes} />
+    <div class="layer skyline" set:html={silhouettes} />
     <div class="scrim"></div>
   </div>
 
@@ -172,19 +174,23 @@ const stats: Stat[] = [
     container-type: size;
     background: var(--scene-water-near);
   }
+  /* Cover, bottom-aligned, the sun at --sun-at of the width (clamped so the
+     scene always covers). scene.ts computes the same placement. From it:
+     the sun disk's left edge, and the right edge of the text column. */
   .layer,
   .live,
   .scrim {
+    --w: max(100cqw, 177.78cqh);
+    --x0: clamp(calc(100cqw - var(--w)), calc(var(--sun-at) * 100cqw - var(--sun-x) * var(--w)), 0px);
+    --sun-left: calc(var(--x0) + (var(--sun-x) - var(--sun-r)) * var(--w));
+    --col-end: calc(max(0px, (100cqw - var(--max)) / 2) + var(--pad) + min(40rem, 50cqw));
     position: absolute;
     inset: 0;
   }
-  /* Cover, bottom-aligned, the sun at --sun-at of the width (clamped so the
-     scene always covers). scene.ts computes the same placement. */
   .layer :global(svg) {
-    --w: max(100cqw, 177.78cqh);
     position: absolute;
     inset-block-end: 0;
-    inset-inline-start: clamp(calc(100cqw - var(--w)), calc(var(--sun-at) * 100cqw - var(--sun-x) * var(--w)), 0px);
+    inset-inline-start: var(--x0);
     inline-size: var(--w);
     block-size: calc(var(--w) * 0.5625);
   }
@@ -207,16 +213,24 @@ const stats: Stat[] = [
   .live:global(.on) ~ .floor {
     visibility: hidden;
   }
+  /* The text column reads on a calm ground: the scrim holds to the
+     column's right edge and clears by the sun's left edge; the skyline
+     behind the column fades so its neon edges stay out of the text. */
   .scrim {
     background:
       linear-gradient(
         90deg,
-        color-mix(in srgb, var(--c-night) 90%, transparent) 0%,
-        color-mix(in srgb, var(--c-night) 82%, transparent) 36%,
-        color-mix(in srgb, var(--c-night) 30%, transparent) 50%,
-        transparent 58%
+        color-mix(in srgb, var(--c-night) 92%, transparent) 0,
+        color-mix(in srgb, var(--c-night) 84%, transparent) calc(var(--col-end) - 14rem),
+        color-mix(in srgb, var(--c-night) 64%, transparent) var(--col-end),
+        transparent max(var(--sun-left), calc(var(--col-end) + 1.5rem))
       ),
       linear-gradient(to top, var(--c-night) 0, transparent 16%);
+  }
+  @media (min-width: 64rem) {
+    .skyline {
+      mask-image: linear-gradient(90deg, rgb(0 0 0 / 0.4) var(--col-end), #000 var(--sun-left));
+    }
   }
 
   /* HUD --------------------------------------------------------------- */
@@ -464,8 +478,16 @@ const stats: Stat[] = [
       z-index: -2;
       background: var(--c-night);
     }
+    /* The HUD column (left of the sun) gets its own calm ground. */
     .scrim {
-      background: linear-gradient(to bottom, transparent 55%, color-mix(in srgb, var(--c-night) 88%, transparent) 80%, var(--c-night) 100%);
+      background:
+        linear-gradient(to bottom, transparent 55%, color-mix(in srgb, var(--c-night) 88%, transparent) 80%, var(--c-night) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--c-night) 74%, transparent) 0,
+          color-mix(in srgb, var(--c-night) 60%, transparent) 30%,
+          transparent min(50%, var(--sun-left))
+        );
     }
     /* The HUD moves to the left of the sun, a narrow column. */
     .hud {

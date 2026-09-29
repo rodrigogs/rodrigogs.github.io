@@ -4,8 +4,14 @@
  * handle, the plain section nouns in pink, and the language switch. The
  * current or hovered item sits on the green selection bar; the scroll spy
  * sets aria-current on the section in view.
+ *
+ * Under 70rem (where the row no longer fits) the nouns fold behind a compact MENU button (pause bars) that
+ * opens them as an overlay panel under the frame: aria-expanded, focus
+ * kept inside, Esc and outside clicks close (src/scripts/menu.ts). Without
+ * scripts the nouns stay one row that scrolls sideways, snapping per item.
  */
 import type { SiteView } from '../lib/view.ts';
+import Icon from './Icon.astro';
 
 interface Props {
   view: SiteView;
@@ -14,10 +20,14 @@ interface Props {
 const { view } = Astro.props;
 ---
 
-<header class="site-header">
+<header class="site-header" data-menu>
   <div class="menu">
     <a class="handle" href={view.href}>{view.person.handle}</a>
-    <nav class="nav" aria-label={view.ui.nav}>
+    <button class="toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-toggle data-js-only>
+      <Icon name="pause" size={14} />
+      <span>Menu</span>
+    </button>
+    <nav class="nav" id="site-nav" aria-label={view.ui.nav}>
       <ul>
         {
           view.nav.map((item) => (
@@ -38,6 +48,7 @@ const { view } = Astro.props;
 
 <script>
   import '../scripts/scrollspy.ts';
+  import '../scripts/menu.ts';
 </script>
 
 <style>
@@ -51,6 +62,7 @@ const { view } = Astro.props;
     pointer-events: none;
   }
   .menu {
+    position: relative;
     display: flex;
     align-items: center;
     gap: var(--s-4);
@@ -85,7 +97,8 @@ const { view } = Astro.props;
     gap: var(--s-1);
   }
   .nav a,
-  .lang {
+  .lang,
+  .toggle {
     display: inline-flex;
     align-items: center;
     block-size: 2.25rem;
@@ -100,12 +113,15 @@ const { view } = Astro.props;
   }
   .nav a:hover,
   .nav a[aria-current='true'],
-  .lang:hover {
+  .lang:hover,
+  .toggle:hover,
+  .toggle[aria-expanded='true'] {
     background: var(--c-select);
     color: var(--c-on-select);
   }
   .nav a:focus-visible,
-  .lang:focus-visible {
+  .lang:focus-visible,
+  .toggle:focus-visible {
     outline-offset: 2px;
     background: var(--c-select);
     color: var(--c-on-select);
@@ -119,9 +135,72 @@ const { view } = Astro.props;
     font-weight: 700;
     padding-block-start: 0;
   }
-  @media (max-width: 63.99rem) {
+
+  /* The compact MENU button: pause bars and the word, a pause-menu key. */
+  .toggle {
+    display: none;
+    flex: none;
+    gap: var(--s-2);
+    border: 0;
+    background: none;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .toggle :global(.icon) {
+    transform: translateY(-0.1em);
+  }
+
+  /* Keep in step with `compact` in src/scripts/menu.ts. */
+  @media (max-width: 69.99rem) {
+    /* No scripts: one row that scrolls sideways, per item, with a fade at the end. */
     .nav {
       mask-image: linear-gradient(90deg, #000 calc(100% - 2.5rem), transparent);
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: var(--s-1);
+    }
+    .nav li {
+      scroll-snap-align: start;
+    }
+
+    /* Scripts: the nouns fold into the pause-menu panel. */
+    [data-menu][data-ready] .toggle {
+      display: inline-flex;
+    }
+    [data-menu][data-ready] .nav {
+      position: absolute;
+      inset-block-start: calc(100% + var(--s-2));
+      inset-inline: -3px;
+      display: none;
+      padding: var(--s-3);
+      border: 3px solid var(--outline);
+      border-radius: 14px;
+      background: var(--c-panel);
+      box-shadow:
+        inset 0 0 0 1px var(--c-rule),
+        var(--shadow);
+      mask-image: none;
+      overflow: visible;
+    }
+    [data-menu][data-open] .nav {
+      display: block;
+    }
+    [data-menu][data-ready] .nav ul {
+      flex-direction: column;
+      gap: var(--s-1);
+    }
+    [data-menu][data-ready] .nav a {
+      inline-size: 100%;
+      block-size: 3rem;
+      padding-inline: var(--s-4);
+      font-size: 1.25rem;
+    }
+    /* The rest of the page dims while the menu is open; a tap on it closes. */
+    [data-menu][data-open]::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: color-mix(in srgb, var(--c-night) 72%, transparent);
+      pointer-events: auto;
     }
   }
   @media (max-width: 47.99rem) {

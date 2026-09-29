@@ -12,6 +12,7 @@
  * (aria-expanded) that stays open across range changes once opened.
  */
 
+import { motion } from '../design/tokens.ts';
 import { diffStacks } from '../lib/derive.ts';
 
 interface CompareData {
@@ -50,12 +51,8 @@ function init(form: HTMLFormElement): void {
   const template = document.querySelector<HTMLTemplateElement>('template[data-line-template]');
   if (!list || !template) return;
 
-  const rootStyle = getComputedStyle(document.documentElement);
-  const ms = (name: string, fallback: number) => Number.parseFloat(rootStyle.getPropertyValue(name)) || fallback;
-  const ease = rootStyle.getPropertyValue('--ease').trim() || 'ease-out';
-  const fast = ms('--d-fast', 160);
-  const base = ms('--d-base', 320);
-  const slow = ms('--d-slow', 560);
+  // The motion tokens come from the source module, not from computed style, so init never forces layout.
+  const { ease, fast, base, slow } = motion;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   let state = { base: data.base, head: data.head };

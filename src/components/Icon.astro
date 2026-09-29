@@ -2,7 +2,7 @@
 /**
  * The site's only icon set, drawn on a 16px grid: one 1.5px square-capped
  * stroke for line glyphs, and a few solid glyphs (the tuner arrows, the HUD
- * star) that read as filled marks at HUD size.
+ * star, the pause-menu bars) that read as filled marks at HUD size.
  */
 export type IconName =
   | 'plus'
@@ -19,7 +19,8 @@ export type IconName =
   | 'pulse'
   | 'star'
   | 'prev'
-  | 'next';
+  | 'next'
+  | 'pause';
 
 interface Props {
   name: IconName;
@@ -48,6 +49,7 @@ const solids: Partial<Record<IconName, string>> = {
   star: 'M8 1.25l2.05 4.3 4.7.6-3.45 3.25.87 4.65L8 11.8l-4.17 2.25.87-4.65L1.25 6.15l4.7-.6z',
   prev: 'M11.5 2.5v11L3.5 8z',
   next: 'M4.5 2.5v11l8-5.5z',
+  pause: 'M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z',
 };
 
 const solid = solids[name];

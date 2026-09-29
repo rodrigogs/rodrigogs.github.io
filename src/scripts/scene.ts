@@ -237,6 +237,7 @@ export function start(canvas: HTMLCanvasElement, hero: HTMLElement): void {
       raf = requestAnimationFrame(frame);
     } else if (!run && raf) {
       stop();
+      state('paused');
     }
     if (reduce.matches && !frozen) {
       state('still');
