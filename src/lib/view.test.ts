@@ -45,13 +45,10 @@ describe.each(['en', 'pt'] as const)('buildView(%s) on the committed snapshot', 
     }
   });
 
-  it('only shows public work: every entry resolves to a public repo or an upstream row', () => {
+  it('only shows public work: every entry resolves to a public repo the owner publishes', () => {
     const publicRepos = new Set(snapshot.repos.map((r) => r.name));
-    const upstream = new Set(snapshot.upstream.map((u) => u.repo));
     for (const entry of work) expect(publicRepos.has(entry.repo)).toBe(true);
-    for (const entry of aiProjects) {
-      expect(entry.repo ? publicRepos.has(entry.repo) : upstream.has(entry.upstream ?? '')).toBe(true);
-    }
+    for (const entry of aiProjects) expect(publicRepos.has(entry.repo)).toBe(true);
   });
 
   it('never counts merged PRs for hermes-agent', () => {

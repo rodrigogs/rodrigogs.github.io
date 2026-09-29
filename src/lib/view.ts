@@ -423,7 +423,7 @@ function careerView(locale: Locale, now: Date): CareerView[] {
       title: role.title[locale],
       note: role.note ? role.note[locale] : null,
       from: monthYear(role.from, locale),
-      to: role.to ? monthYear(role.to, locale) : locale === 'pt' ? 'hoje' : 'now',
+      to: role.to ? monthYear(role.to, locale) : locale === 'pt' ? 'atual' : 'now',
       fromDatetime: role.from,
       toDatetime: role.to,
       current: role.to === null,
@@ -535,18 +535,8 @@ export function buildView(snapshot: Snapshot, locale: Locale, build: BuildInfo):
     sections: sectionView,
     field: fieldView,
     ai: aiProjects.map((entry) => {
-      const repo = entry.repo ? snapshot.repos.find((r) => r.name === entry.repo) : undefined;
-      const up = entry.upstream ? snapshot.upstream.find((u) => u.repo === entry.upstream) : undefined;
+      const repo = snapshot.repos.find((r) => r.name === entry.repo);
       const proofs: ProofView[] = [];
-      if (up) {
-        proofs.push({ value: compact(up.stars, locale), label: countLabel('stars', up.stars, locale), href: up.url });
-        proofs.push({ value: formatInt(up.commits, locale), label: countLabel('commits', up.commits, locale), href: up.proofUrl });
-        proofs.push({
-          value: formatInt(up.prsOpened, locale),
-          label: countLabel('prsOpened', up.prsOpened, locale),
-          href: `${up.url}/pulls?q=is%3Apr+author%3Arodrigogs`,
-        });
-      }
       const stars = repo ? starsProof(repo, locale) : null;
       if (stars) proofs.push(stars);
       for (const fact of entry.facts ?? []) proofs.push(factProof(fact, locale));

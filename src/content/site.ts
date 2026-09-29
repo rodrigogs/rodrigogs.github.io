@@ -43,8 +43,8 @@ export const meta = {
     'Rodrigo Gomes da Silva, engenheiro de software sênior',
   ),
   description: l(
-    'Software engineer since 2010, senior since 2018. I build whole products, from database internals to on-device AI and agent infrastructure. Release history, open source and contact.',
-    'Engenheiro de software desde 2010, sênior desde 2018. Construo produtos completos, do motor do banco de dados à IA rodando no dispositivo e à infraestrutura de agentes. Histórico de releases, open source e contato.',
+    'Shipping software since 2010, senior since 2018. I build whole products, from database internals to on-device AI and agent infrastructure. Release history, open source and contact.',
+    'Entregando software desde 2010, sênior desde 2018. Construo produtos completos, do motor do banco de dados à IA rodando no dispositivo e à infraestrutura de agentes. Histórico de releases, open source e contato.',
   ),
 } as const;
 
@@ -63,7 +63,7 @@ export const hero = {
       label: l('Role', 'Cargo'),
       text: l(
         'Senior Software Engineer at Globant, on the Disney Entertainment account since August 2025.',
-        'Senior Software Engineer na Globant, na conta da Disney Entertainment desde agosto de 2025.',
+        'Senior Software Engineer na Globant, atendendo a Disney Entertainment desde agosto de 2025.',
       ),
     },
     {
@@ -81,7 +81,7 @@ export const hero = {
       label: l('AI', 'IA'),
       text: l(
         'I work with a team of AI agents: spec first, parallel subagents, adversarial review, and proof in the running app before anything ships.',
-        'Trabalho com um time de agentes de IA: especificação primeiro, subagentes em paralelo, revisão adversarial e prova no app rodando antes de qualquer entrega.',
+        'Trabalho com um time de agentes de IA: especificação primeiro, subagentes em paralelo, revisão adversarial e verificação no app rodando antes de qualquer entrega.',
       ),
     },
   ],
@@ -101,7 +101,7 @@ export const sections = {
     label: l('How I work with AI', 'Como trabalho com IA'),
     claim: l(
       'I set the spec and the bar; a team of AI agents does the fan-out; nothing ships until it is proven.',
-      'Eu defino a especificação e o nível de exigência; um time de agentes de IA distribui o trabalho; nada sai sem prova.',
+      'Eu defino a especificação e o padrão de qualidade; um time de agentes de IA executa em paralelo; nada é entregue sem ser comprovado.',
     ),
   },
   work: {
@@ -130,15 +130,15 @@ export const sections = {
     label: l('Career', 'Carreira'),
     /** {years} */
     claim: l(
-      '{years} years shipping software for media, retail, tax compliance and healthcare.',
-      '{years} anos entregando software para mídia, varejo, área fiscal e saúde.',
+      '{years} years shipping software for media, retail and tax compliance.',
+      '{years} anos entregando software para mídia, varejo e área fiscal.',
     ),
   },
   stack: {
     label: l('Stack', 'Stack'),
     claim: l(
-      'What I ship with, and the tools I work with every day, AI included.',
-      'Com o que eu entrego, e as ferramentas que uso no dia a dia, incluindo IA.',
+      'What I ship with, and the tools I work with, AI included.',
+      'As tecnologias com que entrego e as ferramentas que uso no trabalho, IA incluída.',
     ),
   },
   contact: {
@@ -390,29 +390,20 @@ export const work: WorkEntry[] = [
 /** What landed in Hermes Agent; one wording for the AI engineering entry and the Open source row. */
 const hermesAgentNote = l(
   'Gateway watchdog fixes against false wedge kills, a Bedrock context-window cache fix and an auth cooldown reset fix.',
-  'Correções no watchdog do gateway contra falsos travamentos, no cache da janela de contexto do Bedrock e no reset do cooldown de autenticação.',
+  'Correções no watchdog do gateway contra reinícios indevidos por falso travamento, no cache da janela de contexto do Bedrock e no reset do cooldown de autenticação.',
 );
 
 export interface AiProject {
   id: string;
   name: string | L;
-  repo: string | null;
-  /** Upstream repo whose snapshot row feeds the numbers. */
-  upstream?: string;
+  /** Public repo the owner publishes (contributions to others live in Open source). */
+  repo: string;
   note: L;
   facts?: Fact[];
   links: EntryLink[];
 }
 
 export const aiProjects: AiProject[] = [
-  {
-    id: 'hermes-agent',
-    name: 'Hermes Agent',
-    repo: null,
-    upstream: 'NousResearch/hermes-agent',
-    note: hermesAgentNote,
-    links: [{ kind: 'commits', href: 'https://github.com/NousResearch/hermes-agent/commits?author=rodrigogs' }],
-  },
   {
     id: 'hermes-smart-router',
     name: 'hermes-smart-router',
@@ -501,7 +492,7 @@ export const career: Role_[] = [
     from: '2021-06',
     to: '2022-09',
     org: 'Stilingue',
-    title: l('Development Specialist', 'Especialista de Desenvolvimento'),
+    title: l('Development Specialist', 'Especialista em Desenvolvimento'),
   },
   { from: '2018', to: '2020', org: 'Meltwater', title: l('Senior Software Engineer', 'Senior Software Engineer') },
   { from: '2017', to: '2018', org: 'Involves', title: l('Full-stack Developer', 'Desenvolvedor Full-stack') },
@@ -580,7 +571,7 @@ export const stack = {
     },
     {
       label: l('Retrieval', 'Busca e recuperação'),
-      items: ['ChromaDB', 'Docling', 'OpenWebUI', l('BM25 + vector hybrid search', 'Busca híbrida BM25 + vetorial'), l('Cross-encoder reranking', 'Reranking com cross-encoder')],
+      items: ['ChromaDB', l('BM25 keyword recall', 'Busca por palavra-chave BM25')],
     },
     {
       label: l('Quality', 'Qualidade'),
@@ -599,8 +590,8 @@ export const aiWorkflow = {
     {
       name: l('Spec before code', 'Especificação antes do código'),
       text: l(
-        'Every non-trivial change starts as a written spec and a plan I review before the first line is written.',
-        'Toda mudança não trivial começa como especificação e plano escritos, que eu reviso antes da primeira linha.',
+        "Big changes start as a written spec and a plan before any code; bugs start from the symptom, and finding the cause is the agents' job.",
+        'Mudanças grandes começam com especificação e plano escritos antes de qualquer código; bugs começam pelo sintoma, e achar a causa é trabalho dos agentes.',
       ),
       tools: ['Claude Code', 'superpowers'],
     },
@@ -608,7 +599,7 @@ export const aiWorkflow = {
       name: l('A team, not a chatbot', 'Um time, não um chatbot'),
       text: l(
         'Work fans out to parallel subagents, each with its model and effort picked for the job: fast models for mechanical edits, the strongest for architecture and review.',
-        'O trabalho se divide entre subagentes em paralelo, cada um com modelo e esforço escolhidos para a tarefa: modelos rápidos para edições mecânicas, os mais fortes para arquitetura e revisão.',
+        'O trabalho se divide entre subagentes em paralelo, cada um com o modelo e o nível de raciocínio escolhidos para a tarefa: modelos rápidos para edições mecânicas, os mais fortes para arquitetura e revisão.',
       ),
       tools: ['Claude Code', 'Claude on AWS Bedrock'],
     },
@@ -616,7 +607,7 @@ export const aiWorkflow = {
       name: l('Adversarial review', 'Revisão adversarial'),
       text: l(
         'Independent reviewer agents try to refute every finding and audit truth, accessibility and performance before I accept a change.',
-        'Agentes revisores independentes tentam refutar cada achado e auditam verdade, acessibilidade e performance antes de eu aceitar uma mudança.',
+        'Agentes revisores independentes tentam refutar cada achado e auditam a veracidade, a acessibilidade e a performance antes de eu aceitar uma mudança.',
       ),
       tools: ['Claude Code', 'impeccable'],
     },
@@ -624,7 +615,7 @@ export const aiWorkflow = {
       name: l('Proof, not "looks right"', 'Prova, não "parece certo"'),
       text: l(
         'Done means verified: agents drive the running app in a real browser, check the deployed URL and watch CI before anything is called finished.',
-        'Pronto significa verificado: os agentes usam o app rodando num navegador de verdade, conferem a URL publicada e acompanham o CI antes de qualquer coisa ser dada como pronta.',
+        'Pronto significa verificado: os agentes usam o app rodando num navegador de verdade, conferem a URL publicada e acompanham o CI antes de qualquer coisa ser dada como concluída.',
       ),
       tools: ['Playwright', 'Chrome DevTools', 'GitHub Actions'],
     },
@@ -648,7 +639,7 @@ export const aiWorkflow = {
       name: l('Guardrails', 'Limites claros'),
       text: l(
         'Nothing other people can see (pull requests, comments, posts) goes out without my approval, and secrets stay out of every output.',
-        'Nada que outras pessoas possam ver (pull requests, comentários, posts) sai sem a minha aprovação, e segredos ficam fora de qualquer saída.',
+        'Nada que outras pessoas possam ver (pull requests, comentários, posts) sai sem a minha aprovação, e segredos nunca aparecem em nenhum resultado.',
       ),
       tools: ['Claude Code'],
     },
@@ -701,7 +692,7 @@ export const ui = {
 /** The 404 page, printed in both languages at once. */
 export const notFound = {
   title: l('Not found', 'Página não encontrada'),
-  text: l('This page does not exist, or it moved.', 'Esta página não existe, ou mudou de lugar.'),
+  text: l('This page does not exist, or it moved.', 'Esta página não existe ou mudou de lugar.'),
   home: l('Go to the home page', 'Ir para a página inicial'),
 } as const;
 
@@ -712,7 +703,7 @@ export const footer = {
   builtNoSha: l('Built {date}.', 'Gerado em {date}.'),
   data: l(
     'Numbers from GitHub, npm and crates.io, fetched {age}.',
-    'Números do GitHub, npm e crates.io, buscados {age}.',
+    'Números do GitHub, npm e crates.io, atualizados {age}.',
   ),
   /** Plate on the stale-data warning. */
   staleTag: l('Outdated', 'Desatualizado'),

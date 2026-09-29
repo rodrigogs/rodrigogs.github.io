@@ -61,7 +61,7 @@ const pad = (i: number) => String(i + 1).padStart(2, '0');
         {
           view.ai.map((item) => {
             const href = item.links[0]?.href;
-            const proof = item.proofs.find((p) => !/star/i.test(p.label)) ?? item.proofs[0];
+            const proof = item.proofs[0];
             return (
               <li id={item.id}>
                 {href ? <a href={href}>{item.name}</a> : <span>{item.name}</span>}
