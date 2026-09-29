@@ -31,7 +31,7 @@ FIRST VIEWPORT:
 
 FORM: A 1986 Miami night drive with a console-menu UI. It is a brief-pinned world (owner request), not a rolled one. The signature interactions are three:
 - the living scene;
-- Compare as a radio tuner ("◄ 2014 ► … ◄ 2026 ►") inside a menu frame, diffing the stack between any two years;
+- the scene visibly alive: palms swaying, a neon car crossing the causeway and a plane blinking across the sky (still under reduced motion);
 - the toast: copying the email stamps a big unboxed pink "EMAIL COPIED!" with a small white subtitle, like a mission screen in our own words.
 
 The easter egg is a typed cheat code ("VAPORWAVE") that brings back the owner's original vaporwave perspective grid over the ocean, with a small "CHEAT ACTIVATED" line.
@@ -41,10 +41,14 @@ RULES:
 - Decoration is layered where content is not. The scene lives in the hero, and every section below is a menu frame or a clean night band.
 - Marks encode real quantities: HUD numbers, the skyline heights in the README and the diffstat.
 - One highlight color for all selection states (green).
-- Plain labels for the person (Role, Product, AI, Work, Open source, Stack, Contact). Game vocabulary appears only as UI flavor (a toast, a cheat, a tuner), never as claims about him.
+- Plain labels for the person (Role, Product, AI, About, Work, Open source, Career, Contact). Game vocabulary appears only as UI flavor (a toast, a cheat), never as claims about him.
 - Performance: hero JS under 5 KB gzip, no three.js, no bloom, no ray marching, no particles. DPR is capped, rendering pauses offscreen and on hidden tabs, reduced motion gets a still frame, and context loss is handled.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+
+## Good sense (owner, 2026-09-29)
+
+Below the hero the page stays short and credible: About (two first-person paragraphs, AI mentioned naturally, one stack line and one AI-tools line), six featured projects with at most two numbers each and an "Also" line, a compact open source list, career and contact. No manifesto, no package table, no tool-chip walls, no status plates, no gimmick widgets.
 
 ## Unresolved
 
