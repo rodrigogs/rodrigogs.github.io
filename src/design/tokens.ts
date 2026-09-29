@@ -1,33 +1,47 @@
 /**
  * Design tokens, single source of truth.
  *
- * The site reads them as CSS custom properties (see `cssVariables`), and the
- * SVG card renderer (scripts/render-cards.ts) reads the same values directly,
- * so the GitHub profile README and the site cannot drift apart.
+ * World: a 1986 Miami night. Sunset over the ocean, palm silhouettes, Art
+ * Deco facades lit by neon, and a game-menu UI laid over it (an homage to
+ * the era's console crime games, built from our own shapes and words: no
+ * third-party logos, names, fonts or art).
  *
- * Palette: the four release roles are the whole color system.
- *   added      shipped and active work, `+` lines, the site plate
- *   changed    the AI engineering field, the current role
- *   merged     upstream contributions to other people's projects
- *   deprecated retired and dormant work, `−` lines
- * All pairs below were checked against WCAG 2.2 AA (text >= 4.5:1).
+ * The site reads these as CSS custom properties (see `cssVariables`), the
+ * hero shader reads `scene`, and the README card renderer
+ * (scripts/render-cards.ts) reads the same values, so the site, the hero
+ * and the GitHub profile cannot drift apart.
+ *
+ * Palette roles:
+ *   brand       hot pink: the name, headings, the success toast
+ *   select      the one selection color: hover, focus, current item (as in
+ *               the menus it pays homage to, one highlight everywhere)
+ *   added       cyan: products, `+` lines, the HUD clock
+ *   changed     sun yellow: the current role
+ *   merged      violet: AI and open source
+ *   deprecated  sunset orange: legacy work, `−` lines
+ * Every text pair below was checked against WCAG 2.2 AA on `night` and
+ * `panel` (text >= 4.5:1).
  */
 
-export type ThemeName = 'light' | 'dark';
+export type ThemeName = 'night';
 
 export interface Theme {
-  /** Page ground. */
-  paper: string;
-  /** Raised sheet (entries, inputs). */
-  sheet: string;
+  /** Page ground: the night sky over the water. */
+  night: string;
+  /** Raised panels (menu frames, cards). */
+  panel: string;
+  /** Panel edge and hairlines. */
+  rule: string;
   /** Primary text. */
   ink: string;
   /** Secondary text. */
   ink2: string;
   /** Meta text: dates, counts, captions. */
   ink3: string;
-  /** Hairline rules. */
-  rule: string;
+  brand: string;
+  onBrand: string;
+  select: string;
+  onSelect: string;
   added: string;
   onAdded: string;
   addedTint: string;
@@ -35,6 +49,8 @@ export interface Theme {
   onChanged: string;
   changedTint: string;
   merged: string;
+  /** Violet is too dark for text on the night; use this for violet text. */
+  mergedText: string;
   onMerged: string;
   mergedTint: string;
   deprecated: string;
@@ -45,79 +61,87 @@ export interface Theme {
 }
 
 export const themes: Record<ThemeName, Theme> = {
-  light: {
-    paper: '#FAFBFC',
-    sheet: '#FFFFFF',
-    ink: '#12161D',
-    ink2: '#3E4552',
-    ink3: '#5D6573',
-    rule: '#DDE1E7',
-    added: '#127543',
-    onAdded: '#FFFFFF',
-    addedTint: '#E3F4EA',
-    changed: '#F2B71F',
-    onChanged: '#12161D',
-    changedTint: '#FDF3D6',
-    merged: '#2447D6',
+  night: {
+    night: '#0E0826',
+    panel: '#1C1440',
+    rule: '#3A2C72',
+    ink: '#FFF6FB',
+    ink2: '#E4D6FF',
+    ink3: '#B8A6E6',
+    brand: '#FF6EC7',
+    onBrand: '#1A0526',
+    select: '#00FF97',
+    onSelect: '#04140C',
+    added: '#00D9FF',
+    onAdded: '#06101F',
+    addedTint: '#062A3A',
+    changed: '#FFEA00',
+    onChanged: '#1A1400',
+    changedTint: '#2E2A06',
+    merged: '#BD00FF',
+    mergedText: '#D580FF',
     onMerged: '#FFFFFF',
-    mergedTint: '#E4EAFD',
-    deprecated: '#BF361B',
-    onDeprecated: '#FFFFFF',
-    deprecatedTint: '#FBE6E0',
-    selection: '#F2B71F',
-  },
-  dark: {
-    paper: '#0F1216',
-    sheet: '#151A20',
-    ink: '#EEF1F5',
-    ink2: '#B8C0CC',
-    ink3: '#8C95A3',
-    rule: '#2A313B',
-    added: '#3CC97C',
-    onAdded: '#06140C',
-    addedTint: '#0F2A1C',
-    changed: '#F5C23D',
-    onChanged: '#1A1403',
-    changedTint: '#2B230B',
-    merged: '#7D96FF',
-    onMerged: '#070B1C',
-    mergedTint: '#151F40',
-    deprecated: '#FF7556',
-    onDeprecated: '#1A0703',
-    deprecatedTint: '#33150E',
-    selection: '#F5C23D',
+    mergedTint: '#2A0A40',
+    deprecated: '#FF8C42',
+    onDeprecated: '#1A0800',
+    deprecatedTint: '#3A1A0A',
+    selection: '#FF6EC7',
   },
 };
 
-/** Release roles, in the order they are introduced on the page. */
+/** Release roles used by plates, statuses and diff lines. */
 export const roles = ['added', 'changed', 'merged', 'deprecated'] as const;
 export type Role = (typeof roles)[number];
 
 /**
- * Type. Archivo carries everything across its width axis; Martian Mono is
- * reserved for data: versions, dates, hashes, counts, commands.
+ * The hero scene: one palette for the CSS poster, the WebGL shader uniforms
+ * and the SVG silhouettes, so the three layers line up.
+ */
+export const scene = {
+  /** Sky, top to horizon. */
+  skyTop: '#12002A',
+  skyMid: '#5B1A7A',
+  skyLow: '#FF5E8A',
+  horizon: '#FF9A5A',
+  /** Sun, top to bottom. */
+  sunTop: '#FFEA00',
+  sunBottom: '#FF3EA5',
+  /** Water, near to far. */
+  waterNear: '#0B0420',
+  waterFar: '#2A0F4A',
+  /** Silhouettes: palms and the Art Deco skyline. */
+  silhouette: '#140626',
+  /** Neon edges on the skyline. */
+  neonPink: '#FF6EC7',
+  neonCyan: '#00D9FF',
+  /** Horizon line as a fraction of the hero height, from the top. */
+  horizonAt: 0.62,
+} as const;
+
+/**
+ * Type. Four faces, each with one job:
+ *   script  the pink brush-script signature (the name only)
+ *   display heavy rounded titles, white with a dark outline (headings, big numbers)
+ *   sans    everything you read (body, labels, UI)
+ *   hud     numerals and short readouts in the HUD, tabular
  */
 export const type = {
   family: {
-    sans: 'Archivo',
-    mono: 'Martian Mono',
+    script: 'Yellowtail',
+    display: 'Luckiest Guy',
+    sans: 'Inter',
+    hud: 'Orbitron',
   },
-  /** Width axis values (font-stretch percentages). */
-  stretch: {
-    expanded: 125,
-    normal: 100,
-    condensed: 75,
-  },
-  /** rem sizes; display never exceeds 6rem. */
+  /** rem sizes. */
   size: {
     micro: 0.75,
     small: 0.875,
     body: 1,
     lead: 1.25,
     h3: 1.5,
-    h2: 2.25,
+    h2: 2.5,
     h1: 4.5,
-    display: 6,
+    display: 7,
   },
   weight: {
     regular: 400,
@@ -127,10 +151,7 @@ export const type = {
   },
 } as const;
 
-/**
- * Space. One 4px baseline; every block snaps to whole units of it
- * (the "whole-unit grid" raise). Values are px.
- */
+/** Space. One 4px baseline; every block snaps to whole units of it. Values are px. */
 export const space = {
   unit: 4,
   scale: [4, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192] as const,
@@ -139,14 +160,15 @@ export const space = {
   maxWidth: 1280,
 } as const;
 
-/** Hairline and plate geometry. Plates are square-cornered, like printed tags. */
+/** Geometry: menu frames have a thick dark border; the selection bar is rounded. */
 export const shape = {
   hairline: 1,
-  rule: 2,
-  radius: 2,
+  frame: 4,
+  radius: 4,
+  pill: 999,
 } as const;
 
-/** Motion: one authored moment (the Compare diff), exponential ease-out. */
+/** Motion: exponential ease-out; the scene and the toast are the authored moments. */
 export const motion = {
   ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
   fast: 160,
@@ -156,48 +178,42 @@ export const motion = {
 
 const kebab = (s: string) => s.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`);
 
-/** CSS custom properties for one theme, e.g. `--c-added-tint: #E3F4EA;`. */
+/** CSS custom properties for one theme, e.g. `--c-added-tint: #062A3A;`. */
 export function themeVariables(theme: Theme): string {
   return Object.entries(theme)
     .map(([k, v]) => `--c-${kebab(k)}: ${v};`)
     .join(' ');
 }
 
-/**
- * The full token stylesheet: light on :root, dark under
- * `prefers-color-scheme: dark`, plus scale tokens.
- */
+/** CSS custom properties for the hero scene, e.g. `--scene-sky-top: #12002A;`. */
+export function sceneVariables(): string {
+  return Object.entries(scene)
+    .filter(([, v]) => typeof v === 'string')
+    .map(([k, v]) => `--scene-${kebab(k)}: ${v};`)
+    .join(' ');
+}
+
+/** The full token stylesheet (one night theme; the world has no daytime). */
 export function cssVariables(): string {
   const scale = space.scale.map((v, i) => `--s-${i + 1}: ${v / 16}rem;`).join(' ');
   const sizes = Object.entries(type.size)
     .map(([k, v]) => `--t-${k}: ${v}rem;`)
     .join(' ');
   return [
-    `:root { color-scheme: light dark; ${themeVariables(themes.light)} ${scale} ${sizes}`,
+    `:root { color-scheme: dark; ${themeVariables(themes.night)} ${sceneVariables()} ${scale} ${sizes}`,
     `--ease: ${motion.ease}; --d-fast: ${motion.fast}ms; --d-base: ${motion.base}ms; --d-slow: ${motion.slow}ms;`,
-    `--max: ${space.maxWidth / 16}rem; --gutter: ${space.gutter / 16}rem; --radius: ${shape.radius}px; }`,
-    `@media (prefers-color-scheme: dark) { :root { ${themeVariables(themes.dark)} } }`,
+    `--max: ${space.maxWidth / 16}rem; --gutter: ${space.gutter / 16}rem; --radius: ${shape.radius}px; --frame: ${shape.frame}px; }`,
   ].join('\n');
 }
 
 /**
- * The retired 2026 vaporwave identity. Not a theme: it only returns behind
- * the Konami code easter egg, as evidence of personality. On-role text is
- * picked per color for AA contrast (dark ink on the light three, white on
- * the purple), independent of the light or dark theme.
+ * Easter egg: a cheat code switches the night to the owner's original
+ * vaporwave (the perspective grid and the old neon four).
  */
-export const retired = {
+export const vaporwave = {
   added: '#00D9FF',
   changed: '#FFEA00',
   merged: '#BD00FF',
   deprecated: '#FF6EC7',
+  grid: '#FF6EC7',
 } as const;
-
-/** CSS for `:root[data-theme='vaporwave']`, the easter egg palette. */
-export function retiredVariables(): string {
-  const dark = themes.light.ink;
-  const light = themes.light.sheet;
-  const on = { added: dark, changed: dark, merged: light, deprecated: dark } as const;
-  const vars = roles.map((r) => `--c-${r}: ${retired[r]}; --c-on-${r}: ${on[r]};`).join(' ');
-  return `:root[data-theme='vaporwave'] { ${vars} }`;
-}

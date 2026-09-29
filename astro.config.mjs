@@ -18,35 +18,49 @@ export default defineConfig({
       i18n: { defaultLocale: 'en', locales: { en: 'en', pt: 'pt-BR' } },
     }),
   ],
+  // The four faces of the world (see `type` in src/design/tokens.ts), self-hosted
+  // from Fontsource. Latin subset only: it covers English and Portuguese.
   fonts: [
     {
-      name: 'Archivo',
-      cssVariable: '--font-archivo',
+      name: 'Yellowtail',
+      cssVariable: '--font-script',
       provider: fontProviders.local(),
       options: {
         variants: [
-          {
-            src: ['./node_modules/@fontsource-variable/archivo/files/archivo-latin-standard-normal.woff2'],
-            weight: '100 900',
-            style: 'normal',
-            stretch: '62% 125%',
-          },
+          { src: ['./node_modules/@fontsource/yellowtail/files/yellowtail-latin-400-normal.woff2'], weight: 400, style: 'normal' },
         ],
       },
-      fallbacks: ['Helvetica Neue', 'Arial', 'sans-serif'],
+      fallbacks: ['cursive'],
     },
     {
-      name: 'Martian Mono',
-      cssVariable: '--font-martian',
+      name: 'Luckiest Guy',
+      cssVariable: '--font-display',
       provider: fontProviders.local(),
       options: {
         variants: [
-          {
-            src: ['./node_modules/@fontsource-variable/martian-mono/files/martian-mono-latin-standard-normal.woff2'],
-            weight: '100 800',
-            style: 'normal',
-            stretch: '75% 112.5%',
-          },
+          { src: ['./node_modules/@fontsource/luckiest-guy/files/luckiest-guy-latin-400-normal.woff2'], weight: 400, style: 'normal' },
+        ],
+      },
+      fallbacks: ['Impact', 'sans-serif'],
+    },
+    {
+      name: 'Inter',
+      cssVariable: '--font-sans',
+      provider: fontProviders.local(),
+      options: {
+        variants: [
+          { src: ['./node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2'], weight: '100 900', style: 'normal' },
+        ],
+      },
+      fallbacks: ['system-ui', 'Helvetica Neue', 'Arial', 'sans-serif'],
+    },
+    {
+      name: 'Orbitron',
+      cssVariable: '--font-hud',
+      provider: fontProviders.local(),
+      options: {
+        variants: [
+          { src: ['./node_modules/@fontsource-variable/orbitron/files/orbitron-latin-wght-normal.woff2'], weight: '400 900', style: 'normal' },
         ],
       },
       fallbacks: ['ui-monospace', 'Menlo', 'monospace'],
