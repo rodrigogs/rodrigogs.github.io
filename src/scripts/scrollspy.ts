@@ -1,6 +1,7 @@
 /**
  * Scroll spy: the nav noun of the section crossing the middle of the
- * viewport gets aria-current="true" (styled as the active state).
+ * viewport gets aria-current="true" (the green selection bar). `data-spy`
+ * holds the section id.
  */
 
 const links = new Map<string, HTMLAnchorElement>();

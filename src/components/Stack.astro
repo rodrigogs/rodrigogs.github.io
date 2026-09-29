@@ -1,9 +1,10 @@
 ---
 /**
- * Stack, printed as a manifest: the "Ships with" line first, then the
- * grouped tooling. The AI capabilities live in the AI engineering section.
+ * Stack: what he ships with (large chips), the grouped tooling, then the
+ * radio tuner that diffs the stack between any two years.
  */
 import type { SiteView } from '../lib/view.ts';
+import Compare from './Compare.astro';
 import SectionHead from './SectionHead.astro';
 
 interface Props {
@@ -15,120 +16,81 @@ const s = view.sections.stack;
 const t = view.stack;
 ---
 
-<section class="band field-sheet stack" id="stack" aria-labelledby="stack-title">
-  <div class="wrap grid">
-    <div class="lead">
-      <SectionHead id="stack" label={s.label} claim={s.claim} />
-    </div>
-
-    <div class="manifest">
-      <div class="ships">
-        <h3 class="ships-label">{t.ships.label}</h3>
-        <ul class="ships-list">
-          {t.ships.items.map((item) => <li>{item}</li>)}
-        </ul>
+<section class="band stack" id="stack" aria-labelledby="stack-title">
+  <div class="wrap">
+    <SectionHead id="stack" label={s.label} claim={s.claim} />
+    <div class="layout">
+      <div class="manifest">
+        <div class="ships">
+          <h3 class="group-label">{t.ships.label}</h3>
+          <ul class="chips ships-list">
+            {t.ships.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+        <dl class="groups">
+          {
+            t.groups.map((g) => (
+              <div class="group">
+                <dt class="group-label">{g.label}</dt>
+                <dd>
+                  <ul class="chips">
+                    {g.items.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
       </div>
-
-      <dl class="groups">
-        {
-          t.groups.map((g) => (
-            <div class="group">
-              <dt>{g.label}</dt>
-              <dd>
-                <ul>
-                  {g.items.map((item) => (
-                    <li>{item}</li>
-                  ))}
-                </ul>
-              </dd>
-            </div>
-          ))
-        }
-      </dl>
+      <Compare view={view} />
     </div>
-
   </div>
 </section>
 
 <style>
-  .stack {
-    padding-block: var(--s-9);
-  }
-  .grid {
-    row-gap: var(--s-8);
-  }
-  .lead {
-    grid-column: 1 / span 4;
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--s-8);
+    align-items: start;
   }
   .manifest {
-    grid-column: 5 / -1;
     display: flex;
     flex-direction: column;
-    gap: var(--s-6);
+    gap: var(--s-7);
   }
-  .ships {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-3);
-    padding-block-end: var(--s-6);
-    border-block-end: 1px solid var(--c-ink);
-  }
-  .ships-label {
-    font-size: var(--t-small);
+  .group-label {
+    margin-block-end: var(--s-3);
+    color: var(--c-brand);
+    font-family: var(--hud);
+    font-size: var(--t-micro);
     font-weight: 700;
-    line-height: 1.25rem;
-    color: var(--c-ink3);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
-  .ships-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--s-1) var(--s-4);
-    font-size: clamp(var(--t-lead), 1rem + 0.9vw, var(--t-h3));
-    font-stretch: 112%;
-    font-weight: 800;
-    line-height: 2rem;
-    letter-spacing: -0.012em;
-  }
-  .ships-list li:not(:last-child)::after {
-    content: '/';
-    margin-inline-start: var(--s-4);
-    color: var(--c-rule);
-    font-weight: 400;
+  .ships-list li {
+    min-block-size: 2.25rem;
+    padding-inline: var(--s-4);
+    border: 2px solid var(--c-brand);
+    background: color-mix(in srgb, var(--c-brand) 12%, var(--c-night));
+    color: var(--c-ink);
+    font-size: 1rem;
+    font-weight: 700;
   }
   .groups {
-    display: flex;
-    flex-direction: column;
-  }
-  .group {
     display: grid;
-    grid-template-columns: 11rem minmax(0, 1fr);
-    column-gap: var(--s-5);
-    padding-block: var(--s-3);
-    border-block-end: 1px solid var(--c-rule);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-6) var(--s-6);
   }
-  dt {
-    color: var(--c-ink3);
-    font-size: var(--t-small);
-    font-weight: 600;
-    line-height: 1.5rem;
-  }
-  dd ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 var(--s-2);
-  }
-  dd li:not(:last-child)::after {
-    content: ',';
-  }
-
   @media (max-width: 63.99rem) {
-    .lead,
-    .manifest {
-      grid-column: 1 / -1;
+    .layout {
+      grid-template-columns: minmax(0, 1fr);
     }
   }
   @media (max-width: 47.99rem) {
-    .group {
+    .groups {
       grid-template-columns: minmax(0, 1fr);
     }
   }

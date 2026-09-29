@@ -1,11 +1,13 @@
 ---
 /**
  * Document shell: language, meta, social cards, hreflang, JSON-LD, fonts
- * (Astro Fonts API) and the token stylesheet. Pages pass a SiteView; a page
- * printed in both languages (404) fills the "skip" slot with both labels.
+ * (Astro Fonts API: the display faces above the fold are preloaded) and the
+ * token stylesheet, plus the cheat-code palette from `vaporwave`. Pages pass
+ * a SiteView; a page printed in both languages (404) fills the "skip" slot
+ * with both labels.
  */
 import { Font } from 'astro:assets';
-import { cssVariables, retiredVariables, themes } from '../design/tokens.ts';
+import { cssVariables, themes, vaporwave } from '../design/tokens.ts';
 import type { SiteView } from '../lib/view.ts';
 import '../styles/global.css';
 
@@ -24,6 +26,10 @@ const canonical = `${origin}${view.href}`;
 const ogImage = `${origin}/og/${view.locale}.png`;
 const ogLocale = { en: 'en_US', pt: 'pt_BR' } as const;
 const jsonLd = JSON.stringify(view.jsonLd).replace(/</g, '\\u003c');
+// The cheat code (VAPORWAVE) swaps the role colors for the owner's original four.
+const cheat = `:root[data-cheat] { ${Object.entries(vaporwave)
+  .map(([k, v]) => `--c-${k}: ${v};`)
+  .join(' ')} }`;
 ---
 
 <!doctype html>
@@ -61,14 +67,15 @@ const jsonLd = JSON.stringify(view.jsonLd).replace(/</g, '\\u003c');
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content={themes.light.paper} />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content={themes.dark.paper} />
-    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content={themes.night.night} />
+    <meta name="color-scheme" content="dark" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <Font cssVariable="--font-archivo" preload />
-    <Font cssVariable="--font-martian" />
-    <style is:inline set:html={`${cssVariables()}\n${retiredVariables()}`}></style>
+    <Font cssVariable="--font-script" preload />
+    <Font cssVariable="--font-display" preload />
+    <Font cssVariable="--font-sans" preload />
+    <Font cssVariable="--font-hud" />
+    <style is:inline set:html={`${cssVariables()}\n${cheat}`}></style>
     <noscript><style is:inline>[data-js-only] { display: none !important; }</style></noscript>
     <script type="application/ld+json" is:inline set:html={jsonLd} />
   </head>
@@ -85,8 +92,9 @@ const jsonLd = JSON.stringify(view.jsonLd).replace(/</g, '\\u003c');
     inset-inline-start: var(--s-2);
     z-index: 100;
     padding: var(--s-2) var(--s-4);
-    background: var(--c-ink);
-    color: var(--c-paper);
+    border-radius: var(--radius);
+    background: var(--c-select);
+    color: var(--c-on-select);
     font-weight: 700;
     text-decoration: none;
     transform: translateY(-200%);

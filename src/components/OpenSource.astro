@@ -1,8 +1,9 @@
 ---
 /**
- * Upstream: work merged into other people's projects, on a full-bleed
- * Merged (cobalt) field. One row per repository, with the count that links
- * to its proof and the merged pull requests by title.
+ * Open source: work that landed in other people's projects, as one compact
+ * list in a menu frame. Each row: the repository, its stars, the count that
+ * links to the proof, the years, one line on what landed and the merged
+ * pull requests by title.
  */
 import type { SiteView } from '../lib/view.ts';
 import Permalink from './Permalink.astro';
@@ -17,46 +18,43 @@ const s = view.sections.openSource;
 const slug = (repo: string) => repo.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 ---
 
-<section class="band field-merged open-source" id="open-source" aria-labelledby="open-source-title">
+<section class="band open-source" id="open-source" aria-labelledby="open-source-title">
   <div class="wrap">
-    <div class="grid head">
-      <SectionHead id="open-source" label={s.label} claim={s.claim} class="head-inner" />
-    </div>
-    <ol class="rows">
+    <SectionHead id="open-source" label={s.label} claim={s.claim} />
+    <ol class="frame rows">
       {
         view.upstream.map((row) => {
           const id = slug(row.repo);
           const [owner, name] = row.repo.split('/');
           return (
-            <li class="row grid" id={id} data-entry>
+            <li class="row" id={id} data-entry>
               <div class="repo">
-                <div class="title-row">
-                  <h3 class="name">
-                    <a href={row.url}>
-                      <span class="owner">{owner}/</span>
-                      {name}
-                    </a>
-                  </h3>
-                  <Permalink id={id} name={row.repo} label={view.field.permalink} />
-                </div>
-                <p class="stars">
-                  <span class="mono">{row.stars}</span> {view.field.stars}
-                </p>
+                <h3 class="name">
+                  <a href={row.url}>
+                    <span class="owner">{owner}/</span>
+                    {name}
+                  </a>
+                </h3>
+                <Permalink id={id} name={row.repo} label={view.field.permalink} />
               </div>
-              <div class="count">
+              <p class="count">
                 <a href={row.proofUrl}>
-                  <span class="mono n">{row.countValue}</span> {row.countLabel}
+                  <span class="n">{row.countValue}</span> {row.countLabel}
                 </a>
-                {row.years && <span class="mono years">{row.years}</span>}
-              </div>
+              </p>
+              <p class="facts">
+                <span>
+                  <span class="n2">{row.stars}</span> {view.field.stars}
+                </span>
+                {row.years && <span class="n2">{row.years}</span>}
+              </p>
               <div class="what">
                 <p class="note">{row.note}</p>
                 {row.highlights.length > 0 && (
                   <ul class="prs">
                     {row.highlights.map((h) => (
                       <li>
-                        <a href={h.url}>{h.title}</a>
-                        <span class="mono date">{h.date}</span>
+                        <a href={h.url}>{h.title}</a> <span class="date">{h.date}</span>
                       </li>
                     ))}
                   </ul>
@@ -71,100 +69,104 @@ const slug = (repo: string) => repo.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 </section>
 
 <style>
-  .open-source {
-    padding-block: var(--s-9);
-  }
-  .head {
-    margin-block-end: var(--s-7);
-  }
-  .head :global(.head-inner) {
-    grid-column: 1 / -1;
-  }
   .rows {
-    border-block-end: 1px solid var(--line);
+    display: grid;
+    gap: 0;
   }
   .row {
+    display: grid;
+    grid-template-columns: minmax(0, 17rem) minmax(0, 11rem) minmax(0, 1fr);
+    grid-template-areas:
+      'repo count what'
+      'facts facts what';
+    grid-template-rows: auto 1fr;
+    align-items: start;
+    gap: var(--s-1) var(--s-6);
     padding-block: var(--s-5);
-    border-block-start: 1px solid var(--line);
-    row-gap: var(--s-3);
+  }
+  .row + .row {
+    border-block-start: 1px solid var(--c-rule);
   }
   .repo {
-    grid-column: 1 / span 4;
-    min-inline-size: 0;
-  }
-  .count {
-    grid-column: 5 / span 2;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-1);
-    font-size: var(--t-small);
-    line-height: 1.25rem;
-  }
-  .what {
-    grid-column: 7 / -1;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-3);
-  }
-  .title-row {
+    grid-area: repo;
     display: flex;
     align-items: center;
-    gap: var(--s-2);
+    gap: var(--s-1);
+    min-inline-size: 0;
   }
   .name {
-    font-size: var(--t-lead);
-    line-height: 1.75rem;
-    font-weight: 800;
-    font-stretch: 112%;
+    font-size: 1.0625rem;
+    font-weight: 700;
     overflow-wrap: anywhere;
   }
-  .name a {
-    text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
-  }
   .owner {
+    color: var(--c-ink3);
     font-weight: 500;
   }
-  .stars {
+  .name a:hover .owner {
+    color: inherit;
+  }
+  .count {
+    grid-area: count;
     font-size: var(--t-small);
-    line-height: 1.25rem;
+  }
+  .count a {
+    text-decoration: none;
   }
   .n {
-    font-size: var(--t-body);
-    font-weight: 700;
+    color: var(--c-merged-text);
+    font-family: var(--hud);
+    font-size: 1.25rem;
+    font-weight: 800;
   }
-  .years {
+  .count a:hover .n {
+    color: inherit;
+  }
+  .facts {
+    grid-area: facts;
+    display: flex;
+    gap: var(--s-4);
+    color: var(--c-ink3);
     font-size: var(--t-micro);
   }
+  .n2 {
+    color: var(--c-ink2);
+    font-family: var(--hud);
+    font-weight: 700;
+  }
+  .what {
+    grid-area: what;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
   .note {
-    font-size: var(--t-body);
-    max-inline-size: 60ch;
+    color: var(--c-ink);
+    font-size: 1rem;
+    max-inline-size: 64ch;
   }
   .prs {
     display: flex;
     flex-direction: column;
-    gap: var(--s-2);
+    gap: var(--s-1);
     font-size: var(--t-small);
-    line-height: 1.25rem;
-  }
-  .prs li {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: baseline;
-    gap: 0 var(--s-5);
+    color: var(--c-ink2);
   }
   .date {
+    color: var(--c-ink3);
     font-size: var(--t-micro);
     white-space: nowrap;
   }
   @media (max-width: 63.99rem) {
-    .repo {
-      grid-column: 1 / span 6;
-    }
-    .count {
-      grid-column: 7 / -1;
+    .row {
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas:
+        'repo count'
+        'facts facts'
+        'what what';
     }
     .what {
-      grid-column: 1 / -1;
+      margin-block-start: var(--s-2);
     }
   }
 </style>

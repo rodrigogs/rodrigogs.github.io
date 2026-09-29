@@ -1,29 +1,25 @@
 /*
- * Global layer: reset, browser surfaces, type roles, the 12-column grid and
- * the shared primitives (plates, fields, proofs). Every color, size and
- * step comes from the token stylesheet emitted by cssVariables()
- * (src/design/tokens.ts); nothing here hardcodes a color or a font.
+ * Global layer of the 1986 night: reset, browser surfaces, the four type
+ * roles, the grid, and the shared primitives (menu frames, plates, chips,
+ * actions, HUD numerals). Every color, size and step comes from the token
+ * stylesheet emitted by cssVariables() (src/design/tokens.ts).
+ *
+ * One selection color: every hover, focus ring and current item is the
+ * green `--c-select` bar with `--c-on-select` text.
  */
 
 :root {
-  --sans: var(--font-archivo);
-  --mono: var(--font-martian);
+  --script: var(--font-script);
+  --display: var(--font-display);
+  --sans: var(--font-sans);
+  --hud: var(--font-hud);
   --pad: clamp(var(--s-4), 4vw, var(--s-7));
-  --header-h: calc(var(--s-7) + var(--s-1));
-
-  /* Role colors used as text or as small marks (glyphs, counts). The easter
-     egg palette swaps them for ink so text contrast never drops. */
-  --mark-added: var(--c-added);
-  --mark-deprecated: var(--c-deprecated);
-
-  /* Surface-local roles; fields override them. */
-  --ground: var(--c-paper);
-  --fg: var(--c-ink);
-  --fg-2: var(--c-ink2);
-  --fg-3: var(--c-ink3);
-  --line: var(--c-rule);
-  --focus: var(--c-merged);
-  --link: var(--c-ink);
+  --header-h: 4.5rem;
+  /* The heavy dark outline of titles, frames and HUD numerals: the night, deeper. */
+  --outline: color-mix(in oklab, var(--c-night) 45%, black);
+  --shadow: 0 1.25rem 2.5rem -1rem color-mix(in srgb, black 70%, transparent);
+  --glow-pink: color-mix(in srgb, var(--c-brand) 55%, transparent);
+  --glow-cyan: color-mix(in srgb, var(--c-added) 50%, transparent);
 }
 
 *,
@@ -35,10 +31,9 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  scroll-padding-top: calc(var(--header-h) + var(--s-4));
-  scrollbar-color: var(--c-ink3) var(--c-paper);
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: 'tnum' 1;
+  scroll-padding-top: calc(var(--header-h) + var(--s-5));
+  scrollbar-color: var(--c-brand) var(--c-night);
+  background: var(--c-night);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -49,15 +44,35 @@ html {
 
 body {
   margin: 0;
-  background: var(--c-paper);
+  min-block-size: 100dvh;
+  background: var(--c-night);
   color: var(--c-ink);
   font-family: var(--sans);
-  font-size: var(--t-body);
-  line-height: 1.5;
-  font-stretch: 100%;
-  caret-color: var(--c-added);
-  text-rendering: optimizeLegibility;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  caret-color: var(--c-select);
   -webkit-font-smoothing: antialiased;
+  font-variant-numeric: tabular-nums;
+}
+
+/* CRT scanlines: static, faint, never in the way. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 2px,
+    color-mix(in srgb, black 16%, transparent) 2px 3px
+  );
+}
+
+@media print {
+  body::after {
+    display: none;
+  }
 }
 
 h1,
@@ -84,7 +99,7 @@ h2,
 h3,
 h4 {
   text-wrap: balance;
-  font-weight: var(--w-bold, 700);
+  font-weight: 700;
 }
 
 p,
@@ -107,26 +122,33 @@ select {
 
 ::selection {
   background: var(--c-selection);
-  color: var(--c-on-changed);
+  color: var(--c-on-brand);
 }
 
 a {
-  color: var(--link);
+  color: inherit;
   text-decoration-line: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.22em;
-  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
-  transition: text-decoration-color var(--d-fast) var(--ease);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.24em;
+  text-decoration-color: color-mix(in srgb, var(--c-brand) 70%, transparent);
+  border-radius: 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  transition:
+    background-color var(--d-fast) var(--ease),
+    color var(--d-fast) var(--ease);
 }
 
+/* The selection bar: hover and current items light up green, as in a pause menu. */
 a:hover {
-  text-decoration-color: currentColor;
-  text-decoration-thickness: 2px;
+  background: var(--c-select);
+  color: var(--c-on-select);
+  text-decoration-color: transparent;
 }
 
 :focus-visible {
-  outline: 2px solid var(--focus);
-  outline-offset: 2px;
+  outline: 3px solid var(--c-select);
+  outline-offset: 3px;
 }
 
 :focus:not(:focus-visible) {
@@ -143,15 +165,6 @@ a:hover {
   clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
-}
-
-/* Data voice: versions, dates, counts, hashes, commands. */
-.mono {
-  font-family: var(--mono);
-  font-stretch: 100%;
-  font-size: 0.8125em;
-  letter-spacing: -0.01em;
-  font-variant-numeric: tabular-nums slashed-zero;
 }
 
 /* Layout ---------------------------------------------------------------- */
@@ -178,115 +191,131 @@ a:hover {
   }
 }
 
-/* A section is a band. Fields paint the whole band edge to edge. */
+/* A section is a clean night band; a neon horizon line separates bands. */
 .band {
   position: relative;
-  background: var(--ground);
-  color: var(--fg);
+  padding-block: clamp(var(--s-8), 9vw, var(--s-10));
 }
 
-.field-changed {
-  --ground: var(--c-changed);
-  --fg: var(--c-on-changed);
-  --fg-2: var(--c-on-changed);
-  --fg-3: var(--c-on-changed);
-  --line: color-mix(in srgb, var(--c-on-changed) 28%, transparent);
-  --focus: var(--c-on-changed);
-  --link: var(--c-on-changed);
-}
-
-.field-merged {
-  --ground: var(--c-merged);
-  --fg: var(--c-on-merged);
-  --fg-2: var(--c-on-merged);
-  --fg-3: var(--c-on-merged);
-  --line: color-mix(in srgb, var(--c-on-merged) 30%, transparent);
-  --focus: var(--c-on-merged);
-  --link: var(--c-on-merged);
-}
-
-.field-sheet {
-  --ground: var(--c-sheet);
-  border-block: 1px solid var(--c-rule);
-}
-
-.field-ink {
-  --ground: var(--c-ink);
-  --fg: var(--c-paper);
-  --fg-2: var(--c-paper);
-  --fg-3: var(--c-paper);
-  --line: color-mix(in srgb, var(--c-paper) 22%, transparent);
-  --focus: var(--c-changed);
-  --link: var(--c-paper);
-}
-
-@media (prefers-color-scheme: dark) {
-  .field-ink {
-    --ground: var(--c-sheet);
-    --fg: var(--c-ink);
-    --fg-2: var(--c-ink2);
-    --fg-3: var(--c-ink3);
-    --line: var(--c-rule);
-    --link: var(--c-ink);
-    border-top: 2px solid var(--c-ink);
-  }
-}
-
-.field-changed ::selection,
-.field-merged ::selection,
-.field-ink ::selection {
-  background: var(--fg);
-  color: var(--ground);
+.band::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 0;
+  block-size: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--glow-pink) 20%,
+    var(--c-brand) 50%,
+    var(--glow-cyan) 80%,
+    transparent
+  );
+  opacity: 0.55;
 }
 
 /* Type roles ------------------------------------------------------------ */
 
+/* Titles: white, heavy dark outline, hard drop, as the brief pins. */
 .display {
-  font-family: var(--sans);
-  font-stretch: 125%;
-  font-weight: 900;
-  letter-spacing: -0.025em;
-  line-height: 0.92;
+  font-family: var(--display);
+  font-weight: 400;
+  color: var(--c-ink);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  -webkit-text-stroke: 0.16em var(--outline);
+  paint-order: stroke fill;
+  text-shadow: 0.06em 0.07em 0 var(--outline);
 }
 
 .section-title {
-  font-stretch: 125%;
-  font-weight: 900;
-  font-size: clamp(var(--t-h3), 3.2vw, var(--t-h2));
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  font-size: clamp(2.25rem, 1.3rem + 3.4vw, 4rem);
 }
 
 .claim {
-  font-size: clamp(var(--t-lead), 2.2vw, var(--t-h3));
-  line-height: 1.34;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  max-width: 34ch;
+  max-inline-size: 46ch;
+  color: var(--c-ink2);
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  font-weight: 500;
+  line-height: 1.45;
 }
 
-/* Plates: the role tag. Square cornered, solid role fill, on-role text. -- */
+/* HUD numerals: Orbitron, outlined, no panel. */
+.hud-n {
+  font-family: var(--hud);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  -webkit-text-stroke: 0.2em var(--outline);
+  paint-order: stroke fill;
+}
 
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+  margin-block-end: var(--s-8);
+}
+
+/* Menu frames: thick dark border, floating on the night, slightly tilted
+   like a framed postcard. The tilt lives on the backdrop only, so text
+   stays straight and sharp. */
+.frame {
+  --tilt: -0.5deg;
+  position: relative;
+  isolation: isolate;
+  padding: clamp(var(--s-5), 3vw, var(--s-7));
+}
+
+.frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border: var(--frame) solid var(--outline);
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--c-merged) 10%, transparent), transparent 40%),
+    var(--c-panel);
+  box-shadow:
+    inset 0 0 0 1px var(--c-rule),
+    var(--shadow);
+  transform: rotate(var(--tilt));
+}
+
+.frame:nth-of-type(even) {
+  --tilt: 0.45deg;
+}
+
+/* The small pink label in the frame's corner, as on a menu screen. */
+.frame-label {
+  font-family: var(--hud);
+  font-size: var(--t-micro);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-brand);
+}
+
+/* Plates: the role tag, a solid role fill with on-role text. */
 .plate {
   --plate-bg: var(--c-ink);
-  --plate-fg: var(--c-paper);
+  --plate-fg: var(--c-night);
   display: inline-flex;
   align-items: center;
-  gap: var(--s-2);
-  block-size: var(--s-5);
+  block-size: 1.5rem;
   padding-inline: var(--s-2);
   border-radius: var(--radius);
   background: var(--plate-bg);
   color: var(--plate-fg);
-  font-family: var(--sans);
-  font-stretch: 100%;
-  font-size: var(--t-micro);
-  font-weight: 700;
+  font-family: var(--hud);
+  font-size: 0.6875rem;
+  font-weight: 800;
   line-height: 1;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   white-space: nowrap;
   text-decoration: none;
-  vertical-align: baseline;
 }
 
 .plate[data-role='added'] {
@@ -298,85 +327,91 @@ a:hover {
   --plate-fg: var(--c-on-changed);
 }
 .plate[data-role='merged'] {
-  --plate-bg: var(--c-merged);
-  --plate-fg: var(--c-on-merged);
+  --plate-bg: var(--c-merged-text);
+  --plate-fg: var(--c-night);
 }
 .plate[data-role='deprecated'] {
   --plate-bg: var(--c-deprecated);
   --plate-fg: var(--c-on-deprecated);
 }
-.plate[data-inverse] {
-  background: var(--plate-fg);
-  color: var(--plate-bg);
+
+/* Chips: tool and stack names. */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
 }
 
-.plate-m {
-  block-size: var(--s-6);
-  padding-inline: var(--s-3);
-  font-size: var(--t-small);
+.chips li {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 1.75rem;
+  padding: 0.125rem 0.625rem;
+  border: 1px solid var(--c-rule);
+  border-radius: 999px;
+  background: var(--c-merged-tint);
+  color: var(--c-ink2);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.2;
 }
 
-a.plate:hover {
-  text-decoration: none;
-}
-
-/* Action plates: buttons and mailto links that look like printed tags. */
+/* Actions: plates with a dark outline; hover takes the selection bar. */
 .action {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--s-2);
-  min-block-size: var(--s-7);
+  min-block-size: 3rem;
   padding-inline: var(--s-5);
-  border: 1px solid var(--fg);
-  border-radius: var(--radius);
-  background: transparent;
-  color: var(--fg);
+  border: 3px solid var(--outline);
+  border-radius: 10px;
+  background: var(--c-panel);
+  color: var(--c-ink);
   font-family: var(--sans);
-  font-stretch: 100%;
-  font-size: var(--t-body);
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1;
   text-decoration: none;
+  white-space: nowrap;
   cursor: pointer;
+  box-shadow: 0 0.5rem 1rem -0.5rem color-mix(in srgb, black 70%, transparent);
   transition:
     background-color var(--d-fast) var(--ease),
-    color var(--d-fast) var(--ease);
+    color var(--d-fast) var(--ease),
+    transform var(--d-fast) var(--ease);
 }
 
 .action:hover {
-  text-decoration: none;
-  background: color-mix(in srgb, var(--fg) 8%, transparent);
+  background: var(--c-select);
+  color: var(--c-on-select);
+}
+
+.action:active {
+  transform: translateY(1px);
 }
 
 .action-primary {
-  background: var(--fg);
-  color: var(--ground);
+  background: var(--c-brand);
+  color: var(--c-on-brand);
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.1875rem;
+  letter-spacing: 0.04em;
+  padding-block-start: 0.2em;
 }
 
-.action-primary:hover {
-  background: color-mix(in srgb, var(--fg) 86%, var(--ground));
+.action-ghost {
+  border-color: var(--c-rule);
+  background: color-mix(in srgb, var(--c-night) 70%, transparent);
+  box-shadow: none;
 }
 
 .action .icon {
   flex: none;
 }
 
-/* Section scaffold ------------------------------------------------------- */
-
-.section-head {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-4);
-}
-
-.section-head .heading-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--s-3) var(--s-4);
-}
-
-/* Entry targeting: a permalink briefly marks what it points at. */
+/* A permalink briefly marks what it points at. */
 :target {
   animation: target-mark 1.8s var(--ease) 1;
 }
@@ -384,35 +419,24 @@ a.plate:hover {
 @keyframes target-mark {
   0%,
   35% {
-    box-shadow: 0 0 0 var(--s-2) color-mix(in srgb, var(--c-selection) 55%, transparent);
-    background-color: color-mix(in srgb, var(--c-selection) 22%, transparent);
+    outline: 3px solid var(--c-select);
+    outline-offset: 6px;
   }
   100% {
-    box-shadow: 0 0 0 var(--s-2) transparent;
+    outline: 3px solid transparent;
+    outline-offset: 6px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   :target {
     animation: none;
-    box-shadow: 0 0 0 var(--s-2) color-mix(in srgb, var(--c-selection) 45%, transparent);
   }
   *,
   *::before,
   *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
-}
-
-/* The retired 2026 palette, behind the Konami code. The four role colors
-   and their on-role text come from retiredVariables() in tokens.ts; the
-   tints and small marks are derived here so text contrast never drops. */
-:root[data-theme='vaporwave'] {
-  --c-selection: var(--c-deprecated);
-  --c-added-tint: color-mix(in srgb, var(--c-added) 16%, var(--c-paper));
-  --c-deprecated-tint: color-mix(in srgb, var(--c-deprecated) 18%, var(--c-paper));
-  --c-changed-tint: color-mix(in srgb, var(--c-changed) 18%, var(--c-paper));
-  --mark-added: var(--c-ink);
-  --mark-deprecated: var(--c-ink);
 }

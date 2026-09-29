@@ -1,9 +1,25 @@
 ---
 /**
- * The site's only icon set: drawn on a 16px grid, one 1.5px square-capped
- * stroke, so every glyph matches the square plates.
+ * The site's only icon set, drawn on a 16px grid: one 1.5px square-capped
+ * stroke for line glyphs, and a few solid glyphs (the tuner arrows, the HUD
+ * star) that read as filled marks at HUD size.
  */
-export type IconName = 'plus' | 'minus' | 'mail' | 'copy' | 'check' | 'hash' | 'external' | 'up' | 'unfold' | 'fold';
+export type IconName =
+  | 'plus'
+  | 'minus'
+  | 'mail'
+  | 'copy'
+  | 'check'
+  | 'hash'
+  | 'external'
+  | 'up'
+  | 'unfold'
+  | 'fold'
+  | 'download'
+  | 'pulse'
+  | 'star'
+  | 'prev'
+  | 'next';
 
 interface Props {
   name: IconName;
@@ -13,7 +29,7 @@ interface Props {
 
 const { name, size = 16, class: cls } = Astro.props;
 
-const paths: Record<IconName, string> = {
+const lines: Partial<Record<IconName, string>> = {
   plus: 'M8 3v10M3 8h10',
   minus: 'M3 8h10',
   mail: 'M2.75 3.75h10.5v8.5H2.75zM3 4.25l5 4.25 5-4.25',
@@ -24,7 +40,17 @@ const paths: Record<IconName, string> = {
   up: 'M8 13V3.5M4 7.25l4-4 4 4',
   unfold: 'M4.75 5.75L8 2.5l3.25 3.25M4.75 10.25L8 13.5l3.25-3.25',
   fold: 'M4.75 2.75L8 6l3.25-3.25M4.75 13.25L8 10l3.25 3.25',
+  download: 'M8 2.5v8M4.5 7l3.5 3.5L11.5 7M2.75 13.25h10.5',
+  pulse: 'M1.75 8.5h2.75l1.75-4.5 3 8 1.75-3.5h3.25',
 };
+
+const solids: Partial<Record<IconName, string>> = {
+  star: 'M8 1.25l2.05 4.3 4.7.6-3.45 3.25.87 4.65L8 11.8l-4.17 2.25.87-4.65L1.25 6.15l4.7-.6z',
+  prev: 'M11.5 2.5v11L3.5 8z',
+  next: 'M4.5 2.5v11l8-5.5z',
+};
+
+const solid = solids[name];
 ---
 
 <svg
@@ -35,6 +61,18 @@ const paths: Record<IconName, string> = {
   aria-hidden="true"
   focusable="false"
 >
-  <path d={paths[name]} fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"
-  ></path>
+  {
+    solid ? (
+      <path d={solid} fill="currentColor" />
+    ) : (
+      <path
+        d={lines[name]}
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="square"
+        stroke-linejoin="miter"
+      />
+    )
+  }
 </svg>

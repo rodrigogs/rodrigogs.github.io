@@ -1,0 +1,89 @@
+---
+/**
+ * The toast stamped when the email is copied: big pink italic display type
+ * straight over the page, no box, with a small white subtitle. The status
+ * region beside it carries the same words to assistive tech.
+ */
+interface Props {
+  title: string;
+  subtitle: string;
+}
+
+const { title, subtitle } = Astro.props;
+---
+
+<div class="toast" data-toast aria-hidden="true">
+  <p class="display toast-title">{title}</p>
+  <p class="toast-sub">{subtitle}</p>
+</div>
+<p class="sr-only" role="status" aria-live="polite" data-toast-status></p>
+
+<style>
+  .toast {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: var(--s-3);
+    padding: var(--pad);
+    pointer-events: none;
+    text-align: center;
+    visibility: hidden;
+  }
+  .toast[data-show] {
+    visibility: visible;
+    /* A soft dusk behind the stamp so it reads over any text: not a box. */
+    background: radial-gradient(
+      50% 34% at 50% 50%,
+      color-mix(in srgb, var(--c-night) 78%, transparent),
+      transparent 100%
+    );
+    animation: stamp 1600ms var(--ease) both;
+  }
+  .toast-title {
+    color: var(--c-brand);
+    font-size: clamp(2.75rem, 1rem + 7vw, 6rem);
+    text-transform: uppercase;
+    transform: skewX(-10deg);
+    text-shadow:
+      0.06em 0.07em 0 var(--outline),
+      0 0 0.3em var(--glow-pink);
+  }
+  .toast-sub {
+    color: var(--c-ink);
+    font-family: var(--hud);
+    font-size: clamp(0.8125rem, 0.7rem + 0.5vw, 1rem);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    paint-order: stroke fill;
+    -webkit-text-stroke: 0.3em var(--outline);
+  }
+  @keyframes stamp {
+    0% {
+      opacity: 0;
+      transform: scale(1.35);
+      filter: blur(6px);
+    }
+    18% {
+      opacity: 1;
+      transform: scale(0.98);
+      filter: none;
+    }
+    26%,
+    84% {
+      opacity: 1;
+      transform: none;
+    }
+    100% {
+      opacity: 0;
+      transform: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .toast[data-show] {
+      animation: none;
+    }
+  }
+</style>

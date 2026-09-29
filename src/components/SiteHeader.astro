@@ -1,7 +1,9 @@
 ---
 /**
- * Sticky thin bar: wordmark, the literal nouns of the page, language switch.
- * The section in view gets aria-current through the scroll spy.
+ * The nav as a pause menu: a floating menu frame with the pink script
+ * handle, the plain section nouns in pink, and the language switch. The
+ * current or hovered item sits on the green selection bar; the scroll spy
+ * sets aria-current on the section in view.
  */
 import type { SiteView } from '../lib/view.ts';
 
@@ -13,20 +15,14 @@ const { view } = Astro.props;
 ---
 
 <header class="site-header">
-  <div class="wrap bar">
-    <a class="wordmark" href={view.href}>
-      <svg class="glyph" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" focusable="false">
-        <rect width="16" height="16" rx="1.5" fill="currentColor"></rect>
-        <path d="M8 3.5v9M3.5 8h9" stroke="var(--c-on-added)" stroke-width="2"></path>
-      </svg>
-      <span>{view.person.handle}</span>
-    </a>
-    <nav class="nav">
+  <div class="menu">
+    <a class="handle" href={view.href}>{view.person.handle}</a>
+    <nav class="nav" aria-label={view.ui.nav}>
       <ul>
         {
           view.nav.map((item) => (
             <li>
-              <a href={item.href} data-spy={item.key}>
+              <a href={item.href} data-spy={item.href.slice(1)}>
                 {item.label}
               </a>
             </li>
@@ -48,33 +44,41 @@ const { view } = Astro.props;
   .site-header {
     position: sticky;
     inset-block-start: 0;
-    z-index: 20;
-    background: var(--c-paper);
-    border-block-end: 1px solid var(--c-rule);
+    z-index: 50;
+    block-size: var(--header-h);
+    margin-block-end: calc(var(--header-h) * -1);
+    padding: var(--s-3) var(--pad) 0;
+    pointer-events: none;
   }
-  .bar {
+  .menu {
     display: flex;
     align-items: center;
-    gap: var(--s-6);
-    block-size: var(--header-h);
+    gap: var(--s-4);
+    max-inline-size: calc(var(--max) - 2 * var(--pad));
+    block-size: 3.25rem;
+    margin-inline: auto;
+    padding-inline: var(--s-4) var(--s-2);
+    border: 3px solid var(--outline);
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--c-panel) 94%, transparent);
+    box-shadow: var(--shadow);
+    pointer-events: auto;
   }
-  .wordmark {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--s-2);
-    color: var(--c-ink);
-    font-stretch: 125%;
-    font-weight: 800;
-    font-size: var(--t-body);
-    letter-spacing: -0.01em;
+  .handle {
+    flex: none;
+    color: var(--c-brand);
+    font-family: var(--script);
+    font-size: 1.625rem;
+    line-height: 1;
+    padding: 0.1em 0.3em 0.15em 0.1em;
     text-decoration: none;
-  }
-  .glyph {
-    color: var(--c-added);
+    text-shadow: 0 0 0.35em var(--glow-pink);
   }
   .nav {
     flex: 1;
     min-inline-size: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
   }
   .nav ul {
     display: flex;
@@ -82,77 +86,50 @@ const { view } = Astro.props;
   }
   .nav a,
   .lang {
-    position: relative;
     display: inline-flex;
     align-items: center;
-    block-size: var(--header-h);
-    padding-inline: var(--s-3);
-    color: var(--c-ink2);
-    font-size: var(--t-small);
-    font-weight: 600;
+    block-size: 2.25rem;
+    padding: 0.2em var(--s-3) 0;
+    border-radius: 8px;
+    color: var(--c-brand);
+    font-family: var(--display);
+    font-size: 1rem;
+    letter-spacing: 0.04em;
     text-decoration: none;
     white-space: nowrap;
   }
-  .nav a::after {
-    content: '';
-    position: absolute;
-    inset-inline: var(--s-3);
-    inset-block-end: -1px;
-    block-size: 2px;
-    background: var(--c-ink);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--d-base) var(--ease);
-  }
   .nav a:hover,
-  .nav a[aria-current='true'] {
-    color: var(--c-ink);
-  }
-  .nav a[aria-current='true']::after {
-    transform: none;
+  .nav a[aria-current='true'],
+  .lang:hover {
+    background: var(--c-select);
+    color: var(--c-on-select);
   }
   .nav a:focus-visible,
   .lang:focus-visible {
-    outline-offset: -2px;
+    outline-offset: 2px;
+    background: var(--c-select);
+    color: var(--c-on-select);
   }
   .lang {
+    flex: none;
     margin-inline-start: auto;
-    padding-inline-end: 0;
     color: var(--c-ink);
-    text-decoration: underline;
-    text-decoration-color: var(--c-rule);
+    font-family: var(--sans);
+    font-size: var(--t-small);
+    font-weight: 700;
+    padding-block-start: 0;
   }
-  .lang:hover {
-    text-decoration-color: currentColor;
-  }
-
   @media (max-width: 63.99rem) {
-    .bar {
-      flex-wrap: wrap;
-      block-size: auto;
-      column-gap: var(--s-4);
-      row-gap: 0;
-    }
-    .wordmark,
-    .lang {
-      block-size: var(--s-7);
-    }
-    .lang {
-      order: 2;
-    }
     .nav {
-      order: 3;
-      flex-basis: 100%;
-      margin-inline: calc(var(--pad) * -1);
-      overflow-x: auto;
-      scrollbar-width: none;
-      border-block-start: 1px solid var(--c-rule);
+      mask-image: linear-gradient(90deg, #000 calc(100% - 2.5rem), transparent);
     }
-    .nav ul {
-      padding-inline: calc(var(--pad) - var(--s-3));
+  }
+  @media (max-width: 47.99rem) {
+    .handle {
+      display: none;
     }
-    .nav a {
-      block-size: var(--s-7);
+    .menu {
+      padding-inline-start: var(--s-2);
     }
   }
 </style>

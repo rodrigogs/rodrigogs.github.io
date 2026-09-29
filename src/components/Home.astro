@@ -8,16 +8,17 @@ import type { Snapshot } from '../data/schema.ts';
 import snapshotJson from '../data/snapshot.json';
 import Base from '../layouts/Base.astro';
 import { buildView } from '../lib/view.ts';
-import AiEngineering from './AiEngineering.astro';
+import AiWorkflow from './AiWorkflow.astro';
 import Career from './Career.astro';
+import Cheat from './Cheat.astro';
 import Contact from './Contact.astro';
 import Hero from './Hero.astro';
-import Konami from './Konami.astro';
 import OpenSource from './OpenSource.astro';
 import Packages from './Packages.astro';
 import SiteFooter from './SiteFooter.astro';
 import SiteHeader from './SiteHeader.astro';
 import Stack from './Stack.astro';
+import Toast from './Toast.astro';
 import Work from './Work.astro';
 
 interface Props {
@@ -36,7 +37,7 @@ const view = buildView(snapshotJson as unknown as Snapshot, locale, {
   <SiteHeader view={view} />
   <main id="main" tabindex="-1">
     <Hero view={view} />
-    <AiEngineering view={view} />
+    <AiWorkflow view={view} />
     <Work view={view} />
     <OpenSource view={view} />
     <Packages view={view} />
@@ -45,5 +46,6 @@ const view = buildView(snapshotJson as unknown as Snapshot, locale, {
     <Contact view={view} />
   </main>
   <SiteFooter view={view} />
-  <Konami label={view.konami.label} />
+  <Toast title={view.ui.toast} subtitle={view.ui.toastSub} />
+  <Cheat on={view.ui.cheatOn} off={view.ui.cheatOff} />
 </Base>

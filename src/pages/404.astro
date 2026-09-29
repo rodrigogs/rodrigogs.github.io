@@ -1,18 +1,18 @@
 ---
 /**
- * 404, in the same world and in both languages: a removed line, then the
- * way back to the latest release of each locale.
+ * 404, in the same world and in both languages at once: the night scene as
+ * a still poster, and one menu frame with the way back to each home page.
  */
-import Icon from '../components/Icon.astro';
-import Plate from '../components/Plate.astro';
 import { footer, localeTag, locales, notFound } from '../content/site.ts';
 import type { Snapshot } from '../data/schema.ts';
 import snapshotJson from '../data/snapshot.json';
+import { sceneSvg } from '../design/scene-svg.ts';
 import Base from '../layouts/Base.astro';
 import { buildView } from '../lib/view.ts';
 
 const view = buildView(snapshotJson as unknown as Snapshot, 'en', { now: new Date(), sha: process.env.GIT_SHA ?? '' });
 const home = { en: '/', pt: '/pt/' } as const;
+const poster = sceneSvg({ width: 1600, height: 900, idPrefix: 'nf-' }).replace('<svg ', '<svg preserveAspectRatio="xMidYMax slice" ');
 ---
 
 <Base
@@ -31,87 +31,87 @@ const home = { en: '/', pt: '/pt/' } as const;
       ))
     }
   </Fragment>
-  <main id="main" class="nf wrap" tabindex="-1">
-    {
-      locales.map((locale, i) => (
-        <section class="side" lang={localeTag[locale]} aria-labelledby={`nf-${locale}`}>
-          <div class="head">
+  <div class="scene" aria-hidden="true" set:html={poster} />
+  <main id="main" class="nf" tabindex="-1">
+    <div class="frame card">
+      <p class="display code" aria-hidden="true">404</p>
+      {
+        locales.map((locale, i) => (
+          <section class="side" lang={localeTag[locale]} aria-labelledby={`nf-${locale}`}>
             {i === 0 ? (
-              <h1 class="display title" id={`nf-${locale}`}>
+              <h1 class="title" id={`nf-${locale}`}>
                 {notFound.title[locale]}
               </h1>
             ) : (
-              <h2 class="display title" id={`nf-${locale}`}>
+              <h2 class="title" id={`nf-${locale}`}>
                 {notFound.title[locale]}
               </h2>
             )}
-            <Plate role="deprecated" size="m">
-              <span class="mono">404</span>
-            </Plate>
-          </div>
-          <p class="line">
-            <Icon name="minus" size={12} />
-            <span>{notFound.text[locale]}</span>
-          </p>
-          <a class="action action-primary" href={home[locale]}>
-            {notFound.home[locale]}
-          </a>
-        </section>
-      ))
-    }
+            <p class="text">{notFound.text[locale]}</p>
+            <a class="action action-primary" href={home[locale]}>
+              {notFound.home[locale]}
+            </a>
+          </section>
+        ))
+      }
+    </div>
   </main>
 </Base>
 
 <style>
+  .scene {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: var(--c-night);
+  }
+  .scene :global(svg) {
+    inline-size: 100%;
+    block-size: 100%;
+  }
+  .scene::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(60% 60% at 30% 50%, color-mix(in srgb, var(--c-night) 70%, transparent), transparent 80%);
+  }
   .nf {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center start;
+    min-block-size: 100dvh;
+    padding: var(--s-8) var(--pad);
+  }
+  .card {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--s-8) var(--gutter);
-    align-content: center;
-    min-block-size: 100dvh;
-    padding-block: var(--s-9);
+    gap: var(--s-6) var(--s-8);
+    max-inline-size: 46rem;
+  }
+  .code {
+    grid-column: 1 / -1;
+    color: var(--c-brand);
+    font-size: clamp(4rem, 2rem + 8vw, 6rem);
+    transform: skewX(-8deg);
   }
   .side {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--s-5);
-  }
-  .side + .side {
-    padding-inline-start: var(--gutter);
-    border-inline-start: 1px solid var(--c-rule);
-  }
-  .head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: var(--s-3) var(--s-4);
+    gap: var(--s-4);
   }
   .title {
-    font-size: clamp(2.25rem, 1rem + 3.5vw, 4rem);
+    font-size: 1.5rem;
+    font-weight: 750;
+    line-height: 1.25;
   }
-  .line {
-    display: flex;
-    align-items: center;
-    gap: var(--s-2);
-    padding: var(--s-2) var(--s-3);
-    background: var(--c-deprecated-tint);
-    font-size: var(--t-small);
-    line-height: 1.25rem;
-  }
-  .line :global(.icon) {
-    flex: none;
-    color: var(--mark-deprecated);
+  .text {
+    color: var(--c-ink2);
   }
   @media (max-width: 47.99rem) {
-    .nf {
+    .card {
       grid-template-columns: minmax(0, 1fr);
-    }
-    .side + .side {
-      padding-inline-start: 0;
-      padding-block-start: var(--s-8);
-      border-inline-start: 0;
-      border-block-start: 1px solid var(--c-rule);
     }
   }
 </style>

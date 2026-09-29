@@ -1,7 +1,7 @@
 ---
 /**
- * Packages: the registry listing. Each row's bar is its share of the most
- * downloaded package (linear, last 30 days): data, not decoration. The top
+ * Packages as a HUD table: each row's neon bar is its share of the most
+ * downloaded package (linear, last 30 days), data, not decoration. The top
  * rows are open; the long tail sits behind a native disclosure.
  */
 import { fill, type PackageView, type SiteView } from '../lib/view.ts';
@@ -24,27 +24,18 @@ const registryName = { npm: 'npm', crates: 'crates.io' } as const;
 ---
 
 <section class="band packages" id="packages" aria-labelledby="packages-title">
-  <div class="wrap grid">
-    <div class="lead">
-      <SectionHead id="packages" label={s.label} claim={s.claim} />
-    </div>
-    <div class="listing">
+  <div class="wrap">
+    <SectionHead id="packages" label={s.label} claim={s.claim} />
+    <div class="frame listing">
       {
         [head, tail].map((group, gi) => {
           const table = (
             <table class:list={['pkgs', gi > 0 && 'pkgs-tail']}>
-              <colgroup>
-                <col class="c-name" />
-                <col class="c-reg" />
-                <col class="c-ver" />
-                <col class="c-bar" />
-                <col class="c-num" />
-              </colgroup>
               <thead class:list={[gi > 0 && 'sr-only']}>
                 <tr>
                   <th scope="col">{f.name}</th>
-                  <th scope="col">{f.registry}</th>
-                  <th scope="col">{f.version}</th>
+                  <th scope="col" class="c-reg">{f.registry}</th>
+                  <th scope="col" class="c-ver">{f.version}</th>
                   <th scope="col" colspan="2" class="num">
                     {f.downloadsMonth}
                   </th>
@@ -56,12 +47,12 @@ const registryName = { npm: 'npm', crates: 'crates.io' } as const;
                     <th scope="row" class="pkg">
                       <a href={p.url}>{p.name}</a>
                     </th>
-                    <td class="reg">{registryName[p.registry]}</td>
-                    <td class="mono ver">{p.version ?? ''}</td>
+                    <td class="c-reg">{registryName[p.registry]}</td>
+                    <td class="c-ver hud-t">{p.version ?? ''}</td>
                     <td class="bar-cell" aria-hidden="true">
                       <span class="bar" style={`--v:${share(p)}`} />
                     </td>
-                    <td class="mono num">{p.monthly}</td>
+                    <td class="num hud-t">{p.monthly}</td>
                   </tr>
                 ))}
               </tbody>
@@ -71,9 +62,7 @@ const registryName = { npm: 'npm', crates: 'crates.io' } as const;
           if (group.length === 0) return null;
           return (
             <details class="more">
-              <summary>
-                {fill(f.allPackages, { count: view.totals.packages })}
-              </summary>
+              <summary>{fill(f.allPackages, { count: view.totals.packages })}</summary>
               {table}
             </details>
           );
@@ -84,151 +73,105 @@ const registryName = { npm: 'npm', crates: 'crates.io' } as const;
 </section>
 
 <style>
-  .packages {
-    padding-block: var(--s-9);
-  }
-  .grid {
-    row-gap: var(--s-7);
-  }
-  .lead {
-    grid-column: 1 / span 4;
-  }
-  .lead :global(.section-head) {
-    position: sticky;
-    inset-block-start: calc(var(--header-h) + var(--s-6));
-  }
-  .listing {
-    grid-column: 5 / -1;
-    min-inline-size: 0;
-  }
   .pkgs {
     inline-size: 100%;
     border-collapse: collapse;
     table-layout: fixed;
     font-size: var(--t-small);
-    line-height: 1.25rem;
-  }
-  .c-name {
-    inline-size: 34%;
-  }
-  .c-reg {
-    inline-size: 13%;
-  }
-  .c-ver {
-    inline-size: 15%;
-  }
-  .c-bar {
-    inline-size: 26%;
-  }
-  .c-num {
-    inline-size: 12%;
   }
   th,
   td {
-    padding-block: var(--s-2);
-    padding-inline: 0 var(--s-3);
+    padding: var(--s-2) var(--s-3);
     text-align: start;
     vertical-align: middle;
-    border-block-end: 1px solid var(--c-rule);
   }
   thead th {
-    padding-block: 0 var(--s-2);
-    color: var(--c-ink3);
+    color: var(--c-brand);
+    font-family: var(--hud);
     font-size: var(--t-micro);
-    font-weight: 600;
-    line-height: 1rem;
-    border-block-end: 1px solid var(--c-ink);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-block-end: 1px solid var(--c-rule);
+  }
+  thead th:nth-child(1) {
+    inline-size: 34%;
+  }
+  .c-reg {
+    inline-size: 12%;
+    color: var(--c-ink2);
+  }
+  .c-ver {
+    inline-size: 14%;
+  }
+  thead .num {
+    inline-size: 40%;
+  }
+  tbody tr + tr > * {
+    border-block-start: 1px solid color-mix(in srgb, var(--c-rule) 55%, transparent);
   }
   .pkg {
-    font-weight: 600;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    font-weight: 700;
+    overflow-wrap: anywhere;
   }
-  .reg {
+  .hud-t {
+    font-family: var(--hud);
+    font-weight: 700;
+    letter-spacing: 0.03em;
     color: var(--c-ink2);
-  }
-  .ver {
-    color: var(--c-ink2);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
   .num {
-    padding-inline-end: 0;
     text-align: end;
-  }
-  td.num {
-    font-weight: 600;
+    color: var(--c-added);
+    font-size: 1rem;
+    white-space: nowrap;
   }
   .bar-cell {
-    padding-inline-end: var(--s-3);
+    inline-size: 26%;
   }
   .bar {
     display: block;
-    inline-size: calc(var(--v) * 100%);
-    min-inline-size: 1px;
-    block-size: var(--s-2);
-    background: var(--c-ink);
+    block-size: 0.5rem;
+    inline-size: calc(max(var(--v), 0.004) * 100%);
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--c-merged), var(--c-added));
+    box-shadow: 0 0 0.6rem var(--glow-cyan);
   }
   .more {
-    margin-block-start: var(--s-5);
+    margin-block-start: var(--s-4);
   }
-  .more summary {
+  summary {
     display: inline-flex;
     align-items: center;
-    gap: var(--s-2);
-    min-block-size: var(--s-7);
+    min-block-size: 2.75rem;
     padding-inline: var(--s-4);
-    border: 1px solid var(--c-rule);
-    border-radius: var(--radius);
-    font-size: var(--t-small);
+    border: 2px solid var(--c-rule);
+    border-radius: 10px;
     font-weight: 700;
     cursor: pointer;
-    list-style: none;
   }
-  .more summary::-webkit-details-marker {
-    display: none;
+  summary:hover {
+    background: var(--c-select);
+    color: var(--c-on-select);
+    border-color: var(--c-select);
   }
-  .more summary::before {
-    content: '';
-    inline-size: var(--s-2);
-    block-size: var(--s-2);
-    border-inline-end: 1.5px solid currentColor;
-    border-block-end: 1.5px solid currentColor;
-    transform: translateY(-2px) rotate(45deg);
-    transition: transform var(--d-base) var(--ease);
-  }
-  .more[open] summary::before {
-    transform: translateY(2px) rotate(-135deg);
-  }
-  .more[open] summary {
-    margin-block-end: var(--s-4);
-  }
-  @media (max-width: 63.99rem) {
-    .lead,
-    .listing {
-      grid-column: 1 / -1;
-    }
-    .lead :global(.section-head) {
-      position: static;
-    }
+  .pkgs-tail {
+    margin-block-start: var(--s-4);
   }
   @media (max-width: 47.99rem) {
-    .c-name {
-      inline-size: 38%;
-    }
-    .c-reg {
-      inline-size: 15%;
-    }
+    .c-reg,
     .c-ver {
-      inline-size: 17%;
+      display: none;
     }
-    .c-bar {
-      inline-size: 12%;
+    thead th:nth-child(1) {
+      inline-size: 50%;
     }
-    .c-num {
-      inline-size: 18%;
+    thead .num {
+      inline-size: 50%;
+    }
+    .bar-cell {
+      inline-size: 22%;
+      padding-inline: var(--s-1);
     }
   }
 </style>

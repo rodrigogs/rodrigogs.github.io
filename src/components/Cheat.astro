@@ -1,0 +1,47 @@
+---
+/**
+ * The cheat-code line ("CHEAT ACTIVATED"), shown for a moment after the
+ * code is typed; the logic is in src/scripts/cheat.ts.
+ */
+interface Props {
+  on: string;
+  off: string;
+}
+
+const { on, off } = Astro.props;
+---
+
+<p class="cheat" data-cheat-line data-on={on} data-off={off} aria-hidden="true" hidden></p>
+<p class="sr-only" role="status" aria-live="polite" data-cheat-status></p>
+
+<script>
+  import '../scripts/cheat.ts';
+</script>
+
+<style>
+  .cheat {
+    position: fixed;
+    inset-block-start: calc(var(--header-h) + var(--s-3));
+    inset-inline-start: var(--pad);
+    z-index: 70;
+    color: var(--c-added);
+    font-family: var(--hud);
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    paint-order: stroke fill;
+    -webkit-text-stroke: 0.22em var(--outline);
+    text-shadow: 0 0 0.5em var(--glow-cyan);
+    pointer-events: none;
+    animation: blink 1.2s steps(1) 2;
+  }
+  .cheat[hidden] {
+    display: none;
+  }
+  @keyframes blink {
+    50% {
+      opacity: 0.35;
+    }
+  }
+</style>

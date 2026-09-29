@@ -1,13 +1,19 @@
 ---
 /**
- * The first viewport: the name, the one-sentence title, three labeled notes
- * (role, product, open source) and the primary action. The right five columns carry
- * the version rail and the live Compare readout.
+ * The first viewport: a night drive over the water. Layers, back to front:
+ *   L0 the static SVG scene (first paint, and the fallback everywhere),
+ *   L1 the live WebGL canvas, faded in after its first frame,
+ *   the cheat-code floor grid (only while the canvas is not running),
+ *   L2 the skyline with neon edges and the palms, crisp SVG,
+ *   L3 the text, on a scrim, left of the sun.
+ * Top right: the HUD (live local time and real numbers, each linking to
+ * its proof). The sun is placed by the same rule in CSS and in the shader
+ * (see --sun-at), so it never sits under the text.
  */
+import { SUN_X, sceneGridSvg, sceneSilhouettesSvg, sceneSvg } from '../design/scene-svg.ts';
 import type { SiteView } from '../lib/view.ts';
-import Compare from './Compare.astro';
 import CopyEmail from './CopyEmail.astro';
-import Icon from './Icon.astro';
+import Icon, { type IconName } from './Icon.astro';
 import Plate from './Plate.astro';
 
 interface Props {
@@ -15,180 +21,498 @@ interface Props {
 }
 
 const { view } = Astro.props;
-const { hero, person } = view;
-const words = person.name.split(' ');
-const line1 = words.slice(0, 2).join(' ');
-const line2 = words.slice(2).join(' ');
+const { hero, person, totals, field, ui } = view;
+const [first, ...rest] = person.name.split(' ');
+const size = { width: 1600, height: 900 };
+const poster = sceneSvg({ ...size, idPrefix: 'hp-', palms: false, skyline: false });
+const floor = sceneGridSvg({ ...size, idPrefix: 'hg-' });
+const silhouettes = sceneSilhouettesSvg({ ...size, idPrefix: 'hs-' });
+
+interface Stat {
+  icon: IconName;
+  value: string;
+  label: string;
+  href: string;
+  tone: 'pink' | 'yellow' | 'cyan';
+}
+const stats: Stat[] = [
+  { icon: 'star', value: totals.stars, label: field.stars, href: `${person.github}?tab=repositories&sort=stargazers`, tone: 'pink' },
+  { icon: 'download', value: totals.monthlyDownloads, label: field.downloadsMonth, href: `https://www.npmjs.com/~${person.handle}`, tone: 'yellow' },
+  ...(totals.contributions
+    ? [{ icon: 'pulse', value: totals.contributions, label: ui.contributions, href: person.github, tone: 'cyan' } satisfies Stat]
+    : []),
+] as const;
 ---
 
-<section class="hero" aria-labelledby="release-name">
-  <div class="wrap grid">
-    <div class="release">
-      <div class="release-head">
-        <h1 class="display name" id="release-name">{line1}{line2 && <br />}{line2}</h1>
-      </div>
+<section class="hero" id="hero" aria-labelledby="hero-name" data-hero>
+  <div class="scene" aria-hidden="true" style={`--sun-x: ${SUN_X}`}>
+    <div class="layer" set:html={poster} />
+    <canvas class="live" data-scene></canvas>
+    <div class="layer floor" set:html={floor} />
+    <div class="layer" set:html={silhouettes} />
+    <div class="scrim"></div>
+  </div>
 
-      <p class="release-title">{hero.title}</p>
+  <div class="hud" role="group" aria-label={ui.hud}>
+    <p class="clock" data-clock-wrap data-js-only>
+      <span class="sr-only">{ui.time}</span>
+      <time class="hud-n clock-n" data-clock></time>
+      <span class="tz" aria-hidden="true">{person.timezone}</span>
+    </p>
+    <ul class="stats">
+      {
+        stats.map((s) => (
+          <li>
+            <a href={s.href} data-tone={s.tone}>
+              <Icon name={s.icon} size={18} />
+              <span class="hud-n stat-n">{s.value}</span>
+              <span class="stat-l">{s.label}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 
-      <ul class="notes">
-        {
-          hero.notes.map((note) => (
-            <li>
-              <Plate role={note.role}>{note.label}</Plate>
-              <span class="note-text">{note.text}</span>
-            </li>
-          ))
-        }
-      </ul>
+  <div class="wrap copy">
+    <h1 class="lockup" id="hero-name">
+      <span class="script">{first}</span>
+      <span class="display block">{rest.join(' ')}</span>
+    </h1>
 
-      <div class="actions">
-        <a class="action action-primary" href={`mailto:${person.email}`}>
-          <Icon name="mail" />
-          {hero.cta.email}
-        </a>
-        <CopyEmail email={person.email} copy={hero.cta.copy} copied={hero.cta.copied} />
-      </div>
-      <ul class="profiles">
-        <li>
-          <a href={person.github}>
-            GitHub
+    <p class="role">{hero.title}</p>
+
+    <ul class="notes">
+      {
+        hero.notes.map((note) => (
+          <li>
+            <Plate role={note.role}>{note.label}</Plate>
+            <span class="note-text">{note.text}</span>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="actions">
+      <a class="action action-primary" href={`mailto:${person.email}`}>
+        <Icon name="mail" size={18} />
+        {hero.cta.email}
+      </a>
+      <CopyEmail email={person.email} copy={hero.cta.copy} copied={hero.cta.copied} />
+      <a class="action action-ghost" href={person.github}>
+        GitHub
+        <Icon name="external" size={12} />
+      </a>
+      {
+        person.linkedin && (
+          <a class="action action-ghost" href={person.linkedin}>
+            LinkedIn
             <Icon name="external" size={12} />
           </a>
-        </li>
-        {
-          person.linkedin && (
-            <li>
-              <a href={person.linkedin}>
-                LinkedIn
-                <Icon name="external" size={12} />
-              </a>
-            </li>
-          )
-        }
-      </ul>
-    </div>
-
-    <div class="aside">
-      <Compare view={view} />
+        )
+      }
     </div>
   </div>
 </section>
 
+<script>
+  // HUD clock: Rodrigo's local time, client-side only (a build-time time would lie).
+  const clock = document.querySelector<HTMLTimeElement>('[data-clock]');
+  const wrap = clock?.closest<HTMLElement>('[data-clock-wrap]');
+  if (clock && wrap) {
+    const fmt = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'America/Sao_Paulo',
+      hour: '2-digit',
+      minute: '2-digit',
+      hourCycle: 'h23',
+    });
+    const tick = () => {
+      const now = new Date();
+      clock.textContent = fmt.format(now);
+      wrap.dataset.ready = '';
+      setTimeout(tick, 60_000 - (now.getTime() % 60_000) + 50);
+    };
+    tick();
+  }
+
+  // The live scene loads after the page, on idle, and only where it can run well.
+  const canvas = document.querySelector<HTMLCanvasElement>('canvas[data-scene]');
+  const hero = document.querySelector<HTMLElement>('[data-hero]');
+  const nav = navigator as Navigator & { connection?: { saveData?: boolean }; deviceMemory?: number };
+  const weak =
+    nav.connection?.saveData === true ||
+    (nav.deviceMemory ?? 8) < 4 ||
+    (matchMedia('(pointer: coarse)').matches && (nav.hardwareConcurrency ?? 8) <= 4);
+  if (canvas && hero && !weak) {
+    const go = () => import('../scripts/scene.ts').then((m) => m.start(canvas, hero));
+    const idle = () => ('requestIdleCallback' in window ? requestIdleCallback(go, { timeout: 1500 }) : setTimeout(go, 200));
+    if (document.readyState === 'complete') idle();
+    else addEventListener('load', idle, { once: true });
+  }
+</script>
+
 <style>
   .hero {
-    padding-block: var(--s-8) var(--s-9);
-  }
-  .grid {
-    row-gap: var(--s-8);
-    align-items: start;
-  }
-  .release {
-    grid-column: 1 / span 7;
+    position: relative;
     display: flex;
     flex-direction: column;
-    min-inline-size: 0;
-  }
-  .aside {
-    grid-column: 8 / -1;
-    min-inline-size: 0;
-    padding-block-start: var(--s-2);
-    padding-inline-start: var(--s-5);
+    justify-content: center;
+    min-block-size: max(100svh, 44rem);
+    padding-block: calc(var(--header-h) + var(--s-8)) var(--s-9);
+    overflow: hidden;
+    isolation: isolate;
   }
 
-  /* Sized so "Rodrigo Gomes" holds one line inside seven columns. */
-  .release-head {
-    font-size: clamp(2rem, 6vw - 0.375rem, 4.25rem);
-    line-height: 0.94;
+  /* Scene ------------------------------------------------------------- */
+  .scene {
+    --sun-at: 0.7;
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    container-type: size;
+    background: var(--scene-water-near);
   }
-  .name {
-    display: inline;
-    font-size: 1em;
-    line-height: inherit;
+  .layer,
+  .live,
+  .scrim {
+    position: absolute;
+    inset: 0;
+  }
+  /* Cover, bottom-aligned, the sun at --sun-at of the width (clamped so the
+     scene always covers). scene.ts computes the same placement. */
+  .layer :global(svg) {
+    --w: max(100cqw, 177.78cqh);
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-start: clamp(calc(100cqw - var(--w)), calc(var(--sun-at) * 100cqw - var(--sun-x) * var(--w)), 0px);
+    inline-size: var(--w);
+    block-size: calc(var(--w) * 0.5625);
+  }
+  .live {
+    inline-size: 100%;
+    block-size: 100%;
+    opacity: 0;
+    transition: opacity 900ms var(--ease);
+  }
+  .live:global(.on) {
+    opacity: 1;
+  }
+  .floor {
+    opacity: 0;
+    transition: opacity var(--d-slow) var(--ease);
+  }
+  :global(:root[data-cheat]) .floor {
+    opacity: 1;
+  }
+  .live:global(.on) ~ .floor {
+    visibility: hidden;
+  }
+  .scrim {
+    background:
+      linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--c-night) 90%, transparent) 0%,
+        color-mix(in srgb, var(--c-night) 82%, transparent) 36%,
+        color-mix(in srgb, var(--c-night) 30%, transparent) 50%,
+        transparent 58%
+      ),
+      linear-gradient(to top, var(--c-night) 0, transparent 16%);
   }
 
-  .release-title {
-    margin-block-start: var(--s-6);
-    max-inline-size: 36ch;
-    font-size: clamp(var(--t-lead), 1rem + 0.8vw, var(--t-h3));
-    line-height: 1.34;
+  /* HUD --------------------------------------------------------------- */
+  .hud {
+    position: absolute;
+    inset-block-start: calc(var(--header-h) + var(--s-5));
+    inset-inline-end: var(--pad);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--s-2);
+    text-align: end;
+  }
+  .clock {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-2);
+    min-block-size: 3rem;
+    visibility: hidden;
+  }
+  .clock[data-ready] {
+    visibility: visible;
+  }
+  .clock-n {
+    color: var(--c-added);
+    font-size: 2.5rem;
+    line-height: 1;
+    text-shadow: 0 0 0.4em var(--glow-cyan);
+  }
+  .tz {
+    color: var(--c-ink2);
+    font-family: var(--hud);
+    font-size: var(--t-micro);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    paint-order: stroke fill;
+    -webkit-text-stroke: 0.3em var(--outline);
+  }
+  .stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--s-1);
+  }
+  .stats a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    padding: 0.125rem var(--s-2);
+    text-decoration: none;
+    border-radius: 6px;
+    color: var(--tone);
+  }
+  .stats a:hover {
+    background: var(--c-select);
+    color: var(--c-on-select);
+  }
+  .stats a:hover .stat-n,
+  .stats a:hover .stat-l {
+    color: var(--c-on-select);
+    -webkit-text-stroke: 0;
+  }
+  .stats a[data-tone='pink'] {
+    --tone: var(--c-brand);
+  }
+  .stats a[data-tone='yellow'] {
+    --tone: var(--c-changed);
+  }
+  .stats a[data-tone='cyan'] {
+    --tone: var(--c-added);
+  }
+  .stats :global(.icon) {
+    filter: drop-shadow(0 1px 0 var(--outline)) drop-shadow(0 -1px 0 var(--outline)) drop-shadow(1px 0 0 var(--outline))
+      drop-shadow(-1px 0 0 var(--outline));
+  }
+  .stat-n {
+    color: var(--tone);
+    font-size: 1.375rem;
+    line-height: 1.2;
+  }
+  .stat-l {
+    color: var(--c-ink);
+    font-size: var(--t-micro);
     font-weight: 600;
-    letter-spacing: -0.012em;
+    paint-order: stroke fill;
+    -webkit-text-stroke: 0.35em var(--outline);
+    order: -1;
+  }
+
+  /* Text -------------------------------------------------------------- */
+  .copy {
+    position: relative;
+  }
+  .notes {
+    max-inline-size: min(40rem, 50vw);
+  }
+  .lockup {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-weight: 400;
+    cursor: default;
+  }
+  .script {
+    position: relative;
+    z-index: 1;
+    margin-inline-start: 0.08em;
+    margin-block-end: -0.24em;
+    color: var(--c-brand);
+    font-family: var(--script);
+    font-size: clamp(3.5rem, 1.6rem + 5.2vw, 6rem);
+    line-height: 1.1;
+    transform: rotate(-7deg);
+    transform-origin: left bottom;
+    text-shadow:
+      0.035em 0.045em 0 var(--outline),
+      0 0 0.35em var(--glow-pink);
+  }
+  .block {
+    font-size: clamp(2.5rem, 0.6rem + 4.3vw, 5.25rem);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* Chromatic glitch, on hover of the lockup only. */
+  .lockup:hover .block {
+    animation: glitch 700ms steps(1) infinite;
+  }
+  .lockup:hover .script {
+    animation: glitch-script 700ms steps(1) infinite;
+  }
+  @keyframes glitch {
+    0%,
+    100% {
+      text-shadow:
+        -0.04em 0 0 var(--glow-cyan),
+        0.04em 0 0 var(--glow-pink),
+        0.06em 0.07em 0 var(--outline);
+      transform: none;
+    }
+    30% {
+      text-shadow:
+        0.05em 0.01em 0 var(--glow-cyan),
+        -0.05em -0.01em 0 var(--glow-pink),
+        0.06em 0.07em 0 var(--outline);
+      transform: translateX(-2px) skewX(-3deg);
+      clip-path: inset(0 0 45% 0);
+    }
+    32% {
+      clip-path: none;
+    }
+    60% {
+      text-shadow:
+        -0.02em 0 0 var(--glow-cyan),
+        0.03em 0 0 var(--glow-pink),
+        0.06em 0.07em 0 var(--outline);
+      transform: translateX(2px);
+    }
+  }
+  @keyframes glitch-script {
+    0%,
+    100% {
+      text-shadow:
+        -0.03em 0 0 var(--glow-cyan),
+        0.035em 0.045em 0 var(--outline);
+    }
+    45% {
+      text-shadow:
+        0.04em 0 0 var(--glow-cyan),
+        -0.02em 0 0 var(--c-changed),
+        0.035em 0.045em 0 var(--outline);
+      translate: 2px 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lockup:hover .block,
+    .lockup:hover .script {
+      animation: none;
+      text-shadow:
+        -0.03em 0 0 var(--glow-cyan),
+        0.03em 0 0 var(--glow-pink),
+        0.06em 0.07em 0 var(--outline);
+    }
+  }
+
+  .role {
+    margin-block-start: var(--s-6);
+    max-inline-size: min(40rem, 50vw);
+    color: var(--c-ink);
+    font-size: clamp(1.1875rem, 1rem + 0.7vw, 1.5rem);
+    font-weight: 600;
+    line-height: 1.35;
+    text-shadow: 0 1px 0 var(--outline);
   }
 
   .notes {
     display: grid;
-    grid-template-columns: max-content minmax(0, 1fr);
-    row-gap: var(--s-3);
-    column-gap: var(--s-4);
+    gap: var(--s-3);
     margin-block-start: var(--s-6);
-    padding-block-start: var(--s-5);
-    border-block-start: 1px solid var(--c-rule);
-    max-inline-size: 42rem;
   }
   .notes li {
     display: grid;
-    grid-column: 1 / -1;
-    grid-template-columns: subgrid;
+    grid-template-columns: 5.25rem minmax(0, 1fr);
     align-items: baseline;
+    column-gap: var(--s-4);
   }
   .notes li :global(.plate) {
     justify-self: start;
+    transform: translateY(-0.1em);
   }
   .note-text {
     color: var(--c-ink2);
-    line-height: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.55;
   }
 
   .actions {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--s-2);
+    gap: var(--s-3);
     margin-block-start: var(--s-7);
   }
-  .actions > :global(.action:not(.copy)) {
-    padding-inline: var(--s-4);
-  }
-  /* Profiles sit one quiet tier below the email actions: links, not buttons. */
-  .profiles {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--s-2) var(--s-5);
-    margin-block-start: var(--s-4);
-    font-size: var(--t-small);
-    font-weight: 600;
-  }
-  .profiles a {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--s-1);
-    min-block-size: var(--s-5);
-  }
 
+  /* Tablet and phone: the sun sits over the text column's top, so the
+     scene becomes a band and the text starts at the waterline. */
   @media (max-width: 63.99rem) {
-    .release-head {
-      font-size: clamp(2rem, 9vw, 4.25rem);
+    /* The scene is height-bound here, so its horizon sits at 62% of it
+       (scene.horizonAt): the text starts just under the waterline. */
+    .hero {
+      --scene-h: calc(var(--header-h) + 48svh);
+      justify-content: flex-start;
+      padding-block-start: calc(var(--scene-h) * 0.62 + var(--s-3));
+      min-block-size: auto;
     }
-    .release,
-    .aside {
+    .scene {
+      --sun-at: 0.76;
+      block-size: var(--scene-h);
+      inset-block-end: auto;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background: var(--c-night);
+    }
+    .scrim {
+      background: linear-gradient(to bottom, transparent 55%, color-mix(in srgb, var(--c-night) 88%, transparent) 80%, var(--c-night) 100%);
+    }
+    /* The HUD moves to the left of the sun, a narrow column. */
+    .hud {
+      inset-inline: var(--pad) auto;
+      align-items: flex-start;
+      gap: var(--s-1);
+      text-align: start;
+    }
+    .clock {
+      min-block-size: 2.5rem;
+    }
+    .stats {
+      align-items: flex-start;
+      gap: var(--s-1);
+    }
+    .stats a {
+      display: grid;
+      grid-template-columns: auto auto;
+      column-gap: var(--s-1);
+      padding-inline: 0;
+    }
+    .stat-l {
+      order: 0;
       grid-column: 1 / -1;
     }
-    .aside {
-      max-inline-size: 36rem;
-      padding-inline-start: 0;
+    .notes,
+    .role {
+      max-inline-size: 40rem;
+    }
+    .copy {
+      padding-block-start: var(--s-4);
+      background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--c-night) 80%, transparent) 5rem);
     }
   }
-  @media (max-width: 47.99rem) {
-    .hero {
-      padding-block: var(--s-7) var(--s-8);
-    }
-    .notes {
-      grid-template-columns: minmax(0, 1fr);
-      row-gap: var(--s-4);
+  @media (max-width: 29.99rem) {
+    .stat-n {
+      font-size: 1.125rem;
     }
     .notes li {
       grid-template-columns: minmax(0, 1fr);
-      row-gap: var(--s-2);
+      row-gap: var(--s-1);
+    }
+    .clock-n {
+      font-size: 2rem;
+    }
+    .block {
+      white-space: normal;
     }
   }
 </style>

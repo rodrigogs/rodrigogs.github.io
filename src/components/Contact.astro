@@ -1,7 +1,7 @@
 ---
 /**
- * Contact, the close: a full-bleed ink field (the sheet with a strong rule
- * in the dark theme) with the claim, the body and the big email action.
+ * Contact, the close: a neon sign ("Let's talk", a decorative echo of the
+ * lockup), the plain heading and claim, the address, and the actions.
  */
 import type { SiteView } from '../lib/view.ts';
 import CopyEmail from './CopyEmail.astro';
@@ -13,112 +13,125 @@ interface Props {
 
 const { view } = Astro.props;
 const s = view.sections.contact;
-const { person, hero } = view;
+const { person, hero, ui } = view;
 ---
 
-<section class="band field-ink contact" id="contact" aria-labelledby="contact-title">
-  <div class="wrap grid">
-    <div class="copy">
-      <h2 class="section-title" id="contact-title">{s.label}</h2>
-      <p class="claim display">{s.claim}</p>
-      {s.body && <p class="body">{s.body}</p>}
-    </div>
-    <div class="reach">
-      <a class="email" href={`mailto:${person.email}`}>
-        <Icon name="mail" size={32} />
-        <span>{person.email}</span>
+<section class="band contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap inner">
+    <p class="sign" aria-hidden="true">{ui.sign}</p>
+    <h2 class="display section-title" id="contact-title">{s.label}</h2>
+    <p class="claim">{s.claim}</p>
+    {s.body && <p class="body">{s.body}</p>}
+    <a class="email" href={`mailto:${person.email}`}>{person.email}</a>
+    <div class="actions">
+      <a class="action action-primary" href={`mailto:${person.email}`}>
+        <Icon name="mail" size={18} />
+        {hero.cta.email}
       </a>
-      <div class="actions">
-        <a class="action action-primary" href={`mailto:${person.email}`}>{hero.cta.email}</a>
-        <CopyEmail email={person.email} copy={hero.cta.copy} copied={hero.cta.copied} showAddress={false} />
-        <a class="action" href={person.github}>
-          GitHub
-          <Icon name="external" size={12} />
-        </a>
-        {
-          person.linkedin && (
-            <a class="action" href={person.linkedin}>
-              LinkedIn
-              <Icon name="external" size={12} />
-            </a>
-          )
-        }
-      </div>
-      <p class="where">
-        {person.location}
-        <span class="mono">{person.timezone}</span>
-        {person.spoken}
-      </p>
+      <CopyEmail email={person.email} copy={hero.cta.copy} copied={hero.cta.copied} />
+      <a class="action action-ghost" href={person.github}>
+        GitHub
+        <Icon name="external" size={12} />
+      </a>
+      {
+        person.linkedin && (
+          <a class="action action-ghost" href={person.linkedin}>
+            LinkedIn
+            <Icon name="external" size={12} />
+          </a>
+        )
+      }
     </div>
+    <p class="where">
+      {person.location} <span aria-hidden="true">·</span> <span class="tz">{person.timezone}</span>
+      <span aria-hidden="true">·</span>
+      {person.spoken}
+    </p>
   </div>
 </section>
 
 <style>
   .contact {
-    padding-block: var(--s-10) var(--s-9);
+    overflow: hidden;
+    background:
+      radial-gradient(60% 55% at 50% 0%, color-mix(in srgb, var(--c-merged) 22%, transparent), transparent 70%),
+      var(--c-night);
   }
-  .grid {
-    row-gap: var(--s-7);
-  }
-  .copy {
-    grid-column: 1 / span 8;
+  .inner {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: var(--s-5);
+    text-align: center;
+  }
+  .sign {
+    color: var(--c-brand);
+    font-family: var(--script);
+    font-size: clamp(3.5rem, 2rem + 6vw, 6rem);
+    line-height: 1.1;
+    transform: rotate(-5deg);
+    text-shadow:
+      0 0 0.08em var(--c-brand),
+      0 0 0.35em var(--glow-pink),
+      0 0 0.9em var(--glow-pink);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .sign {
+      animation: neon 6s steps(1) infinite;
+    }
+  }
+  @keyframes neon {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    91% {
+      opacity: 0.55;
+    }
+    92% {
+      opacity: 1;
+    }
+    95% {
+      opacity: 0.7;
+    }
+    96% {
+      opacity: 1;
+    }
   }
   .claim {
-    max-inline-size: 16ch;
-    font-size: clamp(2rem, 1rem + 3.6vw, 4rem);
-    line-height: 1;
-    font-weight: 900;
+    max-inline-size: 36ch;
+    color: var(--c-ink);
   }
   .body {
     max-inline-size: 58ch;
-    font-size: var(--t-lead);
-    line-height: 1.75rem;
-  }
-  .reach {
-    grid-column: 1 / -1;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-5);
-    padding-block-start: var(--s-6);
-    border-block-start: 1px solid var(--line);
+    color: var(--c-ink2);
   }
   .email {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--s-4);
-    inline-size: fit-content;
-    max-inline-size: 100%;
-    font-size: clamp(var(--t-lead), 0.6rem + 3vw, 3rem);
-    font-stretch: 112%;
-    font-weight: 800;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 0.18em;
+    color: var(--c-added);
+    font-family: var(--hud);
+    font-size: clamp(1rem, 0.6rem + 1.6vw, 1.75rem);
+    font-weight: 700;
+    letter-spacing: 0.02em;
     overflow-wrap: anywhere;
+    text-decoration-color: color-mix(in srgb, var(--c-added) 60%, transparent);
+    text-shadow: 0 0 0.4em var(--glow-cyan);
   }
-  .email :global(.icon) {
-    flex: none;
+  .email:hover {
+    text-shadow: none;
   }
   .actions {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: var(--s-3);
-  }
-  .actions :global(.action) {
-    border-color: var(--line);
-  }
-  .actions :global(.action-primary) {
-    border-color: var(--fg);
+    margin-block-start: var(--s-2);
   }
   .where {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--s-1) var(--s-4);
+    color: var(--c-ink3);
     font-size: var(--t-small);
-    line-height: 1.25rem;
+  }
+  .tz {
+    font-family: var(--hud);
+    font-weight: 700;
   }
 </style>

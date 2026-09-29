@@ -1,5 +1,5 @@
 ---
-/** The release-tag anchor every entry carries: #<id>, drawn hash glyph. */
+/** The anchor every entry carries: #<id>, drawn hash glyph. */
 import Icon from './Icon.astro';
 
 interface Props {
@@ -16,15 +16,14 @@ const { id, name, label } = Astro.props;
 <style>
   .permalink {
     display: inline-grid;
+    flex: none;
     place-items: center;
-    inline-size: var(--s-5);
-    block-size: var(--s-5);
-    color: var(--fg-3);
+    inline-size: 2rem;
+    block-size: 2rem;
+    color: var(--c-ink2);
     opacity: 0;
+    text-decoration: none;
     transition: opacity var(--d-fast) var(--ease);
-  }
-  .permalink:hover {
-    color: var(--fg);
   }
   :global([data-entry]:is(:hover, :focus-within, :target)) .permalink,
   .permalink:focus-visible {

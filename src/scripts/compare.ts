@@ -1,14 +1,15 @@
 /**
- * Compare: diff the stack between any two years picked on the version rail.
+ * Compare, the radio tuner: diff the stack between the years on two dials
+ * (a <select> each, with ◄ ► step buttons either side).
  *
- * The server renders the default range, so this module only takes over
- * from an already-visible state. It reads the range from ?compare=BASE...HEAD
- * on load, keeps the URL in sync with history.replaceState, announces each
- * new diff through a polite live region, and plays the page's one authored
- * motion: lines on their way out are struck through and fade, then new lines
- * are revealed left to right with the exponential ease-out token. Past
- * the fold limit, lines wait behind a disclosure button (aria-expanded) that
- * stays open across range changes once the visitor opens it.
+ * The server renders the default range with the dials disabled, so this
+ * module enables them and takes over from an already-visible state. It
+ * reads the range from ?compare=BASE...HEAD on load, keeps the URL in sync
+ * with history.replaceState, announces each new diff through a polite live
+ * region, and animates the lines: lines on their way out are struck through
+ * and fade, then new lines are revealed left to right with the exponential
+ * ease-out token. Past the fold limit, lines wait behind a disclosure button
+ * (aria-expanded) that stays open across range changes once opened.
  */
 
 import { diffStacks } from '../lib/derive.ts';
@@ -46,13 +47,8 @@ function init(form: HTMLFormElement): void {
   const list = out<HTMLUListElement>('lines');
   const more = out<HTMLButtonElement>('more');
   const announce = out('announce');
-  const range = form.querySelector<HTMLElement>('[data-range]');
-  const rail = form.querySelector<HTMLElement>('[data-rail]');
   const template = document.querySelector<HTMLTemplateElement>('template[data-line-template]');
-  if (!list || !rail || !template) return;
-
-  const to = Number(rail.dataset.to);
-  const rowOf = (year: number) => to - year + 2;
+  if (!list || !template) return;
 
   const rootStyle = getComputedStyle(document.documentElement);
   const ms = (name: string, fallback: number) => Number.parseFloat(rootStyle.getPropertyValue(name)) || fallback;
@@ -65,15 +61,28 @@ function init(form: HTMLFormElement): void {
   let state = { base: data.base, head: data.head };
   let generation = 0;
 
-  const radios = (name: 'base' | 'head') => [...form.querySelectorAll<HTMLInputElement>(`input[name="${name}"]`)];
+  type Dial = 'base' | 'head';
+  const dial = (name: Dial) => form.querySelector<HTMLSelectElement>(`select[name="${name}"]`);
+  const steps = [...form.querySelectorAll<HTMLButtonElement>('button[data-step]')];
 
-  function checked(name: 'base' | 'head', fallback: number): number {
-    const input = radios(name).find((r) => r.checked);
-    return input ? Number(input.value) : fallback;
+  function checked(name: Dial, fallback: number): number {
+    const select = dial(name);
+    return select ? Number(select.value) : fallback;
   }
 
-  function check(name: 'base' | 'head', year: number): void {
-    for (const r of radios(name)) r.checked = Number(r.value) === year;
+  function check(name: Dial, year: number): void {
+    const select = dial(name);
+    if (select) select.value = String(year);
+  }
+
+  /** The step buttons stop at the first and last year. */
+  function syncSteps(): void {
+    for (const button of steps) {
+      const select = dial(button.dataset.step as Dial);
+      if (!select) continue;
+      const next = select.selectedIndex + Number(button.dataset.dir);
+      button.disabled = next < 0 || next >= select.options.length;
+    }
   }
 
   function blocks(a: number, r: number): string[] {
@@ -139,8 +148,6 @@ function init(form: HTMLFormElement): void {
       const el = out(key);
       if (el) el.textContent = text;
     };
-    set('base', String(b));
-    set('head', String(h));
     set('added', `+${num(diff.added.length)}`);
     set('added-word', words.added(diff.added.length));
     set('removed', `−${num(diff.removed.length)}`);
@@ -155,14 +162,7 @@ function init(form: HTMLFormElement): void {
         el.dataset.kind = kinds[i] ?? 'none';
       });
 
-    if (range) range.style.gridRow = `${rowOf(hi)} / ${rowOf(lo) + 1}`;
-    for (const el of rail!.querySelectorAll<HTMLElement>('[data-year]')) {
-      const y = Number(el.dataset.year);
-      if (y === b) el.dataset.edge = 'base';
-      else if (y === h) el.dataset.edge = 'head';
-      else delete el.dataset.edge;
-    }
-
+    syncSteps();
     updateLines(diff, animate && !reducedMotion.matches);
     if (animate && announce) announce.textContent = summary(b, h, diff, repos);
   }
@@ -240,6 +240,20 @@ function init(form: HTMLFormElement): void {
   }
 
   more?.addEventListener('click', () => setExpanded(more.getAttribute('aria-expanded') !== 'true'));
+
+  // Tune: the step buttons move one year and fire the same change as the select.
+  form.addEventListener('click', (event) => {
+    const button = (event.target as Element).closest<HTMLButtonElement>('button[data-step]');
+    const select = button && dial(button.dataset.step as Dial);
+    if (!button || !select) return;
+    const next = select.selectedIndex + Number(button.dataset.dir);
+    if (next < 0 || next >= select.options.length) return;
+    select.selectedIndex = next;
+    select.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+
+  for (const el of form.querySelectorAll<HTMLSelectElement | HTMLButtonElement>('select, button[data-step]')) el.disabled = false;
+  syncSteps();
 
   form.addEventListener('change', () => {
     state = { base: checked('base', state.base), head: checked('head', state.head) };

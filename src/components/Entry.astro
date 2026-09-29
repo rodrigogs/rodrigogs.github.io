@@ -1,8 +1,9 @@
 ---
 /**
- * A release entry with fixed furniture: every entry carries the same fields
- * in the same places (status, born, latest version, name, note, detail,
- * stack, proofs, links, permalink). Dormant entries print in a retired state.
+ * A work entry as a loading screen: the "screen" on top is a small night
+ * sky with a sliced sun at its right edge and the title in the outlined
+ * display face (never over the sun), then the same furniture on every
+ * card: status, since, latest release, note, detail, proofs, stack, links.
  */
 import type { EntryView, SiteView } from '../lib/view.ts';
 import EntryLinks from './EntryLinks.astro';
@@ -18,33 +19,27 @@ interface Props {
 const { entry, field } = Astro.props;
 ---
 
-<article class="entry" id={entry.id} data-entry data-status={entry.status} aria-labelledby={`${entry.id}-name`}>
-  <div class="rail">
-    <span class="node" aria-hidden="true"></span>
+<article class="frame card" id={entry.id} data-entry data-status={entry.status} aria-labelledby={`${entry.id}-name`}>
+  <div class="screen">
+    <div class="title-row">
+      <h3 class="display card-title" id={`${entry.id}-name`}>{entry.name}</h3>
+      <Permalink id={entry.id} name={entry.name} label={field.permalink} />
+    </div>
     <dl class="meta">
-      <div class="status">
+      <div>
         <dt class="sr-only">{field.status}</dt>
         <dd><Plate role={entry.statusRole}>{entry.statusLabel}</Plate></dd>
       </div>
       <div>
         <dt>{field.born}</dt>
-        <dd class="mono">
-          <time datetime={String(entry.born)}>{entry.born}</time>
-        </dd>
+        <dd class="hud-v"><time datetime={String(entry.born)}>{entry.born}</time></dd>
       </div>
       {
         entry.latest && (
           <div>
             <dt>{field.latest}</dt>
-            <dd class="latest">
-              {entry.latest.href ? (
-                <a class="mono tag" href={entry.latest.href}>
-                  {entry.latest.tag}
-                </a>
-              ) : (
-                <span class="mono tag">{entry.latest.tag}</span>
-              )}
-              {entry.latest.date && <span class="mono date">{entry.latest.date}</span>}
+            <dd class="hud-v">
+              {entry.latest.href ? <a href={entry.latest.href}>{entry.latest.tag}</a> : <span>{entry.latest.tag}</span>}
             </dd>
           </div>
         )
@@ -53,156 +48,114 @@ const { entry, field } = Astro.props;
   </div>
 
   <div class="body">
-    <div class="title-row">
-      <h3 class="name" id={`${entry.id}-name`}>{entry.name}</h3>
-      <Permalink id={entry.id} name={entry.name} label={field.permalink} />
-    </div>
     <p class="note">{entry.note}</p>
     <p class="detail">{entry.detail}</p>
-    <ul class="stack">
+    <Proofs proofs={entry.proofs} />
+    <ul class="chips">
       {entry.stack.map((s) => <li>{s}</li>)}
     </ul>
-    <Proofs proofs={entry.proofs} />
     <EntryLinks links={entry.links} />
   </div>
 </article>
 
 <style>
-  .entry {
-    position: relative;
-    display: grid;
-    grid-template-columns: subgrid;
-    grid-column: 1 / -1;
-    padding-block: var(--s-6);
-    border-block-start: 1px solid var(--c-rule);
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+    padding: var(--s-3) var(--s-3) var(--s-6);
   }
-  .rail {
+  /* The loading screen: a dusk strip with a sliced sun setting at the right. */
+  .screen {
     position: relative;
-    grid-column: 1 / span 3;
-    padding-inline-start: var(--s-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    padding: var(--s-6) 8.5rem var(--s-5) var(--s-5);
+    overflow: hidden;
+    border-radius: 8px;
+    background:
+      linear-gradient(to top, color-mix(in srgb, var(--scene-horizon) 45%, transparent) 0, transparent 3px),
+      linear-gradient(180deg, var(--scene-sky-top) 0%, var(--scene-sky-mid) 100%);
   }
-  .node {
+  .screen::after {
+    content: '';
     position: absolute;
-    inset-inline-start: 0;
-    inset-block-start: var(--s-2);
-    inline-size: var(--s-2);
-    block-size: var(--s-2);
-    background: var(--c-ink);
+    inset-inline-end: 1.75rem;
+    inset-block-end: 0;
+    inline-size: 5.5rem;
+    block-size: 3.25rem;
+    border-radius: 999px 999px 0 0;
+    background: linear-gradient(180deg, var(--scene-sun-top), var(--scene-sun-bottom));
+    mask-image: linear-gradient(
+      180deg,
+      #000 0 42%,
+      transparent 42% 48%,
+      #000 48% 62%,
+      transparent 62% 70%,
+      #000 70% 80%,
+      transparent 80% 90%,
+      #000 90%
+    );
+    box-shadow: 0 0 2rem var(--glow-pink);
   }
-  .meta {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-3);
-  }
-  .meta > div {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: var(--s-1) var(--s-3);
-  }
-  dt {
-    min-inline-size: 3.5rem;
-    color: var(--c-ink3);
-    font-size: var(--t-micro);
-    font-weight: 600;
-    line-height: 1rem;
-  }
-  dd {
-    font-size: var(--t-small);
-    line-height: 1.25rem;
-  }
-  .latest {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 var(--s-2);
-  }
-  .tag {
-    font-weight: 600;
-    color: var(--c-ink);
-  }
-  .date {
-    color: var(--c-ink3);
-  }
-
-  .body {
-    grid-column: 4 / -1;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-3);
-    min-inline-size: 0;
-    max-inline-size: 46rem;
+  .card[data-status='dormant'] .screen {
+    background:
+      linear-gradient(to top, color-mix(in srgb, var(--scene-horizon) 25%, transparent) 0, transparent 3px),
+      linear-gradient(180deg, var(--scene-sky-top) 0%, color-mix(in srgb, var(--scene-sky-mid) 55%, var(--scene-sky-top)) 100%);
   }
   .title-row {
     display: flex;
     align-items: center;
     gap: var(--s-2);
   }
-  .name {
-    font-stretch: 125%;
-    font-weight: 800;
-    font-size: var(--t-h3);
-    line-height: 2rem;
-    letter-spacing: -0.015em;
+  .card-title {
+    font-size: clamp(1.75rem, 1.2rem + 1.4vw, 2.5rem);
+    overflow-wrap: anywhere;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-2) var(--s-5);
+    font-size: var(--t-micro);
+  }
+  .meta > div {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-2);
+  }
+  .meta dt {
+    color: var(--c-ink2);
+    font-weight: 600;
+  }
+  .hud-v {
+    color: var(--c-ink);
+    font-family: var(--hud);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    padding-inline: var(--s-4);
   }
   .note {
-    font-size: var(--t-lead);
-    line-height: 1.75rem;
-    font-weight: 500;
-    max-inline-size: 50ch;
+    color: var(--c-ink);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    line-height: 1.5;
   }
   .detail {
     color: var(--c-ink2);
-    max-inline-size: 68ch;
+    font-size: 1rem;
+    line-height: 1.6;
   }
-  .stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 var(--s-3);
-    color: var(--c-ink2);
-    font-size: var(--t-small);
-    line-height: 1.25rem;
-  }
-  .stack li + li::before {
-    content: '/';
-    margin-inline-end: var(--s-3);
-    color: var(--c-rule);
-  }
-  .body > :global(.proofs) {
-    margin-block-start: var(--s-2);
-  }
-
-  /* Retired: dormant work stays readable (ink3 passes AA on the sheet) but
-     steps back from the active entries. */
-  .entry[data-status='dormant'] .name,
-  .entry[data-status='dormant'] .note,
-  .entry[data-status='dormant'] .tag {
-    color: var(--c-ink3);
-  }
-  .entry[data-status='dormant'] .node {
-    background: var(--c-sheet);
-    box-shadow: inset 0 0 0 1px var(--c-ink3);
-  }
-  .entry[data-status='dormant'] .note {
-    font-weight: 400;
-  }
-
-  @media (max-width: 47.99rem) {
-    .entry {
-      display: flex;
-      flex-direction: column;
-      gap: var(--s-4);
-      padding-block: var(--s-6);
-    }
-    .meta {
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: var(--s-2) var(--s-5);
-    }
-    dt {
-      min-inline-size: 0;
-    }
-    .body {
-      padding-inline-start: var(--s-6);
+  @media (max-width: 29.99rem) {
+    .screen {
+      padding-inline-end: var(--s-5);
+      padding-block-end: 4.25rem;
     }
   }
 </style>

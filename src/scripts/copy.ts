@@ -1,8 +1,10 @@
 /**
  * Copy-to-clipboard for every `[data-copy]` button: writes the value, flips
- * the button to its "Copied" state for two seconds and announces it in the
- * polite status region that follows the button.
+ * the button to "Copied" for two seconds and stamps the toast, which also
+ * announces the copy in its polite status region (see Toast.astro).
  */
+
+import { stamp } from './toast.ts';
 
 const RESET_MS = 2000;
 
@@ -31,19 +33,12 @@ async function write(text: string): Promise<boolean> {
 }
 
 for (const button of document.querySelectorAll<HTMLButtonElement>('[data-copy]')) {
-  const next = button.nextElementSibling;
-  const status = next instanceof HTMLElement && next.hasAttribute('data-copy-status') ? next : null;
   let timer = 0;
-
   button.addEventListener('click', async () => {
-    const value = button.dataset.copy ?? '';
-    if (!(await write(value))) return;
+    if (!(await write(button.dataset.copy ?? ''))) return;
     window.clearTimeout(timer);
     button.dataset.state = 'copied';
-    if (status) status.textContent = `${button.dataset.copied ?? ''}: ${value}`;
-    timer = window.setTimeout(() => {
-      delete button.dataset.state;
-      if (status) status.textContent = '';
-    }, RESET_MS);
+    stamp();
+    timer = window.setTimeout(() => delete button.dataset.state, RESET_MS);
   });
 }

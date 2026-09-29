@@ -671,9 +671,31 @@ export const aiWorkflow = {
   projectsLabel: l('Agent tooling I publish', 'Ferramentas para agentes que publico'),
 } as const;
 
-/** Easter egg: the Konami code brings back the retired 2026 palette. */
-export const konami = {
-  label: l('vaporwave (retired)', 'vaporwave (aposentado)'),
+/**
+ * UI strings of the site surface: the HUD, the toast, the radio-tuner
+ * controls of Compare, the cheat code and the closing sign. Game vocabulary
+ * lives only here, as UI flavor, never as a claim about the person.
+ */
+export const ui = {
+  /** The pause-menu nav and the HUD over the hero scene. */
+  nav: l('Sections', 'Seções'),
+  hud: l('At a glance', 'Em resumo'),
+  /** {tz} */
+  time: l('Local time in Brazil ({tz})', 'Hora local no Brasil ({tz})'),
+  contributions: l('contributions / year', 'contribuições / ano'),
+  /** The stamp shown when the email is copied. */
+  toast: l('Email copied!', 'E-mail copiado!'),
+  /** {email} */
+  toastSub: l('{email} is on your clipboard', '{email} está na sua área de transferência'),
+  /** Compare as a radio tuner. */
+  station: l('Stack FM', 'Stack FM'),
+  earlier: l('Earlier year', 'Ano anterior'),
+  later: l('Later year', 'Ano seguinte'),
+  /** Typing VAPORWAVE toggles the owner's original vaporwave grid. */
+  cheatOn: l('Cheat activated', 'Cheat ativado'),
+  cheatOff: l('Cheat deactivated', 'Cheat desativado'),
+  /** Decorative neon sign over the Contact heading. */
+  sign: l("Let's talk", 'Vamos conversar'),
 } as const;
 
 /** The 404 page, printed in both languages at once. */

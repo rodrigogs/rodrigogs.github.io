@@ -1,8 +1,8 @@
 ---
 /**
- * "Copy address": copies the email and confirms in place ("Copied"),
- * announced politely. Hidden without JS (it could not work), so the mailto
- * action beside it always carries the job on its own.
+ * "Copy address": copies the email, flips its icon and label to "Copied"
+ * and stamps the toast (Toast.astro announces it). Hidden without JS (it
+ * could not work), so the mailto action beside it carries the job alone.
  */
 import Icon from './Icon.astro';
 
@@ -10,15 +10,13 @@ interface Props {
   email: string;
   copy: string;
   copied: string;
-  showAddress?: boolean;
   class?: string;
 }
 
-const { email, copy, copied, showAddress = true, class: cls } = Astro.props;
+const { email, copy, copied, class: cls } = Astro.props;
 ---
 
-<button type="button" class:list={['action', 'copy', cls]} data-copy={email} data-copied={copied} data-js-only>
-  {showAddress && <span class="addr mono">{email}</span>}
+<button type="button" class:list={['action', 'copy', cls]} data-copy={email} data-js-only>
   <span class="state" aria-hidden="true">
     <Icon name="copy" class="i-copy" />
     <Icon name="check" class="i-check" />
@@ -28,28 +26,8 @@ const { email, copy, copied, showAddress = true, class: cls } = Astro.props;
     <span class="done" aria-hidden="true">{copied}</span>
   </span>
 </button>
-<span class="sr-only" role="status" aria-live="polite" data-copy-status></span>
 
 <style>
-  .copy {
-    gap: var(--s-3);
-    padding-inline: var(--s-3);
-    white-space: nowrap;
-  }
-  /* Narrow screens: the address would squeeze the label onto two lines. */
-  @media (max-width: 29.99rem) {
-    .addr {
-      display: none;
-    }
-  }
-  .addr {
-    font-size: var(--t-micro);
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    padding-inline-end: var(--s-2);
-    border-inline-end: 1px solid var(--line);
-    line-height: var(--s-6);
-  }
   .state {
     position: relative;
     inline-size: 16px;
@@ -77,7 +55,6 @@ const { email, copy, copied, showAddress = true, class: cls } = Astro.props;
   /* Both labels share one cell, so the button keeps its width. */
   .label {
     display: inline-grid;
-    font-size: var(--t-small);
   }
   .idle,
   .done {
