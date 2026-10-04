@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-10-03T06:54:03.712Z",
+  "fetchedAt": "2026-10-04T08:24:04.164Z",
   "sources": {
     "github": {
       "ok": true,
-      "lastSuccessAt": "2026-10-03T06:54:03.712Z"
+      "lastSuccessAt": "2026-10-04T08:24:04.164Z"
     },
     "npm": {
       "ok": true,
-      "lastSuccessAt": "2026-10-03T06:54:03.712Z"
+      "lastSuccessAt": "2026-10-04T08:24:04.164Z"
     },
     "crates": {
       "ok": true,
-      "lastSuccessAt": "2026-10-03T06:54:03.712Z"
+      "lastSuccessAt": "2026-10-04T08:24:04.164Z"
     }
   },
   "user": {
@@ -21,9 +21,8 @@
     "followers": 213,
     "publicRepos": 137,
     "createdAt": "2012-09-17T12:49:05Z",
-    "contributionsLastYear": 7239,
+    "contributionsLastYear": 7251,
     "contributionWeeks": [
-      43,
       77,
       13,
       50,
@@ -75,7 +74,8 @@
       270,
       414,
       1294,
-      992
+      1004,
+      0
     ]
   },
   "repos": [
@@ -123,7 +123,7 @@
       "url": "https://github.com/rodrigogs/xvideos",
       "description": "xvideos API library",
       "homepage": null,
-      "stars": 303,
+      "stars": 304,
       "forks": 86,
       "language": "TypeScript",
       "languages": {
@@ -216,7 +216,7 @@
         "url": "https://github.com/rodrigogs/whats-reader/releases/tag/v1.31.0"
       },
       "releaseCount": 93,
-      "releaseDownloads": 7122
+      "releaseDownloads": 7159
     },
     {
       "name": "nodejs-web-jade-scaffold",
@@ -1165,7 +1165,7 @@
       "topics": [],
       "frameworks": [],
       "createdAt": "2020-12-07T04:12:28Z",
-      "pushedAt": "2026-10-02T07:39:05Z",
+      "pushedAt": "2026-10-03T07:38:11Z",
       "archived": false,
       "fork": false,
       "license": null,
@@ -2709,7 +2709,7 @@
         "Vitest"
       ],
       "createdAt": "2026-09-28T20:50:59Z",
-      "pushedAt": "2026-10-02T06:49:55Z",
+      "pushedAt": "2026-10-03T06:55:35Z",
       "archived": false,
       "fork": false,
       "license": null,
@@ -3654,7 +3654,7 @@
       "repo": null,
       "description": "A file watcher utility with glob pattern support",
       "version": "0.5.0",
-      "monthlyDownloads": 5,
+      "monthlyDownloads": 4,
       "yearlyDownloads": null,
       "totalDownloads": 1375,
       "excluded": false
@@ -3664,7 +3664,7 @@
     {
       "repo": "NousResearch/hermes-agent",
       "url": "https://github.com/NousResearch/hermes-agent",
-      "stars": 250822,
+      "stars": 251043,
       "mergedPrs": 0,
       "prsOpened": 40,
       "commits": 1,
@@ -3676,7 +3676,7 @@
     {
       "repo": "RocketChat/Rocket.Chat",
       "url": "https://github.com/RocketChat/Rocket.Chat",
-      "stars": 46208,
+      "stars": 46210,
       "mergedPrs": 1,
       "prsOpened": 1,
       "commits": 2,
@@ -3694,7 +3694,7 @@
     {
       "repo": "nesquena/hermes-webui",
       "url": "https://github.com/nesquena/hermes-webui",
-      "stars": 18738,
+      "stars": 18755,
       "mergedPrs": 5,
       "prsOpened": 8,
       "commits": 52,
@@ -3732,7 +3732,7 @@
     {
       "repo": "moleculerjs/moleculer",
       "url": "https://github.com/moleculerjs/moleculer",
-      "stars": 6378,
+      "stars": 6377,
       "mergedPrs": 1,
       "prsOpened": 1,
       "commits": 4,
@@ -3785,10 +3785,10 @@
     }
   ],
   "totals": {
-    "stars": 1722,
+    "stars": 1723,
     "repos": 92,
-    "monthlyDownloads": 24334,
+    "monthlyDownloads": 24333,
     "packages": 43,
-    "releaseDownloads": 7164
+    "releaseDownloads": 7201
   }
 }
