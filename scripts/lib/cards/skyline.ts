@@ -6,11 +6,10 @@
  * busiest week are named, and the first and last week are dated.
  */
 
-import { sceneSvg } from '../../../src/design/scene-svg.ts';
 import type { ContributionYearView, SiteView } from '../../../src/lib/view.ts';
-import { at, embedSvg, svgDocument, textLayer } from './compose.ts';
+import { at, svgDocument, textLayer } from './compose.ts';
 import { HUD, SANS } from './fonts.ts';
-import { bodyStyle, display, flex, prng, S, T, text } from './pieces.ts';
+import { bodyStyle, display, flex, nightBandDefs, prng, S, stars, T, text } from './pieces.ts';
 
 export const SKYLINE_WIDTH = 1280;
 export const SKYLINE_HEIGHT = 300;
@@ -18,9 +17,9 @@ export const SKYLINE_HEIGHT = 300;
 const W = SKYLINE_WIDTH;
 const H = SKYLINE_HEIGHT;
 /** The water line: buildings stand on it (matches the scene's horizon). */
-const BASE = Math.round(H * S.horizonAt);
+export const BASE = Math.round(H * S.horizonAt);
 /** Top of the scale (the axis maximum). */
-const TOP = 72;
+export const TOP = 72;
 const X0 = 88;
 const X1 = W - 40;
 
@@ -114,17 +113,25 @@ export async function skylineCard(view: SiteView): Promise<string> {
   const defs =
     '<pattern id="sk-ripple" width="8" height="5" patternUnits="userSpaceOnUse"><rect width="8" height="3" fill="#fff"/></pattern>' +
     `<mask id="sk-reflect"><rect x="0" y="${BASE}" width="${W}" height="${H - BASE}" fill="url(#sk-ripple)"/></mask>` +
-    `<linearGradient id="sk-fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${T.night}" stop-opacity="0.62"/><stop offset="1" stop-color="${T.night}" stop-opacity="0.12"/></linearGradient>`;
-  const scene = embedSvg(sceneSvg({ width: W, height: H, animated: true, palms: false, skyline: false, sunX: 0.36, idPrefix: 'sks-' }));
-  // A veil over the sky so the chart and its labels, not the sunset, lead.
-  const veil = `<rect width="${W}" height="${BASE}" fill="url(#sk-fade)"/>`;
+    nightBandDefs('sk-night');
+  // The quiet night: the city lights carry the card, so the sky stays out of the way.
+  const skyRand = prng(1986);
+  let twinkles = '';
+  for (let i = 0; i < 6; i++) {
+    twinkles += `<circle cx="${r1(skyRand() * W)}" cy="${r1(8 + skyRand() * (BASE - 30))}" r="1" fill="${T.ink}"><animate attributeName="opacity" values="1;.15;1" dur="${r1(3 + skyRand() * 2)}s" begin="${r1(-skyRand() * 4)}s" repeatCount="indefinite"/></circle>`;
+  }
+  const scene =
+    `<rect width="${W}" height="${H}" fill="url(#sk-night)"/>` +
+    stars({ x: 0, y: 0, width: W, height: BASE, count: 40, seed: 2010 }) +
+    twinkles +
+    `<rect y="${BASE}" width="${W}" height="1" fill="${T.rule}" opacity="0.6"/>`;
 
   if (!year) {
     const note = await textLayer(
       [at(0, 110, text({ ...bodyStyle(26, T.ink, 600), width: W, textAlign: 'center' }, 'Contribution data was unavailable on the last build.'))],
       { width: W, height: H, id: 'skt' },
     );
-    return svgDocument({ width: W, height: H, title: skylineTitle(null), defs, body: scene + veil + note });
+    return svgDocument({ width: W, height: H, title: skylineTitle(null), defs, body: scene + note });
   }
 
   const n = year.weeks.length;
@@ -191,6 +198,6 @@ export async function skylineCard(view: SiteView): Promise<string> {
   );
 
   const reflection = `<g mask="url(#sk-reflect)" opacity="0.3"><g transform="translate(0 ${2 * BASE}) scale(1 -1)">${city}</g></g>`;
-  const body = scene + veil + grid + reflection + city + breaks + layer;
+  const body = scene + grid + reflection + city + breaks + layer;
   return svgDocument({ width: W, height: H, title: skylineTitle(year), defs, body });
 }

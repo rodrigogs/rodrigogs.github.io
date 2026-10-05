@@ -1,10 +1,13 @@
 /**
- * header.svg: 1280x420, animated. The README masthead: the night-drive
- * scene (src/design/scene-svg.ts, SMIL so it plays inside GitHub's <img>)
- * with the signature lockup, the role line and the site plate on a left
- * scrim, and the place paired with its time zone as a HUD readout in the
- * top-right sky (never alone: a bare UTC offset means nothing without the
- * place it is relative to). The sun sits at 68% x, clear of every word.
+ * header.svg: 1280x420, animated. The README masthead and the ONLY card
+ * that carries the night-drive scene (src/design/scene-svg.ts, SMIL so it
+ * plays inside GitHub's <img>): below it the README is quiet night and
+ * console-menu frames, so the sunset is the first impression, not a
+ * wallpaper. It holds the signature lockup, the role line and the site
+ * plate on a left scrim, and the place paired with its time zone as a HUD
+ * readout in the top-right sky (never alone: a bare UTC offset means
+ * nothing without the place it is relative to). The sun sits at 68% x,
+ * clear of every word.
  */
 
 import { sceneGeometry, sceneSvg } from '../../../src/design/scene-svg.ts';

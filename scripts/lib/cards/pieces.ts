@@ -170,11 +170,19 @@ export function stars(opts: { x: number; y: number; width: number; height: numbe
   return out;
 }
 
-/** The night band: a clean vertical gradient from the top of the sky to the page night. */
-export function nightBandDefs(id: string): string {
+/**
+ * The night band: a clean vertical gradient from the top of the sky to the
+ * page night. A faint dusk tint may ride the top (`dusk`, 0..1): the same
+ * sky colors as the hero scene, kept well under the sun so the cards below
+ * the header stay quiet night, not another sunset.
+ */
+export function nightBandDefs(id: string, dusk = 0): string {
+  const skyTop = dusk > 0 ? S.skyTop : undefined;
   return (
     `<linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1">` +
-    `<stop offset="0" stop-color="${S.skyTop}"/><stop offset="0.7" stop-color="${T.night}"/><stop offset="1" stop-color="${S.waterNear}"/>` +
+    (skyTop ? `<stop offset="0" stop-color="${skyTop}"/>` : '') +
+    `<stop offset="${skyTop ? r1(0.18 * (1 - dusk)) : 0}" stop-color="${T.night}"/>` +
+    `<stop offset="1" stop-color="${S.waterNear}"/>` +
     '</linearGradient>'
   );
 }

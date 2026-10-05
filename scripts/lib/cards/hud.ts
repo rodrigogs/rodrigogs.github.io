@@ -1,23 +1,23 @@
 /**
- * hud.svg: 1280x220. A HUD strip in our own design over the night-drive
- * scene: real numbers from the view as an icon plus an outlined Orbitron
- * numeral on the dark water, with no panel behind them, and the start
- * year as the readout in the corner of the sky. The sun's reflection runs
- * in the gap between the two clusters.
+ * hud.svg: 1280x220. A HUD strip in our own design over the quiet night:
+ * real numbers from the view as an icon plus an outlined Orbitron numeral,
+ * with no panel behind them, and the start year as the readout in the
+ * corner. The sunset stays in the header; here the readouts float on the
+ * night band, as the HUD does over every section below the hero.
  */
 
-import { sceneGeometry, sceneSvg } from '../../../src/design/scene-svg.ts';
 import type { SiteView } from '../../../src/lib/view.ts';
-import { at, embedSvg, svgDocument, textLayer } from './compose.ts';
+import { at, svgDocument, textLayer } from './compose.ts';
 import { type HudIcon, hudIcon } from './icons.ts';
 import { SANS } from './fonts.ts';
-import { hud, S, T, text } from './pieces.ts';
+import { hud, nightBandDefs, S, stars, T, text } from './pieces.ts';
 
 export const HUD_WIDTH = 1280;
 export const HUD_HEIGHT = 220;
 
-/** Sun position: its reflection falls between the third and fourth readout. */
-const SUN_X = 0.66;
+/** The row sits a little below the card's middle, where a readout breathes. */
+const ROW = 106;
+const ICON = 36;
 
 export interface HudStat {
   icon: HudIcon;
@@ -59,22 +59,11 @@ const labelStyle = {
 export async function hudCard(view: SiteView): Promise<string> {
   const W = HUD_WIDTH;
   const H = HUD_HEIGHT;
-  const geo = sceneGeometry(W, H, SUN_X);
   const stats = hudStats(view);
-  const leftCount = Math.min(3, stats.length);
-  const left = { from: 40, to: geo.sun.cx - geo.sun.r - 24 };
-  const right = { from: geo.sun.cx + geo.sun.r + 36, to: W - 24 };
-  // The readouts sit on the dark water, below the horizon, where they keep their contrast.
-  const ROW = Math.round(geo.horizon + 12);
-  const ICON = 36;
-
-  const slots = stats.map((s, i) => {
-    const onLeft = i < leftCount;
-    const band = onLeft ? left : right;
-    const n = onLeft ? leftCount : stats.length - leftCount;
-    const k = onLeft ? i : i - leftCount;
-    return { ...s, x: Math.round(band.from + ((band.to - band.from) / n) * k) };
-  });
+  const slots = stats.map((s, i) => ({
+    ...s,
+    x: Math.round(40 + ((W - 80) / stats.length) * i),
+  }));
 
   const layer = await textLayer(
     [
@@ -87,10 +76,12 @@ export async function hudCard(view: SiteView): Promise<string> {
     { width: W, height: H, id: 'ht' },
   );
 
+  const defs = nightBandDefs('hd-night');
   const body =
-    embedSvg(sceneSvg({ width: W, height: H, palms: false, sunX: SUN_X, idPrefix: 'hd-' })) +
+    `<rect width="${W}" height="${H}" fill="url(#hd-night)"/>` +
+    stars({ x: 0, y: 0, width: W, height: H, count: 26, seed: 1986 }) +
     slots.map((s) => hudIcon(s.icon, s.x, ROW, ICON, s.color)).join('') +
     layer;
 
-  return svgDocument({ width: W, height: H, title: hudTitle(view), body });
+  return svgDocument({ width: W, height: H, title: hudTitle(view), body, defs });
 }

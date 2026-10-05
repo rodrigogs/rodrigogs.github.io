@@ -5,10 +5,13 @@ import { buildView } from '../../../src/lib/view.ts';
 import { about } from '../../../src/content/site.ts';
 import { subsetFont } from './fontembed.ts';
 import { faceData, FACES } from './fonts.ts';
-import { hudStats } from './hud.ts';
-import { axisFor, buildingHeight, niceCeiling, ordinaryAxis, skylineCard, skylineTitle } from './skyline.ts';
+import { alsoLine, renderReadme, upstreamLine, WORK_IDS } from './readme.ts';
+import { S, T } from './pieces.ts';
+import { hudStats, hudCard } from './hud.ts';
+import { renderReadmeCards } from '../../render-cards.ts';
+import { axisFor, BASE, buildingHeight, niceCeiling, ordinaryAxis, skylineCard, skylineTitle, TOP } from './skyline.ts';
 import { SHIP_MARKS, TOOL_MARKS } from './stack.ts';
-import { workProofs } from './work.ts';
+import { workCard, workProofs } from './work.ts';
 
 const snapshot = snapshotJson as unknown as Snapshot;
 const build = { now: new Date('2026-09-28T12:00:00Z'), sha: '' };
@@ -44,13 +47,22 @@ describe('skyline scale', () => {
 
   it('draws the record week off the ordinary scale, capped at the chart top, never past it', async () => {
     const svg = await skylineCard(view);
-    // The record week (1,294) dwarfs the rest of this snapshot's weeks: it is
-    // capped at the chart top with a break mark (a light chevron stroked in ink),
-    // never drawn by the old unbounded leader, and not called out in words.
-    expect(svg).toMatch(/stroke="#FFF6FB" stroke-width="2" stroke-linecap="round"/);
-    expect(svg).not.toContain('V58"');
-    expect(svg).not.toContain('Tallest tower');
-    expect(svg).not.toContain('Best week');
+    // The record week is capped at the chart top with a break mark (a light
+    // chevron stroked in ink) ONLY when it truly exceeds the ordinary scale;
+    // when the data fits, nothing is capped or marked. Deriving the
+    // expectation from the weeks keeps this green across daily refreshes.
+    const year = view.contributionYear;
+    const bestIndex = year?.best?.index ?? -1;
+    const secondHighest = Math.max(0, ...(year?.weeks.filter((_, i) => i !== bestIndex) ?? []));
+    const offScale = bestIndex >= 0 && buildingHeight(year!.weeks[bestIndex]!, ordinaryAxis(secondHighest).top) > BASE - TOP;
+    const mark = /stroke="#FFF6FB" stroke-width="2" stroke-linecap="round"/;
+    if (offScale) {
+      expect(svg).toMatch(mark);
+      expect(svg).not.toContain('Tallest tower');
+      expect(svg).not.toContain('Best week');
+    } else {
+      expect(svg).not.toMatch(mark);
+    }
   });
 });
 
@@ -87,6 +99,36 @@ describe('workProofs', () => {
       const proofs = workProofs(entry);
       expect(proofs.length).toBeGreaterThan(0);
       expect(proofs.length).toBeLessThanOrEqual(2);
+    }
+  });
+});
+
+describe('the scene lives only in the header', () => {
+  // The night-drive scene draws the sunset sky, the sliced sun, the palms
+  // and the city. It is the header's first impression; every card below it
+  // is quiet night and console-menu frames, or the profile reads as the
+  // same wallpaper over and over.
+  it('draws the scene once, in the header card alone', async () => {
+    const cards = await renderReadmeCards(view);
+    const withScene = cards.filter(([, svg]) => svg.includes('-sky"') || svg.includes('slices'));
+    expect(withScene.map(([name]) => name)).toEqual(['header.svg']);
+  });
+
+  it('keeps the work cards menu frames: panel fill, thick dark border, neon edge, scanlines', async () => {
+    const entry = view.work.find((w) => w.id === WORK_IDS[0])!;
+    const svg = await workCard(entry);
+    expect(svg).toContain(`fill="${T.panel}"`); // the panel fill
+    expect(svg).toContain('stroke-width="10"'); // the thick dark border
+    expect(svg).toContain(`stroke="${S.neonCyan}"`); // the neon edge
+    expect(svg).toContain('patternUnits="userSpaceOnUse"'); // the scanlines
+  });
+
+  it('keeps the hud and skyline on quiet night: no sun, no palms, no scene ids', async () => {
+    for (const svg of [await hudCard(view), await skylineCard(view)]) {
+      expect(svg).not.toContain('skyTop');
+      expect(svg).not.toContain('#FF5E8A'); // the scene's skyLow
+      expect(svg).not.toContain('#FF9A5A'); // the scene's horizon
+      expect(svg).not.toContain('-sky"');
     }
   });
 });
