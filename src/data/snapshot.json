@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-10-07T06:48:39.500Z",
+  "fetchedAt": "2026-10-08T06:51:08.457Z",
   "sources": {
     "github": {
       "ok": true,
-      "lastSuccessAt": "2026-10-07T06:48:39.500Z"
+      "lastSuccessAt": "2026-10-08T06:51:08.457Z"
     },
     "npm": {
       "ok": true,
-      "lastSuccessAt": "2026-10-07T06:48:39.500Z"
+      "lastSuccessAt": "2026-10-08T06:51:08.457Z"
     },
     "crates": {
       "ok": true,
-      "lastSuccessAt": "2026-10-07T06:48:39.500Z"
+      "lastSuccessAt": "2026-10-08T06:51:08.457Z"
     }
   },
   "user": {
@@ -21,7 +21,7 @@
     "followers": 213,
     "publicRepos": 137,
     "createdAt": "2012-09-17T12:49:05Z",
-    "contributionsLastYear": 7535,
+    "contributionsLastYear": 7560,
     "contributionWeeks": [
       77,
       13,
@@ -75,7 +75,7 @@
       414,
       1307,
       1092,
-      226
+      251
     ]
   },
   "repos": [
@@ -216,7 +216,7 @@
         "url": "https://github.com/rodrigogs/whats-reader/releases/tag/v1.31.0"
       },
       "releaseCount": 93,
-      "releaseDownloads": 7236
+      "releaseDownloads": 7258
     },
     {
       "name": "nodejs-web-jade-scaffold",
@@ -1165,7 +1165,7 @@
       "topics": [],
       "frameworks": [],
       "createdAt": "2020-12-07T04:12:28Z",
-      "pushedAt": "2026-10-06T07:39:49Z",
+      "pushedAt": "2026-10-07T07:41:13Z",
       "archived": false,
       "fork": false,
       "license": null,
@@ -2709,7 +2709,7 @@
         "Vitest"
       ],
       "createdAt": "2026-09-28T20:50:59Z",
-      "pushedAt": "2026-10-06T06:51:01Z",
+      "pushedAt": "2026-10-07T06:50:12Z",
       "archived": false,
       "fork": false,
       "license": null,
@@ -3664,7 +3664,7 @@
     {
       "repo": "NousResearch/hermes-agent",
       "url": "https://github.com/NousResearch/hermes-agent",
-      "stars": 251766,
+      "stars": 252026,
       "mergedPrs": 0,
       "prsOpened": 40,
       "commits": 1,
@@ -3676,7 +3676,7 @@
     {
       "repo": "RocketChat/Rocket.Chat",
       "url": "https://github.com/RocketChat/Rocket.Chat",
-      "stars": 46222,
+      "stars": 46224,
       "mergedPrs": 1,
       "prsOpened": 1,
       "commits": 2,
@@ -3694,7 +3694,7 @@
     {
       "repo": "nesquena/hermes-webui",
       "url": "https://github.com/nesquena/hermes-webui",
-      "stars": 18781,
+      "stars": 18801,
       "mergedPrs": 5,
       "prsOpened": 8,
       "commits": 52,
@@ -3732,7 +3732,7 @@
     {
       "repo": "moleculerjs/moleculer",
       "url": "https://github.com/moleculerjs/moleculer",
-      "stars": 6377,
+      "stars": 6378,
       "mergedPrs": 1,
       "prsOpened": 1,
       "commits": 4,
@@ -3789,6 +3789,6 @@
     "repos": 92,
     "monthlyDownloads": 25171,
     "packages": 43,
-    "releaseDownloads": 7278
+    "releaseDownloads": 7300
   }
 }
