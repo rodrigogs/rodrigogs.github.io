@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-10-11T06:47:19.022Z",
+  "fetchedAt": "2026-10-12T07:09:11.153Z",
   "sources": {
     "github": {
       "ok": true,
-      "lastSuccessAt": "2026-10-11T06:47:19.022Z"
+      "lastSuccessAt": "2026-10-12T07:09:11.153Z"
     },
     "npm": {
       "ok": true,
-      "lastSuccessAt": "2026-10-11T06:47:19.022Z"
+      "lastSuccessAt": "2026-10-12T07:09:11.153Z"
     },
     "crates": {
       "ok": true,
-      "lastSuccessAt": "2026-10-11T06:47:19.022Z"
+      "lastSuccessAt": "2026-10-12T07:09:11.153Z"
     }
   },
   "user": {
@@ -21,7 +21,7 @@
     "followers": 214,
     "publicRepos": 137,
     "createdAt": "2012-09-17T12:49:05Z",
-    "contributionsLastYear": 7937,
+    "contributionsLastYear": 8205,
     "contributionWeeks": [
       13,
       50,
@@ -75,7 +75,7 @@
       1307,
       1167,
       540,
-      14
+      359
     ]
   },
   "repos": [
@@ -216,7 +216,7 @@
         "url": "https://github.com/rodrigogs/whats-reader/releases/tag/v1.31.0"
       },
       "releaseCount": 93,
-      "releaseDownloads": 7325
+      "releaseDownloads": 7354
     },
     {
       "name": "nodejs-web-jade-scaffold",
@@ -1165,7 +1165,7 @@
       "topics": [],
       "frameworks": [],
       "createdAt": "2020-12-07T04:12:28Z",
-      "pushedAt": "2026-10-10T07:35:38Z",
+      "pushedAt": "2026-10-11T07:36:56Z",
       "archived": false,
       "fork": false,
       "license": null,
@@ -2709,7 +2709,7 @@
         "Vitest"
       ],
       "createdAt": "2026-09-28T20:50:59Z",
-      "pushedAt": "2026-10-10T06:47:53Z",
+      "pushedAt": "2026-10-11T06:48:49Z",
       "archived": false,
       "fork": false,
       "license": null,
@@ -2874,20 +2874,8 @@
       "repo": null,
       "description": "Resolves debug namespace like magic.",
       "version": "1.0.0",
-      "monthlyDownloads": 6947,
-      "yearlyDownloads": 82224,
-      "totalDownloads": null,
-      "excluded": false
-    },
-    {
-      "registry": "npm",
-      "name": "@rodrigogs/mysql-events",
-      "url": "https://www.npmjs.com/package/@rodrigogs/mysql-events",
-      "repo": "mysql-events",
-      "description": "A node.js package that watches a MySQL database and runs callbacks on matched events like updates on tables and/or specific columns.",
-      "version": "0.6.0",
-      "monthlyDownloads": 6616,
-      "yearlyDownloads": 77620,
+      "monthlyDownloads": 6693,
+      "yearlyDownloads": 82087,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2898,8 +2886,20 @@
       "repo": "zongji",
       "description": "A mysql binlog listener running on Node.js",
       "version": "0.4.14",
-      "monthlyDownloads": 6560,
-      "yearlyDownloads": 77876,
+      "monthlyDownloads": 6440,
+      "yearlyDownloads": 77842,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/mysql-events",
+      "url": "https://www.npmjs.com/package/@rodrigogs/mysql-events",
+      "repo": "mysql-events",
+      "description": "A node.js package that watches a MySQL database and runs callbacks on matched events like updates on tables and/or specific columns.",
+      "version": "0.6.0",
+      "monthlyDownloads": 6377,
+      "yearlyDownloads": 77469,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2910,8 +2910,8 @@
       "repo": "pornhub",
       "description": "pornhub.com api implementation.",
       "version": "0.6.0",
-      "monthlyDownloads": 2035,
-      "yearlyDownloads": 6661,
+      "monthlyDownloads": 2028,
+      "yearlyDownloads": 6729,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2922,8 +2922,8 @@
       "repo": "sxyprn",
       "description": "sxyprn.com api implementation.",
       "version": "0.1.0",
-      "monthlyDownloads": 1399,
-      "yearlyDownloads": 1399,
+      "monthlyDownloads": 1415,
+      "yearlyDownloads": 1415,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2934,8 +2934,8 @@
       "repo": null,
       "description": "A non date-based time calculator",
       "version": "2.1.3",
-      "monthlyDownloads": 1048,
-      "yearlyDownloads": 8104,
+      "monthlyDownloads": 1377,
+      "yearlyDownloads": 8438,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2946,8 +2946,8 @@
       "repo": "mongoose-timezone",
       "description": "[![Build Status](https://travis-ci.org/rodrigogs/mongoose-timezone.svg?branch=master)](https://travis-ci.org/rodrigogs/mongoose-timezone) [![Code Climate](https://codeclimate.com/github/rodrigogs/mongoose-timezone/badges/gpa.svg)](https://codeclimate.com/",
       "version": "1.3.0",
-      "monthlyDownloads": 1024,
-      "yearlyDownloads": 24486,
+      "monthlyDownloads": 1021,
+      "yearlyDownloads": 24460,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2958,8 +2958,8 @@
       "repo": "baileys-store",
       "description": "Baileys Store",
       "version": "2.0.0",
-      "monthlyDownloads": 589,
-      "yearlyDownloads": 18921,
+      "monthlyDownloads": 602,
+      "yearlyDownloads": 18844,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2970,8 +2970,8 @@
       "repo": "xvideos",
       "description": "xvideos.com api implementation.",
       "version": "3.2.2",
-      "monthlyDownloads": 325,
-      "yearlyDownloads": 2862,
+      "monthlyDownloads": 341,
+      "yearlyDownloads": 2885,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2982,8 +2982,8 @@
       "repo": null,
       "description": "Plugin for Mongoose that turns duplicate errors into regular Mongoose validation errors",
       "version": "0.1.0",
-      "monthlyDownloads": 176,
-      "yearlyDownloads": 972,
+      "monthlyDownloads": 175,
+      "yearlyDownloads": 970,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2994,8 +2994,8 @@
       "repo": "easyvpn",
       "description": "Easy way to get a VPN connection.",
       "version": "1.3.1",
-      "monthlyDownloads": 151,
-      "yearlyDownloads": 871,
+      "monthlyDownloads": 153,
+      "yearlyDownloads": 875,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3006,8 +3006,8 @@
       "repo": "punto",
       "description": "Bidirectional dot notation conversion.",
       "version": "1.1.2",
-      "monthlyDownloads": 112,
-      "yearlyDownloads": 640,
+      "monthlyDownloads": 116,
+      "yearlyDownloads": 646,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3019,7 +3019,19 @@
       "description": "# Install ```bash $ npm install involves-changelog --save ```",
       "version": "0.4.0",
       "monthlyDownloads": 104,
-      "yearlyDownloads": 699,
+      "yearlyDownloads": 700,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "hidemyass-scrapper",
+      "url": "https://www.npmjs.com/package/hidemyass-scrapper",
+      "repo": null,
+      "description": "Page scrapper that retrieves proxy server information from HideMyAss website",
+      "version": "0.4.0",
+      "monthlyDownloads": 94,
+      "yearlyDownloads": 598,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3031,19 +3043,7 @@
       "description": "This promise pool keeps looping `Promise.all`'s promises until the last generator item is submitted to the processor.",
       "version": "2.0.0",
       "monthlyDownloads": 88,
-      "yearlyDownloads": 1879,
-      "totalDownloads": null,
-      "excluded": false
-    },
-    {
-      "registry": "npm",
-      "name": "hidemyass-scrapper",
-      "url": "https://www.npmjs.com/package/hidemyass-scrapper",
-      "repo": null,
-      "description": "Page scrapper that retrieves proxy server information from HideMyAss website",
-      "version": "0.4.0",
-      "monthlyDownloads": 85,
-      "yearlyDownloads": 588,
+      "yearlyDownloads": 1871,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3054,8 +3054,8 @@
       "repo": null,
       "description": null,
       "version": "0.0.0",
-      "monthlyDownloads": 71,
-      "yearlyDownloads": 1047,
+      "monthlyDownloads": 70,
+      "yearlyDownloads": 1045,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3066,8 +3066,8 @@
       "repo": "focusnfe-sdk",
       "description": "TypeScript SDK for the FocusNFe Brazilian fiscal document API",
       "version": "0.1.0",
-      "monthlyDownloads": 55,
-      "yearlyDownloads": 1775,
+      "monthlyDownloads": 53,
+      "yearlyDownloads": 1776,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3079,7 +3079,7 @@
       "description": "Page scrapper that retrieves proxy server information from FreeProxyLists website",
       "version": "0.4.1",
       "monthlyDownloads": 47,
-      "yearlyDownloads": 531,
+      "yearlyDownloads": 532,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3090,20 +3090,8 @@
       "repo": null,
       "description": "A proxy crawler.",
       "version": "2.0.0",
-      "monthlyDownloads": 42,
-      "yearlyDownloads": 314,
-      "totalDownloads": null,
-      "excluded": false
-    },
-    {
-      "registry": "npm",
-      "name": "fastify-router",
-      "url": "https://www.npmjs.com/package/fastify-router",
-      "repo": "fastify-router",
-      "description": "[![Build Status](https://travis-ci.org/rodrigogs/fastify-router.svg?branch=master)](https://travis-ci.org/rodrigogs/fastify-router) [![Code Climate](https://codeclimate.com/github/rodrigogs/fastify-router/badges/gpa.svg)](https://codeclimate.com/github/ro",
-      "version": "1.1.0",
-      "monthlyDownloads": 41,
-      "yearlyDownloads": 300,
+      "monthlyDownloads": 44,
+      "yearlyDownloads": 316,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3114,8 +3102,20 @@
       "repo": null,
       "description": "Load environment variables from the cloud. cenv may be loaded from the code or used as a cli.",
       "version": "1.0.0-alpha",
-      "monthlyDownloads": 40,
-      "yearlyDownloads": 339,
+      "monthlyDownloads": 43,
+      "yearlyDownloads": 344,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "fastify-router",
+      "url": "https://www.npmjs.com/package/fastify-router",
+      "repo": "fastify-router",
+      "description": "[![Build Status](https://travis-ci.org/rodrigogs/fastify-router.svg?branch=master)](https://travis-ci.org/rodrigogs/fastify-router) [![Code Climate](https://codeclimate.com/github/rodrigogs/fastify-router/badges/gpa.svg)](https://codeclimate.com/github/ro",
+      "version": "1.1.0",
+      "monthlyDownloads": 43,
+      "yearlyDownloads": 303,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3127,7 +3127,7 @@
       "description": "Sarahah flodder",
       "version": "2.0.0",
       "monthlyDownloads": 38,
-      "yearlyDownloads": 293,
+      "yearlyDownloads": 294,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3138,8 +3138,8 @@
       "repo": null,
       "description": "",
       "version": "1.0.0",
-      "monthlyDownloads": 31,
-      "yearlyDownloads": 235,
+      "monthlyDownloads": 36,
+      "yearlyDownloads": 240,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3150,8 +3150,8 @@
       "repo": null,
       "description": "### Install ```bash $ npm install involves-changelog-store -g ```",
       "version": "0.3.0",
-      "monthlyDownloads": 29,
-      "yearlyDownloads": 592,
+      "monthlyDownloads": 31,
+      "yearlyDownloads": 595,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3193,6 +3193,18 @@
     },
     {
       "registry": "npm",
+      "name": "pg-turbo",
+      "url": "https://www.npmjs.com/package/pg-turbo",
+      "repo": "pg-turbo",
+      "description": "Resilient PostgreSQL dump & restore with direct COPY protocol",
+      "version": "0.1.4",
+      "monthlyDownloads": 25,
+      "yearlyDownloads": 717,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
       "name": "pulchra",
       "url": "https://www.npmjs.com/package/pulchra",
       "repo": "pulchra",
@@ -3217,18 +3229,6 @@
     },
     {
       "registry": "npm",
-      "name": "pg-turbo",
-      "url": "https://www.npmjs.com/package/pg-turbo",
-      "repo": "pg-turbo",
-      "description": "Resilient PostgreSQL dump & restore with direct COPY protocol",
-      "version": "0.1.4",
-      "monthlyDownloads": 21,
-      "yearlyDownloads": 713,
-      "totalDownloads": null,
-      "excluded": false
-    },
-    {
-      "registry": "npm",
       "name": "autogram",
       "url": "https://www.npmjs.com/package/autogram",
       "repo": null,
@@ -3238,30 +3238,6 @@
       "yearlyDownloads": 305,
       "totalDownloads": null,
       "excluded": true
-    },
-    {
-      "registry": "npm",
-      "name": "not-only-fans",
-      "url": "https://www.npmjs.com/package/not-only-fans",
-      "repo": null,
-      "description": "Easily download OnlyFans content",
-      "version": "1.0.0",
-      "monthlyDownloads": 19,
-      "yearlyDownloads": 105,
-      "totalDownloads": null,
-      "excluded": false
-    },
-    {
-      "registry": "npm",
-      "name": "gpt-query",
-      "url": "https://www.npmjs.com/package/gpt-query",
-      "repo": null,
-      "description": "A TypeScript library designed to streamline queries and integrate with APIs like OpenAI GPT and others. The project is modular, making it simple to maintain and extend functionality.",
-      "version": "1.0.0",
-      "monthlyDownloads": 18,
-      "yearlyDownloads": 225,
-      "totalDownloads": null,
-      "excluded": false
     },
     {
       "registry": "npm",
@@ -3277,6 +3253,30 @@
     },
     {
       "registry": "npm",
+      "name": "gpt-query",
+      "url": "https://www.npmjs.com/package/gpt-query",
+      "repo": null,
+      "description": "A TypeScript library designed to streamline queries and integrate with APIs like OpenAI GPT and others. The project is modular, making it simple to maintain and extend functionality.",
+      "version": "1.0.0",
+      "monthlyDownloads": 17,
+      "yearlyDownloads": 225,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "not-only-fans",
+      "url": "https://www.npmjs.com/package/not-only-fans",
+      "repo": null,
+      "description": "Easily download OnlyFans content",
+      "version": "1.0.0",
+      "monthlyDownloads": 16,
+      "yearlyDownloads": 105,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
       "name": "succubus",
       "url": "https://www.npmjs.com/package/succubus",
       "repo": null,
@@ -3286,18 +3286,6 @@
       "yearlyDownloads": 103,
       "totalDownloads": null,
       "excluded": true
-    },
-    {
-      "registry": "npm",
-      "name": "http-tester",
-      "url": "https://www.npmjs.com/package/http-tester",
-      "repo": null,
-      "description": "Simple library created in a hurry to test and log HTTP requests.",
-      "version": "0.1.1",
-      "monthlyDownloads": 14,
-      "yearlyDownloads": 186,
-      "totalDownloads": null,
-      "excluded": false
     },
     {
       "registry": "npm",
@@ -3325,30 +3313,6 @@
     },
     {
       "registry": "npm",
-      "name": "garrulous",
-      "url": "https://www.npmjs.com/package/garrulous",
-      "repo": "garrulous",
-      "description": "Convert any encoding to any encoding",
-      "version": "1.1.0",
-      "monthlyDownloads": 13,
-      "yearlyDownloads": 191,
-      "totalDownloads": null,
-      "excluded": false
-    },
-    {
-      "registry": "npm",
-      "name": "sadistic",
-      "url": "https://www.npmjs.com/package/sadistic",
-      "repo": null,
-      "description": "",
-      "version": "0.0.0",
-      "monthlyDownloads": 13,
-      "yearlyDownloads": 93,
-      "totalDownloads": null,
-      "excluded": true
-    },
-    {
-      "registry": "npm",
       "name": "@rodrigogs/serverless",
       "url": "https://www.npmjs.com/package/@rodrigogs/serverless",
       "repo": null,
@@ -3361,13 +3325,37 @@
     },
     {
       "registry": "npm",
-      "name": "pilgrim",
-      "url": "https://www.npmjs.com/package/pilgrim",
+      "name": "garrulous",
+      "url": "https://www.npmjs.com/package/garrulous",
+      "repo": "garrulous",
+      "description": "Convert any encoding to any encoding",
+      "version": "1.1.0",
+      "monthlyDownloads": 12,
+      "yearlyDownloads": 191,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "http-tester",
+      "url": "https://www.npmjs.com/package/http-tester",
       "repo": null,
-      "description": null,
+      "description": "Simple library created in a hurry to test and log HTTP requests.",
+      "version": "0.1.1",
+      "monthlyDownloads": 12,
+      "yearlyDownloads": 186,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "sadistic",
+      "url": "https://www.npmjs.com/package/sadistic",
+      "repo": null,
+      "description": "",
       "version": "0.0.0",
       "monthlyDownloads": 12,
-      "yearlyDownloads": 86,
+      "yearlyDownloads": 93,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3397,42 +3385,6 @@
     },
     {
       "registry": "npm",
-      "name": "gh-trending",
-      "url": "https://www.npmjs.com/package/gh-trending",
-      "repo": null,
-      "description": "[![Code Climate](https://codeclimate.com/github/rodrigogs/ilsap/badges/gpa.svg)](https://codeclimate.com/github/rodrigogs/ilsap) [![dependencies Status](https://david-dm.org/rodrigogs/ilsap/status.svg)](https://david-dm.org/rodrigogs/ilsap) [![devDependen",
-      "version": "0.0.0",
-      "monthlyDownloads": 11,
-      "yearlyDownloads": 164,
-      "totalDownloads": null,
-      "excluded": true
-    },
-    {
-      "registry": "npm",
-      "name": "habilis",
-      "url": "https://www.npmjs.com/package/habilis",
-      "repo": null,
-      "description": null,
-      "version": "0.0.0",
-      "monthlyDownloads": 11,
-      "yearlyDownloads": 110,
-      "totalDownloads": null,
-      "excluded": true
-    },
-    {
-      "registry": "npm",
-      "name": "involves-changelog-server",
-      "url": "https://www.npmjs.com/package/involves-changelog-server",
-      "repo": null,
-      "description": "### Install ```bash $ npm install involves-changelog-server -g ```",
-      "version": "0.3.0",
-      "monthlyDownloads": 11,
-      "yearlyDownloads": 206,
-      "totalDownloads": null,
-      "excluded": false
-    },
-    {
-      "registry": "npm",
       "name": "payowl",
       "url": "https://www.npmjs.com/package/payowl",
       "repo": null,
@@ -3440,6 +3392,18 @@
       "version": "0.0.1-ALPHA",
       "monthlyDownloads": 11,
       "yearlyDownloads": 112,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "pilgrim",
+      "url": "https://www.npmjs.com/package/pilgrim",
+      "repo": null,
+      "description": null,
+      "version": "0.0.0",
+      "monthlyDownloads": 11,
+      "yearlyDownloads": 86,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3454,18 +3418,6 @@
       "yearlyDownloads": 98,
       "totalDownloads": null,
       "excluded": true
-    },
-    {
-      "registry": "npm",
-      "name": "twinned",
-      "url": "https://www.npmjs.com/package/twinned",
-      "repo": null,
-      "description": "Stupidly small and fast object deep cloner",
-      "version": "1.0.0",
-      "monthlyDownloads": 11,
-      "yearlyDownloads": 89,
-      "totalDownloads": null,
-      "excluded": false
     },
     {
       "registry": "npm",
@@ -3517,27 +3469,39 @@
     },
     {
       "registry": "npm",
-      "name": "kinky-quote",
-      "url": "https://www.npmjs.com/package/kinky-quote",
+      "name": "gh-trending",
+      "url": "https://www.npmjs.com/package/gh-trending",
       "repo": null,
-      "description": "Crawls random quotes from kinkyquotes.com.",
-      "version": "1.0.1",
+      "description": "[![Code Climate](https://codeclimate.com/github/rodrigogs/ilsap/badges/gpa.svg)](https://codeclimate.com/github/rodrigogs/ilsap) [![dependencies Status](https://david-dm.org/rodrigogs/ilsap/status.svg)](https://david-dm.org/rodrigogs/ilsap) [![devDependen",
+      "version": "0.0.0",
       "monthlyDownloads": 10,
-      "yearlyDownloads": 141,
+      "yearlyDownloads": 164,
       "totalDownloads": null,
-      "excluded": false
+      "excluded": true
     },
     {
       "registry": "npm",
-      "name": "nerdy",
-      "url": "https://www.npmjs.com/package/nerdy",
+      "name": "habilis",
+      "url": "https://www.npmjs.com/package/habilis",
       "repo": null,
-      "description": "",
+      "description": null,
       "version": "0.0.0",
       "monthlyDownloads": 10,
-      "yearlyDownloads": 94,
+      "yearlyDownloads": 110,
       "totalDownloads": null,
       "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "involves-changelog-server",
+      "url": "https://www.npmjs.com/package/involves-changelog-server",
+      "repo": null,
+      "description": "### Install ```bash $ npm install involves-changelog-server -g ```",
+      "version": "0.3.0",
+      "monthlyDownloads": 10,
+      "yearlyDownloads": 206,
+      "totalDownloads": null,
+      "excluded": false
     },
     {
       "registry": "npm",
@@ -3553,25 +3517,49 @@
     },
     {
       "registry": "npm",
+      "name": "twinned",
+      "url": "https://www.npmjs.com/package/twinned",
+      "repo": null,
+      "description": "Stupidly small and fast object deep cloner",
+      "version": "1.0.0",
+      "monthlyDownloads": 10,
+      "yearlyDownloads": 89,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
       "name": "@rodrigogs/spiderman",
       "url": "https://www.npmjs.com/package/@rodrigogs/spiderman",
       "repo": "spiderman",
       "description": "Yet to describe",
       "version": "0.0.0",
       "monthlyDownloads": 9,
-      "yearlyDownloads": 116,
+      "yearlyDownloads": 117,
       "totalDownloads": null,
       "excluded": true
     },
     {
       "registry": "npm",
-      "name": "megazord",
-      "url": "https://www.npmjs.com/package/megazord",
+      "name": "kinky-quote",
+      "url": "https://www.npmjs.com/package/kinky-quote",
+      "repo": null,
+      "description": "Crawls random quotes from kinkyquotes.com.",
+      "version": "1.0.1",
+      "monthlyDownloads": 9,
+      "yearlyDownloads": 141,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "nerdy",
+      "url": "https://www.npmjs.com/package/nerdy",
       "repo": null,
       "description": "",
       "version": "0.0.0",
       "monthlyDownloads": 9,
-      "yearlyDownloads": 77,
+      "yearlyDownloads": 94,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3637,6 +3625,18 @@
     },
     {
       "registry": "npm",
+      "name": "megazord",
+      "url": "https://www.npmjs.com/package/megazord",
+      "repo": null,
+      "description": "",
+      "version": "0.0.0",
+      "monthlyDownloads": 7,
+      "yearlyDownloads": 77,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
       "name": "ditcher",
       "url": "https://www.npmjs.com/package/ditcher",
       "repo": null,
@@ -3664,7 +3664,7 @@
     {
       "repo": "NousResearch/hermes-agent",
       "url": "https://github.com/NousResearch/hermes-agent",
-      "stars": 252608,
+      "stars": 252887,
       "mergedPrs": 0,
       "prsOpened": 40,
       "commits": 1,
@@ -3676,7 +3676,7 @@
     {
       "repo": "RocketChat/Rocket.Chat",
       "url": "https://github.com/RocketChat/Rocket.Chat",
-      "stars": 46245,
+      "stars": 46247,
       "mergedPrs": 1,
       "prsOpened": 1,
       "commits": 2,
@@ -3694,7 +3694,7 @@
     {
       "repo": "nesquena/hermes-webui",
       "url": "https://github.com/nesquena/hermes-webui",
-      "stars": 18854,
+      "stars": 18870,
       "mergedPrs": 5,
       "prsOpened": 8,
       "commits": 52,
@@ -3787,8 +3787,8 @@
   "totals": {
     "stars": 1726,
     "repos": 92,
-    "monthlyDownloads": 27860,
+    "monthlyDownloads": 27631,
     "packages": 43,
-    "releaseDownloads": 7367
+    "releaseDownloads": 7396
   }
 }
