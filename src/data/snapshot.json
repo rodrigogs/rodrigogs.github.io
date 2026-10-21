@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-10-20T06:45:59.543Z",
+  "fetchedAt": "2026-10-21T06:46:47.522Z",
   "sources": {
     "github": {
       "ok": true,
-      "lastSuccessAt": "2026-10-20T06:45:59.543Z"
+      "lastSuccessAt": "2026-10-21T06:46:47.522Z"
     },
     "npm": {
       "ok": true,
-      "lastSuccessAt": "2026-10-20T06:45:59.543Z"
+      "lastSuccessAt": "2026-10-21T06:46:47.522Z"
     },
     "crates": {
       "ok": true,
-      "lastSuccessAt": "2026-10-20T06:45:59.543Z"
+      "lastSuccessAt": "2026-10-21T06:46:47.522Z"
     }
   },
   "user": {
@@ -21,7 +21,7 @@
     "followers": 213,
     "publicRepos": 137,
     "createdAt": "2012-09-17T12:49:05Z",
-    "contributionsLastYear": 9401,
+    "contributionsLastYear": 9424,
     "contributionWeeks": [
       50,
       50,
@@ -75,7 +75,7 @@
       1167,
       540,
       1495,
-      51
+      74
     ]
   },
   "repos": [
@@ -85,7 +85,7 @@
       "url": "https://github.com/rodrigogs/easyvpn",
       "description": "Easily connect to a VPN in a country of your choice.",
       "homepage": null,
-      "stars": 520,
+      "stars": 519,
       "forks": 46,
       "language": "JavaScript",
       "languages": {
@@ -165,7 +165,7 @@
       "url": "https://github.com/rodrigogs/whats-reader",
       "description": "Browse WhatsApp chat exports offline with AI-powered voice transcription. Privacy-first desktop/web app with bookmarks, search, and statistics. Built with SvelteKit and Electron.",
       "homepage": "https://rodrigogs.github.io/whats-reader/",
-      "stars": 275,
+      "stars": 274,
       "forks": 29,
       "language": "TypeScript",
       "languages": {
@@ -216,7 +216,7 @@
         "url": "https://github.com/rodrigogs/whats-reader/releases/tag/v1.31.0"
       },
       "releaseCount": 93,
-      "releaseDownloads": 7528
+      "releaseDownloads": 7553
     },
     {
       "name": "nodejs-web-jade-scaffold",
@@ -1165,7 +1165,7 @@
       "topics": [],
       "frameworks": [],
       "createdAt": "2020-12-07T04:12:28Z",
-      "pushedAt": "2026-10-19T07:46:19Z",
+      "pushedAt": "2026-10-20T07:36:14Z",
       "archived": false,
       "fork": false,
       "license": null,
@@ -2709,7 +2709,7 @@
         "Vitest"
       ],
       "createdAt": "2026-09-28T20:50:59Z",
-      "pushedAt": "2026-10-19T07:01:07Z",
+      "pushedAt": "2026-10-20T06:47:34Z",
       "archived": false,
       "fork": false,
       "license": null,
@@ -3654,7 +3654,7 @@
       "repo": null,
       "description": "A file watcher utility with glob pattern support",
       "version": "0.5.0",
-      "monthlyDownloads": 2,
+      "monthlyDownloads": 0,
       "yearlyDownloads": null,
       "totalDownloads": 1375,
       "excluded": false
@@ -3664,7 +3664,7 @@
     {
       "repo": "NousResearch/hermes-agent",
       "url": "https://github.com/NousResearch/hermes-agent",
-      "stars": 255347,
+      "stars": 255668,
       "mergedPrs": 0,
       "prsOpened": 40,
       "commits": 1,
@@ -3676,7 +3676,7 @@
     {
       "repo": "RocketChat/Rocket.Chat",
       "url": "https://github.com/RocketChat/Rocket.Chat",
-      "stars": 46293,
+      "stars": 46304,
       "mergedPrs": 1,
       "prsOpened": 1,
       "commits": 2,
@@ -3694,7 +3694,7 @@
     {
       "repo": "nesquena/hermes-webui",
       "url": "https://github.com/nesquena/hermes-webui",
-      "stars": 19048,
+      "stars": 19067,
       "mergedPrs": 5,
       "prsOpened": 8,
       "commits": 52,
@@ -3785,10 +3785,10 @@
     }
   ],
   "totals": {
-    "stars": 1729,
+    "stars": 1727,
     "repos": 92,
-    "monthlyDownloads": 29100,
+    "monthlyDownloads": 29098,
     "packages": 43,
-    "releaseDownloads": 7570
+    "releaseDownloads": 7595
   }
 }
