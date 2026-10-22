@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-10-21T06:46:47.522Z",
+  "fetchedAt": "2026-10-22T06:46:59.455Z",
   "sources": {
     "github": {
       "ok": true,
-      "lastSuccessAt": "2026-10-21T06:46:47.522Z"
+      "lastSuccessAt": "2026-10-22T06:46:59.455Z"
     },
     "npm": {
       "ok": true,
-      "lastSuccessAt": "2026-10-21T06:46:47.522Z"
+      "lastSuccessAt": "2026-10-22T06:46:59.455Z"
     },
     "crates": {
       "ok": true,
-      "lastSuccessAt": "2026-10-21T06:46:47.522Z"
+      "lastSuccessAt": "2026-10-22T06:46:59.455Z"
     }
   },
   "user": {
@@ -21,7 +21,7 @@
     "followers": 213,
     "publicRepos": 137,
     "createdAt": "2012-09-17T12:49:05Z",
-    "contributionsLastYear": 9424,
+    "contributionsLastYear": 9452,
     "contributionWeeks": [
       50,
       50,
@@ -75,7 +75,7 @@
       1167,
       540,
       1495,
-      74
+      102
     ]
   },
   "repos": [
@@ -123,7 +123,7 @@
       "url": "https://github.com/rodrigogs/xvideos",
       "description": "xvideos API library",
       "homepage": null,
-      "stars": 306,
+      "stars": 307,
       "forks": 86,
       "language": "TypeScript",
       "languages": {
@@ -216,7 +216,7 @@
         "url": "https://github.com/rodrigogs/whats-reader/releases/tag/v1.31.0"
       },
       "releaseCount": 93,
-      "releaseDownloads": 7553
+      "releaseDownloads": 7641
     },
     {
       "name": "nodejs-web-jade-scaffold",
@@ -1165,7 +1165,7 @@
       "topics": [],
       "frameworks": [],
       "createdAt": "2020-12-07T04:12:28Z",
-      "pushedAt": "2026-10-20T07:36:14Z",
+      "pushedAt": "2026-10-21T07:37:52Z",
       "archived": false,
       "fork": false,
       "license": null,
@@ -2709,7 +2709,7 @@
         "Vitest"
       ],
       "createdAt": "2026-09-28T20:50:59Z",
-      "pushedAt": "2026-10-20T06:47:34Z",
+      "pushedAt": "2026-10-21T06:48:17Z",
       "archived": false,
       "fork": false,
       "license": null,
@@ -3664,7 +3664,7 @@
     {
       "repo": "NousResearch/hermes-agent",
       "url": "https://github.com/NousResearch/hermes-agent",
-      "stars": 255668,
+      "stars": 256042,
       "mergedPrs": 0,
       "prsOpened": 40,
       "commits": 1,
@@ -3676,7 +3676,7 @@
     {
       "repo": "RocketChat/Rocket.Chat",
       "url": "https://github.com/RocketChat/Rocket.Chat",
-      "stars": 46304,
+      "stars": 46308,
       "mergedPrs": 1,
       "prsOpened": 1,
       "commits": 2,
@@ -3694,7 +3694,7 @@
     {
       "repo": "nesquena/hermes-webui",
       "url": "https://github.com/nesquena/hermes-webui",
-      "stars": 19067,
+      "stars": 19095,
       "mergedPrs": 5,
       "prsOpened": 8,
       "commits": 52,
@@ -3785,10 +3785,10 @@
     }
   ],
   "totals": {
-    "stars": 1727,
+    "stars": 1728,
     "repos": 92,
     "monthlyDownloads": 29098,
     "packages": 43,
-    "releaseDownloads": 7595
+    "releaseDownloads": 7683
   }
 }
