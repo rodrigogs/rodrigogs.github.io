@@ -1,29 +1,28 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-10-31T06:28:03.315Z",
+  "fetchedAt": "2026-11-01T06:29:15.622Z",
   "sources": {
     "github": {
       "ok": true,
-      "lastSuccessAt": "2026-10-31T06:28:03.315Z"
+      "lastSuccessAt": "2026-11-01T06:29:15.622Z"
     },
     "npm": {
       "ok": true,
-      "lastSuccessAt": "2026-10-31T06:28:03.315Z"
+      "lastSuccessAt": "2026-11-01T06:29:15.622Z"
     },
     "crates": {
       "ok": true,
-      "lastSuccessAt": "2026-10-31T06:28:03.315Z"
+      "lastSuccessAt": "2026-11-01T06:29:15.622Z"
     }
   },
   "user": {
     "login": "rodrigogs",
     "name": "Rodrigo Gomes da Silva",
-    "followers": 214,
+    "followers": 215,
     "publicRepos": 137,
     "createdAt": "2012-09-17T12:49:05Z",
-    "contributionsLastYear": 10704,
+    "contributionsLastYear": 10756,
     "contributionWeeks": [
-      50,
       137,
       87,
       74,
@@ -75,7 +74,8 @@
       540,
       1495,
       744,
-      661
+      709,
+      4
     ]
   },
   "repos": [
@@ -216,7 +216,7 @@
         "url": "https://github.com/rodrigogs/whats-reader/releases/tag/v1.31.0"
       },
       "releaseCount": 93,
-      "releaseDownloads": 7825
+      "releaseDownloads": 7844
     },
     {
       "name": "nodejs-web-jade-scaffold",
@@ -2709,7 +2709,7 @@
         "Vitest"
       ],
       "createdAt": "2026-09-28T20:50:59Z",
-      "pushedAt": "2026-10-30T06:37:17Z",
+      "pushedAt": "2026-10-31T06:29:36Z",
       "archived": false,
       "fork": false,
       "license": null,
@@ -3664,7 +3664,7 @@
     {
       "repo": "NousResearch/hermes-agent",
       "url": "https://github.com/NousResearch/hermes-agent",
-      "stars": 258940,
+      "stars": 259259,
       "mergedPrs": 0,
       "prsOpened": 40,
       "commits": 0,
@@ -3676,7 +3676,7 @@
     {
       "repo": "RocketChat/Rocket.Chat",
       "url": "https://github.com/RocketChat/Rocket.Chat",
-      "stars": 46352,
+      "stars": 46354,
       "mergedPrs": 1,
       "prsOpened": 1,
       "commits": 2,
@@ -3694,7 +3694,7 @@
     {
       "repo": "nesquena/hermes-webui",
       "url": "https://github.com/nesquena/hermes-webui",
-      "stars": 19304,
+      "stars": 19321,
       "mergedPrs": 5,
       "prsOpened": 8,
       "commits": 52,
@@ -3768,7 +3768,7 @@
     {
       "repo": "friedrith/node-wifi",
       "url": "https://github.com/friedrith/node-wifi",
-      "stars": 414,
+      "stars": 413,
       "mergedPrs": 1,
       "prsOpened": 1,
       "commits": 1,
@@ -3789,6 +3789,6 @@
     "repos": 92,
     "monthlyDownloads": 29207,
     "packages": 43,
-    "releaseDownloads": 7868
+    "releaseDownloads": 7887
   }
 }
