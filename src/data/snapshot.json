@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-11-01T06:29:15.622Z",
+  "fetchedAt": "2026-11-02T06:39:51.038Z",
   "sources": {
     "github": {
       "ok": true,
-      "lastSuccessAt": "2026-11-01T06:29:15.622Z"
+      "lastSuccessAt": "2026-11-02T06:39:51.038Z"
     },
     "npm": {
       "ok": true,
-      "lastSuccessAt": "2026-11-01T06:29:15.622Z"
+      "lastSuccessAt": "2026-11-02T06:39:51.038Z"
     },
     "crates": {
       "ok": true,
-      "lastSuccessAt": "2026-11-01T06:29:15.622Z"
+      "lastSuccessAt": "2026-11-02T06:39:51.038Z"
     }
   },
   "user": {
@@ -21,7 +21,7 @@
     "followers": 215,
     "publicRepos": 137,
     "createdAt": "2012-09-17T12:49:05Z",
-    "contributionsLastYear": 10756,
+    "contributionsLastYear": 10718,
     "contributionWeeks": [
       137,
       87,
@@ -74,8 +74,8 @@
       540,
       1495,
       744,
-      709,
-      4
+      708,
+      17
     ]
   },
   "repos": [
@@ -216,7 +216,7 @@
         "url": "https://github.com/rodrigogs/whats-reader/releases/tag/v1.31.0"
       },
       "releaseCount": 93,
-      "releaseDownloads": 7844
+      "releaseDownloads": 7873
     },
     {
       "name": "nodejs-web-jade-scaffold",
@@ -2709,7 +2709,7 @@
         "Vitest"
       ],
       "createdAt": "2026-09-28T20:50:59Z",
-      "pushedAt": "2026-10-31T06:29:36Z",
+      "pushedAt": "2026-11-01T06:30:48Z",
       "archived": false,
       "fork": false,
       "license": null,
@@ -3664,7 +3664,7 @@
     {
       "repo": "NousResearch/hermes-agent",
       "url": "https://github.com/NousResearch/hermes-agent",
-      "stars": 259259,
+      "stars": 259585,
       "mergedPrs": 0,
       "prsOpened": 40,
       "commits": 0,
@@ -3676,7 +3676,7 @@
     {
       "repo": "RocketChat/Rocket.Chat",
       "url": "https://github.com/RocketChat/Rocket.Chat",
-      "stars": 46354,
+      "stars": 46358,
       "mergedPrs": 1,
       "prsOpened": 1,
       "commits": 2,
@@ -3694,7 +3694,7 @@
     {
       "repo": "nesquena/hermes-webui",
       "url": "https://github.com/nesquena/hermes-webui",
-      "stars": 19321,
+      "stars": 19344,
       "mergedPrs": 5,
       "prsOpened": 8,
       "commits": 52,
@@ -3789,6 +3789,6 @@
     "repos": 92,
     "monthlyDownloads": 29207,
     "packages": 43,
-    "releaseDownloads": 7887
+    "releaseDownloads": 7916
   }
 }
