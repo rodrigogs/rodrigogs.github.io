@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-11-03T06:31:34.752Z",
+  "fetchedAt": "2026-11-04T06:31:56.375Z",
   "sources": {
     "github": {
       "ok": true,
-      "lastSuccessAt": "2026-11-03T06:31:34.752Z"
+      "lastSuccessAt": "2026-11-04T06:31:56.375Z"
     },
     "npm": {
       "ok": true,
-      "lastSuccessAt": "2026-11-03T06:31:34.752Z"
+      "lastSuccessAt": "2026-11-04T06:31:56.375Z"
     },
     "crates": {
       "ok": true,
-      "lastSuccessAt": "2026-11-03T06:31:34.752Z"
+      "lastSuccessAt": "2026-11-04T06:31:56.375Z"
     }
   },
   "user": {
@@ -21,7 +21,7 @@
     "followers": 215,
     "publicRepos": 137,
     "createdAt": "2012-09-17T12:49:05Z",
-    "contributionsLastYear": 10750,
+    "contributionsLastYear": 10751,
     "contributionWeeks": [
       137,
       87,
@@ -75,7 +75,7 @@
       1495,
       744,
       708,
-      49
+      50
     ]
   },
   "repos": [
@@ -123,7 +123,7 @@
       "url": "https://github.com/rodrigogs/xvideos",
       "description": "xvideos API library",
       "homepage": null,
-      "stars": 307,
+      "stars": 308,
       "forks": 86,
       "language": "TypeScript",
       "languages": {
@@ -216,7 +216,7 @@
         "url": "https://github.com/rodrigogs/whats-reader/releases/tag/v1.31.0"
       },
       "releaseCount": 93,
-      "releaseDownloads": 7897
+      "releaseDownloads": 7919
     },
     {
       "name": "nodejs-web-jade-scaffold",
@@ -2709,7 +2709,7 @@
         "Vitest"
       ],
       "createdAt": "2026-09-28T20:50:59Z",
-      "pushedAt": "2026-11-02T06:41:24Z",
+      "pushedAt": "2026-11-03T06:33:03Z",
       "archived": false,
       "fork": false,
       "license": null,
@@ -2874,8 +2874,8 @@
       "repo": null,
       "description": "Resolves debug namespace like magic.",
       "version": "1.0.0",
-      "monthlyDownloads": 6164,
-      "yearlyDownloads": 83209,
+      "monthlyDownloads": 6332,
+      "yearlyDownloads": 83816,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2886,8 +2886,8 @@
       "repo": "zongji",
       "description": "A mysql binlog listener running on Node.js",
       "version": "0.4.14",
-      "monthlyDownloads": 6067,
-      "yearlyDownloads": 78741,
+      "monthlyDownloads": 6232,
+      "yearlyDownloads": 79317,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2898,8 +2898,8 @@
       "repo": "mysql-events",
       "description": "A node.js package that watches a MySQL database and runs callbacks on matched events like updates on tables and/or specific columns.",
       "version": "0.6.0",
-      "monthlyDownloads": 5928,
-      "yearlyDownloads": 77578,
+      "monthlyDownloads": 6066,
+      "yearlyDownloads": 78167,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2910,8 +2910,8 @@
       "repo": null,
       "description": "A non date-based time calculator",
       "version": "2.1.3",
-      "monthlyDownloads": 3559,
-      "yearlyDownloads": 10847,
+      "monthlyDownloads": 3551,
+      "yearlyDownloads": 10870,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2922,20 +2922,8 @@
       "repo": "pornhub",
       "description": "pornhub.com api implementation.",
       "version": "0.6.0",
-      "monthlyDownloads": 1796,
-      "yearlyDownloads": 8078,
-      "totalDownloads": null,
-      "excluded": false
-    },
-    {
-      "registry": "npm",
-      "name": "sxyprn",
-      "url": "https://www.npmjs.com/package/sxyprn",
-      "repo": "sxyprn",
-      "description": "sxyprn.com api implementation.",
-      "version": "0.1.0",
-      "monthlyDownloads": 639,
-      "yearlyDownloads": 1488,
+      "monthlyDownloads": 1805,
+      "yearlyDownloads": 8241,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2946,8 +2934,8 @@
       "repo": "baileys-store",
       "description": "Baileys Store",
       "version": "2.0.0",
-      "monthlyDownloads": 613,
-      "yearlyDownloads": 16688,
+      "monthlyDownloads": 640,
+      "yearlyDownloads": 16692,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2958,8 +2946,20 @@
       "repo": "mongoose-timezone",
       "description": "[![Build Status](https://travis-ci.org/rodrigogs/mongoose-timezone.svg?branch=master)](https://travis-ci.org/rodrigogs/mongoose-timezone) [![Code Climate](https://codeclimate.com/github/rodrigogs/mongoose-timezone/badges/gpa.svg)](https://codeclimate.com/",
       "version": "1.3.0",
-      "monthlyDownloads": 595,
-      "yearlyDownloads": 24154,
+      "monthlyDownloads": 625,
+      "yearlyDownloads": 24190,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "sxyprn",
+      "url": "https://www.npmjs.com/package/sxyprn",
+      "repo": "sxyprn",
+      "description": "sxyprn.com api implementation.",
+      "version": "0.1.0",
+      "monthlyDownloads": 378,
+      "yearlyDownloads": 1488,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2970,8 +2970,8 @@
       "repo": "xvideos",
       "description": "xvideos.com api implementation.",
       "version": "3.2.2",
-      "monthlyDownloads": 330,
-      "yearlyDownloads": 2828,
+      "monthlyDownloads": 329,
+      "yearlyDownloads": 2844,
       "totalDownloads": null,
       "excluded": false
     },
@@ -2982,20 +2982,8 @@
       "repo": null,
       "description": "# Install ```bash $ npm install involves-changelog --save ```",
       "version": "0.4.0",
-      "monthlyDownloads": 225,
-      "yearlyDownloads": 869,
-      "totalDownloads": null,
-      "excluded": false
-    },
-    {
-      "registry": "npm",
-      "name": "easyvpn",
-      "url": "https://www.npmjs.com/package/easyvpn",
-      "repo": "easyvpn",
-      "description": "Easy way to get a VPN connection.",
-      "version": "1.3.1",
-      "monthlyDownloads": 170,
-      "yearlyDownloads": 931,
+      "monthlyDownloads": 236,
+      "yearlyDownloads": 881,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3006,8 +2994,20 @@
       "repo": null,
       "description": "Page scrapper that retrieves proxy server information from FreeProxyLists website",
       "version": "0.4.1",
-      "monthlyDownloads": 157,
-      "yearlyDownloads": 590,
+      "monthlyDownloads": 170,
+      "yearlyDownloads": 605,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "easyvpn",
+      "url": "https://www.npmjs.com/package/easyvpn",
+      "repo": "easyvpn",
+      "description": "Easy way to get a VPN connection.",
+      "version": "1.3.1",
+      "monthlyDownloads": 166,
+      "yearlyDownloads": 930,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3018,8 +3018,8 @@
       "repo": "promise-pool",
       "description": "This promise pool keeps looping `Promise.all`'s promises until the last generator item is submitted to the processor.",
       "version": "2.0.0",
-      "monthlyDownloads": 110,
-      "yearlyDownloads": 1580,
+      "monthlyDownloads": 133,
+      "yearlyDownloads": 1571,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3030,8 +3030,8 @@
       "repo": null,
       "description": "Page scrapper that retrieves proxy server information from HideMyAss website",
       "version": "0.4.0",
-      "monthlyDownloads": 106,
-      "yearlyDownloads": 592,
+      "monthlyDownloads": 116,
+      "yearlyDownloads": 604,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3042,8 +3042,8 @@
       "repo": "punto",
       "description": "Bidirectional dot notation conversion.",
       "version": "1.1.2",
-      "monthlyDownloads": 97,
-      "yearlyDownloads": 679,
+      "monthlyDownloads": 103,
+      "yearlyDownloads": 692,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3054,8 +3054,8 @@
       "repo": null,
       "description": "A proxy crawler.",
       "version": "2.0.0",
-      "monthlyDownloads": 87,
-      "yearlyDownloads": 363,
+      "monthlyDownloads": 94,
+      "yearlyDownloads": 371,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3066,8 +3066,8 @@
       "repo": null,
       "description": "### Install ```bash $ npm install involves-changelog-store -g ```",
       "version": "0.3.0",
-      "monthlyDownloads": 80,
-      "yearlyDownloads": 648,
+      "monthlyDownloads": 93,
+      "yearlyDownloads": 661,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3078,8 +3078,8 @@
       "repo": "occupy-sarahah",
       "description": "Sarahah flodder",
       "version": "2.0.0",
-      "monthlyDownloads": 69,
-      "yearlyDownloads": 307,
+      "monthlyDownloads": 75,
+      "yearlyDownloads": 314,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3090,8 +3090,20 @@
       "repo": null,
       "description": "Plugin for Mongoose that turns duplicate errors into regular Mongoose validation errors",
       "version": "0.1.0",
-      "monthlyDownloads": 58,
-      "yearlyDownloads": 973,
+      "monthlyDownloads": 60,
+      "yearlyDownloads": 977,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/focusnfe-sdk",
+      "url": "https://www.npmjs.com/package/@rodrigogs/focusnfe-sdk",
+      "repo": "focusnfe-sdk",
+      "description": "TypeScript SDK for the FocusNFe Brazilian fiscal document API",
+      "version": "0.1.0",
+      "monthlyDownloads": 59,
+      "yearlyDownloads": 1819,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3102,22 +3114,10 @@
       "repo": null,
       "description": null,
       "version": "0.0.0",
-      "monthlyDownloads": 58,
-      "yearlyDownloads": 1048,
+      "monthlyDownloads": 55,
+      "yearlyDownloads": 1050,
       "totalDownloads": null,
       "excluded": true
-    },
-    {
-      "registry": "npm",
-      "name": "@rodrigogs/focusnfe-sdk",
-      "url": "https://www.npmjs.com/package/@rodrigogs/focusnfe-sdk",
-      "repo": "focusnfe-sdk",
-      "description": "TypeScript SDK for the FocusNFe Brazilian fiscal document API",
-      "version": "0.1.0",
-      "monthlyDownloads": 55,
-      "yearlyDownloads": 1812,
-      "totalDownloads": null,
-      "excluded": false
     },
     {
       "registry": "npm",
@@ -3127,7 +3127,7 @@
       "description": "",
       "version": "1.0.0",
       "monthlyDownloads": 39,
-      "yearlyDownloads": 261,
+      "yearlyDownloads": 264,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3145,6 +3145,18 @@
     },
     {
       "registry": "npm",
+      "name": "fastify-router",
+      "url": "https://www.npmjs.com/package/fastify-router",
+      "repo": "fastify-router",
+      "description": "[![Build Status](https://travis-ci.org/rodrigogs/fastify-router.svg?branch=master)](https://travis-ci.org/rodrigogs/fastify-router) [![Code Climate](https://codeclimate.com/github/rodrigogs/fastify-router/badges/gpa.svg)](https://codeclimate.com/github/ro",
+      "version": "1.1.0",
+      "monthlyDownloads": 25,
+      "yearlyDownloads": 303,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
       "name": "conditional-race",
       "url": "https://www.npmjs.com/package/conditional-race",
       "repo": "conditional-race",
@@ -3157,49 +3169,13 @@
     },
     {
       "registry": "npm",
-      "name": "fastify-router",
-      "url": "https://www.npmjs.com/package/fastify-router",
-      "repo": "fastify-router",
-      "description": "[![Build Status](https://travis-ci.org/rodrigogs/fastify-router.svg?branch=master)](https://travis-ci.org/rodrigogs/fastify-router) [![Code Climate](https://codeclimate.com/github/rodrigogs/fastify-router/badges/gpa.svg)](https://codeclimate.com/github/ro",
-      "version": "1.1.0",
-      "monthlyDownloads": 23,
-      "yearlyDownloads": 302,
-      "totalDownloads": null,
-      "excluded": false
-    },
-    {
-      "registry": "npm",
-      "name": "@rodrigogs/ispi",
-      "url": "https://www.npmjs.com/package/@rodrigogs/ispi",
-      "repo": null,
-      "description": "Check if the program is running on a Raspberry Pi",
-      "version": "1.1.1",
-      "monthlyDownloads": 18,
-      "yearlyDownloads": 301,
-      "totalDownloads": null,
-      "excluded": false
-    },
-    {
-      "registry": "npm",
-      "name": "apogeu",
-      "url": "https://www.npmjs.com/package/apogeu",
-      "repo": null,
-      "description": "[![Build Status](https://travis-ci.org/apogeu/apogeu.svg?branch=master)](https://travis-ci.org/apogeu/apogeu) [![Code Climate](https://codeclimate.com/github/apogeu/apogeu/badges/gpa.svg)](https://codeclimate.com/github/apogeu/apogeu) [![Dependency Status",
-      "version": "0.1.1",
-      "monthlyDownloads": 18,
-      "yearlyDownloads": 248,
-      "totalDownloads": null,
-      "excluded": false
-    },
-    {
-      "registry": "npm",
       "name": "gpt-query",
       "url": "https://www.npmjs.com/package/gpt-query",
       "repo": null,
       "description": "A TypeScript library designed to streamline queries and integrate with APIs like OpenAI GPT and others. The project is modular, making it simple to maintain and extend functionality.",
       "version": "1.0.0",
-      "monthlyDownloads": 18,
-      "yearlyDownloads": 229,
+      "monthlyDownloads": 21,
+      "yearlyDownloads": 234,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3210,10 +3186,22 @@
       "repo": null,
       "description": "Serverless Framework - Build web, mobile and IoT applications with serverless architectures using AWS Lambda, Azure Functions, Google CloudFunctions & more",
       "version": "3.22.0-patched",
-      "monthlyDownloads": 17,
-      "yearlyDownloads": 167,
+      "monthlyDownloads": 20,
+      "yearlyDownloads": 170,
       "totalDownloads": null,
       "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "apogeu",
+      "url": "https://www.npmjs.com/package/apogeu",
+      "repo": null,
+      "description": "[![Build Status](https://travis-ci.org/apogeu/apogeu.svg?branch=master)](https://travis-ci.org/apogeu/apogeu) [![Code Climate](https://codeclimate.com/github/apogeu/apogeu/badges/gpa.svg)](https://codeclimate.com/github/apogeu/apogeu) [![Dependency Status",
+      "version": "0.1.1",
+      "monthlyDownloads": 19,
+      "yearlyDownloads": 249,
+      "totalDownloads": null,
+      "excluded": false
     },
     {
       "registry": "npm",
@@ -3222,10 +3210,22 @@
       "repo": null,
       "description": null,
       "version": "0.0.0",
-      "monthlyDownloads": 17,
-      "yearlyDownloads": 160,
+      "monthlyDownloads": 19,
+      "yearlyDownloads": 162,
       "totalDownloads": null,
       "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/ispi",
+      "url": "https://www.npmjs.com/package/@rodrigogs/ispi",
+      "repo": null,
+      "description": "Check if the program is running on a Raspberry Pi",
+      "version": "1.1.1",
+      "monthlyDownloads": 18,
+      "yearlyDownloads": 304,
+      "totalDownloads": null,
+      "excluded": false
     },
     {
       "registry": "npm",
@@ -3234,8 +3234,20 @@
       "repo": null,
       "description": "### Install ```bash $ npm install involves-changelog-server -g ```",
       "version": "0.3.0",
-      "monthlyDownloads": 15,
-      "yearlyDownloads": 217,
+      "monthlyDownloads": 18,
+      "yearlyDownloads": 220,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/asaas-sdk",
+      "url": "https://www.npmjs.com/package/@rodrigogs/asaas-sdk",
+      "repo": "asaas-sdk",
+      "description": "[![CI](https://github.com/rodrigogs/asaas-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/rodrigogs/asaas-sdk/actions/workflows/ci.yml) [![npm version](https://img.shields.io/npm/v/%40rodrigogs%2Fasaas-sdk)](https://www.npmjs.com/package/@rodr",
+      "version": "0.1.1",
+      "monthlyDownloads": 14,
+      "yearlyDownloads": 1470,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3265,25 +3277,13 @@
     },
     {
       "registry": "npm",
-      "name": "@rodrigogs/asaas-sdk",
-      "url": "https://www.npmjs.com/package/@rodrigogs/asaas-sdk",
-      "repo": "asaas-sdk",
-      "description": "[![CI](https://github.com/rodrigogs/asaas-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/rodrigogs/asaas-sdk/actions/workflows/ci.yml) [![npm version](https://img.shields.io/npm/v/%40rodrigogs%2Fasaas-sdk)](https://www.npmjs.com/package/@rodr",
-      "version": "0.1.1",
-      "monthlyDownloads": 13,
-      "yearlyDownloads": 1467,
-      "totalDownloads": null,
-      "excluded": false
-    },
-    {
-      "registry": "npm",
       "name": "pg-turbo",
       "url": "https://www.npmjs.com/package/pg-turbo",
       "repo": "pg-turbo",
       "description": "Resilient PostgreSQL dump & restore with direct COPY protocol",
       "version": "0.1.4",
       "monthlyDownloads": 13,
-      "yearlyDownloads": 738,
+      "yearlyDownloads": 743,
       "totalDownloads": null,
       "excluded": false
     },
@@ -3301,15 +3301,39 @@
     },
     {
       "registry": "npm",
+      "name": "garrulous",
+      "url": "https://www.npmjs.com/package/garrulous",
+      "repo": "garrulous",
+      "description": "Convert any encoding to any encoding",
+      "version": "1.1.0",
+      "monthlyDownloads": 12,
+      "yearlyDownloads": 192,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
       "name": "gh-trending",
       "url": "https://www.npmjs.com/package/gh-trending",
       "repo": null,
       "description": "[![Code Climate](https://codeclimate.com/github/rodrigogs/ilsap/badges/gpa.svg)](https://codeclimate.com/github/rodrigogs/ilsap) [![dependencies Status](https://david-dm.org/rodrigogs/ilsap/status.svg)](https://david-dm.org/rodrigogs/ilsap) [![devDependen",
       "version": "0.0.0",
-      "monthlyDownloads": 11,
-      "yearlyDownloads": 174,
+      "monthlyDownloads": 12,
+      "yearlyDownloads": 173,
       "totalDownloads": null,
       "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "http-tester",
+      "url": "https://www.npmjs.com/package/http-tester",
+      "repo": null,
+      "description": "Simple library created in a hurry to test and log HTTP requests.",
+      "version": "0.1.1",
+      "monthlyDownloads": 11,
+      "yearlyDownloads": 172,
+      "totalDownloads": null,
+      "excluded": false
     },
     {
       "registry": "npm",
@@ -3325,27 +3349,27 @@
     },
     {
       "registry": "npm",
+      "name": "noipjs",
+      "url": "https://www.npmjs.com/package/noipjs",
+      "repo": null,
+      "description": null,
+      "version": "0.0.0",
+      "monthlyDownloads": 10,
+      "yearlyDownloads": 132,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
       "name": "@rodrigogs/adapter-nextjs",
       "url": "https://www.npmjs.com/package/@rodrigogs/adapter-nextjs",
       "repo": null,
       "description": "The adapter for the supporting of using Amplify APIs in Next.js.",
       "version": "1.3.0-next15.0",
       "monthlyDownloads": 9,
-      "yearlyDownloads": 149,
+      "yearlyDownloads": 147,
       "totalDownloads": null,
       "excluded": true
-    },
-    {
-      "registry": "npm",
-      "name": "garrulous",
-      "url": "https://www.npmjs.com/package/garrulous",
-      "repo": "garrulous",
-      "description": "Convert any encoding to any encoding",
-      "version": "1.1.0",
-      "monthlyDownloads": 9,
-      "yearlyDownloads": 189,
-      "totalDownloads": null,
-      "excluded": false
     },
     {
       "registry": "npm",
@@ -3354,8 +3378,32 @@
       "repo": "spiderman",
       "description": "Yet to describe",
       "version": "0.0.0",
+      "monthlyDownloads": 9,
+      "yearlyDownloads": 100,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "kinky-quote",
+      "url": "https://www.npmjs.com/package/kinky-quote",
+      "repo": null,
+      "description": "Crawls random quotes from kinkyquotes.com.",
+      "version": "1.0.1",
+      "monthlyDownloads": 9,
+      "yearlyDownloads": 145,
+      "totalDownloads": null,
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/serverless-router",
+      "url": "https://www.npmjs.com/package/@rodrigogs/serverless-router",
+      "repo": "serverless-router",
+      "description": "Serverless, minimalist, pluggable, universal router.",
+      "version": "0.0.1",
       "monthlyDownloads": 8,
-      "yearlyDownloads": 99,
+      "yearlyDownloads": 102,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3373,25 +3421,25 @@
     },
     {
       "registry": "npm",
-      "name": "http-tester",
-      "url": "https://www.npmjs.com/package/http-tester",
-      "repo": null,
-      "description": "Simple library created in a hurry to test and log HTTP requests.",
-      "version": "0.1.1",
-      "monthlyDownloads": 8,
-      "yearlyDownloads": 169,
-      "totalDownloads": null,
-      "excluded": false
-    },
-    {
-      "registry": "npm",
-      "name": "noipjs",
-      "url": "https://www.npmjs.com/package/noipjs",
+      "name": "habilis",
+      "url": "https://www.npmjs.com/package/habilis",
       "repo": null,
       "description": null,
       "version": "0.0.0",
       "monthlyDownloads": 8,
-      "yearlyDownloads": 130,
+      "yearlyDownloads": 118,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
+      "name": "nerdy",
+      "url": "https://www.npmjs.com/package/nerdy",
+      "repo": null,
+      "description": "",
+      "version": "0.0.0",
+      "monthlyDownloads": 8,
+      "yearlyDownloads": 94,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3421,15 +3469,27 @@
     },
     {
       "registry": "npm",
-      "name": "@rodrigogs/serverless-router",
-      "url": "https://www.npmjs.com/package/@rodrigogs/serverless-router",
-      "repo": "serverless-router",
-      "description": "Serverless, minimalist, pluggable, universal router.",
-      "version": "0.0.1",
+      "name": "@rodrigogs/serverless-finch",
+      "url": "https://www.npmjs.com/package/@rodrigogs/serverless-finch",
+      "repo": "serverless-finch",
+      "description": "Deploy your serverless static website to AWS S3.",
+      "version": "3.0.0",
       "monthlyDownloads": 7,
-      "yearlyDownloads": 101,
+      "yearlyDownloads": 99,
       "totalDownloads": null,
-      "excluded": true
+      "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "@rodrigogs/vuejs-noty",
+      "url": "https://www.npmjs.com/package/@rodrigogs/vuejs-noty",
+      "repo": "vuejs-noty",
+      "description": "Noty plugin for Vue.js 2 and 3",
+      "version": "0.1.5-beta-2",
+      "monthlyDownloads": 7,
+      "yearlyDownloads": 132,
+      "totalDownloads": null,
+      "excluded": false
     },
     {
       "registry": "npm",
@@ -3445,37 +3505,13 @@
     },
     {
       "registry": "npm",
-      "name": "habilis",
-      "url": "https://www.npmjs.com/package/habilis",
+      "name": "rationalist",
+      "url": "https://www.npmjs.com/package/rationalist",
       "repo": null,
       "description": null,
       "version": "0.0.0",
       "monthlyDownloads": 7,
-      "yearlyDownloads": 117,
-      "totalDownloads": null,
-      "excluded": true
-    },
-    {
-      "registry": "npm",
-      "name": "kinky-quote",
-      "url": "https://www.npmjs.com/package/kinky-quote",
-      "repo": null,
-      "description": "Crawls random quotes from kinkyquotes.com.",
-      "version": "1.0.1",
-      "monthlyDownloads": 7,
-      "yearlyDownloads": 143,
-      "totalDownloads": null,
-      "excluded": false
-    },
-    {
-      "registry": "npm",
-      "name": "nerdy",
-      "url": "https://www.npmjs.com/package/nerdy",
-      "repo": null,
-      "description": "",
-      "version": "0.0.0",
-      "monthlyDownloads": 7,
-      "yearlyDownloads": 93,
+      "yearlyDownloads": 124,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3505,49 +3541,13 @@
     },
     {
       "registry": "npm",
-      "name": "succubus",
-      "url": "https://www.npmjs.com/package/succubus",
-      "repo": null,
-      "description": null,
-      "version": "0.0.0",
-      "monthlyDownloads": 7,
-      "yearlyDownloads": 104,
-      "totalDownloads": null,
-      "excluded": true
-    },
-    {
-      "registry": "npm",
-      "name": "@rodrigogs/serverless-finch",
-      "url": "https://www.npmjs.com/package/@rodrigogs/serverless-finch",
-      "repo": "serverless-finch",
-      "description": "Deploy your serverless static website to AWS S3.",
-      "version": "3.0.0",
-      "monthlyDownloads": 6,
-      "yearlyDownloads": 98,
-      "totalDownloads": null,
-      "excluded": false
-    },
-    {
-      "registry": "npm",
-      "name": "@rodrigogs/vuejs-noty",
-      "url": "https://www.npmjs.com/package/@rodrigogs/vuejs-noty",
-      "repo": "vuejs-noty",
-      "description": "Noty plugin for Vue.js 2 and 3",
-      "version": "0.1.5-beta-2",
-      "monthlyDownloads": 6,
-      "yearlyDownloads": 131,
-      "totalDownloads": null,
-      "excluded": false
-    },
-    {
-      "registry": "npm",
       "name": "@rodrigogs/dynamoose-plugin-optimistic-locking",
       "url": "https://www.npmjs.com/package/@rodrigogs/dynamoose-plugin-optimistic-locking",
       "repo": "dynamoose-plugin-optimistic-locking",
       "description": "A Dynamoose plugin that implements optimistic locking for db writes",
       "version": "0.0.1",
-      "monthlyDownloads": 5,
-      "yearlyDownloads": 94,
+      "monthlyDownloads": 6,
+      "yearlyDownloads": 96,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3559,19 +3559,7 @@
       "description": "",
       "version": "0.0.0",
       "monthlyDownloads": 5,
-      "yearlyDownloads": 103,
-      "totalDownloads": null,
-      "excluded": true
-    },
-    {
-      "registry": "npm",
-      "name": "rationalist",
-      "url": "https://www.npmjs.com/package/rationalist",
-      "repo": null,
-      "description": null,
-      "version": "0.0.0",
-      "monthlyDownloads": 5,
-      "yearlyDownloads": 121,
+      "yearlyDownloads": 102,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3589,13 +3577,25 @@
     },
     {
       "registry": "npm",
+      "name": "megazord",
+      "url": "https://www.npmjs.com/package/megazord",
+      "repo": null,
+      "description": "",
+      "version": "0.0.0",
+      "monthlyDownloads": 4,
+      "yearlyDownloads": 80,
+      "totalDownloads": null,
+      "excluded": true
+    },
+    {
+      "registry": "npm",
       "name": "payowl",
       "url": "https://www.npmjs.com/package/payowl",
       "repo": null,
       "description": "Detect websites protected by paywall applications",
       "version": "0.0.1-ALPHA",
       "monthlyDownloads": 4,
-      "yearlyDownloads": 111,
+      "yearlyDownloads": 112,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3607,31 +3607,19 @@
       "description": "[![Build Status](https://travis-ci.org/rodrigogs/pulchra.svg?branch=master)](https://travis-ci.org/rodrigogs/pulchra) [![Maintainability](https://api.codeclimate.com/v1/badges/a9e8a6a7fde22f6582b3/maintainability)](https://codeclimate.com/github/rodrigogs",
       "version": "1.0.7-aplha",
       "monthlyDownloads": 4,
-      "yearlyDownloads": 340,
+      "yearlyDownloads": 341,
       "totalDownloads": null,
       "excluded": false
     },
     {
       "registry": "npm",
-      "name": "megazord",
-      "url": "https://www.npmjs.com/package/megazord",
-      "repo": null,
-      "description": "",
-      "version": "0.0.0",
-      "monthlyDownloads": 3,
-      "yearlyDownloads": 78,
-      "totalDownloads": null,
-      "excluded": true
-    },
-    {
-      "registry": "npm",
-      "name": "pilgrim",
-      "url": "https://www.npmjs.com/package/pilgrim",
+      "name": "succubus",
+      "url": "https://www.npmjs.com/package/succubus",
       "repo": null,
       "description": null,
       "version": "0.0.0",
-      "monthlyDownloads": 3,
-      "yearlyDownloads": 87,
+      "monthlyDownloads": 4,
+      "yearlyDownloads": 106,
       "totalDownloads": null,
       "excluded": true
     },
@@ -3642,10 +3630,22 @@
       "repo": null,
       "description": "Stupidly small and fast object deep cloner",
       "version": "1.0.0",
-      "monthlyDownloads": 3,
-      "yearlyDownloads": 89,
+      "monthlyDownloads": 4,
+      "yearlyDownloads": 90,
       "totalDownloads": null,
       "excluded": false
+    },
+    {
+      "registry": "npm",
+      "name": "pilgrim",
+      "url": "https://www.npmjs.com/package/pilgrim",
+      "repo": null,
+      "description": null,
+      "version": "0.0.0",
+      "monthlyDownloads": 3,
+      "yearlyDownloads": 88,
+      "totalDownloads": null,
+      "excluded": true
     },
     {
       "registry": "crates",
@@ -3664,7 +3664,7 @@
     {
       "repo": "NousResearch/hermes-agent",
       "url": "https://github.com/NousResearch/hermes-agent",
-      "stars": 259961,
+      "stars": 260309,
       "mergedPrs": 0,
       "prsOpened": 40,
       "commits": 0,
@@ -3676,7 +3676,7 @@
     {
       "repo": "RocketChat/Rocket.Chat",
       "url": "https://github.com/RocketChat/Rocket.Chat",
-      "stars": 46364,
+      "stars": 46371,
       "mergedPrs": 1,
       "prsOpened": 1,
       "commits": 2,
@@ -3694,7 +3694,7 @@
     {
       "repo": "nesquena/hermes-webui",
       "url": "https://github.com/nesquena/hermes-webui",
-      "stars": 19363,
+      "stars": 19381,
       "mergedPrs": 5,
       "prsOpened": 8,
       "commits": 52,
@@ -3785,10 +3785,10 @@
     }
   ],
   "totals": {
-    "stars": 1729,
+    "stars": 1730,
     "repos": 92,
-    "monthlyDownloads": 27214,
+    "monthlyDownloads": 27593,
     "packages": 43,
-    "releaseDownloads": 7940
+    "releaseDownloads": 7962
   }
 }
