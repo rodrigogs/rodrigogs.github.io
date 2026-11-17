@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-11-16T06:48:21.262Z",
+  "fetchedAt": "2026-11-17T06:32:55.334Z",
   "sources": {
     "github": {
       "ok": true,
-      "lastSuccessAt": "2026-11-16T06:48:21.262Z"
+      "lastSuccessAt": "2026-11-17T06:32:55.334Z"
     },
     "npm": {
       "ok": true,
-      "lastSuccessAt": "2026-11-16T06:48:21.262Z"
+      "lastSuccessAt": "2026-11-17T06:32:55.334Z"
     },
     "crates": {
       "ok": true,
-      "lastSuccessAt": "2026-11-16T06:48:21.262Z"
+      "lastSuccessAt": "2026-11-17T06:32:55.334Z"
     }
   },
   "user": {
@@ -21,7 +21,7 @@
     "followers": 214,
     "publicRepos": 137,
     "createdAt": "2012-09-17T12:49:05Z",
-    "contributionsLastYear": 11051,
+    "contributionsLastYear": 11064,
     "contributionWeeks": [
       74,
       83,
@@ -75,7 +75,7 @@
       708,
       183,
       354,
-      37
+      50
     ]
   },
   "repos": [
@@ -85,7 +85,7 @@
       "url": "https://github.com/rodrigogs/easyvpn",
       "description": "Easily connect to a VPN in a country of your choice.",
       "homepage": null,
-      "stars": 520,
+      "stars": 521,
       "forks": 46,
       "language": "JavaScript",
       "languages": {
@@ -216,7 +216,7 @@
         "url": "https://github.com/rodrigogs/whats-reader/releases/tag/v1.31.0"
       },
       "releaseCount": 93,
-      "releaseDownloads": 8316
+      "releaseDownloads": 8515
     },
     {
       "name": "nodejs-web-jade-scaffold",
@@ -1165,7 +1165,7 @@
       "topics": [],
       "frameworks": [],
       "createdAt": "2020-12-07T04:12:28Z",
-      "pushedAt": "2026-11-15T07:22:48Z",
+      "pushedAt": "2026-11-16T07:36:48Z",
       "archived": false,
       "fork": false,
       "license": null,
@@ -2709,7 +2709,7 @@
         "Vitest"
       ],
       "createdAt": "2026-09-28T20:50:59Z",
-      "pushedAt": "2026-11-15T06:31:07Z",
+      "pushedAt": "2026-11-16T06:49:54Z",
       "archived": false,
       "fork": false,
       "license": null,
@@ -3664,7 +3664,7 @@
     {
       "repo": "NousResearch/hermes-agent",
       "url": "https://github.com/NousResearch/hermes-agent",
-      "stars": 263708,
+      "stars": 264000,
       "mergedPrs": 0,
       "prsOpened": 40,
       "commits": 1,
@@ -3676,7 +3676,7 @@
     {
       "repo": "RocketChat/Rocket.Chat",
       "url": "https://github.com/RocketChat/Rocket.Chat",
-      "stars": 46516,
+      "stars": 46493,
       "mergedPrs": 1,
       "prsOpened": 1,
       "commits": 2,
@@ -3694,7 +3694,7 @@
     {
       "repo": "nesquena/hermes-webui",
       "url": "https://github.com/nesquena/hermes-webui",
-      "stars": 19540,
+      "stars": 19545,
       "mergedPrs": 5,
       "prsOpened": 8,
       "commits": 52,
@@ -3785,10 +3785,10 @@
     }
   ],
   "totals": {
-    "stars": 1732,
+    "stars": 1733,
     "repos": 92,
     "monthlyDownloads": 32252,
     "packages": 43,
-    "releaseDownloads": 8361
+    "releaseDownloads": 8560
   }
 }
